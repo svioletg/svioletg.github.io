@@ -12,6 +12,7 @@
 
 body
 {
+	margin: 0 auto;
 	scroll-behavior: smooth;
 	/*background-color: #AA77AA;*/
 	background-image: linear-gradient(#d15ed1,#411C45,#B8005F,#77CCCC);
@@ -157,13 +158,12 @@ div.grid_item img.icon:hover
 
 footer
 {
-	margin: 5em -10px -10em;
-	min-height: 8em;
-	padding-left: 18px;
-	padding:1em;
+	/*margin: 5em -10px -10em;*/
+	min-height: 5em;
+	padding: 1em;
+	margin-top: 5em;
 	font-weight: bold;
 	font-size: 1.5em;
-	width: 100%;
 	background-color: black;
 }
 

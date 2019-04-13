@@ -128,13 +128,12 @@ a#musiclink:hover
 
 footer
 {
-	margin: 5em -10px -10em;
-	min-height: 8em;
-	padding-left: 18px;
-	padding:1em;
+	/*margin: 5em -10px -10em;*/
+	min-height: 5em;
+	padding: 1em;
+	margin-top: 5em;
 	font-weight: bold;
 	font-size: 1.5em;
-	width: 100%;
 	background-color: black;
 }
 
