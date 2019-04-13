@@ -58,6 +58,9 @@ div#main
 {
 	color: black;
 	background-color: white;
+	padding: 1em;
+	font-size: 1.25em;
+	font-family: 'Roboto', sans-serif;
 }
 
 div#main hr
