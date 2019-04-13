@@ -1,0 +1,124 @@
+@keyframes fadein 
+{
+	from { opacity: 0; margin-top: -2em; }
+	to   { opacity: 1; margin-top: 0;}
+}
+
+@keyframes hrgrow
+{
+	from { width: 0; }
+	to   { width: 50%;}
+}
+
+body
+{
+	margin:0 auto;
+	scroll-behavior: smooth;
+	color: white;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	animation: fadein 1s;
+	overflow-x: hidden;
+}
+
+div#header
+{
+	padding:1em;
+	background-image: linear-gradient(#FF66FF,#66FFFF);
+}
+
+h1, h2
+{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	letter-spacing: 0.5em;
+	text-align: center;
+}
+
+h1
+{
+	font-size: 7em;
+}
+
+h2
+{
+	font-size: 2em;
+}
+
+hr
+{
+	width: 50%;
+	color: white;
+	margin-top: 5em;
+	margin-bottom: 5em;
+	animation: hrgrow 1s;
+}
+
+div#main
+{
+	color: black;
+	background-color: white;
+}
+
+div#main hr
+{
+	margin-top: 2em;
+	margin-bottom: 2em;
+	color: black;
+}
+
+div#navigation
+{
+	font-size: 3em;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	text-align: center;
+	justify-content: center;
+	background-color: black;
+	width: 100%;
+	margin: 0;
+	position:sticky;
+	top: 0;
+}
+
+div#navigation a
+{
+	padding: 1em;
+	flex: 1;
+	transition: all 0.25s;
+}
+
+div#navigation a
+{
+	color: white;
+	text-decoration: none;
+}
+
+a#projectlink
+{
+	background-image: url('img/code.png');
+	background-position: center;
+	background-size: 100% 5em;
+	font-weight: 300;
+	transition: all 0.25s;
+}
+
+a#projectlink:hover
+{
+	color: black;
+}
+
+a#musiclink
+{
+	background-image: url('img/music.png');
+	background-position: center;
+	background-size: 100% 5em;
+	font-weight: 300;
+	transition: all 0.25s;
+}
+
+a#musiclink:hover
+{
+	color: black;
+}
