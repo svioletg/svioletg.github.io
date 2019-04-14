@@ -14,7 +14,6 @@ body
 {
 	margin: 0 auto;
 	scroll-behavior: smooth;
-	/*background-color: #AA77AA;*/
 	background-image: linear-gradient(#d15ed1,#411C45,#B8005F,#77CCCC);
 	transition: 0.5s;
 	color: white;
@@ -154,26 +153,4 @@ div.grid_item img.icon:hover
 .infolink:hover
 {
 	background-color: black;
-}
-
-footer
-{
-	/*margin: 5em -10px -10em;*/
-	min-height: 5em;
-	padding: 1em;
-	margin-top: 5em;
-	font-weight: bold;
-	font-size: 1.5em;
-	background-color: black;
-}
-
-footer img
-{
-	margin-bottom:-0.3em;
-}
-
-footer a
-{
-	color:white;
-	text-decoration: none;
 }

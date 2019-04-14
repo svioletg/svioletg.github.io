@@ -1,0 +1,173 @@
+@keyframes fadein 
+{
+	from { opacity: 0; margin-top: -2em; }
+	to   { opacity: 1; margin-top: 0;}
+}
+
+@keyframes hrgrow
+{
+	from { width: 0; }
+	to   { width: 50%;}
+}
+
+body
+{
+	margin: 0 auto;
+	background-color: #333;
+	scroll-behavior: smooth;
+	background-color: black;
+	transition: 0.5s;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	animation: fadein 1s;
+}
+
+a
+{
+	text-decoration: none;
+	color: white;
+}
+
+div#page
+{
+	/*margin: auto;*/
+	/*width: 75%;*/
+	background-color: #333;
+}
+
+div#header
+{
+	padding:1em;
+	background-image: url('img/header.png');
+	background-size: 100% 100%;
+}
+
+h1, h2
+{
+	font-family: 'Source Code Pro';
+	font-weight: 300;
+	letter-spacing: 0.5em;
+	text-align: center;
+}
+
+h1
+{
+	font-size: 6em;
+}
+
+h2
+{
+	font-size: 4em;
+}
+
+hr
+{
+	width: 50%;
+	color: white;
+	margin-top: 5em;
+	margin-bottom: 5em;
+	animation: hrgrow 1s;
+}
+
+div.grid
+{
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	flex-shrink: 0;
+	justify-content: space-around;
+	width: 90%;
+}
+
+div.grid_item
+{
+	padding-right: 0;
+	text-transform: capitalize;
+	flex-shrink: 0;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 2.5em;
+	letter-spacing: 0.5em;
+	font-weight: 300;
+	min-width: 12em;
+	max-width: 12em;
+}
+
+.info
+{
+	margin-bottom: 1em;
+	font-family: 'Source Code Pro', sans-serif;
+	letter-spacing: 0;
+	background-color: rgba(0,0,0,0.5);
+	padding: 10px;
+	padding-left: 0;
+	
+/*	min-width: 10em;
+	max-width: 10em;*/
+}
+
+.infolink
+{
+	transition: all 0.25s;
+}
+
+.infolink:hover
+{
+	background-color: black;
+}
+
+div.projectlink
+{
+	font-size: 2em;
+	width: 50%;
+	margin: auto;
+	font-size: 2em;
+	font-family: 'Source Code Pro';
+	background-color: #222;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	color:white;
+	transition: all 0.25s;
+}
+
+div.projectlink a
+{
+	color:white;
+	text-decoration: none;
+}
+
+div.projectlink span.date
+{
+	background-color: #333;
+}
+
+.tag
+{
+	margin: 0;
+	padding: 0.25em;
+}
+
+.tag.webapp
+{
+	border-left: 5px solid rgb(255,100,0);
+	background-color: rgba(255,100,0,0.5);
+}
+
+.tag.css
+{
+	border-left: 5px solid rgb(0,0,255);
+	background-color: rgba(0,0,255,0.5);
+}
+
+.tag.js
+{
+	border-left: 5px solid rgb(255,200,0);
+	background-color: rgba(255,200,0,0.5);
+}
+
+.tag.python
+{
+	border-left: 5px solid rgb(70, 70, 170);
+	background-color: rgba(70, 70, 170, 0.5);
+}
