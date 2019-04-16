@@ -126,3 +126,14 @@ a#musiclink:hover
 {
 	color: black;
 }
+
+p
+{
+	font-size:1.5em;
+	font-weight: lighter;
+	width: 75%;
+	/*text-align: center;*/
+	margin: auto;
+	padding: 1em;
+	/*background-color: rgba(0,0,0,0.5);*/
+}
