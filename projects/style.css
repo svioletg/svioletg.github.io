@@ -42,7 +42,7 @@ div#header
 	background-size: 100% 100%;
 }
 
-h1, h2
+h1, h2, h3
 {
 	font-family: 'Source Code Pro';
 	font-weight: 300;
@@ -58,6 +58,11 @@ h1
 h2
 {
 	font-size: 4em;
+}
+
+h3
+{
+	font-size: 3em;
 }
 
 hr
@@ -141,6 +146,33 @@ div.projectlink span.date
 {
 	background-color: #333;
 }
+
+p
+{
+	font-size:1.5em;
+	font-weight: lighter;
+	width: 75%;
+	text-align: center;
+	margin: auto;
+	padding: 1em;
+	background-color: rgba(0,0,0,0.5);
+}
+
+p a
+{
+	color: cyan;
+	text-decoration: underline;
+}
+
+p a:active
+{
+	color: blue;
+}
+
+/*p a:visited
+{
+	color: purple;
+}*/
 
 .tag
 {
