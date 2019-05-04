@@ -201,5 +201,6 @@ p a:active
 .tag.python
 {
 	border-left: 5px solid rgb(70, 70, 170);
-	background-color: rgba(70, 70, 170, 0.5);
+	/*background-color: rgba(70, 70, 170, 0.5);*/
+	background-image: linear-gradient(to right, rgba(70, 70, 170, 0.5),rgba(170, 170, 70, 0.5))
 }
