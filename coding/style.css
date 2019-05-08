@@ -126,7 +126,7 @@ div.projectlink
 {
 	font-size: 2em;
 	width: 50%;
-	margin: auto;
+	/*margin: auto;*/
 	font-size: 2em;
 	font-family: 'Source Code Pro';
 	background-color: #222;
@@ -174,33 +174,61 @@ p a:active
 	color: purple;
 }*/
 
+table#projectlist
+{
+	width: 80%;
+	font-size: 2em;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+th
+{
+	background-color: white;
+	color: black;
+}
+
+td 
+{
+	text-align: center;
+	padding-left: 1em; 
+	padding-right: 1em;
+	background-color: rgba(0,0,0,0.5);
+}
+
+td.yes {background-color: rgba(0,255,0,0.5);}
+td.asterisk {background-color: rgba(255,127,0,0.5);}
+td.no {background-color: rgba(255,0,0,0.5);}
+
 .tag
 {
 	margin: 0;
-	padding: 0.25em;
+	padding: 2em;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 .tag.webapp
 {
-	border-left: 5px solid rgb(255,100,0);
+	/*border-left: 5px solid rgb(255,100,0);*/
 	background-color: rgba(255,100,0,0.5);
 }
 
 .tag.css
 {
-	border-left: 5px solid rgb(0,0,255);
+	/*border-left: 5px solid rgb(0,0,255);*/
 	background-color: rgba(0,0,255,0.5);
 }
 
 .tag.js
 {
-	border-left: 5px solid rgb(255,200,0);
+	/*border-left: 5px solid rgb(255,200,0);*/
 	background-color: rgba(255,200,0,0.5);
 }
 
 .tag.python
 {
-	border-left: 5px solid rgb(70, 70, 170);
+	/*border-left: 5px solid rgb(70, 70, 170);*/
 	/*background-color: rgba(70, 70, 170, 0.5);*/
 	background-image: linear-gradient(to right, rgba(70, 70, 170, 0.5),rgba(170, 170, 70, 0.5))
 }
