@@ -69,8 +69,8 @@ hr
 {
 	width: 50%;
 	color: white;
-	margin-top: 5em;
-	margin-bottom: 5em;
+	margin-top: 4em;
+	margin-bottom: 4em;
 	animation: hrgrow 1s;
 }
 
@@ -182,10 +182,20 @@ table#projectlist
 	border-collapse: collapse;
 }
 
+tr
+{
+	transition: all 0.25s;
+}
+
+tr:hover
+{
+	box-shadow: inset 0 0 20px white;
+}
+
 th
 {
-	background-color: white;
-	color: black;
+	background-color: #DDD;
+	color: #555;
 }
 
 td 
@@ -211,7 +221,13 @@ td.no {background-color: rgba(255,0,0,0.5);}
 .tag.webapp
 {
 	/*border-left: 5px solid rgb(255,100,0);*/
-	background-color: rgba(255,100,0,0.5);
+	/*background-color: rgba(255,100,0,0.5);*/
+	background-image: linear-gradient(
+		140deg, 
+		rgba(255, 127, 0, 0.5) 0%, rgba(255, 127, 0, 0.5) 33%,
+		rgba(0, 255, 255, 0.5) 33%, rgba(0, 255, 255, 0.5) 66%,
+		rgba(255, 255, 0, 0.5) 66%, rgba(255, 255, 0, 0.5) 100%
+		);
 }
 
 .tag.css
@@ -223,12 +239,16 @@ td.no {background-color: rgba(255,0,0,0.5);}
 .tag.js
 {
 	/*border-left: 5px solid rgb(255,200,0);*/
-	background-color: rgba(255,200,0,0.5);
+	background-color: rgba(255,255,0,0.5);
 }
 
 .tag.python
 {
 	/*border-left: 5px solid rgb(70, 70, 170);*/
 	/*background-color: rgba(70, 70, 170, 0.5);*/
-	background-image: linear-gradient(to right, rgba(70, 70, 170, 0.5),rgba(170, 170, 70, 0.5))
+	background-image: linear-gradient(
+		140deg, 
+		rgba(0, 0, 255, 0.5) 0%, rgba(0, 0, 255, 0.5) 50%,
+		rgba(255, 255, 0, 0.5) 50%, rgba(255, 255, 0, 0.5) 100%
+		);
 }
