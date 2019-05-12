@@ -28,17 +28,36 @@ a
 	color: white;
 }
 
+.light a
+{
+	color:black;
+}
+
 div#page
 {
 	/*margin: auto;*/
 	/*width: 75%;*/
 	background-color: #333;
+	color:white;
+	transition: all 0.25s;
+}
+
+div#page.light
+{
+	background-color: white;
+	color:black;
 }
 
 div#header
 {
 	padding:1em;
 	background-image: url('img/header.png');
+	background-size: 100% 100%;
+}
+
+div#blogheader
+{
+	padding:1em;
 	background-size: 100% 100%;
 }
 
@@ -74,6 +93,11 @@ hr
 	animation: hrgrow 1s;
 }
 
+.light hr
+{
+	color: black;
+}
+
 div.grid
 {
 	margin: auto;
@@ -99,6 +123,27 @@ div.grid_item
 	max-width: 12em;
 }
 
+.themetoggle
+{
+	/*margin: auto;*/
+	text-align: center;
+	width: 20%;
+	top: 0;
+	position: sticky;
+	display: block;
+	background-color: black;
+	color: white;
+	font-size: 3em;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+
+.themetoggle:hover
+{
+	background-color: #DDD;
+	color: black;
+}
+
 .info
 {
 	margin-bottom: 1em;
@@ -120,6 +165,11 @@ div.grid_item
 .infolink:hover
 {
 	background-color: black;
+}
+
+.light .infolink:hover
+{
+	background-color: #DDD;
 }
 
 div.projectlink
@@ -149,13 +199,19 @@ div.projectlink span.date
 
 p
 {
+	font-family: 'Roboto Slab', serif;
 	font-size:1.5em;
 	font-weight: lighter;
-	width: 75%;
+	width: 50%;
 	/*text-align: center;*/
 	margin: auto;
 	padding: 1em;
 	background-color: rgba(0,0,0,0.5);
+}
+
+.light p
+{
+	background-color: rgba(0,0,0,0.1);
 }
 
 p a
@@ -174,7 +230,7 @@ p a:active
 	color: purple;
 }*/
 
-table#projectlist
+table#list
 {
 	width: 80%;
 	font-size: 2em;
@@ -216,6 +272,11 @@ td.no {background-color: rgba(255,0,0,0.5);}
 	/*padding: 2em;*/
 	padding-top: 0;
 	padding-bottom: 0;
+}
+
+.tag.misc
+{
+	background-color: rgba(127,127,127,0.5);
 }
 
 .tag.webapp

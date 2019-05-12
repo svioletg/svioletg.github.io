@@ -1,0 +1,21 @@
+h3
+{
+	font-family: 'Roboto Slab', serif;
+	letter-spacing: 0;
+	font-weight: 400;
+	margin: auto;
+	width: 50%;
+	text-align: left;
+}
+
+h4
+{
+	font-size: 1.5em;
+	font-style: italic;
+	font-family: 'Roboto Slab', serif;
+	letter-spacing: 0;
+	font-weight: 400;
+	margin: auto;
+	width: 50%;
+	text-align: left;
+}
