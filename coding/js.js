@@ -4,15 +4,15 @@ $('td:contains("No")').addClass('no');
 $('td:contains("Yes*")').toggleClass('yes asterisk');
 $('td:contains("No*")').toggleClass('no asterisk');
 
-//  1 = dark
-// -1 = light
-var theme = 1;
+$('img.arrow').attr('src','https://img.icons8.com/ios/100/000000/sort-down-filled.png');
 
-$('.themetoggle').click(function(){
-	theme*=-1;
-	if (theme == 1) {$(this).html('LIGHT THEME'); $('div#page').removeClass('light');}
-	if (theme == -1) {$(this).html('DARK THEME'); $('div#page').addClass('light');}
-})
+$('img.arrow').click(function() {
+	$(this).toggleClass('up down');
+	$(this).parent().next('pre').toggleClass('collapsed');
+});
+
+$('.themetoggle').html('TOGGLE DARK/LIGHT');
+$('.themetoggle').click(function(){$('div#page').toggleClass('light');});
 
 // Sorting function: https://stackoverflow.com/a/49041392/8108924
 

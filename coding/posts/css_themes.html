@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CSS Theme Switching - Seth Gibbs / Coding / Posts</title>
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet"> 
+		<link rel="stylesheet" type="text/css" href="../style.css">
+		<link rel="stylesheet" type="text/css" href="blog.css">
+		<link rel="stylesheet" type="text/css" href="../../footer.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div id="page">
+			<div class="toolbox">
+				<div class="themetoggle"></div>
+			</div>
+			<h4>DATE POSTED: 2019-05-13</h4>
+			<h4>CATEGORIES: <span class="tag css">CSS</span>, <span class="tag js">JavaScript/jQuery</span></h4>
+			<h3>Toggle-able dark and light themes</h3>
+			<br>
+			<p>
+				<!-- [<a href="#howto">Click here to skip to the "how to" section.</a>]
+				<br><br> -->
+				Most websites and webapps nowadays have two main color schemes: a <b>light theme</b> and a <b>dark theme</b> (also referred to as light mode/dark mode).
+				<br><br>
+				Dark themes tend to be easier to read and are less straining on the eyes, especially at night. However, light themes can sometimes provide better contrast, and of course some just simply prefer the brighter look.
+				<br><br>
+				In this post, I'd like to show how I personally go about having dark and light themes implemented, and more specifically, how I use them in this site.
+				<br><br>
+				First thing's first, we'll set up some basic styling. Something like:
+			</p>
+<p class="banner css">CSS<img class="arrow down"></p>
+			<pre>
+body
+{
+	background-color: white;
+	color: black;
+	font-family: 'Arial';
+	margin: 0 auto;
+	scroll-behavior: smooth;
+	width: 80%;
+}
+</pre>
+			<p>
+				This will be our default theme, black Arial text on a white background. You can use whatever main element you want to wrap the main content of your page in, whether that be <code>body</code> or something else like a <code>div</code> with a certain ID.
+				<br><br>
+				For our dark theme, we'll leave everything else alone and just alter the <code>background-color</code> and <code>color</code>. Although, you can change any other things if you'd prefer to.
+			</p>
+<p class="banner css">CSS<img class="arrow down"></p>
+<pre>
+body.dark
+{
+	background-color: black;
+	color: white;
+}
+</pre>
+			<p>
+				This takes care of <code>body</code>, but what about elements that should have styling different than <code>body</code>? Since <code>body</code> has the class <code>dark</code>, we can specify dark mode by prefacing elements with <code>.dark</code> in your CSS. Example:
+			</p>
+<p class="banner css">CSS<img class="arrow down"></p>
+<pre>
+body
+{
+	background-color: white;
+	color: black;
+}
+
+body.dark
+{
+	background-color: black;
+	color: white;
+}
+
+p
+{
+	background-color: gray;
+	color: black;
+}
+
+.dark p
+{
+	/* This will override body.dark's styling. */
+	background-color: #222;
+	color: gray;
+}
+</pre>
+			<p>
+				Great, now we've got the styling that we want.
+				<br><br>
+				Although, as you've probably realized by now, we don't really have a way to toggle this on or off besides manually adding that class through browser developer tools (inspect element). Let's do that now.
+				<br><br>
+				Thankfully, <b>jQuery</b> makes this a breeze. If you aren't already using jQuery, now's a good time to start. It <i>vastly</i> simplifies a lot of JavaScript tasks and provides some more useful features on its own, and it makes working with JavaScript actually bearable.
+				<br><br>
+				We'll use jQuery's <code>.toggleClass()</code> function here. As the name suggests, it toggles a certain class on or off, removing said class if it's present, and adding the class if it's not. It's especially useful in cases like this, and reduces a ton of clutter.
+				<br><br>
+				Without it, we'd have to write this:
+			</p>
+<p class="banner js">JavaScript / jQuery<img class="arrow down"></p>
+<pre>
+// 1 = dark theme active
+// -1 = dark theme inactive
+
+// Setting this to 1 or -1 makes it easily switchable
+// Dark theme will be active by default
+var theme_toggle = 1;
+
+$('div.toggle_button').click(function(){
+	// 1 gets turned into -1, -1 gets turned into 1.
+	theme_toggle *= -1;
+	if (theme_toggle == 1) {$(this).addClass('dark');}
+
+	if (theme_toggle == -1) {$(this).removeClass('dark');}
+})
+</pre>
+			<p>
+				Excluding comments and newlines, that's 5 lines of code. Which isn't a ton, but seems like a lot for such a simple task.
+				<br><br>
+				If we use <code>.toggleClass()</code>, however:
+			</p>
+<p class="banner js">JavaScript / jQuery<img class="arrow down"></p>
+<pre>
+$('div.toggle_button').click(function(){$(this).toggleClass('dark');})
+</pre>
+			<p>
+				One line. Not our previous five. <i>One</i>.
+				<br><br>
+				Now all that's left is to actually place an element that you can click to activate this. You can use any element, a <code>&lt;button&gt;</code>, a <code>&lt;div&gt;</code>, a link tag (<code>&lt;a&gt;</code>), whatever you choose. Just make sure to change the text in <code>$('div.toggle_button').click</code> accordingly, and give it an ID like "theme_toggle" or something. The <code>$()</code> selector works the same way you select elements in CSS.
+				<br><br>
+				This method is actually used in this very website, although with a "light" class instead of a "dark" class. You can click the toggle button in the top left to try that out.
+			</p>
+			<hr>
+			<div class="grid">
+				<a href="index.html">
+					<div class="grid_item info infolink">
+						BACK
+					</div>
+				</a>
+			</div>
+		</div>
+	</body>
+	<footer>
+		<span id="devcredit"></span>
+		<br><a href="https://icons8.com/icon/63308/info">Info icon by Icons8</a>
+		<br><a href="https://icons8.com/icon/37319/sort-down-filled">Sort Down Filled icon by Icons8</a>
+
+		<script src="../../footer.js"></script>
+		<script src="../js.js"></script>
+	</footer>
+</html>
