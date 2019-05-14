@@ -1,0 +1,28 @@
+body
+{
+	background-color: white;
+	color: black;
+	font-family: 'Arial';
+	margin: 0 auto;
+	scroll-behavior: smooth;
+	width: 80%;
+}
+
+body.dark
+{
+	background-color: black;
+	color: white;
+}
+
+p
+{
+	background-color: gray;
+	color: black;
+}
+
+.dark p
+{
+	/* This will override body.dark's styling. */
+	background-color: #222;
+	color: gray;
+}

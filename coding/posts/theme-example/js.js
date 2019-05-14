@@ -1,0 +1,1 @@
+$('button#theme_button').click(function(){$('body').toggleClass('dark');});

@@ -66,6 +66,10 @@ body
 {
 	background-color: white;
 	color: black;
+	font-family: 'Arial';
+	margin: 0 auto;
+	scroll-behavior: smooth;
+	width: 80%;
 }
 
 body.dark
@@ -110,9 +114,9 @@ var theme_toggle = 1;
 $('div.toggle_button').click(function(){
 	// 1 gets turned into -1, -1 gets turned into 1.
 	theme_toggle *= -1;
-	if (theme_toggle == 1) {$(this).addClass('dark');}
+	if (theme_toggle == 1) {$('body').addClass('dark');}
 
-	if (theme_toggle == -1) {$(this).removeClass('dark');}
+	if (theme_toggle == -1) {$('body').removeClass('dark');}
 })
 </pre>
 			<p>
@@ -122,7 +126,7 @@ $('div.toggle_button').click(function(){
 			</p>
 <p class="banner js">JavaScript / jQuery<img class="arrow down"></p>
 <pre>
-$('div.toggle_button').click(function(){$(this).toggleClass('dark');})
+$('button#theme_button').click(function(){$('body').toggleClass('dark');});
 </pre>
 			<p>
 				One line. Not our previous five. <i>One</i>.
@@ -130,6 +134,8 @@ $('div.toggle_button').click(function(){$(this).toggleClass('dark');})
 				Now all that's left is to actually place an element that you can click to activate this. You can use any element, a <code>&lt;button&gt;</code>, a <code>&lt;div&gt;</code>, a link tag (<code>&lt;a&gt;</code>), whatever you choose. Just make sure to change the text in <code>$('div.toggle_button').click</code> accordingly, and give it an ID like "theme_toggle" or something. The <code>$()</code> selector works the same way you select elements in CSS.
 				<br><br>
 				This method is actually used in this very website, although with a "light" class instead of a "dark" class. You can click the toggle button in the top left to try that out.
+				<br><br>
+				A working example of this post can be found <a href="theme-example/page.html">here</a>.
 			</p>
 			<hr>
 			<div class="grid">
