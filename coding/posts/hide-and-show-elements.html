@@ -17,12 +17,135 @@
 			<div class="toolbox">
 				<div class="themetoggle"></div>
 			</div>
-			<h4>DATE POSTED: YYYY-MM-DD</h4>
+			<h4>DATE POSTED: 2019-05-17</h4>
 			<h4>CATEGORIES: <span class="tag misc">Tutorial/Guide</span>, <span class="tag html">HTML</span>, <span class="tag css">CSS</span>, <span class="tag js">JavaScript/jQuery</span></h4>
 			<h3>Expandable/Collapsable Elements</h3>
 			<br>
 			<p id="about">
-				Article contents
+				Having the option to expand and collapse elements on your page is incredibly useful, and often helps to hide clutter that the user may not want on the screen anymore.
+				<br><br>
+				There are a couple ways of going about this. The most straightforward approach would be to toggle a specific element, which works for things like menus, but if you want to have sections of your page or article be collapsable, it'd be better to have a system that automatically determines what element to hide.
+				<br><br>
+				I'll be talking about the latter method here, each button will toggle on or off the element directly under it.
+				<br><br>
+				Let's assume we have some HTML similar to this:
+			</p>
+<p class="banner html">HTML<img class="arrow down"></p>
+<pre class="html">
+&lt;div&gt;
+	&lt;p&gt;
+		Paragraph #1
+	&lt;/p&gt;
+
+	&lt;p&gt;
+		Paragraph #2
+	&lt;/p&gt;
+
+	&lt;p&gt;
+		Paragraph #3
+	&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+			<p>
+				What we want is to have a way to show and hide each of those paragraph elements. 
+				<br><br>
+				We'll use <code>&lt;button&gt;</code> tags for this, but you can also use anything else such as <code>&lt;img&gt;</code>, <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code>, or whatever you choose. Just make sure to change the jQuery code (discussed later) accordingly.
+				<br><br>
+				Give these buttons a <b>class</b> to identify them as element toggles, and place one before each element you want to be collapse-able.
+			</p>
+<p class="banner html">HTML<img class="arrow down"></p>
+<pre class="html">
+&lt;div&gt;
+	&lt;button class="show-hide-switch"&gt;Toggle Element&lt;/button&gt;
+	&lt;p&gt;
+		Paragraph #1
+	&lt;/p&gt;
+	&lt;br&gt;
+	&lt;button class="show-hide-switch"&gt;Toggle Element&lt;/button&gt;
+	&lt;p&gt;
+		Paragraph #2
+	&lt;/p&gt;
+	&lt;br&gt;
+	&lt;button class="show-hide-switch"&gt;Toggle Element&lt;/button&gt;
+	&lt;p&gt;
+		Paragraph #3
+	&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+			<p>
+				Next, the jQuery portion.
+				<br><br>
+				We'll have these buttons toggle on or off a class named "hide" on these paragraph elements. I'll go into what styling that class should have in a bit.
+			</p>
+<p class="banner js">JavaScript / jQuery<img class="arrow down"></p>
+<pre class="js">
+$('button.show-hide-switch').click(function(){
+	$(this).next('p').toggleClass('hide');
+})
+</pre>
+			<p>
+				There's a bit to unpack here, so I'll go bit by bit.
+				<br><br>
+				A. <code>$('button.show-hide-switch')</code>
+				<br><br>
+				This targets any <code>&lt;button&gt;</code> element in the page with the <code>show-hide-switch</code> class.
+				<br><br>
+				B. <code>.click(function(){})</code>
+				<br><br>
+				The <code>.click()</code> function runs whatever code is inside <code>function(){// Code here}</code> once the selected element (placed before <code>.click()</code> is clicked.
+				<br><br>
+				C. <code>$(this)</code>
+				<br><br>
+				Selects the element running this code. In this case, it's the button we clicked.
+				<br><br>
+				D. <code>.next('p')</code>
+				<br><br>
+				The <code>.next(element)</code> function selects the next <code>element</code> tag after whatever element this function is attached to. Which, in this case, is <code>$(this)</code>. We've put <code>'p'</code> here, so it will select the next paragraph element after the button.
+				<br><br>
+				Finally,
+				<br><br>
+				E. <code>.toggleClass('hide')</code>
+				<br><br>
+				This will toggle the class <code>hide</code> for the <code>&lt;p&gt;</code> element we selected. If the class is present, it will be removed. If it is not present, it will be added.
+				<br><br>
+				Okay, with that out of the way, now onto the what will actually hide and/or show the element: the CSS.
+				<br><br>
+				There are a couple ways of going about hiding our element. We can either make it completely disappear instantly, or have it gradually collapse and hide itself. I'll show both methods, starting with the former:
+			</p>
+<p class="banner css">CSS<img class="arrow down"></p>
+<pre>
+p.hide
+{
+	display: none;
+}
+</pre>
+			<p>
+				And with that, we're done!
+				<br><br>
+				Well, with the "instant disappearance" method, at least.
+				<br><br>
+				If you instead want it to gradually collapse (shrink in height, in this case), it's not that much more complicated, but it does come with a tradeoff: You have to set a maximum height, meaning your element can't be higher than what you set
+				<br><br>
+				By default, if your element has reached its maximum height but there's still more text, it'll just overflow over the other elements. Since you probably don't want that, the next best option is to set <code>overflow-y</code> to <code>scroll</code>, so that a scrollbar is placed and you can still access all of the information within that element. Of course, the scrollbar may be annoying, but it's the necessary tradeoff to having a gradual collapse on your element.
+				<br><br>
+				If you want to continue with that, you'll need to set different CSS:
+			</p>
+<p class="banner css">CSS<img class="arrow down"></p>
+<pre>
+p
+{
+	max-height: 500px;
+	overflow-y: scroll;
+	transition: all 0.5s;
+}
+
+p.hide
+{
+	max-height: 0;
+}
+</pre>
+			<p>
+				A working example of this post can be found <a href="hide-show-example/page.html">here</a>.
 			</p>
 			<hr>
 			<div class="grid">

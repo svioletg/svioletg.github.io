@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>CSS Theme Switching - Seth Gibbs / Coding / Posts</title>
+		<title>Dark & Light Themes - Seth Gibbs / Coding / Posts</title>
 		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
 		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
@@ -19,11 +19,9 @@
 			</div>
 			<h4>DATE POSTED: 2019-05-13</h4>
 			<h4>CATEGORIES: <span class="tag misc">Tutorial/Guide</span>, <span class="tag css">CSS</span>, <span class="tag js">JavaScript/jQuery</span></h4>
-			<h3>Toggle-able dark and light themes</h3>
+			<h3>Switchable dark and light themes</h3>
 			<br>
 			<p>
-				<!-- [<a href="#howto">Click here to skip to the "how to" section.</a>]
-				<br><br> -->
 				Most websites and webapps nowadays have two main color schemes: a <b>light theme</b> and a <b>dark theme</b> (also referred to as light mode/dark mode).
 				<br><br>
 				Dark themes tend to be easier to read and are less straining on the eyes, especially at night. However, light themes can sometimes provide better contrast, and of course some just simply prefer the brighter look.
@@ -33,7 +31,7 @@
 				First thing's first, we'll set up some basic styling. Something like:
 			</p>
 <p class="banner css">CSS<img class="arrow down"></p>
-			<pre>
+<pre class="css">
 body
 {
 	background-color: white;
@@ -50,7 +48,7 @@ body
 				For our dark theme, we'll leave everything else alone and just alter the <code>background-color</code> and <code>color</code>. Although, you can change any other things if you'd prefer to.
 			</p>
 <p class="banner css">CSS<img class="arrow down"></p>
-<pre>
+<pre class="css">
 body.dark
 {
 	background-color: black;
@@ -61,7 +59,7 @@ body.dark
 				This takes care of <code>body</code>, but what about elements that should have styling different than <code>body</code>? Since <code>body</code> has the class <code>dark</code>, we can specify dark mode by prefacing elements with <code>.dark</code> in your CSS. Example:
 			</p>
 <p class="banner css">CSS<img class="arrow down"></p>
-<pre>
+<pre class="css">
 body
 {
 	background-color: white;
@@ -104,7 +102,7 @@ p
 				Without it, we'd have to write this:
 			</p>
 <p class="banner js">JavaScript / jQuery<img class="arrow down"></p>
-<pre>
+<pre class="js">
 // 1 = dark theme active
 // -1 = dark theme inactive
 
@@ -128,11 +126,11 @@ $('div.toggle_button').click(function(){
 <p class="banner js">JavaScript / jQuery<img class="arrow down"></p>
 <pre>
 $('button#theme_button').click(function(){$('body').toggleClass('dark');});
-</pre>
+</pre class="js">
 			<p>
 				One line. Not our previous five. <i>One</i>.
 				<br><br>
-				Now all that's left is to actually place an element that you can click to activate this. You can use any element, a <code>&lt;button&gt;</code>, a <code>&lt;div&gt;</code>, a link tag (<code>&lt;a&gt;</code>), whatever you choose. Just make sure to change the text in <code>$('div.toggle_button').click</code> accordingly, and give it an ID like "theme_toggle" or something. The <code>$()</code> selector works the same way you select elements in CSS.
+				Now all that's left is to actually place an element that you can click to activate this. You can use any element, a <code>&lt;button&gt;</code>, a <code>&lt;div&gt;</code>, a link tag (<code>&lt;a&gt;</code>), whatever you choose. Just make sure to change the text in <code>$('button#theme_button')</code> accordingly, and give it an ID like "theme_toggle" or something. The <code>$()</code> selector works the same way you select elements in CSS.
 				<br><br>
 				This method is actually used in this very website, although with a "light" class instead of a "dark" class. You can click the toggle button in the top left to try that out.
 				<br><br>
