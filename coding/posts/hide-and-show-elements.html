@@ -108,7 +108,7 @@ $('button.show-hide-switch').click(function(){
 				<br><br>
 				This will toggle the class <code>hide</code> for the <code>&lt;p&gt;</code> element we selected. If the class is present, it will be removed. If it is not present, it will be added.
 				<br><br>
-				Okay, with that out of the way, now onto the what will actually hide and/or show the element: the CSS.
+				Okay, with that out of the way, now onto what will actually hide and/or show the element: the CSS.
 				<br><br>
 				There are a couple ways of going about hiding our element. We can either make it completely disappear instantly, or have it gradually collapse and hide itself. I'll show both methods, starting with the former:
 			</p>
@@ -124,7 +124,7 @@ p.hide
 				<br><br>
 				Well, with the "instant disappearance" method, at least.
 				<br><br>
-				If you instead want it to gradually collapse (shrink in height, in this case), it's not that much more complicated, but it does come with a tradeoff: You have to set a maximum height, meaning your element can't be higher than what you set
+				If you instead want it to gradually collapse (shrink in height, in this case), it's not that much more complicated, but it does come with a tradeoff: You have to set a maximum height, meaning your element can't be higher than what you set.
 				<br><br>
 				By default, if your element has reached its maximum height but there's still more text, it'll just overflow over the other elements. Since you probably don't want that, the next best option is to set <code>overflow-y</code> to <code>scroll</code>, so that a scrollbar is placed and you can still access all of the information within that element. Of course, the scrollbar may be annoying, but it's the necessary tradeoff to having a gradual collapse on your element.
 				<br><br>
