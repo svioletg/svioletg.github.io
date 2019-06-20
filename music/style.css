@@ -122,14 +122,14 @@ div.grid_item img.cover:hover
 
 div.grid_item img.icon
 {
+	border-radius: 100px;
 	width: 200px;
 	transition: all 0.25s;
 }
 
 div.grid_item img.icon:hover
 {
-	width: 200px;
-	filter: invert(1);
+	border-radius: 0px;
 }
 
 div.grid_item.trackinfo
