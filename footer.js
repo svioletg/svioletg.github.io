@@ -1,1 +1,1 @@
-$('span#devcredit').html('Website written & created by: Seth Gibbs<a href="https://github.com/Alpha-Hedge"><img src="https://img.icons8.com/color/32/000000/github.png"></a><br><a href="https://icons8.com/icon/63777/github">GitHub icon by Icons8</a>')
+$('span#devcredit').html('Website written & created by: Seth Gibbs<a href="https://github.com/Alpha-Hedge"><img src="https://img.icons8.com/color/32/000000/github.png"></a><br>Contact / email: seth@sethgibbs.xyz<br><a href="https://icons8.com/icon/63777/github">GitHub icon by Icons8</a>')
