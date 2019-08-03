@@ -111,14 +111,14 @@ div.grid_item img.cover
 	margin: 0 auto;
 	min-width: 75%;
 	max-width: 75%;
-	border: 5px solid black;
+	border: 2px solid black;
 	transition: all 0.25s;
 }
 
 div.grid_item img.cover:hover
 {
 	box-shadow: 0 0 1em white;
-	border: 5px solid white;
+	border: 2px solid white;
 }
 
 div.grid_item img.icon
