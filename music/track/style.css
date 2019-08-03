@@ -1,0 +1,130 @@
+body
+{
+	background-color: #002957;
+	margin: 0;
+}
+
+div#content
+{
+	font-size: 2em;
+	margin: 0;
+	width: 100%;
+	/*padding-right: 50px;
+	padding-left: 50px;*/
+	padding-top: 25px;
+	padding-bottom: 25px;
+	background-color: #8c3a8f;
+	color: white;
+	font-family: 'Roboto';
+}
+
+.palette-c div#content
+{
+	background-color: #ea70f1;
+}
+
+div.songinfo
+{
+	display: flex;
+	justify-content: center;
+	margin: auto;
+}
+
+hr
+{
+	width: 25%;
+	color: white;
+	margin-top: -1em;
+}
+
+div.top
+{
+	background-color: #ea70f1;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.palette-b div.top
+{
+	background-color: #0078ff;
+}
+
+.palette-c div.top
+{
+	background-color: #00ffff;
+}
+
+.palette-d div.top
+{
+	background-color: #002957;
+}
+
+h1, h2, h3
+{
+	margin: 0;
+	font-weight: normal;
+	font-family: 'Raleway';
+	text-align: center;
+}
+
+h1
+{
+	font-size: 2em;
+	padding-bottom: 0.25em;
+}
+
+h3
+{
+	margin-top: -1em;
+	padding-top: 1em;
+	font-size: 1em;
+}
+
+div.track
+{
+	width: 60%;
+	display: flex;
+	justify-content: center;
+	margin: auto;
+}
+
+img.cover
+{
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	width: 40%;
+	border: 1px solid white;
+}
+
+div.track div.info
+{
+	background-color: rgba(0,0,0,0.5);
+	width: 60%;
+	font-family: 'Roboto';
+	font-weight: lighter;
+	font-style: italic;
+	padding: 1em;
+	font-size: 1em;
+}
+
+div.links
+{
+	display: flex;
+	margin: auto;
+	justify-content: space-between;
+	width: 40%;
+}
+
+div.links img
+{
+	width: 150px;
+	border-radius: 50%;
+	transition: all 0.25s;
+}
+
+div.links img:hover
+{
+	border-radius: 0;
+}
