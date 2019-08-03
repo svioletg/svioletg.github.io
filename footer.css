@@ -1,16 +1,20 @@
 footer
 {
+	font-family: 'Roboto';
 	min-height: 5em;
 	padding: 1em;
 	/*margin-top: 5em;*/
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1em;
+	font-weight: lighter;
 	background-color: black;
+	color:white;
+	margin: 0;
 }
 
 footer img
 {
-	margin-bottom:-0.3em;
+	vertical-align: middle;
 }
 
 footer a
