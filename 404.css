@@ -1,0 +1,39 @@
+body
+{
+	margin: 0 auto;
+	background-color: #333;
+	color: #EEE;
+}
+
+h1
+{
+	font-family: 'Roboto';
+	font-weight: lighter;
+	font-size: 5em;
+	text-align: center;
+}
+
+p
+{
+	font-family: 'Roboto';
+	font-weight: lighter;
+	font-size: 3em;
+	text-align: center;
+	width: 50%;
+	margin: 0 auto;
+}
+
+p.button
+{
+	background-color: rgba(0,0,0,0.25);
+	bottom: 0; position: absolute;
+	width: 100%;
+	padding: 1em;
+	box-sizing: border-box;
+	transition: all 0.25s;
+}
+
+p.button:hover
+{
+	background-color: rgba(0,0,0,0.75);
+}
