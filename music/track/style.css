@@ -1,3 +1,16 @@
+@keyframes fadein 
+{
+	from { opacity: 0; /*filter: blur(10px);*/ }
+	to   { opacity: 1; /*filter: blur(0px);*/}
+}
+
+@keyframes hrgrow
+{
+	from { width: 0; }
+	to { width: 250px; }
+}
+
+
 body
 {
 	background-color: #002957;
@@ -60,7 +73,7 @@ div.top
 	background-color: #002957;
 }
 
-h1, h2, h3
+h1, h2, h3, h4, h5
 {
 	margin: 0;
 	font-weight: normal;
@@ -70,6 +83,8 @@ h1, h2, h3
 
 h1
 {
+	font-family: 'Roboto';
+	font-weight: lighter;
 	font-size: 2em;
 	padding-bottom: 0.25em;
 }
@@ -81,44 +96,183 @@ h3
 	font-size: 1em;
 }
 
+h4
+{
+	text-align: left;
+	font-weight: lighter;
+	font-size: 3em;
+	font-family: 'Roboto';
+}
+
+h5
+{
+	margin-top: 0.5em;
+	text-align: left;
+	font-weight: lighter;
+	font-size: 1.5em;
+}
+
+a.button
+{
+	text-decoration: none;
+}
+
+a.button img
+{
+	margin: 0 auto;
+	margin-bottom: 3px;
+	vertical-align: middle; 
+	width: 40px; 
+	/*margin-bottom: 3px;*/
+	filter: invert(1);
+	transition: all 0.25s;
+}
+
+div.alltracks hr
+{
+	margin-left: 0;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	width: 250px;
+	animation: hrgrow 0.5s;
+}
+
+div.trackgroup
+{
+	display: flex;
+	justify-content: space-between;
+	flex-flow: row;
+	flex-wrap: wrap;
+}
+
+div.trackgroup a
+{
+	text-decoration: none;
+}
+
+div.trackgroup a img
+{
+	border: 1px solid white;
+	width: 250px;
+}
+
+div.trackgroup a p
+{
+	background-color: rgba(0,0,0,0.25);
+	color: white;
+	font-family: 'Roboto';
+	font-weight: lighter;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	width: 250px;
+	width: 250px;
+	margin: 0;
+	margin-bottom: 1em;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+div.trackgroup a.emptyslot
+{
+	cursor: default;
+}
+
+div.trackgroup a.emptyslot img
+{
+	border: 0px;
+}
+
+div.trackgroup img.infobttn
+{
+	cursor: help;
+	position: absolute;
+	margin-left: -2em;
+	transition: all 0.25s;
+}
+
+div.trackgroup img.infobttn:hover
+{
+	position: absolute;
+	margin-left: -2em;
+	margin-bottom: -10px;
+}
+
+div.tracklist
+{
+	margin-left: 1em;
+	font-size: 0.75em;
+}
+
+div.track a
+{
+	text-decoration: none;
+	color: white;
+	transition: all 0.25s;
+}
+
+div.track a:hover
+{
+	box-shadow: inset 0 -10px 0 0 rgba(234,112,241,0.75);
+}
+
+div.button
+{
+	background-color: rgba(0,0,0,0.25);
+	transition: all 0.25s;
+	text-decoration: none;
+	color: white;
+	margin: 0;
+	width: 15%;
+	text-align: center;
+	padding: 0.5em;
+	padding-left: 0;
+	position: absolute;
+	top: 0;
+	font-weight: lighter;
+	font-family: 'Roboto';
+}
+
+div.button:hover
+{
+	background-color: rgba(0,0,0,0.5);
+}
+
 div.track
 {
 	width: 60%;
+	height: 450px;
 	display: flex;
 	justify-content: center;
 	margin: auto;
-}
-
-img.cover
-{
-	display: flex;
-	justify-content: center;
-	margin: auto;
-	width: 40%;
-	border: 1px solid white;
+	animation: fadein 0.5s;
 }
 
 div.track div.info
 {
 	background-color: rgba(0,0,0,0.5);
-	width: 60%;
 	font-family: 'Roboto';
 	font-weight: lighter;
 	font-style: italic;
-	padding: 1em;
 	font-size: 1em;
+	padding: 1em;
+	width: 60%;
+	/*box-sizing: border-box;*/
+	overflow-y: auto;
 }
 
 div.links
 {
 	display: flex;
 	margin: auto;
-	justify-content: space-between;
+	justify-content: center;
 	width: 40%;
 }
 
 div.links img
 {
+	padding-left: 2em;
+	padding-right: 2em;
+	margin: auto;
 	width: 150px;
 	border-radius: 50%;
 	transition: all 0.25s;
@@ -127,4 +281,14 @@ div.links img
 div.links img:hover
 {
 	border-radius: 0;
+}
+
+img.cover
+{
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	height: 100%;
+	border: 1px solid white;
+	box-sizing: border-box;
 }
