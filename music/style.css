@@ -18,14 +18,16 @@ body
 	transition: 0.5s;
 	color: white;
 	font-family: 'Raleway', sans-serif;
+	font-weight: lighter;
 	animation: fadein 1s;
 	overflow-x: hidden;
 }
 
 h1, h2
 {
+	font-weight: lighter;
 	font-weight: 300;
-	letter-spacing: 0.5em;
+	/*letter-spacing: 0.5em;*/
 	text-align: center;
 }
 
@@ -90,7 +92,8 @@ div.grid
 	flex-wrap: wrap;
 	flex-direction: row;
 	flex-shrink: 0;
-	justify-content: space-around;
+	/*justify-content: space-around;*/
+	justify-content: center;
 	width: 90%;
 }
 
@@ -102,8 +105,8 @@ div.grid_item
 	font-size: 2.5em;
 	letter-spacing: 0em;
 	font-weight: 300;
-	min-width: 25%;
-	max-width: 25%;
+	min-width: 20%;
+	max-width: 20%;
 }
 
 div.grid_item img.cover
@@ -207,9 +210,6 @@ table.album img
 
 .info
 {
-	margin: 0 auto;
-	min-width: 100%;
-	max-width: 100%;
 	font-family: 'Roboto', sans-serif;
 	letter-spacing: 0;
 	background-color: rgba(0,0,0,0.5);
@@ -217,8 +217,6 @@ table.album img
 
 .infolink
 {
-	margin: 0 auto;
-	width: 70%;
 	padding: 0.25em;
 	transition: all 0.25s;
 }
