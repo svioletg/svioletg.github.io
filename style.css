@@ -21,12 +21,12 @@ body
 	font-weight: 300;
 	overflow-x: hidden;
 	animation: fadein 1s;
+	background-color: #8c3a8f;
 }
 
 div#header
 {
-	padding:1em;
-	background-image: linear-gradient(magenta,purple);
+	padding: 1em;
 }
 
 h1, h2
@@ -39,7 +39,7 @@ h1, h2
 
 h1
 {
-	font-size: 7em;
+	font-size: 5em;
 }
 
 h2
@@ -61,6 +61,8 @@ div#main
 	color: black;
 	background-color: white;
 	padding: 1em;
+	padding-top: 3em;
+	padding-bottom: 3em;
 	font-size: 1.25em;
 	font-family: 'Roboto', sans-serif;
 }
@@ -74,57 +76,37 @@ div#main hr
 
 div#navigation
 {
-	font-size: 3em;
+	font-size: 2em;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
 	text-align: center;
 	justify-content: center;
-	background-color: black;
 	width: 100%;
 	margin: 0;
-	position:sticky;
 	top: 0;
 }
 
 div#navigation a
 {
+	margin: 0 auto;
+	width: 25%;
 	padding: 1em;
-	flex: 1;
+	padding-top: 2em;
+	padding-bottom: 2em;
 	transition: all 0.25s;
-}
-
-div#navigation a
-{
 	color: white;
 	text-decoration: none;
-}
-
-a#projectlink
-{
-	background-image: url('img/code.png');
-	background-position: center;
-	background-size: 100% 5em;
-	font-weight: 300;
+	/*background-color: rgba(255,255,255,0);*/
+	border: 2px solid white;
+	border-radius: 5px;
 	transition: all 0.25s;
 }
 
-a#projectlink:hover
+div#navigation a:hover
 {
-	color: black;
-}
-
-a#musiclink
-{
-	background-image: url('img/music.png');
-	background-position: center;
-	background-size: 100% 5em;
-	font-weight: 300;
-	transition: all 0.25s;
-}
-
-a#musiclink:hover
-{
+	background-color: white;
 	color: black;
 }
 
