@@ -23,17 +23,31 @@ body
 	overflow-x: hidden;
 }
 
-h1, h2
+@media (prefers-reduced-motion: reduce) 
 {
+	body
+	{
+		scroll-behavior: auto;
+	}
+}
+
+body.homeindex
+{
+	background-image: linear-gradient(45deg, rgba(19, 19, 19, 0.09) 0%, rgba(19, 19, 19, 0.09) 29%,rgba(124, 124, 124, 0.09) 29%, rgba(124, 124, 124, 0.09) 35%,rgba(119, 119, 119, 0.09) 35%, rgba(119, 119, 119, 0.09) 37%,rgba(229, 229, 229, 0.09) 37%, rgba(229, 229, 229, 0.09) 41%,rgba(116, 116, 116, 0.09) 41%, rgba(116, 116, 116, 0.09) 67%,rgba(136, 136, 136, 0.09) 67%, rgba(136, 136, 136, 0.09) 90%,rgba(206, 206, 206, 0.09) 90%, rgba(206, 206, 206, 0.09) 100%),linear-gradient(135deg, rgba(250, 250, 250, 0.01) 0%, rgba(250, 250, 250, 0.01) 27%,rgba(31, 31, 31, 0.01) 27%, rgba(31, 31, 31, 0.01) 29%,rgba(89, 89, 89, 0.01) 29%, rgba(89, 89, 89, 0.01) 54%,rgba(225, 225, 225, 0.01) 54%, rgba(225, 225, 225, 0.01) 77%,rgba(252, 252, 252, 0.01) 77%, rgba(252, 252, 252, 0.01) 79%,rgba(139, 139, 139, 0.01) 79%, rgba(139, 139, 139, 0.01) 80%,rgba(28, 28, 28, 0.01) 80%, rgba(28, 28, 28, 0.01) 82%,rgba(166, 166, 166, 0.01) 82%, rgba(166, 166, 166, 0.01) 100%),linear-gradient(45deg, rgba(99, 99, 99, 0.06) 0%, rgba(99, 99, 99, 0.06) 5%,rgba(135, 135, 135, 0.06) 5%, rgba(135, 135, 135, 0.06) 60%,rgba(231, 231, 231, 0.06) 60%, rgba(231, 231, 231, 0.06) 62%,rgba(136, 136, 136, 0.06) 62%, rgba(136, 136, 136, 0.06) 84%,rgba(169, 169, 169, 0.06) 84%, rgba(169, 169, 169, 0.06) 100%),linear-gradient(135deg, rgba(43, 43, 43, 0.07) 0%, rgba(43, 43, 43, 0.07) 3%,rgba(3, 3, 3, 0.07) 3%, rgba(3, 3, 3, 0.07) 10%,rgba(77, 77, 77, 0.07) 10%, rgba(77, 77, 77, 0.07) 39%,rgba(19, 19, 19, 0.07) 39%, rgba(19, 19, 19, 0.07) 41%,rgba(232, 232, 232, 0.07) 41%, rgba(232, 232, 232, 0.07) 70%,rgba(188, 188, 188, 0.07) 70%, rgba(188, 188, 188, 0.07) 100%),linear-gradient(135deg, rgba(194, 194, 194, 0.04) 0%, rgba(194, 194, 194, 0.04) 24%,rgba(193, 193, 193, 0.04) 24%, rgba(193, 193, 193, 0.04) 49%,rgba(76, 76, 76, 0.04) 49%, rgba(76, 76, 76, 0.04) 90%,rgba(13, 13, 13, 0.04) 90%, rgba(13, 13, 13, 0.04) 94%,rgba(12, 12, 12, 0.04) 94%, rgba(12, 12, 12, 0.04) 99%,rgba(35, 35, 35, 0.04) 99%, rgba(35, 35, 35, 0.04) 100%),linear-gradient(135deg, rgba(233, 233, 233, 0.03) 0%, rgba(233, 233, 233, 0.03) 24%,rgba(7, 7, 7, 0.03) 24%, rgba(7, 7, 7, 0.03) 45%,rgba(156, 156, 156, 0.03) 45%, rgba(156, 156, 156, 0.03) 78%,rgba(105, 105, 105, 0.03) 78%, rgba(105, 105, 105, 0.03) 100%),linear-gradient(135deg, rgba(12, 12, 12, 0.02) 0%, rgba(12, 12, 12, 0.02) 40%,rgba(97, 97, 97, 0.02) 40%, rgba(97, 97, 97, 0.02) 51%,rgba(222, 222, 222, 0.02) 51%, rgba(222, 222, 222, 0.02) 61%,rgba(235, 235, 235, 0.02) 61%, rgba(235, 235, 235, 0.02) 78%,rgba(30, 30, 30, 0.02) 78%, rgba(30, 30, 30, 0.02) 88%,rgba(104, 104, 104, 0.02) 88%, rgba(104, 104, 104, 0.02) 100%),linear-gradient(0deg, rgba(80, 80, 80, 0.1) 0%, rgba(80, 80, 80, 0.1) 9%,rgba(209, 209, 209, 0.1) 9%, rgba(209, 209, 209, 0.1) 26%,rgba(170, 170, 170, 0.1) 26%, rgba(170, 170, 170, 0.1) 56%,rgba(86, 86, 86, 0.1) 56%, rgba(86, 86, 86, 0.1) 63%,rgba(53, 53, 53, 0.1) 63%, rgba(53, 53, 53, 0.1) 83%,rgba(170, 170, 170, 0.1) 83%, rgba(170, 170, 170, 0.1) 88%,rgba(36, 36, 36, 0.1) 88%, rgba(36, 36, 36, 0.1) 100%),linear-gradient(90deg, rgb(117, 25, 189),rgb(201, 11, 132));
+}
+
+h1, h2, h3, h4, h5
+{
+	margin: 0;
+	font-weight: normal;
 	font-weight: lighter;
-	font-weight: 300;
-	/*letter-spacing: 0.5em;*/
+	font-family: 'Raleway';
 	text-align: center;
 }
 
 h1
 {
-	font-size: 7em;
+	font-size: 5em;
 }
 
 h2
@@ -43,8 +57,11 @@ h2
 
 hr
 {
-	width: 50%;
+	border: none;
 	color: white;
+	background-color: white;
+	width: 50%;
+	height: 1px;
 	margin-top: 5em;
 	margin-bottom: 5em;
 	animation: hrgrow 1s;
@@ -58,7 +75,17 @@ a
 
 p
 {
-	font-size: 2em;
+	font-size: 1.75em;
+}
+
+p a
+{
+	color: cyan;
+}
+
+p a:visited
+{
+	color: #008888;
 }
 
 sub
@@ -77,12 +104,156 @@ sub
 	font-family: 'Roboto', sans-serif;
 }
 
+div.top
+{
+	background-color: rgba(255,255,255,0.25);
+	width: 100%;
+	margin: 0;
+	padding: 2em;
+	box-sizing: border-box;
+	font-family: 'Roboto';
+}
+
+div.headlink
+{
+	margin: 0 auto;
+	font-family: 'Roboto';
+	width: 100%;
+	display: flex;
+}
+
+div.headlink a
+{
+	padding: 0.25em;
+	box-sizing: border-box;
+	background-color: rgba(255,255,255,0.25);
+	
+	width: 50%;
+	transition: all 0.25s;
+}
+
+div.headlink a:hover
+{
+	background-color: rgba(0,0,0,0.25);
+}
+
+div.headlink a h1
+{
+	font-family: 'Roboto';
+	font-weight: lighter;
+}
+
+div#navigation
+{
+	animation: fadein 1s;
+	font-size: 3em;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	text-align: center;
+	justify-content: center;
+	width: 100%;
+	margin: 0;
+	top: 0;
+}
+
+div#navigation a
+{
+	margin: 0 auto;
+	width: 25%;
+	padding: 1em;
+	transition: all 0.25s;
+	color: white;
+	text-decoration: none;
+	/*background-color: rgba(255,255,255,0);*/
+	border: 2px solid white;
+	border-radius: 5px;
+	transition: all 0.25s;
+}
+
+div#navigation a:hover
+{
+	background-color: white;
+	color: black;
+}
+
 div.infoblock
 {
 	font-family: 'Roboto', sans-serif;
 	font-weight: lighter;
 	background-color: rgba(0,0,0,0.5);
 	padding: 1em;
+}
+
+div.infoblock sup
+{
+	/*font-style: italic;*/
+	color: #777;
+	font-weight: normal;
+	font-size: 0.7em;
+}
+
+div.infoblock hr
+{
+	padding: 0;
+	margin: 0 auto;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+div.infoblock h1
+{
+	font-size: 2em;
+}
+
+div.infoblock ul
+{
+	text-align: center;
+	list-style: none;
+}
+
+div.infoblock li
+{
+	margin: 0 auto;
+	font-size: 2em;
+}
+
+div.infoblock a
+{
+	/*box-shadow: inset 0 -10px 0 0 rgba(0,0,0,0.5);*/
+	transition: all 0.25s;
+}
+
+div.infoblock a:hover
+{
+	box-shadow: inset 0 -10px 0 0 rgba(0,0,0,0.5);
+}
+
+div.infoblock a.notelink
+{
+	box-shadow: none;
+	font-style: initial;
+}
+
+div.infoblock a.notelink:hover
+{
+	background-color: rgba(0,0,0,0);
+}
+
+img.infobttn
+{
+	cursor: help;
+	position: absolute;
+	margin-left: -2em;
+	transition: all 0.25s;
+}
+
+img.infobttn:hover
+{
+	position: absolute;
+	margin-left: -2em;
+	margin-bottom: -10px;
 }
 
 div.grid
@@ -104,7 +275,6 @@ div.grid_item
 	text-align: center;
 	font-size: 2.5em;
 	letter-spacing: 0em;
-	font-weight: 300;
 	min-width: 20%;
 	max-width: 20%;
 }
@@ -148,6 +318,17 @@ iframe.album_embed
 	margin: 0 auto;
 	width: 50%;
 	height: 500px;
+}
+
+footer span.note
+{
+	transition: all 4s;
+}
+
+footer span.note.highlight
+{
+	transition: all 0.5s;
+	background-color: rgba(255,127,0,0.5);
 }
 
 /*table.album
@@ -208,6 +389,13 @@ table.album img
 	letter-spacing: 0;
 }
 
+#month_table
+{
+	margin: 0 auto;
+	text-align: center;
+	width: 50%;
+}
+
 .info
 {
 	font-family: 'Roboto', sans-serif;
@@ -217,11 +405,19 @@ table.album img
 
 .infolink
 {
+	font-family: 'Raleway', sans-serif;
 	padding: 0.25em;
 	transition: all 0.25s;
+	width: 100%;
 }
 
-.infolink:hover {background-color: black; width: 90%;}
+.infolink:hover
+{
+	padding: 0.25em;
+	transition: all 0.25s;
+	width: 100%;
+	background-color: rgba(0,0,0,1);
+}
 
 .janlink       {background-color: rgba(255,0,0,0.5);}
 .janlink:hover {background-color: rgba(255,0,0,1);}
