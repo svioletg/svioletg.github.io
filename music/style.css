@@ -279,6 +279,12 @@ div.grid_item
 	max-width: 20%;
 }
 
+div#socialmedia div.grid_item
+{
+	min-width: 16.66%;
+	max-width: 16.66%;
+}
+
 div.grid_item img.cover
 {
 	margin: 0 auto;
