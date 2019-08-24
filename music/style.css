@@ -285,6 +285,16 @@ div#socialmedia div.grid_item
 	max-width: 16.66%;
 }
 
+div#socialmedia img.icon
+{
+	transition: all 0.25s;
+}
+
+div#socialmedia img.icon:hover
+{
+	filter: invert(1);
+}
+
 div.grid_item img.cover
 {
 	margin: 0 auto;
@@ -302,15 +312,15 @@ div.grid_item img.cover:hover
 
 div.grid_item img.icon
 {
-	border-radius: 50%;
+	border-radius: 100%;
 	width: 50%;
 	transition: all 0.25s;
 }
 
-div.grid_item img.icon:hover
+/*div.grid_item img.icon:hover
 {
 	border-radius: 0px;
-}
+}*/
 
 div.grid_item.trackinfo
 {
