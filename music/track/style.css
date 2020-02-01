@@ -16,19 +16,19 @@
 	to { padding-left: 2em; padding-right: 2em; opacity: 1; }
 }
 
-body
-{
-	background-color: #002957;
-	margin: 0;
-	scroll-behavior: smooth;
-}
-
 @media (prefers-reduced-motion: reduce) 
 {
 	body
 	{
 		scroll-behavior: auto;
 	}
+}
+
+body
+{
+	background-color: #002957;
+	margin: 0;
+	scroll-behavior: smooth;
 }
 
 div#content
