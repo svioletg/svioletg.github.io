@@ -347,6 +347,11 @@ footer span.note.highlight
 	background-color: rgba(255,127,0,0.5);
 }
 
+ul#equipment li
+{
+	font-size: 1.5em;
+}
+
 /*table.album
 {
 	border-collapse: collapse;
