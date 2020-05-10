@@ -265,6 +265,12 @@ div.trackgroup a p
 	transition: all 0.25s;
 }
 
+sub
+{
+	color: #AAA;
+	font-style: italic;
+}
+
 div.trackgroup a p:hover
 {
 	background-color: rgba(0,0,0,0.75);
