@@ -12,51 +12,68 @@
 	</head>
 	<body class="homeindex">
 		<div class="top">
-			<h1>SETH GIBBS</h1>
+			<h1>seth gibbs</h1>
+			<h2>independent music artist & producer</h2>
 		</div>
-		<br><br><br><br>
-		<div id="navigation">
-			<a href="track/all-tracks.html">
-				SEE ALL RELEASES
+
+		<nav>
+			<!-- <a href="#about">about</a> -->
+			<a href="#contact">contact</a>
+		</nav>
+
+		<!-- <a id="widebttn" href="track/all-tracks.html">
+			full discography
+		</a> -->
+
+		<div style="display: flex; flex-direction: row;">
+			<nav style="width: 50%;">buy</nav>
+			<nav style="width: 50%;">listen</nav>
+		</div>
+		<div style="display: flex; flex-direction: row;">
+			<a style="width: 50%;" id="widebttn" class="bcbttn" href="http://bandcamp.sethgibbs.xyz">
+			bandcamp
+			</a>
+			<a style="width: 50%;" id="widebttn" class="ytbttn" href="http://youtube.sethgibbs.xyz">
+			youtube
 			</a>
 		</div>
-		<hr>
-		<div class="grid" id="socialmedia" style="font-size: 0;">
-			<div class="grid_item">
-				<a title="Twitter" href="http://twitter.sethgibbs.xyz"><img alt="Twitter" class="icon twitter" src="img/icon/twitter.svg"></a>
+
+		<div style="display: flex; flex-direction: row; margin: 0;">
+			<div class="latestrelease" style="width: 100%;">
+				<div style="width:100%; background-color: rgba(0,0,0,0.4);">
+					<h2 style="width:100%; ">Most recent release:</h2>
+					<br><br><br><br>
+					<a href="https://sethgibbs.bandcamp.com/track/voltage">
+					<h1 style="color: cyan; width:100%;">Voltage</h1>
+					</a>
+					<br><br><br><br>
+					<h2 style="width:100%;">SINGLE</h2>
+				</div>
 			</div>
-			<div class="grid_item">
-				<a title="SoundCloud" href="http://soundcloud.sethgibbs.xyz"><img alt="SoundCloud" class="icon soundcloud" src="img/icon/soundcloud.svg"></a>
-			</div>
-			<div class="grid_item">
-				<a title="YouTube" href="http://youtube.sethgibbs.xyz"><img alt="YouTube" class="icon youtube" src="img/icon/youtube.svg"></a>
-			</div>
-			<div class="grid_item">
-				<a title="Bandcamp" href="http://bandcamp.sethgibbs.xyz"><img alt="Bandcamp" class="icon bandcamp" src="img/icon/bandcamp.svg"></a>
-			</div>
-			<div class="grid_item">
-				<a title="Patreon" href="http://patreon.sethgibbs.xyz"><img alt="Patreon" class="icon patreon" src="img/icon/patreonblack.png"></a>
-			</div>
-			<div class="grid_item">
-				<a title="Ko-Fi" href="http://kofi.sethgibbs.xyz"><img alt="Ko-Fi" class="icon kofi" src="img/icon/kofiblack.png"></a>
-			</div>
+			<!-- <div class="upcoming" style="width: 50%;">
+				<div style="padding-top: 4em; padding-bottom: 4em; width:100%;">
+					<h2 style="width:100%; background-color: rgba(0,0,0,0.4);">Upcoming:</h2>
+					<a href="https://sethgibbs.bandcamp.com/album/plumeria">
+					<h1 style="color: cyan; width:100%; background-color: rgba(0,0,0,0.4);">Plumeria</h1>
+					</a>
+					<h3 style="width:100%; background-color: rgba(0,0,0,0.4);">ALBUM</h3>
+				</div>
+			</div> -->
 		</div>
-		<hr>
-		<div class="infoblock" style="width: 60%; text-align: center; margin: 0 auto;">
-			<p>
-				I've always been heavily interested in music, and I began learning how to produce music in 2015; composing and releasing my first original song (<a href="track/fight-or-flight.html">Fight or Flight</a>) on July 4th, 2016. Since then I've been steadily improving, and as of 2019 I've been releasing one song every month.
-				<br><br>
-				Currently, I make all of my music digitally in FL Studio 20 with various VSTs/plugins (some of which are listed <a href="#what-i-use">below</a>).
-				<br><br>
-				I most commonly produce rock and electronic music, and I aim to expand my skills with other genres.
-				<br><br>
-				If you'd like to tell me or ask me anything, you can email me at <b>seth@sethgibbs.xyz</b> or contact me on any of the social platforms above. I'll get back to you as soon as I can!
-			</p>
-			<hr id="what-i-use">
-			<h1 style="font-size: 3em;">EQUIPMENT<a href="#note-1" class="notelink">*</a></h1>
+
+		<div class="infoblock" style="width: 100%; text-align: center; margin: 0 auto; background-color: #663399;">
+			<br id="about">
+			<br><br><br><br>
+			<!-- <h1 style="font-size: 3em;">about</h1>
 			<hr>
-			<ul id="equipment" style="text-align: left;">
-				<li style="font-size: 3em; font-family: 'Raleway';">SOFTWARE</li>
+			<p style="width: 60%; margin: 0 auto;">
+				I've been working with music since 2015, releasing my <a href="track/fight-or-flight.html">first track</a> in July of 2016.
+			</p> -->
+			<hr id="what-i-use">
+			<h1 style="font-size: 3em;">equipment<a href="#note-1" class="notelink">*</a></h1>
+			<hr>
+			<ul id="equipment" style="text-align: left; width: 60%; margin: 0 auto;">
+				<li style="font-size: 3em; font-family: 'Raleway';">software</li>
 				<li>
 					<a href="https://www.image-line.com/flstudio/">FL Studio 20</a>
 					<br>
@@ -67,82 +84,89 @@
 				<li>
 					<a href="https://reverb.com/item/6447738-sawtooth-ep-series-electric-bass-guitar-trans-purple">Sawtooth EP Series Electric Bass Guitar</a>
 				</li> -->
-				<li style="font-size: 3em; font-family: 'Raleway';">VIRTUAL PLUGINS / VSTs</li>
+				<li style="font-size: 3em; font-family: 'Raleway';">plugins & VSTs</li>
 				<li>
 					<a href="https://www.native-instruments.com/en/products/komplete/samplers/kontakt-6-player/">Kontakt 6 Player</a>
 					<br>
-					<sup>VST PLAYER</sup>
+					<sup>sampler</sup>
 				</li>
 				<li>
 					<a href="https://www.native-instruments.com/en/products/komplete/keys/noire/">NOIRE</a>
 					<br>
-					<sup>PIANO</sup>
+					<sup>piano</sup>
 				</li>
 				<li>
 					<a href="https://www.native-instruments.com/en/products/komplete/keys/the-giant/">THE GIANT</a>
 					<br>
-					<sup>PIANO</sup>
+					<sup>piano</sup>
 				</li>
 				<li>
 					<a href="https://impactsoundworks.com/product/shreddage-3-stratus/">Shreddage 3 Stratus</a>
 					<br>
-					<sup>ELECTRIC GUITAR</sup>
+					<sup>electric guitar</sup>
 				</li>
 				<li>
 					<a href="https://www.native-instruments.com/en/products/komplete/guitar/scarbee-pre-bass-amped/">Scarbee Pre-Bass Amped</a>
 					<br>
-					<sup>ELECTRIC BASS</sup>
+					<sup>electric bass</sup>
 				</li>
 				<li>
 					<a href="https://impactsoundworks.com/product/shreddage-3-precision/">Shreddage 3 Precision</a>
 					<br>
-					<sup>ELECTRIC BASS</sup>
+					<sup>electric bass</sup>
 				</li>
 				<li>
 					<a href="https://impactsoundworks.com/product/shreddage-drums/">Shreddage Drums</a>
 					<br>
-					<sup>DRUMS / PERCUSSION</sup>
+					<sup>drums</sup>
 				</li>
 				<li>
 					<a href="https://www.spitfireaudio.com/labs/">Spitfire LABS Strings</a>
 					<br>
-					<sup>STRINGS</sup>
+					<sup>strings</sup>
 				</li>
 				<li>
 					<a href="https://www.native-instruments.com/en/products/komplete/cinematic/session-strings-2/">Session Strings 2</a>
 					<br>
-					<sup>STRINGS</sup>
+					<sup>strings</sup>
 				</li>
 				<li>
 					<a href="https://asb2m10.github.io/dexed/">Dexed</a>
 					<br>
-					<sup>SYNTHESIZER</sup>
+					<sup>synthesizer</sup>
 				</li>
 				<li>
 					<a href="https://www.image-line.com/plugins/Synths/MiniSynth/">MiniSynth</a>
 					<br>
-					<sup>SYNTHESIZER</sup>
+					<sup>synthesizer</sup>
 				</li>
 				<li>
 					<a href="https://www.image-line.com/plugins/Synths/Sytrus/">Sytrus</a>
 					<br>
-					<sup>SYNTHESIZER</sup>
+					<sup>synthesizer</sup>
 				</li>
 				<li>
 					<a href="https://daichilab.sakura.ne.jp/softsynth/index.html">Synth1</a>
 					<br>
-					<sup>SYNTHESIZER</sup>
+					<sup>synthesizer</sup>
 				</li>
 				<br>
-				<li style="font-size: 3em; font-family: 'Raleway';">EQUIPMENT / PHYSICAL INSTRUMENTS</li>
+				<li style="font-size: 3em; font-family: 'Raleway';">physical instruments & equipment</li>
 				<li>
 					<a href="https://www.alesis.com/products/view2/v25">Alesis V25</a>
 					<br>
-					<sup>MIDI KEYBOARD / CONTROLLER</sup>
+					<sup>midi controller, keyboard</sup>
 				</li>
 			</ul>
+			<hr id="contact">
+			<h1 style="font-size: 3em;">contact</h1>
+			<hr>
+			<p style="width: 60%; margin: 0 auto;">
+				If you'd like to ask me anything or contact me for any reason, you can do so via messaging <b>seth@sethgibbs.xyz</b>
+				<br><br>
+				I will try and get back to you as soon as I can.
+			</p>
 		</div>
-		<br><br>
 	</body>
 	<footer>
 		<span id="note-1" class="note">* Not everything I've ever used is listed, only what I use most often and what I can provide a link to.</span>
