@@ -148,7 +148,7 @@ sub
 	z-index: -1;
 	
 	display: block;
-	background-image: url('img/cover/voltage.png');
+	background-image: url('img/cover/pulse.png');
 	background-position: center;
 	background-size: cover;
 	width: 100%;
