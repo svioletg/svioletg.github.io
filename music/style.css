@@ -159,24 +159,6 @@ sub
 	filter: blur(1.5em);
 }
 
-.upcoming:before 
-{
-	content: "";
-	position: absolute;
-	margin-left: 50%;
-	right: 0;
-	z-index: -1;
-	
-	display: block;
-	background-image: url('img/cover/plumeria.png');
-	background-position: center;
-	background-size: cover;
-	width: 50%;
-	height: 100%;
-	
-	filter: blur(1em);
-}
-
 div.top
 {
 	background-color: #ea70f1;
@@ -249,6 +231,13 @@ a#widebttn.ytbttn:hover
 	background-color: white;
 	color: red;
 }
+
+a#widebttn.spbttn:hover
+{
+	background-color: lime;
+	color: black;
+}
+
 
 a#widebttn:active
 {
