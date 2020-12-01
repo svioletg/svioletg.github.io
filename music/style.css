@@ -150,7 +150,7 @@ sub
 	z-index: -1;
 	
 	display: block;
-	background-image: url('img/cover/recent.png');
+	background-image: url('img/cover/recent.jpg');
 	background-position: center;
 	background-size: cover;
 	width: 100%;
