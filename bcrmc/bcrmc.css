@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+
+body
+{
+	background-color: #222;
+	color: white;
+	font-family: 'Akshar', sans-serif;
+	font-weight: lighter;
+	text-align: center;
+	font-size: 1em;
+}
+
+hr { width: 75%; }
+p { width: 50%; margin: 0 auto; font-size: 1.5em;}
+b { font-weight: bold; }
+code { background-color: #444; padding: 5px; color: yellow;}
+a { color: cyan; }
+
+a.bttn
+{
+	font-weight: bolder;
+	margin: 0 auto;
+	width: 20%;
+	display: block;
+	font-size: 1.5em;
+	color: white;
+	padding: 10px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: white;
+	text-decoration: none;
+	transition: 0.2s all;
+}
+
+a.bttn:hover { background-color: white; color: black; }
+
+a.mega { border-color: red; }
+a.mega:hover { background-color: red; color: white; }
+
+h1 { font-size: 3em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.5em; font-weight: bolder; }
+
+figure
+{
+	display: inline-block;
+	padding: 0;
+	margin: 0 auto;
+}
+
+figure img { height: 20em; object-fit: scale-down; }
+
+figcaption 
+{
+	background-color: black;
+	padding: 5px;
+	font-weight: bolder;
+}
