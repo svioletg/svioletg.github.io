@@ -3,7 +3,8 @@
 
 body
 {
-	background-color: #222;
+	/*background-color: #333;*/
+	background-image: url(bg.png);
 	color: white;
 	font-family: 'Akshar', sans-serif;
 	font-weight: lighter;
@@ -12,7 +13,7 @@ body
 }
 
 hr { width: 75%; }
-p { width: 50%; margin: 0 auto; font-size: 1.5em;}
+p { width: 50%; margin: 0 auto; font-size: 1.5em; }
 b { font-weight: bold; }
 code { background-color: #444; padding: 5px; color: yellow;}
 a { color: cyan; }
@@ -40,20 +41,28 @@ a.mega:hover { background-color: red; color: white; }
 
 h1 { font-size: 3em; }
 h2 { font-size: 2em; }
+h2 sup { font-style: italic; font-weight: lighter; }
 h3 { font-size: 1.5em; font-weight: bolder; }
 
 figure
 {
 	display: inline-block;
-	padding: 0;
-	margin: 0 auto;
+	padding: 0; margin: 0;
 }
 
-figure img { height: 20em; object-fit: scale-down; }
-
-figcaption 
+figure img
 {
-	background-color: black;
+	height: 300px; 
+	object-fit: scale-down; 
+	vertical-align: top;
+}
+
+figcaption
+{
+	background-color: rgba(0,0,0,0.5);
 	padding: 5px;
 	font-weight: bolder;
+	letter-spacing: 2px;
 }
+
+figcaption sup { font-style: italic; }
