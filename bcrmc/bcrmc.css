@@ -116,7 +116,7 @@ li.note
 
 @media (max-width:800px)
 {
-	body {font-size:2em;}
+/*	body {font-size:2em;}*/
 	main {width:100%}
 	h2, h2 {width:100%; border-left: none; border-top: 5px solid cyan;}
 	a.bttn {padding: 1em; width: 75%;}
