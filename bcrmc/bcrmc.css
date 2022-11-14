@@ -44,6 +44,7 @@ a.bttn
 	border-color: black;
 	text-decoration: none;
 	background-image: url('bttn.png');
+	background-size: cover;
 	/*transition: 0.2s all;*/
 }
 
@@ -110,4 +111,13 @@ li.note
 	background-color: rgba(255,127,0,0.25);
 	list-style-type: none;
 	padding: 0.5em;
+	font-size: 0.75em;
+}
+
+@media (max-width:800px)
+{
+	body {font-size:2em;}
+	main {width:100%}
+	h2, h2 {width:100%; border-left: none; border-top: 5px solid cyan;}
+	a.bttn {padding: 1em; width: 75%;}
 }
