@@ -93,6 +93,7 @@ figcaption
 figcaption sup { font-style: italic; }
 
 ul { font-size: 1.5em; width: 75%; text-align: left; margin: 0 auto; }
+ul img { width: 40%; }
 ul ol
 {
 	padding-top: 1em;
@@ -130,4 +131,5 @@ a.hlight
 	h2, h2 {width:100%; border-left: none; border-top: 5px solid cyan;}
 	a.bttn {padding: 1em; width: 75%;}
 	ul ol {border-left: none; border-top: 5px solid yellow;}
+	ul img {width: 100%;}
 }
