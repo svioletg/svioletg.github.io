@@ -25,7 +25,13 @@ main
 hr { width: 75%; }
 p { width: 75%; margin: 0 auto; font-size: 1.5em; }
 b { font-weight: bold; }
-code { font-weight:bold; background-color: #444; padding: 5px; color: yellow;}
+code 
+{
+	font-family: "Courier New";
+	font-weight:bold; 
+	background-color: #444; 
+	padding: 5px; color: yellow;
+}
 a { color: cyan; }
 
 a.bttn
@@ -69,7 +75,15 @@ h2
 	border-left: 5px solid cyan;
 }
 h2 sup { font-style: italic; font-weight: lighter; }
-h3 { font-size: 1.5em; font-weight: bolder; }
+h3 { font-weight: bold; font-size: 2em; text-align: left; }
+h3.subtitle
+{
+	font-size: 1.5em; 
+	text-align: center; 
+	font-weight: normal; 
+	margin-top: -1em; 
+	font-style: italic; 
+}
 
 figure { display: inline-block; padding: 0; margin: 0; }
 
