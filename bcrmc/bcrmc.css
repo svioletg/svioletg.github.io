@@ -138,6 +138,8 @@ a.hlight
 	border-left: 5px solid yellow;
 }
 
+img.alone { width: auto; height: 500px; }
+
 @media (max-width:800px)
 {
 /*	body {font-size:2em;}*/
@@ -146,4 +148,5 @@ a.hlight
 	a.bttn {padding: 1em; width: 75%;}
 	ul ol {border-left: none; border-top: 5px solid yellow;}
 	ul img {width: 100%;}
+	img.alone { width:100%; height: auto; }
 }
