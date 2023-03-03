@@ -1,48 +1,48 @@
 
-<figure><img src="bcr4/jpg/desu-bakeryext.jpg"><figcaption>Mar's Bakery (Exterior)
-    <a href="bcr4/png/desu-bakeryext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-altuofromwest.jpg"><figcaption>Altuo Peninsula from the West
+    <a href="bcr3/png/desu-altuofromwest.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-bakeryint.jpg"><figcaption>Mar's Bakery (Interior)
-    <a href="bcr4/png/desu-bakeryint.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-deepslatecave.jpg"><figcaption>Deepslate Cave
+    <a href="bcr3/png/desu-deepslatecave.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-brewext.jpg"><figcaption>Mar's Brewery (Exterior)
-    <a href="bcr4/png/desu-brewext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-discfarm.jpg"><figcaption>Music Disc Farm
+    <a href="bcr3/png/desu-discfarm.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-brewint.jpg"><figcaption>Mar's Brewery (Interior)
-    <a href="bcr4/png/desu-brewint.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-dripstonecave.jpg"><figcaption>Dripstone Cave
+    <a href="bcr3/png/desu-dripstonecave.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-cactusfarmext.jpg"><figcaption>Desu's Cactus Farm (Exterior)
-    <a href="bcr4/png/desu-cactusfarmext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-fishing.jpg"><figcaption>Mar & Violet Fishing
+    <a href="bcr3/png/desu-fishing.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-christmastree.jpg"><figcaption>Gemini Town Christmas Tree
-    <a href="bcr4/png/desu-christmastree.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-marglass.jpg"><figcaption>Mar Through Spyglass
+    <a href="bcr3/png/desu-marglass.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-conservatorybasement.jpg"><figcaption>Gemini Conservatory (Basement)
-    <a href="bcr4/png/desu-conservatorybasement.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-melonfarm.jpg"><figcaption>Desu's Pumpkin+Melon Farm
+    <a href="bcr3/png/desu-melonfarm.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-conservatorybasement2.jpg"><figcaption>Gemini Conservatory (Basement Corner)
-    <a href="bcr4/png/desu-conservatorybasement2.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-mountainhouse.jpg"><figcaption>Desu's In-mountain Home
+    <a href="bcr3/png/desu-mountainhouse.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-conservatoryext.jpg"><figcaption>Gemini Conservatory (Exterior)
-    <a href="bcr4/png/desu-conservatoryext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-northtown.jpg"><figcaption>North Hillside Altuo
+    <a href="bcr3/png/desu-northtown.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-geminilighthouse.jpg"><figcaption>Gemini Lighthouse
-    <a href="bcr4/png/desu-geminilighthouse.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-observatoryint1.jpg"><figcaption>Altuo Observatory (Interior)
+    <a href="bcr3/png/desu-observatoryint1.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-hollowstronghold.jpg"><figcaption>Hollowed-out Stronghold
-    <a href="bcr4/png/desu-hollowstronghold.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-observatoryint2.jpg"><figcaption>Altuo Observatory (Interior)
+    <a href="bcr3/png/desu-observatoryint2.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-mesaspire.jpg"><figcaption>Spire in the Mesa
-    <a href="bcr4/png/desu-mesaspire.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-snowing.jpg"><figcaption>Altuo in Winter
+    <a href="bcr3/png/desu-snowing.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-nattyworm.jpg"><figcaption>Natty's Beetlejuice Worm
-    <a href="bcr4/png/desu-nattyworm.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-towerglass.jpg"><figcaption>Altuo Tower Through Spyglass
+    <a href="bcr3/png/desu-towerglass.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-pixelart.jpg"><figcaption>Mesa Art (Hover for more)
-    <a href="bcr4/png/desu-pixelart.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-townhallconstruction.jpg"><figcaption>Construction of Town Hall
+    <a href="bcr3/png/desu-townhallconstruction.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-vhouseext.jpg"><figcaption>Violet's House (Exterior)
-    <a href="bcr4/png/desu-vhouseext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-townsideboard.jpg"><figcaption>Altuo Townside Bulletin Board
+    <a href="bcr3/png/desu-townsideboard.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
 
-<figure><img src="bcr4/jpg/desu-vhouseint.jpg"><figcaption>Violet's House (Interior)
-    <a href="bcr4/png/desu-vhouseint.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+<figure><img src="bcr3/jpg/desu-virecords.jpg"><figcaption>Violet's Disc Collection
+    <a href="bcr3/png/desu-virecords.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
