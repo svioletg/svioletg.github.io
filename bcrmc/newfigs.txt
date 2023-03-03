@@ -1,0 +1,48 @@
+
+<figure><img src="bcr4/jpg/desu-bakeryext.jpg"><figcaption>Mar's Bakery (Exterior)
+    <a href="bcr4/png/desu-bakeryext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-bakeryint.jpg"><figcaption>Mar's Bakery (Interior)
+    <a href="bcr4/png/desu-bakeryint.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-brewext.jpg"><figcaption>Mar's Brewery (Exterior)
+    <a href="bcr4/png/desu-brewext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-brewint.jpg"><figcaption>Mar's Brewery (Interior)
+    <a href="bcr4/png/desu-brewint.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-cactusfarmext.jpg"><figcaption>Desu's Cactus Farm (Exterior)
+    <a href="bcr4/png/desu-cactusfarmext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-christmastree.jpg"><figcaption>Gemini Town Christmas Tree
+    <a href="bcr4/png/desu-christmastree.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-conservatorybasement.jpg"><figcaption>Gemini Conservatory (Basement)
+    <a href="bcr4/png/desu-conservatorybasement.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-conservatorybasement2.jpg"><figcaption>Gemini Conservatory (Basement Corner)
+    <a href="bcr4/png/desu-conservatorybasement2.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-conservatoryext.jpg"><figcaption>Gemini Conservatory (Exterior)
+    <a href="bcr4/png/desu-conservatoryext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-geminilighthouse.jpg"><figcaption>Gemini Lighthouse
+    <a href="bcr4/png/desu-geminilighthouse.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-hollowstronghold.jpg"><figcaption>Hollowed-out Stronghold
+    <a href="bcr4/png/desu-hollowstronghold.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-mesaspire.jpg"><figcaption>Spire in the Mesa
+    <a href="bcr4/png/desu-mesaspire.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-nattyworm.jpg"><figcaption>Natty's Beetlejuice Worm
+    <a href="bcr4/png/desu-nattyworm.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-pixelart.jpg"><figcaption>Mesa Art (Hover for more)
+    <a href="bcr4/png/desu-pixelart.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-vhouseext.jpg"><figcaption>Violet's House (Exterior)
+    <a href="bcr4/png/desu-vhouseext.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+
+<figure><img src="bcr4/jpg/desu-vhouseint.jpg"><figcaption>Violet's House (Interior)
+    <a href="bcr4/png/desu-vhouseint.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
