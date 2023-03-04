@@ -146,7 +146,7 @@ a.hlight
 
 img.alone { width: auto; height: 500px; }
 
-@media (max-width:800px)
+@media only screen and (max-device-width:600px)
 {
 /*	body {font-size:2em;}*/
 	main {width:100%}
@@ -154,5 +154,6 @@ img.alone { width: auto; height: 500px; }
 	a.bttn {padding: 1em; width: 75%;}
 	ul ol {border-left: none; border-top: 5px solid yellow;}
 	ul img {width: 100%;}
-	img.alone { width:100%; height: auto; }
+	img.alone {width:100%; height: auto;}
+	figure img {height:200px;}
 }

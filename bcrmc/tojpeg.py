@@ -1,5 +1,5 @@
 import inquirer
-import os, shutil, glob
+import os, glob, shutil
 
 q = [inquirer.List('folder', message='Choose image root folder', choices=['bcr1', 'bcr2', 'bcr3', 'bcr4'], carousel=True)]
 folder = inquirer.prompt(q)['folder']
