@@ -1,0 +1,12 @@
+span.spoiler
+{
+	background-color: black;
+	color: black;
+	cursor: pointer;
+}
+
+span.spoiler.revealed
+{
+	background-color: white;
+	color: black;
+}

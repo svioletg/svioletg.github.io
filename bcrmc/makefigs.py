@@ -31,7 +31,8 @@ image_names = [re.search(r'[ \w-]+?(?=\.)', i)[0] for i in images]
 # new_images  = [i for i in image_names if i not in figure_srcs]
 new_images = image_names
 
-if new_images == []: print('Nothing to generate.')
+if new_images == []:
+    print('Nothing to generate.')
 
 newfig_template = """
 <figure><img src="{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg"><figcaption>{CAPTION_NAME}

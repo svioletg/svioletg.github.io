@@ -1,45 +1,35 @@
-@keyframes fadein 
-{
-	from { opacity: 0; margin-top: -2em; }
-	to   { opacity: 1; margin-top: 0;}
-}
+@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Bagel+Fat+One&display=swap');
 
-@keyframes hrgrow
+html
 {
-	from { width: 0; }
-	to   { width: 50%;}
+	background-color: #4D177F;
+	background: linear-gradient(90deg, #4d177f, #1d177f);
+	background-repeat: no-repeat;
+	height: 100%;
 }
 
 body
 {
-	margin:0 auto;
-	scroll-behavior: smooth;
+	font-family: 'Akshar', serif;
 	color: white;
-	background-color: black;
-	/*background-image: linear-gradient(#FF66FF,#66FFFF);*/
-	font-family: 'Raleway', sans-serif;
-	font-weight: 300;
-	overflow-x: hidden;
-	animation: fadein 1s;
-	background-color: #8c3a8f;
+	text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
 }
 
-div#header
-{
-	padding: 1em;
-}
+hr { color: white; width: 50%; }
 
 h1, h2
 {
-	font-family: 'Raleway', sans-serif;
-	font-weight: 300;
-	letter-spacing: 0.5em;
+	letter-spacing: 2px;
+	font-family: 'Bagel Fat One', serif;
+	font-size: 3em;
+	margin: 0 auto;
 	text-align: center;
-}
-
-h1
-{
-	font-size: 5em;
 }
 
 h2
@@ -47,76 +37,39 @@ h2
 	font-size: 2em;
 }
 
-hr
+div#links
 {
-	width: 50%;
-	color: white;
-	margin-top: 5em;
-	margin-bottom: 5em;
-	animation: hrgrow 1s;
+	font-family: 'Bagel Fat One', serif;
 }
 
-div#main
+a.btn
 {
-	color: black;
-	background-color: white;
-	padding: 1em;
-	padding-top: 3em;
-	padding-bottom: 3em;
-	font-size: 1.25em;
-	font-family: 'Roboto', sans-serif;
-}
-
-div#main hr
-{
-	margin-top: 2em;
-	margin-bottom: 2em;
-	color: black;
-}
-
-div#navigation
-{
-	font-size: 2em;
+	/* background-image: url('wedgebtn.svg');
+	background-position: center;
+	background-size: cover; */
+	display: block;
 	margin: 0 auto;
-	display: flex;
-	flex-direction: row;
-	align-items: stretch;
-	text-align: center;
-	justify-content: center;
-	width: 100%;
-	margin: 0;
-	top: 0;
-}
-
-div#navigation a
-{
-	margin: 0 auto;
+	padding: 0.5em;
 	width: 25%;
-	padding: 1em;
-	padding-top: 2em;
-	padding-bottom: 2em;
-	transition: all 0.25s;
+	/* border: black solid 5px; */
+	border-radius: 2em;
 	color: white;
-	text-decoration: none;
-	/*background-color: rgba(255,255,255,0);*/
-	border: 2px solid white;
-	border-radius: 5px;
-	transition: all 0.25s;
-}
-
-div#navigation a:hover
-{
 	background-color: white;
-	color: black;
+	font-size: 2.5em;
+	text-align: center;
+	text-decoration: none;
+	text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+
+	transition: all 0.1s;
 }
 
-p
+a.btn:hover
 {
-	font-size:1.5em;
-	font-weight: lighter;
-	width: 75%;
-	/*text-align: center;*/
-	margin: auto;
-	padding: 1em;
-	/*background-color: rgba(0,0,0,0.5);*/
+	transform: translateX(1em);
+	filter: invert(1);
 }

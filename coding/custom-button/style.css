@@ -1,0 +1,46 @@
+body
+{
+	background-color: #333;
+	color: white;
+	transition: all 0.1s;
+}
+
+/*body.light
+{
+	background-color: #DDD;
+	color: black;
+}*/
+
+table
+{
+	font-size: 2em;
+	border-collapse: collapse;
+}
+
+td
+{
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+	text-align: left;
+}
+
+/*.light td
+{
+	background-color: #BBB;
+	color: black;
+}*/
+
+tr:hover
+{
+	box-shadow: none;
+}
+
+button
+{
+	color: white;
+}
+
+/*.light button
+{
+	color: black;
+}*/

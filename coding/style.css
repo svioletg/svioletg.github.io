@@ -32,7 +32,7 @@ div#page
 {
 	/*margin: auto;*/
 	/*width: 75%;*/
-	background-color: #333;
+	background-color: #222;
 	color:white;
 	transition: all 0.25s;
 }
@@ -46,13 +46,8 @@ div#page.light
 div#header
 {
 	padding:1em;
-	background-image: url('img/header.png');
+	/*background-image: url('img/header.png');*/
 	background-size: 100% 100%;
-	color:white;
-}
-
-.light div#header
-{
 	color:white;
 }
 
@@ -64,10 +59,16 @@ div#blogheader
 
 h1, h2, h3
 {
+	color: white;
 	font-family: 'Source Code Pro';
 	font-weight: 300;
 	letter-spacing: 0.5em;
 	text-align: center;
+}
+
+.light h1, .light h2, .light h3
+{
+	color: black;
 }
 
 h1
@@ -82,7 +83,7 @@ h2
 
 h3
 {
-	font-size: 3em;
+	font-size: 2em;
 }
 
 hr
@@ -425,12 +426,7 @@ td.no {background-color: rgba(255,0,0,0.5);}
 
 .tag.webapp
 {
-	background-image: linear-gradient(
-		140deg, 
-		rgba(255, 127, 0, 0.5) 0%, rgba(255, 127, 0, 0.5) 33%,
-		rgba(0, 255, 255, 0.5) 33%, rgba(0, 255, 255, 0.5) 66%,
-		rgba(255, 255, 0, 0.5) 66%, rgba(255, 255, 0, 0.5) 100%
-		);
+	background-image: linear-gradient(90deg, rgba(255, 127, 0, 0.5), rgba(0, 255, 255, 0.5), rgba(255, 255, 0, 0.5));
 }
 
 .tag.html
@@ -451,9 +447,5 @@ td.no {background-color: rgba(255,0,0,0.5);}
 .tag.python
 {
 	/*background-color: rgba(70, 70, 170, 0.5);*/
-	background-image: linear-gradient(
-		140deg, 
-		rgba(0, 0, 255, 0.5) 0%, rgba(0, 0, 255, 0.5) 50%,
-		rgba(255, 255, 0, 0.5) 50%, rgba(255, 255, 0, 0.5) 100%
-		);
+	background-image: linear-gradient(90deg, rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5));
 }

@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@keyframes fadein 
+{
+	from { opacity: 0; margin-top: -2em; }
+	to   { opacity: 1; margin-top: 0; }
+}
+
+@keyframes hrgrow
+{
+	from { width: 0; }
+	to   { width: 50%; }
+}
+
+body
+{
+	margin: 0 auto;
+	scroll-behavior: smooth;
+	color: white;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	overflow-x: hidden;
+	background-color: #8c3a8f;
+}
+
+div#header
+{
+	animation: fadein 1s;
+	padding: 1em;
+}
+
+h1, h2
+{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	letter-spacing: 0.5em;
+	text-align: center;
+}
+
+h1
+{
+	font-size: 5em;
+}
+
+h2
+{
+	font-size: 2em;
+}
+
+hr
+{
+	width: 50%;
+	color: white;
+	margin-top: 5em;
+	margin-bottom: 5em;
+	animation: hrgrow 1s;
+}
+
+div#main
+{
+	color: black;
+	background-color: white;
+	padding: 1em;
+	padding-top: 3em;
+	padding-bottom: 3em;
+	font-size: 1.25em;
+	font-family: 'Roboto', sans-serif;
+}
+
+div#main hr
+{
+	margin-top: 2em;
+	margin-bottom: 2em;
+	color: black;
+}
+
+div#navigation
+{
+	animation: fadein 1s;
+	font-size: 2em;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	text-align: center;
+	justify-content: center;
+	width: 100%;
+	margin: 0;
+	top: 0;
+}
+
+div#navigation a
+{
+	margin: 0 auto;
+	width: 25%;
+	padding: 1em;
+	padding-top: 2em;
+	padding-bottom: 2em;
+	transition: all 0.25s;
+	color: white;
+	text-decoration: none;
+	/*background-color: rgba(255,255,255,0);*/
+	border: 2px solid white;
+	border-radius: 5px;
+	transition: all 0.25s;
+}
+
+div#navigation a:hover
+{
+	background-color: white;
+	color: black;
+}
+
+p
+{
+	font-size:1.5em;
+	font-weight: lighter;
+	width: 75%;
+	/*text-align: center;*/
+	margin: auto;
+	padding: 1em;
+	/*background-color: rgba(0,0,0,0.5);*/
+}

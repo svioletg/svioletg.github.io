@@ -1,14 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
 @import url('https://fontlibrary.org/face/minecraftia');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap');
 
 body
 {
-	/*background-color: #333;*/
-	background-image: url(bg.png);
+	margin: 0;
+	background-image: url('cherry_planks_128x128.png');
 	color: white;
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Aoboshi One', serif;
 	font-weight: lighter;
 	text-align: center;
 	font-size: 1em;
@@ -21,17 +20,26 @@ main
 	margin: 0 auto;
 }
 
-
 hr { width: 75%; }
 p { width: 75%; margin: 0 auto; font-size: 1.5em; }
 b { font-weight: bold; }
 code 
 {
 	font-family: "Courier New";
-	font-weight:bold; 
-	background-color: #444; 
+	font-weight: bold; 
+	background-color: #333; 
 	padding: 5px; color: yellow;
 }
+
+nav.flexnav
+{
+	margin: 0 auto;
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 1em;
+}
+
 a { color: cyan; }
 
 a.bttn
@@ -41,22 +49,51 @@ a.bttn
 	font-size: 20px;
 	margin: 0 auto;
 	width: 396px;
-	height: 36px;
-	display: block;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
 	color: white;
 	padding: 0px;
+	padding-bottom: 5px;
 	border-style: solid;
 	border-width: 2px;
 	border-color: black;
-	text-decoration: none;
 	background-image: url('bttn.png');
 	background-size: cover;
 	/*transition: 0.2s all;*/
 }
 
+nav.flexnav a.bttn
+{
+	justify-content: center;
+}
+
 a.bttn:hover { border-color: white; }
 a.mega { background-image: url('bttnbig.png'); height: 72px; }
 a.mega span { position: relative; top: 3px; }
+
+b.hl /* hl for "highlight" */
+{
+	color: orange;
+}
+
+b.hl2
+{
+	color: turquoise;
+}
+
+span.title-gradient-120
+{
+	background: linear-gradient(fuchsia, orange);
+	/* background: radial-gradient(gold, fuchsia); */
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	filter: drop-shadow(3px 3px black);
+}
+
+h1 { font-size: 3em; }
 
 h2, h3 
 {
@@ -67,13 +104,18 @@ h2, h3
 	margin-top: 0.5em;
 }
 
-h1 { font-size: 3em; }
 h2 
 {
 	font-size: 2em;
 	background-color: rgba(0,255,255,0.25);
-	border-left: 5px solid cyan;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('dirt_64x64.png');
+	background-size: 64px;
+	box-shadow: inset 0 0 1em black;
+	border: 2px solid black;
+	text-shadow: 5px 5px black;
+	backdrop-filter: blur(5px);
 }
+
 h2 sup { font-style: italic; font-weight: lighter; }
 h3 { font-weight: bold; font-size: 2em; text-align: left; }
 h3.subtitle
@@ -85,7 +127,7 @@ h3.subtitle
 	font-style: italic; 
 }
 
-figure { display: inline-block; padding: 0; margin: 0; }
+figure { display: inline-block; padding: 0; margin: 0; min-width: 30%; max-width: 33.3%; }
 
 figure a
 {
@@ -100,6 +142,13 @@ figure img
 	vertical-align: top;
 }
 
+.gallery
+{
+	display: flex;
+	flex-flow: wrap;
+	justify-content: center;
+}
+
 .gallery.smaller figure img { height: 250px; }
 
 figcaption
@@ -107,7 +156,6 @@ figcaption
 	background-color: rgba(0,0,0,0.5);
 	padding: 5px;
 	font-weight: bolder;
-	letter-spacing: 2px;
 }
 
 figcaption sup { font-style: italic; }
@@ -119,14 +167,18 @@ ul ol
 	padding-top: 1em;
 	padding-bottom: 1em;
 	margin-left: 0;
-	font-family: 'Roboto Slab', serif;
 	font-size: 0.9em;
 	text-align: left;
-	background-color: rgba(255,255,0,0.25);
-	border-left: 5px solid yellow;
+	background-color: rgba(255,255,0,0.1);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('dirt_64x64.png');
 }
 
-li {padding-bottom: 20px;}
+li
+{
+	padding-bottom: 20px;
+	margin-right: 2em;
+	text-shadow: 2px 2px black;
+}
 
 li.note
 {
@@ -144,16 +196,32 @@ a.hlight
 	border-left: 5px solid yellow;
 }
 
+img.linker
+{
+	position: absolute;
+	margin-top: 0.25em;
+	padding-left: 0.5em;
+	height: 1em;
+	opacity: 0;
+}
+
+h2:hover img.linker
+{
+	opacity: 1;
+}
+
 img.alone { width: auto; height: 500px; }
 
 @media only screen and (max-device-width:600px)
 {
 /*	body {font-size:2em;}*/
-	main {width:100%}
-	h2, h2 {width:100%; border-left: none; border-top: 5px solid cyan;}
+	main {width: 100%}
+	h2, h2 {width: 100%; border-left: none;}
 	a.bttn {padding: 1em; width: 75%;}
-	ul ol {border-left: none; border-top: 5px solid yellow;}
+	ul {width: 100%; padding-left: 0;}
+	ul li {padding-left: 1em;}
+	ul ol {border-left: none;}
 	ul img {width: 100%;}
-	img.alone {width:100%; height: auto;}
-	figure img {height:200px;}
+	img.alone {width: 100%; height: auto;}
+	figure img {height: 200px;}
 }
