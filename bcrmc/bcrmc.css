@@ -5,7 +5,7 @@
 body
 {
 	margin: 0;
-	background-image: url('cherry_planks_128x128.png');
+	background-image: url('i/cherry_planks_128x128.png');
 	color: white;
 	font-family: 'Aoboshi One', serif;
 	font-weight: lighter;
@@ -60,7 +60,7 @@ a.bttn
 	border-style: solid;
 	border-width: 2px;
 	border-color: black;
-	background-image: url('bttn.png');
+	background-image: url('i/bttn.png');
 	background-size: cover;
 	/*transition: 0.2s all;*/
 }
@@ -71,7 +71,7 @@ nav.flexnav a.bttn
 }
 
 a.bttn:hover { border-color: white; }
-a.mega { background-image: url('bttnbig.png'); height: 72px; }
+a.mega { background-image: url('i/bttnbig.png'); height: 72px; }
 a.mega span { position: relative; top: 3px; }
 
 b.hl /* hl for "highlight" */
@@ -108,12 +108,11 @@ h2
 {
 	font-size: 2em;
 	background-color: rgba(0,255,255,0.25);
-	background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('dirt_64x64.png');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/bamboo_mosaic_64x64_dark.png');
 	background-size: 64px;
 	box-shadow: inset 0 0 1em black;
 	border: 2px solid black;
 	text-shadow: 5px 5px black;
-	backdrop-filter: blur(5px);
 }
 
 h2 sup { font-style: italic; font-weight: lighter; }
@@ -169,8 +168,11 @@ ul ol
 	margin-left: 0;
 	font-size: 0.9em;
 	text-align: left;
-	background-color: rgba(255,255,0,0.1);
-	background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('dirt_64x64.png');
+	background-color: rgba(255,0,255,0.1);
+	backdrop-filter: blur(5px);
+	border: 2px solid black;
+	/* background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/bamboo_planks_64x64.png'); */
+	box-shadow: inset 0 0 1em black;
 }
 
 li

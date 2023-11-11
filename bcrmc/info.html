@@ -19,9 +19,9 @@
 		<hr>
 		<!-- Begin main content -->
 		<h1 style="font-family: 'MinecraftiaRegular'; color: yellow;">
-			<img src="bcr.png" style="height: 1.5em; vertical-align: bottom;">
+			<img src="i/bcr.png" style="height: 1.5em; vertical-align: bottom;">
 			<span class="bcrmc-header">BCR-MC 5</span><br>1.20: <span class="title-gradient-120">Trails & Tales</span>
-			<img src="cherry_sapling_128x128.png" style="height: 1.5em; vertical-align: bottom;">
+			<img src="i/cherry_sapling_128x128.png" style="height: 1.5em; vertical-align: bottom;">
 		</h1>
 
 		<h2 id="contents">Table Of Contents</h2><br>
@@ -34,26 +34,25 @@
 		</nav><br>
 		<h2 id="joining-the-server">Joining The Server</h2>
 		<ul>
-			<li>Make sure you are on <b class="hl">1.20.x</b>. You can play with both vanilla & modded clients, but <b class="hl">only client-side mods will load</b>. Server-side mods will simply be ignored.</li>
+			<li>Make sure you are on <b class="hl">1.20.2</b>. You can play with both vanilla & modded clients, but <b class="hl">only client-side mods will load</b>. Server-side mods will simply be ignored.</li>
 			<li>The server is running on Minecraft Java Edition, however Bedrock players can also join thanks to the GeyserMC plugin.</li>
-			<li>If you are on Java, simply connect via Multiplayer → Direct Connect or Add Server, using the address <code>play.bcr-mc.xyz</code>. <b>If you are on Bedrock,</b> see below - <i>you will only have to do this once!</i></li><br>
+			<li>If you are on Java, you'll connect via <b class="hl">Multiplayer</b> → <b class="hl">Direct Connect</b> or <b class="hl">Add Server</b>, using the address <code>play.bcr-mc.xyz</code>. <b>If you are on Bedrock,</b> see below - <i>you will only have to do this once!</i></li><br>
 			<h3 style="font-size: 1.5em; margin: 0;">Switch users:</h3>
 			<span>(Summarized from <a href="https://apexminecrafthosting.com/how-to-join-a-bedrock-edition-server-on-xbox-switch/">this article</a>.)</span>
 			<ol>
 				<li>Open the <b class="hl">System Settings</b> by selecting the <b>gear icon</b> on the home screen, and scroll down to the <b>Internet</b> section.</li>
-				<li>Select <b class="hl">Internet Settings</b>, select the network you are connected to (there should be a checkmark to the right of it), and select <b cl
-			class="hl">Change Settings</b>.</li>
-				<li>Change <b class="hl">DNS Settings</b> to <b>Manual</b>.</li>
-				<li>Set your <b class="hl">Primary DNS</b> to <code>104.238.130.180</code>, and your <b>Secondary DNS</b> to <code>1.1.1.1</code>. 
-					The latter may end up displaying as <code>001.001.001.001</code>, which is normal.</li>
+				<li>Select <b class="hl">Internet Settings</b>, select the network you are connected to (there should be a checkmark to the right of it), and select <b class="hl">Change Settings</b>.</li>
+				<li>Change <b class="hl">DNS Settings</b> to <b>Manual</b>, 
+					then set your <b class="hl">Primary DNS</b> to <code>104.238.130.180</code>, 
+					and set your <b class="hl">Secondary DNS</b> to <code>1.1.1.1</code>.</li>
 				<li>Select <b class="hl">Save</b>, and open Minecraft.</li>
-				<li>Select <b class="hl">Play</b>, followed by the <b>Servers</b> tab.</li>
-				<li>Select anything from the <b class="hl">Featured Servers</b> list, and select <b class="hl">Join Server</b>.</li>
-				<li>A new menu will appear - select <b class="hl">Connect to a Server</b>. From here, you may continue from <b>Step 3</b> of the "If you are not on Switch" section — make sure that the <b>Add to server list</b> toggle is flipped ON (it should look green) so that you don't have to do this each time.</li>
+				<li>At the title screen, choose <b class="hl">Play</b>, followed by the <b class="hl">Servers</b> tab.</li>
+				<li>Select anything from the <b class="hl">Featured Servers</b> list, and then <b class="hl">Join Server</b>.</li>
+				<li>A new menu will appear - select <b class="hl">Connect to a Server</b>. From here, you'll continue from <b>Step 3</b> of the "Other Bedrock users" section below — make sure that the <b class="hl">Add to server list</b> toggle is flipped ON (it should look green) so that you don't have to do this each time.</li>
 			</ol>
 			<h3 style="font-size: 1.5em; margin: 0;">Other Bedrock users:</h3>
 			<ol>
-				<li>Hit <b class="hl">Play</b>, then select <b class="hl">Servers</b> tab.</li>
+				<li>Hit <b class="hl">Play</b>, then select the <b class="hl">Servers</b> tab.</li>
 				<li>Scroll to the bottom of the list, and select <b class="hl">Add Server</b>.</li>
 				<li>In the <b class="hl">Server Name</b> box, enter whatever you'd like. This will only affect the title of the server for yourself.</li>
 				<li>In the <b class="hl">Server Address</b> box, enter <code>play.bcr-mc.xyz</code>.</li>
@@ -66,10 +65,6 @@
 		<ul>
 			<li><a class="hlight" href="https://github.com/tylastrog/RecordEveryStatistic">Record Every Statistic</a>
 				<br>Records Minecraft statistics to scoreboard objectives that can be used for commands.
-			</li>
-			<li><a class="hlight" href="#">bcrmc5</a>
-				<br>Custom datapack made by me for the server. Mainly includes custom advancements.
-				<br><sup style="font-size: 0.75em; font-style: italic;">There's no public download for this, but if you want it for any reason let me know and I'll send it over Discord.</sup>
 			</li>
 			<li><a class="hlight" href="https://www.planetminecraft.com/data-pack/treecapitator-datapack-1-13/">TreeCapitator</a>
 				<br>Allows chopping down a whole tree by breaking one block. Can be configured per player by typing <code>/trigger TreeCapitator</code>. Will use the equivalent amount of tool durability as if you'd used it on every block, you can chop single blocks by sneaking.
@@ -86,9 +81,6 @@
 			</li>
 			<li><a class="hlight" href="https://modrinth.com/mod/chunky">Chunky</a>
 				<br>Pre-generates chunks to mitigate server lag.
-			</li>
-			<li><a class="hlight" href="https://dev.bukkit.org/projects/clicksort/">ClickSort</a>
-				<br>Allows players to automatically sort inventories. Default is middle-click sorting & sorting by item ID, see link for options & customization.
 			</li>
 			<li><a class="hlight" href="https://dev.bukkit.org/projects/dynmap">Dynmap</a>
 				<br>Live map that updates real-time & <a href="https://map.bcr-mc.xyz">can be viewed online</a>. See <a href="https://github.com/webbukkit/dynmap/wiki/Commands">here</a> for a list of commands to add markers to the map.
@@ -118,16 +110,16 @@
 
 		<h2 id="recommended-mods">Recommended Mods</h2>
 			<h3 class="subtitle">Every mod below works with <a href="https://fabricmc.net/"><b>Fabric</b></a>, 
-				<b class="hl">may</b> work with Quilt, and <b class="hl">will not</b> work with Forge.<br>
-				<b>Bedrock Edition</b> players cannot install mods.</h3>
+				is <b class="hl">likely</b> to work with <a href="https://quiltmc.org/en/">Quilt</a>, and <b class="hl">will not</b> work with Forge.<br>
+				<b>Bedrock Edition</b> players cannot use these mods.</h3>
 			<p style="text-align: left;"><b>Optimization & performance;</b> helps the game run smoother and faster, reduces lag.</p><hr>
 			<ul>
 				<li><a class="hlight" href="https://www.curseforge.com/minecraft/mc-mods/lithium">Lithium</a></li>
 				<li><a class="hlight" href="https://www.curseforge.com/minecraft/mc-mods/phosphor">Phosphor</a></li>
-				<li><a class="hlight" href="https://modrinth.com/mod/sodium">Sodium</a><br><i>Highly</i> recommended, I would suggest installing Fabric purely for Sodium alone, even if you plan to use no other mods.</li>
+				<li><a class="hlight" href="https://modrinth.com/mod/sodium">Sodium</a><br>The three mods above are <i>very strongly recommended</i>, as they vastly improve the game's performance and do not alter the game otherwise.</li>
 			</ul>
 			<br>
-			<p style="text-align: left;"><b>Quality of life;</b> makes certain tasks easier, more convenient, generally improves the gameplay experience.</p><hr>
+			<p style="text-align: left;"><b>Quality of life;</b> makes certain tasks easier, more convenient, generally aims to improve the gameplay experience.</p><hr>
 			<ul>
 				<li><a class="hlight" href="https://www.curseforge.com/minecraft/mc-mods/mouse-wheelie/">Mouse Wheelie</a><br>Adds the ability to move items in and out of inventories with the scroll wheel, or shift-clicking and dragging.</li>
 				<li><a class="hlight" href="https://www.curseforge.com/minecraft/mc-mods/xaeros-minimap">Xaero's Minimap</a><br>Adds a configurable minimap to the screen, along with waypoints.</li>

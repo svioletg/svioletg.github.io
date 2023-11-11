@@ -35,12 +35,12 @@ if new_images == []:
     print('Nothing to generate.')
 
 newfig_template = """
-<figure><img src="{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg"><figcaption>{CAPTION_NAME}
+<figure><img src="i/{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg"><figcaption>{CAPTION_NAME}
     <a href="{FOLDER_NAME}/png/{IMAGE_NAME}.png">[PNG]</a><br><sup>(from {AUTHOR_NAME})</sup></figcaption></figure>
 """
 
 newfig_template_no_png = """
-<figure><img src="{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg"><figcaption>{CAPTION_NAME}
+<figure><img src="i/{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg"><figcaption>{CAPTION_NAME}
     <br><sup>(from {AUTHOR_NAME})</sup></figcaption></figure>
 """
 
