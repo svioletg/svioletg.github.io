@@ -74,12 +74,12 @@ a.bttn:hover { border-color: white; }
 a.mega { background-image: url('i/bttnbig.png'); height: 72px; }
 a.mega span { position: relative; top: 3px; }
 
-b.hl /* hl for "highlight" */
+.hl /* hl for "highlight" */
 {
 	color: orange;
 }
 
-b.hl2
+.hl2
 {
 	color: turquoise;
 }
