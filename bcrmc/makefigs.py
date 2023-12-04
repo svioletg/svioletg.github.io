@@ -12,7 +12,7 @@ no_png = False
 with open('photo_authors.json') as f:
     authors = json.load(f)
 
-q = [inquirer.List('folder', message='Choose image root folder', choices=['bcr1', 'bcr2', 'bcr3', 'bcr4'], carousel=True)]
+q = [inquirer.List('folder', message='Choose image root folder', choices=['bcr1', 'bcr2', 'bcr3', 'bcr4', 'bcr5'], carousel=True)]
 folder = inquirer.prompt(q)['folder']
 
 try:
@@ -35,12 +35,12 @@ if new_images == []:
     print('Nothing to generate.')
 
 newfig_template = """
-<figure><img src="i/{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg"><figcaption>{CAPTION_NAME}
+<figure style="background-image: url('{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg');"><figcaption>{CAPTION_NAME}
     <a href="{FOLDER_NAME}/png/{IMAGE_NAME}.png">[PNG]</a><br><sup>(from {AUTHOR_NAME})</sup></figcaption></figure>
 """
 
 newfig_template_no_png = """
-<figure><img src="i/{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg"><figcaption>{CAPTION_NAME}
+<figure style="background-image: url('{FOLDER_NAME}/jpg/{IMAGE_NAME}.jpg');"><figcaption>{CAPTION_NAME}
     <br><sup>(from {AUTHOR_NAME})</sup></figcaption></figure>
 """
 

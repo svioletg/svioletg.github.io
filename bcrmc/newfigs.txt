@@ -1,0 +1,24 @@
+
+<figure><img src="i/bcr5/jpg/mar-creeperblossomtree.jpg"><figcaption>Creeper In Cherry Tree
+    <a href="bcr5/png/mar-creeperblossomtree.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+
+<figure><img src="i/bcr5/jpg/mar-dripstones.jpg"><figcaption>Dripstone Cavern In Hazy Light
+    <a href="bcr5/png/mar-dripstones.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+
+<figure><img src="i/bcr5/jpg/mar-nightlavariver.jpg"><figcaption>Midnight River Bank with Flowing Lava
+    <a href="bcr5/png/mar-nightlavariver.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+
+<figure><img src="i/bcr5/jpg/mar-postoffice.jpg"><figcaption>Town Post Office
+    <a href="bcr5/png/mar-postoffice.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+
+<figure><img src="i/bcr5/jpg/mar-vhousefromdistance.jpg"><figcaption>Violet's House (Afar)
+    <a href="bcr5/png/mar-vhousefromdistance.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+
+<figure><img src="i/bcr5/jpg/vi-sunsetvalley.jpg"><figcaption>Town Valley at Sunset
+    <a href="bcr5/png/vi-sunsetvalley.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+
+<figure><img src="i/bcr5/jpg/vi-vhouseconstruction.jpg"><figcaption>Violet's House Under Construction
+    <a href="bcr5/png/vi-vhouseconstruction.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+
+<figure><img src="i/bcr5/jpg/vi-vhousefinished.jpg"><figcaption>Violet's Finished House (Front)
+    <a href="bcr5/png/vi-vhousefinished.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
