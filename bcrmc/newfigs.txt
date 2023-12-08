@@ -1,24 +1,52 @@
 
-<figure><img src="i/bcr5/jpg/mar-creeperblossomtree.jpg"><figcaption>Creeper In Cherry Tree
-    <a href="bcr5/png/mar-creeperblossomtree.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
-
-<figure><img src="i/bcr5/jpg/mar-dripstones.jpg"><figcaption>Dripstone Cavern In Hazy Light
-    <a href="bcr5/png/mar-dripstones.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
-
-<figure><img src="i/bcr5/jpg/mar-nightlavariver.jpg"><figcaption>Midnight River Bank with Flowing Lava
-    <a href="bcr5/png/mar-nightlavariver.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
-
-<figure><img src="i/bcr5/jpg/mar-postoffice.jpg"><figcaption>Town Post Office
-    <a href="bcr5/png/mar-postoffice.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
-
-<figure><img src="i/bcr5/jpg/mar-vhousefromdistance.jpg"><figcaption>Violet's House (Afar)
-    <a href="bcr5/png/mar-vhousefromdistance.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
-
-<figure><img src="i/bcr5/jpg/vi-sunsetvalley.jpg"><figcaption>Town Valley at Sunset
-    <a href="bcr5/png/vi-sunsetvalley.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
-
-<figure><img src="i/bcr5/jpg/vi-vhouseconstruction.jpg"><figcaption>Violet's House Under Construction
-    <a href="bcr5/png/vi-vhouseconstruction.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
-
-<figure><img src="i/bcr5/jpg/vi-vhousefinished.jpg"><figcaption>Violet's Finished House (Front)
-    <a href="bcr5/png/vi-vhousefinished.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+    <figure style="background-image: url('bcr5/jpg/desu-harukeishrine.jpg');"><figcaption>Hakurei Shrine
+        <a href="bcr5/png/desu-harukeishrine.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/desu-mushroomisland.jpg');"><figcaption>Giant Mushroom Island Panorama
+        <a href="bcr5/png/desu-mushroomisland.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/desu-postoffice.jpg');"><figcaption>Cerise Post Office
+        <a href="bcr5/png/desu-postoffice.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/desu-twilightbarroom.jpg');"><figcaption>The Twilight Bar Room
+        <a href="bcr5/png/desu-twilightbarroom.png">[PNG]</a><br><sup>(from Desu)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/mar-deepslatelavashaft.jpg');"><figcaption>Mineshaft in Deepslate with Lava Flow
+        <a href="bcr5/png/mar-deepslatelavashaft.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/mar-desumarhousefront.jpg');"><figcaption>Desu + Mar's House at Night (Front)
+        <a href="bcr5/png/mar-desumarhousefront.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/mar-desumarhousefrontdaylight.jpg');"><figcaption>Desu + Mar's House in Daylight (Front)
+        <a href="bcr5/png/mar-desumarhousefrontdaylight.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/mar-desumarhouseroof.jpg');"><figcaption>Desu + Mar's House (Roof)
+        <a href="bcr5/png/mar-desumarhouseroof.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/mar-mushroomisland.jpg');"><figcaption>Giant Mushroom Island Panorama (Shaders)
+        <a href="bcr5/png/mar-mushroomisland.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/mar-twilightbarroom.jpg');"><figcaption>The Twilight Bar Room at Night
+        <a href="bcr5/png/mar-twilightbarroom.png">[PNG]</a><br><sup>(from Mar)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/vi-bridgeatenight.jpg');"><figcaption>Cerise Bridge at Night
+        <a href="bcr5/png/vi-bridgeatenight.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/vi-bridgeatsunrise.jpg');"><figcaption>Cerise Bridge at Sunrise
+        <a href="bcr5/png/vi-bridgeatsunrise.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/vi-bridgeawayfromtown.jpg');"><figcaption>On the Cerise Bridge Looking Toward West Hill
+        <a href="bcr5/png/vi-bridgeawayfromtown.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/vi-bridgefrombelowangle.jpg');"><figcaption>Cerise Bridge from Below
+        <a href="bcr5/png/vi-bridgefrombelowangle.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/vi-bridgefrombelowzoom.jpg');"><figcaption>Cerise Bridge from Below (Zoomed)
+        <a href="bcr5/png/vi-bridgefrombelowzoom.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/vi-bridgefrombelowzoomangle.jpg');"><figcaption>Cerise Bridge from Below (Zoomed, Alternate Angle)
+        <a href="bcr5/png/vi-bridgefrombelowzoomangle.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+    
+    <figure style="background-image: url('bcr5/jpg/vi-mansion.jpg');"><figcaption>Mansion in the North Side of Cerise
+        <a href="bcr5/png/vi-mansion.png">[PNG]</a><br><sup>(from Violet)</sup></figcaption></figure>
+    
