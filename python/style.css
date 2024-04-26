@@ -28,6 +28,14 @@ h3 {
     font-size: 1.75em;
 }
 
+div.tooltip {
+    padding: 10px;
+    position: fixed;
+    display: block;
+    border: 1px solid black;
+    background-color: white;
+}
+
 p {
     font-size: 1.4em;
 }
@@ -35,6 +43,10 @@ p {
 span.kw {
     color: blue;
     font-weight: bold;
+}
+
+span.term {
+    text-decoration: underline dashed;
 }
 
 code {
