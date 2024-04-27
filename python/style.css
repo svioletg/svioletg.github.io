@@ -4,7 +4,7 @@ body {
     margin: 0;
     font-size: 1em;
     font-family: 'Vollkorn', serif;
-    background-color: #555;
+    background-color: navy;
 }
 
 main {
@@ -28,6 +28,31 @@ h3 {
     font-size: 1.75em;
 }
 
+button.sidenote, div.sidenote {
+    text-align: left;
+    font-size: 1em;
+    font-style: italic;
+    font-family: 'Vollkorn', serif;
+    padding: 1em;
+}
+
+button.sidenote {
+    color: white;
+    font-size: 1.5em;
+    border: none;
+    outline: none;
+    width: 100%;
+    background-color: #00aaaa;
+}
+
+div.sidenote {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #aaffff;
+    border-bottom: 5px solid #00aaaa;
+    transition: max-height 0.2s ease-out;
+}
+
 div.tooltip {
     padding: 10px;
     position: fixed;
@@ -37,7 +62,7 @@ div.tooltip {
 }
 
 p {
-    font-size: 1.4em;
+    font-size: 1.25em;
 }
 
 span.kw {
@@ -49,11 +74,24 @@ span.term {
     text-decoration: underline dashed;
 }
 
+kbd {
+    font-size: 0.75em;
+    font-family: 'Consolas', monospace;
+    padding: 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: white;
+    background: linear-gradient(#555, #000);
+    border: 1px solid black;
+    box-shadow: 0px 2px 0px black;
+    border-radius: 5px;
+}
+
 code {
     font-size: 0.75em;
     font-family: 'Consolas', monospace;
     padding: 5px;
-    background-color: #333;
+    background-color: black;
     color: #ddd;
     border-radius: 5px;
 }
