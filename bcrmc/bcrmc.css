@@ -127,7 +127,8 @@ h3.subtitle
 }
 
 figure 
-{ display: inline-block; padding: 0; margin: 0; min-width: 33.3%; max-width: 33.3%;
+{
+	display: inline-block; padding: 0; margin: 0; min-width: 33.3%; max-width: 33.3%;
 	aspect-ratio: 16/9; background-size: cover;
 }
 
