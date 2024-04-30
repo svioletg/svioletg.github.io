@@ -73,7 +73,7 @@
             paths or programs that contain spaces — in order to make sure the command prompt treats it as one single argument, just
             put double-quotes <kbd>" "</kbd> around what you need to. For example, <code>cd "C:\Program Files"</code>.
         </p>
-            <button class="sidenote collapsible">Sidenote: What are commands, really?</button>
+            <button class="sidenote collapsible" onclick="toggleSidenote(this)">Sidenote: What are commands, really?</button>
             <div class="sidenote collapsible">
                 <p>
                     90% of the time, a "command" is actually just the name of a program somewhere on your PC. Those programs are EXE files,
@@ -96,14 +96,37 @@
             </div>
         <p>
             Besides the Python-specific commands that will be discussed shortly (I promise), there's a few basic commands 
-            that will be useful to remember, as well as some basic terminology that I'll be using from here on out.
+            that will be useful to remember, as well as some basic terminology that I'll be using from here on out. Commands will be written below
+            in a format like this: <code>command &lt;required_argument&gt; [optional_argument]</code>
+            <br>The angle brackets <kbd>&lt;</kbd> <kbd>&gt;</kbd> are to tell you this argument is <i>required</i>, and the command will not function
+            without it. Arguments surrounded by square brackets <kbd>[</kbd> <kbd>]</kbd> are optional, letting you modify the command's behavior
+            further. Remember not to type out the brackets when typing out commands, they're just here as a guide.
 
-
+            An absolute path means a file path beginning from the very top of the file system:
+            the drive letter, e.g. <code>C:\</code>, where a relative path essentially assumes your current directory is in front of
+            whatever path you've given it. For example, <code>C:\Users\Violet\Documents\Coding\Python</code> is an absolute path,
+            where if say we were already currently inside of that Documents folder, I could use the relative path <code>Coding\Python</code>.
 
             <h3>Common Commands (for Windows)</h3>
-            <ul>
-                <li><code>cd</code>
-            </ul>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>cd &lt;path_to_directory&gt;</code></td>
+                    <td>
+                        Stands for "change directory"; <code>path_to_directory</code> must be a valid <span>file path</span>.
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>dir [path_to_directory]</code></td>
+                    <td>
+                        Short for "directory", if given no arguments this will list out everything within your current directory. Alternatively,
+                        you can specify a file path to list the contents of another location.
+                    </td>
+                </tr>
+            </table>
         </p>
 <pre><code class="language-python"># dedicated code block<br>
 def foo():

@@ -34,31 +34,29 @@ function createTooltip(tag) {
     // Append the tooltip to the body
     document.body.appendChild(currentTooltip);
 }
+function toggleSidenote() {
+    this.classList.toggle('active');
+    var nextElement = this.nextElementSibling;
+    if (!nextElement) {
+        console.log("Couldn't find next element sibling for collapsible button ".concat(this, "."));
+    }
+    else if (!(nextElement instanceof HTMLDivElement)) {
+        console.log("Next element sibling for collapsible button ".concat(this, " is not a div. Instead: ").concat(nextElement));
+    }
+    else {
+        var content = nextElement;
+        console.log(content);
+        console.log(content.style.maxHeight);
+        if (content.style.maxHeight) {
+            content.style.maxHeight = '0';
+        }
+        else {
+            content.style.maxHeight = content.scrollHeight + 'px';
+        }
+    }
+}
+;
 function main() {
-    // Add collapsing functionality
-    COLLAPSE_BUTTONS.forEach(function (button) {
-        console.log(button);
-        button.addEventListener('click', function () {
-            button.classList.toggle('active');
-            var nextElement = button.nextElementSibling;
-            if (!nextElement) {
-                console.log("Couldn't find next element sibling for collapsible button ".concat(button, "."));
-            }
-            else if (!(nextElement instanceof HTMLDivElement)) {
-                console.log("Next element sibling for collapsible button ".concat(button, " is not a div. Instead: ").concat(nextElement));
-            }
-            else {
-                var content = nextElement;
-                console.log(content);
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = '0';
-                }
-                else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                }
-            }
-        });
-    });
     // Add description boxes to term elements
     TERM_TAGS.forEach(function (tag) {
         tag.addEventListener('mouseover', function () {

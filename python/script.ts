@@ -42,29 +42,26 @@ function createTooltip(tag: HTMLSpanElement): void {
     document.body.appendChild(currentTooltip);
 }
 
-function main(): void {
-    // Add collapsing functionality
-    COLLAPSE_BUTTONS.forEach((button: HTMLButtonElement) => {
-        console.log(button);
-        button.addEventListener('click', () => {
-            button.classList.toggle('active');
-            let nextElement: Element | null = button.nextElementSibling;
-            if (!nextElement) {
-                console.log(`Couldn't find next element sibling for collapsible button ${button}.`);
-            } else if (!(nextElement instanceof HTMLDivElement)) {
-                console.log(`Next element sibling for collapsible button ${button} is not a div. Instead: ${nextElement}`);
-            } else {
-                let content: HTMLDivElement = nextElement;
-                console.log(content);
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = '0';
-                } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                }
-            }
-        });
-    });
+function toggleSidenote(this: HTMLButtonElement): void {
+    this.classList.toggle('active');
+    let nextElement: Element | null = this.nextElementSibling;
+    if (!nextElement) {
+        console.log(`Couldn't find next element sibling for collapsible button ${this}.`);
+    } else if (!(nextElement instanceof HTMLDivElement)) {
+        console.log(`Next element sibling for collapsible button ${this} is not a div. Instead: ${nextElement}`);
+    } else {
+        let content: HTMLDivElement = nextElement;
+        console.log(content);
+        console.log(content.style.maxHeight);
+        if (content.style.maxHeight) {
+            content.style.maxHeight = '0';
+        } else {
+            content.style.maxHeight = content.scrollHeight + 'px';
+        }
+    }
+};
 
+function main(): void {
     // Add description boxes to term elements
     TERM_TAGS.forEach((tag: HTMLSpanElement) => {
         tag.addEventListener('mouseover', () => {
