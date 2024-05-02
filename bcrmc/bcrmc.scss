@@ -2,21 +2,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap');
 
 :root {
-    --bcr1-icon: url('i/cherry_sapling_128x128.png');
-    --bcr1-bg: url('i/cherry_planks_128x128.png');
+    --bcr1-icon: url('i/bell_128x128.png');
+    --bcr1-bg: url('i/dirt_128x128_dark.png');
+    --bcr1-h2: url('i/cobblestone_128x128.png');
 
-    --bcr2-icon: url('i/cherry_sapling_128x128.png');
-    --bcr2-bg: url('i/cherry_planks_128x128.png');
+    --bcr2-icon: url('i/honey_bottle_128x128.png');
+    --bcr2-bg: url('i/grass_block_top_128x128.png');
+    --bcr2-h2: url('i/honeycomb_block_128x128_dark.png');
 
-    --bcr3-icon: url('i/cherry_sapling_128x128.png');
-    --bcr3-bg: url('i/cherry_planks_128x128.png');
+    --bcr3-icon: url('i/music_disc_otherside_128x128.png');
+    --bcr3-bg: url('i/deepslate_top_128x128.png');
+    --bcr3-h2: url('i/amethyst_block_128x128.png');
 
     --bcr4-icon: url('i/sculk_shrieker_side_128x128.png');
     --bcr4-bg: url('i/sculk_catalyst_top_128x128.png');
+    --bcr4-h2: url('i/mangrove_planks_128x128.png');
 
     --bcr5-icon: url('i/cherry_sapling_128x128.png');
     --bcr5-bg: url('i/cherry_planks_128x128.png');
-    --bcr5-h2: url('i/bamboo_planks_64x64.png');
+    --bcr5-h2: url('i/bamboo_planks_128x128.png');
 }
 
 @font-face {
@@ -32,7 +36,7 @@ body
     font-weight: lighter;
     text-align: center;
     font-size: 1em;
-    background-image: url('i/dirt_64x64_dark.png');
+    background-image: url('i/dirt_128x128_dark.png');
 }
 
 @for $i from 1 through 5 {
@@ -74,7 +78,7 @@ a { color: cyan; }
 {
     font-family: 'MinecraftRegular';
     text-shadow: 3px 3px rgba(0,0,0,0.5);
-    font-size: 20px;
+    font-size: 1.5em;
     margin: 0 auto;
     width: 396px;
     height: 50px;
@@ -118,7 +122,7 @@ span.title-gradient-120
     /* background: radial-gradient(gold, fuchsia); */
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(3px 3px black);
+    filter: drop-shadow(3px 3px rgba(0, 0, 0, 0.5));
 }
 
 h1 { font-size: 3em; }
@@ -127,7 +131,7 @@ h1.mc-head span,
 h1.mc-head img:not(.no-shadow) {
     font-family: 'MinecraftRegular';
     color: yellow;
-    filter: drop-shadow(3px 3px black);
+    filter: drop-shadow(3px 3px rgba(0, 0, 0, 0.5));
 }
 
 h2, h3 
@@ -216,7 +220,7 @@ ul ol
     background-color: rgba(255,0,255,0.1);
     backdrop-filter: blur(5px);
     border: 2px solid black;
-    /* background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/bamboo_planks_64x64.png'); */
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/bamboo_planks_128x128.png'); */
     box-shadow: inset 0 0 1em black;
 }
 
@@ -258,6 +262,16 @@ h2:hover img.linker
 }
 
 img.alone { width: auto; height: 500px; }
+
+@for $i from 1 through 5 {
+    img.bcr#{$i}-icon {
+        content: var(--bcr#{$i}-icon);
+        height: 1.5em;
+        padding-right: 1em;
+        vertical-align: bottom;
+        filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+    }
+}
 
 @media only screen and (max-device-width:600px)
 {

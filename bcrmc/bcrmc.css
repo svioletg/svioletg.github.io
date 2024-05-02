@@ -1,17 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap");
 :root {
-  --bcr1-icon: url("i/cherry_sapling_128x128.png");
-  --bcr1-bg: url("i/cherry_planks_128x128.png");
-  --bcr2-icon: url("i/cherry_sapling_128x128.png");
-  --bcr2-bg: url("i/cherry_planks_128x128.png");
-  --bcr3-icon: url("i/cherry_sapling_128x128.png");
-  --bcr3-bg: url("i/cherry_planks_128x128.png");
+  --bcr1-icon: url("i/bell_128x128.png");
+  --bcr1-bg: url("i/dirt_128x128_dark.png");
+  --bcr1-h2: url("i/cobblestone_128x128.png");
+  --bcr2-icon: url("i/honey_bottle_128x128.png");
+  --bcr2-bg: url("i/grass_block_top_128x128.png");
+  --bcr2-h2: url("i/honeycomb_block_128x128_dark.png");
+  --bcr3-icon: url("i/music_disc_otherside_128x128.png");
+  --bcr3-bg: url("i/deepslate_top_128x128.png");
+  --bcr3-h2: url("i/amethyst_block_128x128.png");
   --bcr4-icon: url("i/sculk_shrieker_side_128x128.png");
   --bcr4-bg: url("i/sculk_catalyst_top_128x128.png");
+  --bcr4-h2: url("i/mangrove_planks_128x128.png");
   --bcr5-icon: url("i/cherry_sapling_128x128.png");
   --bcr5-bg: url("i/cherry_planks_128x128.png");
-  --bcr5-h2: url("i/bamboo_planks_64x64.png");
+  --bcr5-h2: url("i/bamboo_planks_128x128.png");
 }
 
 @font-face {
@@ -25,7 +29,7 @@ body {
   font-weight: lighter;
   text-align: center;
   font-size: 1em;
-  background-image: url("i/dirt_64x64_dark.png");
+  background-image: url("i/dirt_128x128_dark.png");
 }
 
 body.bcr1 {
@@ -91,7 +95,7 @@ a {
 .bttn {
   font-family: "MinecraftRegular";
   text-shadow: 3px 3px rgba(0, 0, 0, 0.5);
-  font-size: 20px;
+  font-size: 1.5em;
   margin: 0 auto;
   width: 396px;
   height: 50px;
@@ -139,9 +143,10 @@ a.mega span {
 span.title-gradient-120 {
   background: linear-gradient(fuchsia, orange);
   /* background: radial-gradient(gold, fuchsia); */
-  background-clip: text;
+  -webkit-background-clip: text;
+          background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(3px 3px black);
+  filter: drop-shadow(3px 3px rgba(0, 0, 0, 0.5));
 }
 
 h1 {
@@ -152,7 +157,7 @@ h1.mc-head span,
 h1.mc-head img:not(.no-shadow) {
   font-family: "MinecraftRegular";
   color: yellow;
-  filter: drop-shadow(3px 3px black);
+  filter: drop-shadow(3px 3px rgba(0, 0, 0, 0.5));
 }
 
 h2, h3 {
@@ -229,7 +234,8 @@ figure a {
 
 figure img {
   height: 300px;
-  object-fit: scale-down;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
   vertical-align: top;
 }
 
@@ -271,9 +277,10 @@ ul ol {
   font-size: 0.9em;
   text-align: left;
   background-color: rgba(255, 0, 255, 0.1);
-  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
   border: 2px solid black;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/bamboo_planks_64x64.png'); */
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/bamboo_planks_128x128.png'); */
   box-shadow: inset 0 0 1em black;
 }
 
@@ -315,6 +322,46 @@ img.alone {
   height: 500px;
 }
 
+img.bcr1-icon {
+  content: var(--bcr1-icon);
+  height: 1.5em;
+  padding-right: 1em;
+  vertical-align: bottom;
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+}
+
+img.bcr2-icon {
+  content: var(--bcr2-icon);
+  height: 1.5em;
+  padding-right: 1em;
+  vertical-align: bottom;
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+}
+
+img.bcr3-icon {
+  content: var(--bcr3-icon);
+  height: 1.5em;
+  padding-right: 1em;
+  vertical-align: bottom;
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+}
+
+img.bcr4-icon {
+  content: var(--bcr4-icon);
+  height: 1.5em;
+  padding-right: 1em;
+  vertical-align: bottom;
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+}
+
+img.bcr5-icon {
+  content: var(--bcr5-icon);
+  height: 1.5em;
+  padding-right: 1em;
+  vertical-align: bottom;
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+}
+
 @media only screen and (max-device-width: 600px) {
   /*	body {font-size:2em;}*/
   main {
@@ -348,6 +395,4 @@ img.alone {
   figure img {
     height: 200px;
   }
-}
-
-/*# sourceMappingURL=bcrmc.css.map */
+}/*# sourceMappingURL=bcrmc.css.map */
