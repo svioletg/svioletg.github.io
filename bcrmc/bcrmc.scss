@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap');
+
+:root {
+    --bcr1-bg: url('i/cherry_planks_128x128.png');
+    --bcr1-icon: url('i/cherry_sapling_128x128.png');
+
+    --bcr2-bg: url('i/cherry_planks_128x128.png');
+    --bcr2-icon: url('i/cherry_sapling_128x128.png');
+
+    --bcr3-bg: url('i/cherry_planks_128x128.png');
+    --bcr3-icon: url('i/cherry_sapling_128x128.png');
+
+    --bcr4-bg: url('i/sculk_catalyst_top_128x128.png');
+    --bcr4-icon: url('i/sculk_shrieker_side_128x128.png');
+
+    --bcr5-bg: url('i/cherry_planks_128x128.png');
+    --bcr5-icon: url('i/cherry_sapling_128x128.png');
+}
+
+@font-face {
+    font-family: 'MinecraftRegular';
+    src: url('./font/MinecraftRegular-Bmg3.otf');
+}
+
+body
+{
+    margin: 0;
+    color: white;
+    font-family: 'Aoboshi One', serif;
+    font-weight: lighter;
+    text-align: center;
+    font-size: 1em;
+    background-image: url('i/dirt_64x64_dark.png');
+}
+
+@for $i from 1 through 5 {
+    body.bcr#{$i} {
+        background-image: var(--bcr#{$i}-bg);
+    }
+}
+
+main
+{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 75%;
+    margin: 0 auto;
+}
+
+hr { width: 75%; }
+p { width: 75%; margin: 0 auto; font-size: 1.5em; }
+b { font-weight: bold; }
+code 
+{
+    font-family: "Courier New";
+    font-weight: bold; 
+    background-color: #333; 
+    padding: 5px; color: yellow;
+}
+
+nav.flexnav
+{
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1em;
+}
+
+a { color: cyan; }
+
+.bttn
+{
+    font-family: 'MinecraftRegular';
+    text-shadow: 3px 3px rgba(0,0,0,0.5);
+    font-size: 20px;
+    margin: 0 auto;
+    width: 396px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    padding: 0px;
+    padding-bottom: 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    background-image: url('i/bttn.png');
+    background-size: cover;
+    /*transition: 0.2s all;*/
+}
+
+nav.flexnav .bttn
+{
+    justify-content: center;
+}
+
+.bttn:hover { border-color: white; }
+a.mega { background-image: url('i/bttnbig.png'); height: 72px; }
+a.mega span { position: relative; top: 3px; }
+
+.hl /* hl for "highlight" */
+{
+    color: orange;
+}
+
+.hl2
+{
+    color: turquoise;
+}
+
+span.title-gradient-120
+{
+    background: linear-gradient(fuchsia, orange);
+    /* background: radial-gradient(gold, fuchsia); */
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(3px 3px black);
+}
+
+h1 { font-size: 3em; }
+
+h1.mc-head span,
+h1.mc-head img:not(.no-shadow) {
+    font-family: 'MinecraftRegular';
+    color: yellow;
+    filter: drop-shadow(3px 3px black);
+}
+
+h2, h3 
+{
+    width: 75%;
+    margin: auto;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+h2 
+{
+    font-size: 2em;
+    background-color: rgba(0,255,255,0.25);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/bamboo_mosaic_64x64_dark.png');
+    background-size: 64px;
+    box-shadow: inset 0 0 1em black;
+    border: 2px solid black;
+    text-shadow: 5px 5px black;
+}
+
+h2 sup { font-style: italic; font-weight: lighter; }
+h3 { font-weight: bold; font-size: 2em; text-align: left; }
+h3.subtitle
+{
+    font-size: 1.5em; 
+    text-align: center; 
+    font-weight: normal; 
+    margin-top: -1em; 
+    font-style: italic; 
+}
+
+figure 
+{
+    display: inline-block; padding: 0; margin: 0; min-width: 33.3%; max-width: 33.3%;
+    aspect-ratio: 16/9; background-size: cover;
+}
+
+figure a
+{
+    text-decoration: underline;
+    font-style: normal;
+}
+
+figure img
+{
+    height: 300px;
+    object-fit: scale-down; 
+    vertical-align: top;
+}
+
+.gallery
+{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}
+
+.gallery.smaller figure img { height: 250px; }
+
+figcaption
+{
+    background-color: rgba(0,0,0,0.5);
+    padding: 5px;
+    font-weight: bolder;
+}
+
+figcaption sup { font-style: italic; }
+
+ul { font-size: 1.5em; width: 75%; text-align: left; margin: 0 auto; }
+ul img { width: 40%; }
+ul ol
+{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-left: 0;
+    font-size: 0.9em;
+    text-align: left;
+    background-color: rgba(255,0,255,0.1);
+    backdrop-filter: blur(5px);
+    border: 2px solid black;
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/bamboo_planks_64x64.png'); */
+    box-shadow: inset 0 0 1em black;
+}
+
+li
+{
+    padding-bottom: 20px;
+    margin-right: 2em;
+    text-shadow: 2px 2px black;
+}
+
+li.note
+{
+    border-left: 5px solid orange;
+    background-color: rgba(255,127,0,0.25);
+    list-style-type: none;
+    padding: 0.5em;
+    font-size: 0.75em;
+}
+
+a.hlight
+{
+    background-color: rgba(255, 255, 0, 0.25);
+    padding-right: 10px; padding-left: 10px;
+    border-left: 5px solid yellow;
+}
+
+img.linker
+{
+    position: absolute;
+    margin-top: 0.25em;
+    padding-left: 0.5em;
+    height: 1em;
+    opacity: 0;
+}
+
+h2:hover img.linker
+{
+    opacity: 1;
+}
+
+img.alone { width: auto; height: 500px; }
+
+@media only screen and (max-device-width:600px)
+{
+/*	body {font-size:2em;}*/
+    main {width: 100%}
+    h2, h2 {width: 100%; border-left: none;}
+    .bttn {padding: 1em; width: 75%;}
+    ul {width: 100%; padding-left: 0;}
+    ul li {padding-left: 1em;}
+    ul ol {border-left: none;}
+    ul img {width: 100%;}
+    img.alone {width: 100%; height: auto;}
+    figure img {height: 200px;}
+}
