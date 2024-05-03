@@ -6,7 +6,7 @@ function add_viewport_meta(header: HTMLHeadElement): void {
     header.innerHTML += `<meta name="viewport" content="width=device-width, initial-scale=1.0">`;
 }
 
-function main(): void {
+function add_missing_header_data(): void {
     let header: HTMLHeadElement = document.getElementsByTagName("head")[0];
     console.log(header);
     if (!header.innerHTML.includes(`href="favicon.ico"`)) {
@@ -20,4 +20,4 @@ function main(): void {
     }
 }
 
-main()
+add_missing_header_data();

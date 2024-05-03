@@ -2,5 +2,12 @@
     "compilerOptions": {
         "lib": ["es6", "dom", "es2016"],
         "target": "es5",
-      }
+        
+        "resolveJsonModule": true,
+        "esModuleInterop": true
+      },
+    "include": [
+      "*.json",
+      "*.ts"
+    ]
 }

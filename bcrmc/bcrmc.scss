@@ -3,24 +3,24 @@
 
 :root {
     --bcr1-icon: url('i/bell_128x128.png');
-    --bcr1-bg: url('i/dirt_128x128_dark.png');
-    --bcr1-h2: url('i/cobblestone_128x128.png');
+    --bcr1-bg:   url('i/dirt_128x128_dark.png');
+    --bcr1-h2:   url('i/cobblestone_128x128.png');
 
     --bcr2-icon: url('i/honey_bottle_128x128.png');
-    --bcr2-bg: url('i/grass_block_top_128x128.png');
-    --bcr2-h2: url('i/honeycomb_block_128x128_dark.png');
+    --bcr2-bg:   url('i/grass_block_top_128x128.png');
+    --bcr2-h2:   url('i/honeycomb_block_128x128_dark.png');
 
     --bcr3-icon: url('i/music_disc_otherside_128x128.png');
-    --bcr3-bg: url('i/deepslate_top_128x128.png');
-    --bcr3-h2: url('i/amethyst_block_128x128.png');
+    --bcr3-bg:   url('i/deepslate_top_128x128.png');
+    --bcr3-h2:   url('i/amethyst_block_128x128.png');
 
     --bcr4-icon: url('i/sculk_shrieker_side_128x128.png');
-    --bcr4-bg: url('i/sculk_catalyst_top_128x128.png');
-    --bcr4-h2: url('i/mangrove_planks_128x128.png');
+    --bcr4-bg:   url('i/sculk_catalyst_top_128x128.png');
+    --bcr4-h2:   url('i/mangrove_planks_128x128.png');
 
     --bcr5-icon: url('i/cherry_sapling_128x128.png');
-    --bcr5-bg: url('i/cherry_planks_128x128.png');
-    --bcr5-h2: url('i/bamboo_planks_128x128.png');
+    --bcr5-bg:   url('i/cherry_planks_128x128.png');
+    --bcr5-h2:   url('i/bamboo_planks_128x128.png');
 }
 
 @font-face {
@@ -36,7 +36,7 @@ body
     font-weight: lighter;
     text-align: center;
     font-size: 1em;
-    background-image: url('i/dirt_128x128_dark.png');
+    background-image: black url('i/dirt_128x128_dark.png');
 }
 
 @for $i from 1 through 5 {
@@ -63,8 +63,9 @@ code
     padding: 5px; color: yellow;
 }
 
-nav.flexnav
+.flexnav
 {
+    align-items: center;
     margin: 0 auto;
     width: 90%;
     display: flex;
@@ -95,6 +96,16 @@ a { color: cyan; }
     background-image: url('i/bttn.png');
     background-size: cover;
     /*transition: 0.2s all;*/
+}
+
+.bttn.arrow {
+    width: 3em;
+    height: 3em;
+}
+
+.bttn.arrow.hide {
+    opacity: 0;
+    pointer-events: none;
 }
 
 nav.flexnav .bttn

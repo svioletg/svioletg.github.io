@@ -29,7 +29,7 @@ body {
   font-weight: lighter;
   text-align: center;
   font-size: 1em;
-  background-image: url("i/dirt_128x128_dark.png");
+  background-image: black url("i/dirt_128x128_dark.png");
 }
 
 body.bcr1 {
@@ -80,7 +80,8 @@ code {
   color: yellow;
 }
 
-nav.flexnav {
+.flexnav {
+  align-items: center;
   margin: 0 auto;
   width: 90%;
   display: flex;
@@ -112,6 +113,16 @@ a {
   background-image: url("i/bttn.png");
   background-size: cover;
   /*transition: 0.2s all;*/
+}
+
+.bttn.arrow {
+  width: 3em;
+  height: 3em;
+}
+
+.bttn.arrow.hide {
+  opacity: 0;
+  pointer-events: none;
 }
 
 nav.flexnav .bttn {

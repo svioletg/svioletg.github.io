@@ -6,7 +6,7 @@ function create_section_anchors()
     {
         let tag = tags_h2[i];
         tag.innerHTML += `<a href="#${tag.id}" aria-label="Link to section ${tag.id}">
-        <img title="Click to link to this section" class="linker" src="i/chain_128x128_outline.png">
+        <img title="Click to link to this section" class="linker" src="/bcrmc/i/chain_128x128_outline.png">
         </a>`;
     }
 }
