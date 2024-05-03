@@ -15,7 +15,7 @@
   --bcr4-h2: url("i/mangrove_planks_128x128.png");
   --bcr5-icon: url("i/cherry_sapling_128x128.png");
   --bcr5-bg: url("i/cherry_planks_128x128.png");
-  --bcr5-h2: url("i/bamboo_planks_128x128.png");
+  --bcr5-h2: url("i/bamboo_planks_128x128_dark.png");
 }
 
 @font-face {
@@ -29,7 +29,8 @@ body {
   font-weight: lighter;
   text-align: center;
   font-size: 1em;
-  background-image: black url("i/dirt_128x128_dark.png");
+  background-color: black;
+  background-image: url("i/dirt_128x128_dark.png");
 }
 
 body.bcr1 {
@@ -86,6 +87,8 @@ code {
   width: 90%;
   display: flex;
   flex-wrap: wrap;
+  -moz-column-gap: 1em;
+       column-gap: 1em;
   row-gap: 1em;
 }
 

@@ -1,17 +1,45 @@
 const LATEST_SERVER: number = 5;
 
 // Concatenation for readability, mainly
+class ServerInfo {
+    title: string;
+    dates: string;
+    done: boolean;
+    world_link: string;
+    map_folder_link: string;
+}
+
+const SERVERS: { [key: string]: object } = {
+    "bcr1": {
+        "title": "BCR-MC 1 — 1.14/1.15: Village & Pillage / Buzzy Bees",
+        "dates": "Dec. 2019",
+        "done": true
+    },
+    "bcr2": {
+        "title": "BCR-MC 2 — 1.15: Buzzy Bees",
+        "dates": "Apr. 2020",
+        "done": true
+    },
+    "bcr3": {
+        "title": "BCR-MC 3 — 1.18: Caves & Cliffs",
+        "dates": "Dec. 1st, 2021 — Jan. 29th, 2022",
+        "done": true
+    },
+    "bcr4": {
+        "title": "BCR-MC 4 — 1.19: The Wild Update",
+        "dates": "Dec. 1st, 2022 — Jan. 31st, 2023",
+        "done": true
+    },
+    "bcr5": {
+        "title": "BCR-MC 5 — 1.20: Trails & Tales",
+        "dates": "Dec. 1st, 2023 — Jan. 31st, 2024",
+        "done": true
+    }
+}
+
 const FIGURE_TEMPLATE: string = `<figure style="background-image: url('jpg/%IMAGE%.jpg');">`+
     `<figcaption>%TITLE%<a href="png/%IMAGE%.png">[PNG]</a>`+
     `<br><sup>(from %AUTHOR%)</sup></figcaption></figure>`
-
-function create_figure(image_name: string, server_season: number): string {
-    let figure_string: string = FIGURE_TEMPLATE
-        .replace('%IMAGE%', image_name)
-        .replace('%TITLE%', PHOTO_TITLES[`bcr${server_season}`][image_name])
-        .replace('%AUTHOR%', PHOTO_AUTHORS[image_name.split('-')[0]])
-    return figure_string
-}
 
 const PHOTO_AUTHORS: { [key: string]: string } = {
     "desu": "Desu",
@@ -165,6 +193,14 @@ const PHOTO_TITLES: { [key: string]: object } = {
         "mar-icespike": "Ice Spikes in Rain",
         "vi-menorah": "Menorah at Sunset"
     }
+}
+
+function create_figure(image_name: string, server_season: number): string {
+    let figure_string: string = FIGURE_TEMPLATE
+        .replace('%IMAGE%', image_name)
+        .replace('%TITLE%', PHOTO_TITLES[`bcr${server_season}`][image_name])
+        .replace('%AUTHOR%', PHOTO_AUTHORS[image_name.split('-')[0]])
+    return figure_string
 }
 
 function add_gallery_nav_arrows(): void {

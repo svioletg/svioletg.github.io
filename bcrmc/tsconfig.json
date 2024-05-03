@@ -2,7 +2,7 @@
     "compilerOptions": {
         "lib": ["es6", "dom", "es2016"],
         "target": "es5",
-        
+        "module": "CommonJS",
         "resolveJsonModule": true,
         "esModuleInterop": true
       },
