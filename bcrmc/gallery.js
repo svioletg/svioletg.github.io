@@ -1,211 +1,134 @@
-var LATEST_SERVER = 5;
-// Concatenation for readability, mainly
-var FIGURE_TEMPLATE = "<figure style=\"background-image: url('jpg/%IMAGE%.jpg');\">" +
-    "<figcaption>%TITLE%<a href=\"png/%IMAGE%.png\">[PNG]</a>" +
-    "<br><sup>(from %AUTHOR%)</sup></figcaption></figure>";
-var PHOTO_AUTHORS = {
-    "desu": "Desu",
-    "mar": "Mar",
-    "vi": "Violet"
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
 };
-var PHOTO_TITLES = {
-    "bcr1": {
-        "desu-violetleghouse": "Violet and Leg's House at Daytime",
-        "mar-townsunrise": "Central Town at Sunrise",
-        "mar-towersunrise": "Mar's Tower at Sunrise",
-        "vi-townbridge": "Central Town from the Bridge at Night",
-        "vi-towntower": "Central Town with Tower in the Background",
-        "desu-boat": "Boat Ride",
-        "desu-chestsdesert": "Chests in Desert",
-        "desu-hillside": "Hillside by River",
-        "desu-togetherminecart": "Minecart Experiment"
-    },
-    "bcr2": {
-        "vi-vihousenight": "Violet's House at Night",
-        "vi-townvalleyday": "Town Valley at Daytime",
-        "vi-alliumrock": "Allium on a Rock Formation at Daytime",
-        "desu-foggytown": "View of Cabin ",
-        "desu-loandistance": "Loan Entering Town",
-        "desu-marcave": "Mar's Mountainside Home",
-        "desu-mesacabin": "Evan's Mesa Lodging",
-        "desu-roofedforest": "Mushroom Forest"
-    },
-    "bcr3": {
-        "mar-postdragon": "Post",
-        "vi-exposedcavenight": "Inside of Exposed Cave at Night",
-        "vi-conservatory": "The Altuo Conservatory",
-        "mar-beachhousenight": "Mar's Beach House at Night in the Snow",
-        "mar-lighthouserain": "Rodanthe Lighthouse at Night in the Rain",
-        "mar-endermanledge": "Enderman Standing on a Ledge in the Nether",
-        "desu-floatingrock": "Large Mountain",
-        "vi-observatory1": "Natty's Observatory ",
-        "vi-observatory2": "Natty's Observatory ",
-        "vi-northaltuo": "Northern Altuo at Sunrise",
-        "vi-northaltuonight": "Northern Altuo at Night With the Moon Overhead",
-        "desu-altuofromwest": "Altuo Peninsula from the West",
-        "desu-deepslatecave": "Deepslate Cave",
-        "desu-discfarm": "Music Disc Farm",
-        "desu-dripstonecave": "Dripstone Cave",
-        "desu-fishing": "Mar ",
-        "desu-marglass": "Mar Through Spyglass",
-        "desu-melonfarm": "Desu's Pumpkin",
-        "desu-mountainhouse": "Desu's In",
-        "desu-northtown": "North Hillside Altuo",
-        "desu-observatoryint1": "Altuo Observatory ",
-        "desu-observatoryint2": "Altuo Observatory ",
-        "desu-snowing": "Altuo in Winter",
-        "desu-towerglass": "Altuo Tower Through Spyglass",
-        "desu-townhallconstruction": "Construction of Town Hall",
-        "desu-townsideboard": "Altuo Townside Bulletin Board",
-        "desu-virecords": "Violet's Disc Collection"
-    },
-    "bcr4": {
-        "vi-southgeminisunrise": "Sunrise in South Gemini City",
-        "vi-geminihouses": "Mar",
-        "mar-bocchi": "Mar's Melted Bocchi",
-        "mar-lushgodrays": "Lush Cave With Godrays",
-        "desu-beegarden": "Mar's Bee Garden",
-        "desu-castlein": "Gemini Outskirts Fort ",
-        "desu-castleout": "Gemini Outskirts Fort ",
-        "desu-dhousein": "Desu's House ",
-        "desu-dhouseout": "Desu's House ",
-        "desu-ekhouse1": "Evan",
-        "desu-ekhouse2": "Evan",
-        "desu-ekhouse3": "Evan",
-        "desu-marhousein": "Mar's House ",
-        "desu-marhouseout": "Mar's House ",
-        "desu-cactusfarm": "Desu's Cactus Farm",
-        "desu-netherroof": "Top Of The Nether",
-        "desu-postoffice": "Gemini Post Office",
-        "desu-pyramidgarden": "Roof of the Pyramid ",
-        "desu-pyramidsuiteEV": "Evan's Pyramid Suite",
-        "desu-pyramidsuiteDM": "Desu",
-        "vi-andrehouse1": "Andre's House ",
-        "vi-andrehouse2": "Andre's House ",
-        "vi-andrehouse3": "Andre's House ",
-        "vi-beegarden": "Mar's Bee Garden At Dusk",
-        "vi-conservatoryfar": "Gemini Conservatory From Afar",
-        "vi-dragondeath": "Death of the Ender Dragon",
-        "vi-end": "The End",
-        "vi-endfruits": "End Island With Chorus Fruits",
-        "vi-farmedge": "Edge of the Gemini Farm",
-        "vi-mesaview1": "Painted Desert",
-        "vi-mesaview2": "Painted Desert",
-        "vi-nightmesa": "The Mesa at Night",
-        "vi-oceantemple": "Entrance of an Ocean Monument",
-        "vi-plainsmesa": "Plains with Mesas in the Distance",
-        "vi-pyramidsunset": "Evan's Inverted Pyramid at Sunset",
-        "vi-vhousefromfarm": "Violet's House Viewed from the Farm",
-        "vi-conservatoryinside": "Gemini Conservatory ",
-        "vi-marbrewinside": "Mar's Brewery ",
-        "vi-pyramidnightclose": "Evan's Pyramid at Night",
-        "vi-pyramidnightfar": "Evan's Pyramid at Night ",
-        "desu-bakeryext": "Mar's Bakery ",
-        "desu-bakeryint": "Mar's Bakery ",
-        "desu-brewext": "Mar's Brewery ",
-        "desu-brewint": "Mar's Brewery ",
-        "desu-cactusfarmext": "Desu's Cactus Farm ",
-        "desu-christmastree": "Gemini Town Christmas Tree",
-        "desu-conservatorybasement": "Gemini Conservatory ",
-        "desu-conservatorybasement2": "Gemini Conservatory ",
-        "desu-conservatoryext": "Gemini Conservatory ",
-        "desu-geminilighthouse": "Gemini Lighthouse",
-        "desu-hollowstronghold": "Hollowed",
-        "desu-mesaspire": "Spire in the Mesa",
-        "desu-nattyworm": "Natty's Beetlejuice Worm",
-        "desu-pixelart": "Mesa Art ",
-        "desu-vhouseext": "Violet's House ",
-        "desu-vhouseint": "Violet's House ",
-        "vi-serverclosing": "Last Second on the Server"
-    },
-    "bcr5": {
-        "mar-creeperblossomtree": "Creeper in Cherry Tree",
-        "mar-dripstones": "Dripstone Cavern in Hazy Light",
-        "mar-nightlavariver": "Midnight River Bank with Flowing Lava",
-        "mar-postoffice": "Town Post Office",
-        "mar-vhousefromdistance": "Violet's House ",
-        "vi-sunsetvalley": "Town Valley at Sunset",
-        "vi-vhouseconstruction": "Violet's House Under Construction",
-        "vi-vhousefinished": "Violet's Finished House ",
-        "desu-harukeishrine": "Hakurei Shrine",
-        "desu-mushroomisland": "Giant Mushroom Island Panorama",
-        "desu-postoffice": "Cerise Post Office",
-        "desu-twilightbarroom": "The Twilight Bar Room",
-        "mar-deepslatelavashaft": "Mineshaft in Deepslate with Lava Flow",
-        "mar-desumarhousefront": "Desu ",
-        "mar-desumarhousefrontdaylight": "Desu ",
-        "mar-desumarhouseroof": "Desu ",
-        "mar-mushroomisland": "Giant Mushroom Island Panorama ",
-        "mar-twilightbarroom": "The Twilight Bar Room at Night",
-        "vi-bridgeatenight": "Cerise Bridge at Night",
-        "vi-bridgeatsunrise": "Cerise Bridge at Sunrise",
-        "vi-bridgeawayfromtown": "On the Cerise Bridge Looking Toward West Hill",
-        "vi-bridgefrombelowangle": "Cerise Bridge from Below",
-        "vi-bridgefrombelowzoom": "Cerise Bridge from Below ",
-        "vi-bridgefrombelowzoomangle": "Cerise Bridge from Below ",
-        "vi-mansion": "Mansion in the North Side of Cerise",
-        "desu-dragondeath": "Death of the Ender Dragon",
-        "desu-enderfarm": "Endermen Farm",
-        "desu-skaletonfarmentrance": "SKAleton Farm Entrance",
-        "desu-skaletonfarminterior": "SKAleton Farm Interior",
-        "desu-xmastree": "Cerise Xmas Tree",
-        "mar-beefarm": "Mar's Bee Farm",
-        "mar-beerose": "Bees Around a Rose",
-        "mar-icespike": "Ice Spikes in Rain",
-        "vi-menorah": "Menorah at Sunset"
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function extract_number(input_string) {
-    return Number(input_string.match(/\d+/)[0]);
-}
-function create_figure(image_name, server_season) {
-    var figure_string = FIGURE_TEMPLATE
-        .replace('%IMAGE%', image_name)
-        .replace('%TITLE%', PHOTO_TITLES["bcr".concat(server_season)][image_name])
-        .replace('%AUTHOR%', PHOTO_AUTHORS[image_name.split('-')[0]]);
-    return figure_string;
-}
-function add_gallery_nav_arrows() {
-    var gallery_titles = document.querySelectorAll('div.gallery-title');
-    gallery_titles.forEach(function (title) {
-        var current_page_name = title.getAttribute('name');
-        var current_page_number = extract_number(current_page_name);
-        var left_arrow = document.createElement('button');
-        left_arrow.classList.add('bttn', 'arrow');
-        left_arrow.addEventListener('click', function () { switch_gallery("bcr".concat(current_page_number - 1)); });
-        left_arrow.innerHTML = '&lt;';
-        var right_arrow = document.createElement('button');
-        right_arrow.classList.add('bttn', 'arrow');
-        right_arrow.addEventListener('click', function () { switch_gallery("bcr".concat(current_page_number + 1)); });
-        right_arrow.innerHTML = '&gt;';
-        title.insertBefore(left_arrow, title.querySelector('h2'));
-        if (current_page_number == 1) {
-            left_arrow.classList.add('hide');
+import { extract_number, json } from './utils.js';
+(function () {
+    return __awaiter(this, void 0, void 0, function () {
+        function author_from_filename(filename) {
+            return PHOTO_AUTHORS[filename.split('-')[0]];
         }
-        title.appendChild(right_arrow);
-        if (current_page_number == LATEST_SERVER) {
-            right_arrow.classList.add('hide');
+        function create_figure(image_filename, image_title, server_season) {
+            var figure_string = FIGURE_TEMPLATE
+                .replace(/%IMAGE%/g, image_filename)
+                .replace(/%TITLE%/g, image_title)
+                .replace(/%SEASON%/g, server_season)
+                .replace(/%AUTHOR%/g, author_from_filename(image_filename));
+            return figure_string;
         }
-    });
-}
-// TODO: switch_gallery()
-function switch_gallery(season) {
-    // Swap page theme
-    var body = document.querySelector('body');
-    body.classList.remove(body.classList.toString());
-    body.classList.add(season);
-    // Change out title, maps, and files
-    ['div.gallery-title', 'div.gallery-maps', 'div.gallery-files'].forEach(function (selector) {
-        console.log(selector);
-        var divs = document.querySelectorAll(selector);
-        console.log(divs);
-        divs.forEach(function (div) {
-            console.log(div);
-            div.classList.add('off');
+        function build_gallery(server_season) {
+            console.log('starting a build');
+            var gallery_container = document.querySelector('div#gallery-collection');
+            var new_gallery = document.createElement('div');
+            new_gallery.classList.add('gallery', 'smaller');
+            new_gallery.setAttribute('name', server_season);
+            // Run through images
+            console.log(typeof (PHOTO_TITLES[server_season]), PHOTO_TITLES[server_season]);
+            for (var _i = 0, _a = Object.entries(PHOTO_TITLES[server_season]); _i < _a.length; _i++) {
+                var _b = _a[_i], key = _b[0], value = _b[1];
+                console.log(key, value);
+                console.log(new_gallery.innerHTML);
+                var new_figure = create_figure(key, value, server_season);
+                new_gallery.innerHTML += new_figure;
+            }
+            // Add it
+            gallery_container.appendChild(new_gallery);
+        }
+        function add_gallery_nav_arrows() {
+            var gallery_titles = document.querySelectorAll('div.gallery-title');
+            gallery_titles.forEach(function (title) {
+                var current_page_name = title.getAttribute('name');
+                var current_page_number = extract_number(current_page_name);
+                var left_arrow = document.createElement('button');
+                left_arrow.classList.add('bttn', 'arrow');
+                left_arrow.addEventListener('click', function () { switch_gallery("bcr".concat(current_page_number - 1)); });
+                left_arrow.innerHTML = '&lt;';
+                var right_arrow = document.createElement('button');
+                right_arrow.classList.add('bttn', 'arrow');
+                right_arrow.addEventListener('click', function () { switch_gallery("bcr".concat(current_page_number + 1)); });
+                right_arrow.innerHTML = '&gt;';
+                title.insertBefore(left_arrow, title.querySelector('h2'));
+                if (current_page_number == 1) {
+                    left_arrow.classList.add('hide');
+                }
+                title.appendChild(right_arrow);
+                if (current_page_number == LATEST_SERVER) {
+                    right_arrow.classList.add('hide');
+                }
+            });
+        }
+        function switch_gallery(season) {
+            // Swap page theme
+            var body = document.querySelector('body');
+            body.classList.remove(body.classList.toString());
+            body.classList.add(season);
+            // Make the gallery, if it doesn't exist
+            if (!document.querySelector("div.gallery[name=\"".concat(season, "\"]"))) {
+                build_gallery(season);
+            }
+            // Change out stuff depending on the relevant server season
+            ['div.gallery-title', 'div.gallery-maps', 'div.gallery-files', 'div.gallery'].forEach(function (selector) {
+                var divs = document.querySelectorAll(selector);
+                divs.forEach(function (div) {
+                    div.classList.add('off');
+                });
+            });
+            document.querySelectorAll("div[name=\"".concat(season, "\"]")).forEach(function (div) { div.classList.remove('off'); });
+        }
+        var LATEST_SERVER, FIGURE_TEMPLATE, PHOTO_AUTHORS, PHOTO_TITLES, params, initial_season;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    LATEST_SERVER = 5;
+                    FIGURE_TEMPLATE = "<figure style=\"background-image: url('/bcrmc/%SEASON%/jpg/%IMAGE%.jpg');\">" +
+                        "<figcaption>%TITLE%<a href=\"/bcrmc/%SEASON%/png/%IMAGE%.png\">[PNG]</a>" +
+                        "<br><sup>(from %AUTHOR%)</sup></figcaption></figure>";
+                    PHOTO_AUTHORS = {
+                        "desu": "Desu",
+                        "mar": "Mar",
+                        "vi": "Violet"
+                    };
+                    return [4 /*yield*/, json('/bcrmc/photo_titles.json')];
+                case 1:
+                    PHOTO_TITLES = _a.sent();
+                    params = new URLSearchParams(window.location.search);
+                    initial_season = params.get('season') || params.get('s') || "bcr".concat(LATEST_SERVER);
+                    add_gallery_nav_arrows();
+                    switch_gallery(initial_season);
+                    return [2 /*return*/];
+            }
         });
     });
-    document.querySelectorAll("div[name=\"".concat(season, "\"]")).forEach(function (div) { div.classList.remove('off'); });
-}
-// Main
-add_gallery_nav_arrows();
-switch_gallery("bcr".concat(LATEST_SERVER));
+})();

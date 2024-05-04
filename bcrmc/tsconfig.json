@@ -1,9 +1,8 @@
 {
     "compilerOptions": {
-        "lib": ["es6", "dom", "es2016"],
+        "lib": ["es6", "dom", "es2017"],
         "target": "es5",
-        "module": "CommonJS",
-        "resolveJsonModule": true,
+        "module": "es2015",
         "esModuleInterop": true
       },
     "include": [
