@@ -1,27 +1,5 @@
 var LATEST_SERVER = 5;
 // Concatenation for readability, mainly
-var SERVERS = {
-    "bcr1": {
-        "title": "BCR-MC 1 — 1.14/1.15: Village & Pillage / Buzzy Bees",
-        "dates": "Dec. 2019"
-    },
-    "bcr2": {
-        "title": "BCR-MC 2 — 1.15: Buzzy Bees",
-        "dates": "Apr. 2020"
-    },
-    "bcr3": {
-        "title": "BCR-MC 3 — 1.18: Caves & Cliffs",
-        "dates": "Dec. 1st, 2021 — Jan. 29th, 2022"
-    },
-    "bcr4": {
-        "title": "BCR-MC 4 — 1.19: The Wild Update",
-        "dates": "Dec. 1st, 2022 — Jan. 31st, 2023"
-    },
-    "bcr5": {
-        "title": "BCR-MC 5 — 1.20: Trails & Tales",
-        "dates": "Dec. 1st, 2023 — Jan. 31st, 2024"
-    }
-};
 var FIGURE_TEMPLATE = "<figure style=\"background-image: url('jpg/%IMAGE%.jpg');\">" +
     "<figcaption>%TITLE%<a href=\"png/%IMAGE%.png\">[PNG]</a>" +
     "<br><sup>(from %AUTHOR%)</sup></figcaption></figure>";
@@ -177,6 +155,9 @@ var PHOTO_TITLES = {
         "vi-menorah": "Menorah at Sunset"
     }
 };
+function extract_number(input_string) {
+    return Number(input_string.match(/\d+/)[0]);
+}
 function create_figure(image_name, server_season) {
     var figure_string = FIGURE_TEMPLATE
         .replace('%IMAGE%', image_name)
@@ -185,26 +166,46 @@ function create_figure(image_name, server_season) {
     return figure_string;
 }
 function add_gallery_nav_arrows() {
-    var gallery_title = document.querySelector('div#gallery-title');
-    console.log(gallery_title);
-    console.log(gallery_title.getAttribute('name'));
-    console.log(gallery_title.getAttribute('name').match(/\d+/));
-    var current_page_number = Number(gallery_title.getAttribute('name').match(/\d+/)[0]);
-    var left_arrow = document.createElement('a');
-    left_arrow.classList.add('bttn', 'arrow');
-    left_arrow.href = "/bcrmc/bcr".concat(current_page_number - 1, "/gallery");
-    left_arrow.text = '<';
-    var right_arrow = document.createElement('a');
-    right_arrow.classList.add('bttn', 'arrow');
-    right_arrow.href = "/bcrmc/bcr".concat(current_page_number + 1, "/gallery");
-    right_arrow.text = '>';
-    gallery_title.insertBefore(left_arrow, gallery_title.querySelector('h2'));
-    if (current_page_number == 1) {
-        left_arrow.classList.add('hide');
-    }
-    gallery_title.appendChild(right_arrow);
-    if (current_page_number == LATEST_SERVER) {
-        right_arrow.classList.add('hide');
-    }
+    var gallery_titles = document.querySelectorAll('div.gallery-title');
+    gallery_titles.forEach(function (title) {
+        var current_page_name = title.getAttribute('name');
+        var current_page_number = extract_number(current_page_name);
+        var left_arrow = document.createElement('button');
+        left_arrow.classList.add('bttn', 'arrow');
+        left_arrow.addEventListener('click', function () { switch_gallery("bcr".concat(current_page_number - 1)); });
+        left_arrow.innerHTML = '&lt;';
+        var right_arrow = document.createElement('button');
+        right_arrow.classList.add('bttn', 'arrow');
+        right_arrow.addEventListener('click', function () { switch_gallery("bcr".concat(current_page_number + 1)); });
+        right_arrow.innerHTML = '&gt;';
+        title.insertBefore(left_arrow, title.querySelector('h2'));
+        if (current_page_number == 1) {
+            left_arrow.classList.add('hide');
+        }
+        title.appendChild(right_arrow);
+        if (current_page_number == LATEST_SERVER) {
+            right_arrow.classList.add('hide');
+        }
+    });
 }
+// TODO: switch_gallery()
+function switch_gallery(season) {
+    // Swap page theme
+    var body = document.querySelector('body');
+    body.classList.remove(body.classList.toString());
+    body.classList.add(season);
+    // Change out title, maps, and files
+    ['div.gallery-title', 'div.gallery-maps', 'div.gallery-files'].forEach(function (selector) {
+        console.log(selector);
+        var divs = document.querySelectorAll(selector);
+        console.log(divs);
+        divs.forEach(function (div) {
+            console.log(div);
+            div.classList.add('off');
+        });
+    });
+    document.querySelectorAll("div[name=\"".concat(season, "\"]")).forEach(function (div) { div.classList.remove('off'); });
+}
+// Main
 add_gallery_nav_arrows();
+switch_gallery("bcr".concat(LATEST_SERVER));

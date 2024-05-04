@@ -1,42 +1,6 @@
 const LATEST_SERVER: number = 5;
 
 // Concatenation for readability, mainly
-class ServerInfo {
-    title: string;
-    dates: string;
-    done: boolean;
-    world_link: string;
-    map_folder_link: string;
-}
-
-const SERVERS: { [key: string]: object } = {
-    "bcr1": {
-        "title": "BCR-MC 1 — 1.14/1.15: Village & Pillage / Buzzy Bees",
-        "dates": "Dec. 2019",
-        "done": true
-    },
-    "bcr2": {
-        "title": "BCR-MC 2 — 1.15: Buzzy Bees",
-        "dates": "Apr. 2020",
-        "done": true
-    },
-    "bcr3": {
-        "title": "BCR-MC 3 — 1.18: Caves & Cliffs",
-        "dates": "Dec. 1st, 2021 — Jan. 29th, 2022",
-        "done": true
-    },
-    "bcr4": {
-        "title": "BCR-MC 4 — 1.19: The Wild Update",
-        "dates": "Dec. 1st, 2022 — Jan. 31st, 2023",
-        "done": true
-    },
-    "bcr5": {
-        "title": "BCR-MC 5 — 1.20: Trails & Tales",
-        "dates": "Dec. 1st, 2023 — Jan. 31st, 2024",
-        "done": true
-    }
-}
-
 const FIGURE_TEMPLATE: string = `<figure style="background-image: url('jpg/%IMAGE%.jpg');">`+
     `<figcaption>%TITLE%<a href="png/%IMAGE%.png">[PNG]</a>`+
     `<br><sup>(from %AUTHOR%)</sup></figcaption></figure>`
@@ -195,6 +159,10 @@ const PHOTO_TITLES: { [key: string]: object } = {
     }
 }
 
+function extract_number(input_string: string): number {
+    return Number(input_string.match(/\d+/)[0])
+}
+
 function create_figure(image_name: string, server_season: number): string {
     let figure_string: string = FIGURE_TEMPLATE
         .replace('%IMAGE%', image_name)
@@ -204,31 +172,53 @@ function create_figure(image_name: string, server_season: number): string {
 }
 
 function add_gallery_nav_arrows(): void {
-    let gallery_title: HTMLDivElement = document.querySelector('div#gallery-title');
-    console.log(gallery_title);
-    console.log(gallery_title.getAttribute('name'));
-    console.log(gallery_title.getAttribute('name').match(/\d+/));
-    let current_page_number: number = Number(gallery_title.getAttribute('name').match(/\d+/)[0])
+    let gallery_titles: NodeListOf<HTMLDivElement> = document.querySelectorAll('div.gallery-title');
+    gallery_titles.forEach(title => {
+        let current_page_name: string = title.getAttribute('name');
+        let current_page_number: number = extract_number(current_page_name);
 
-    let left_arrow: HTMLAnchorElement = document.createElement('a');
-    left_arrow.classList.add('bttn', 'arrow');
-    left_arrow.href = `/bcrmc/bcr${current_page_number - 1}/gallery`;
-    left_arrow.text = '<';
+        let left_arrow: HTMLButtonElement = document.createElement('button');
+        left_arrow.classList.add('bttn', 'arrow');
+        left_arrow.addEventListener('click', () => { switch_gallery(`bcr${current_page_number - 1}`); })
+        left_arrow.innerHTML = '&lt;';
 
-    let right_arrow: HTMLAnchorElement = document.createElement('a');
-    right_arrow.classList.add('bttn', 'arrow');
-    right_arrow.href = `/bcrmc/bcr${current_page_number + 1}/gallery`;
-    right_arrow.text = '>';
-    
-    gallery_title.insertBefore(left_arrow, gallery_title.querySelector('h2'));
-    if (current_page_number == 1) {
-        left_arrow.classList.add('hide');
-    }
-    
-    gallery_title.appendChild(right_arrow);
-    if (current_page_number == LATEST_SERVER) {
-        right_arrow.classList.add('hide');
-    }
+        let right_arrow: HTMLButtonElement = document.createElement('button');
+        right_arrow.classList.add('bttn', 'arrow');
+        right_arrow.addEventListener('click', () => { switch_gallery(`bcr${current_page_number + 1}`); })
+        right_arrow.innerHTML = '&gt;';
+        
+        title.insertBefore(left_arrow, title.querySelector('h2'));
+        if (current_page_number == 1) {
+            left_arrow.classList.add('hide');
+        }
+        
+        title.appendChild(right_arrow);
+        if (current_page_number == LATEST_SERVER) {
+            right_arrow.classList.add('hide');
+        }
+    });
 }
 
+// TODO: switch_gallery()
+function switch_gallery(season: string): void {
+    // Swap page theme
+    let body: HTMLBodyElement = document.querySelector('body');
+    body.classList.remove(body.classList.toString());
+    body.classList.add(season);
+
+    // Change out title, maps, and files
+    ['div.gallery-title', 'div.gallery-maps', 'div.gallery-files'].forEach(selector => {
+        console.log(selector);
+        let divs: NodeListOf<HTMLDivElement> = document.querySelectorAll(selector);
+        console.log(divs);
+        divs.forEach(div => {
+            console.log(div);
+            div.classList.add('off');
+        });
+    });
+    document.querySelectorAll(`div[name="${season}"]`).forEach(div => { div.classList.remove('off'); });
+}
+
+// Main
 add_gallery_nav_arrows();
+switch_gallery(`bcr${LATEST_SERVER}`);

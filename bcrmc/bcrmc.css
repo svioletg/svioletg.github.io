@@ -92,6 +92,14 @@ code {
   row-gap: 1em;
 }
 
+div.off {
+  display: none;
+}
+
+.flexnav.gallery-files {
+  width: 60%;
+}
+
 a {
   color: cyan;
 }
