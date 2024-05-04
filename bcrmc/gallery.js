@@ -49,17 +49,13 @@ import { extract_number, json } from './utils.js';
             return figure_string;
         }
         function build_gallery(server_season) {
-            console.log('starting a build');
             var gallery_container = document.querySelector('div#gallery-collection');
             var new_gallery = document.createElement('div');
             new_gallery.classList.add('gallery', 'smaller');
             new_gallery.setAttribute('name', server_season);
             // Run through images
-            console.log(typeof (PHOTO_TITLES[server_season]), PHOTO_TITLES[server_season]);
             for (var _i = 0, _a = Object.entries(PHOTO_TITLES[server_season]); _i < _a.length; _i++) {
                 var _b = _a[_i], key = _b[0], value = _b[1];
-                console.log(key, value);
-                console.log(new_gallery.innerHTML);
                 var new_figure = create_figure(key, value, server_season);
                 new_gallery.innerHTML += new_figure;
             }
@@ -89,14 +85,34 @@ import { extract_number, json } from './utils.js';
                 }
             });
         }
-        function switch_gallery(season) {
+        function update_heading_anchors(server_season) {
+            console.log(server_season);
+            var heading_anchors = document.querySelectorAll('a.heading-link');
+            heading_anchors.forEach(function (a) {
+                console.log(a.href);
+                if (a.href.includes('?s=bcr')) {
+                    console.log('replacing', a.href);
+                    console.log("?s=".concat(server_season));
+                    a.href = a.href.replace(/\?s=bcr\d+/, "?s=".concat(server_season));
+                    console.log(a.href);
+                }
+                else {
+                    var root = a.href.split('#')[0];
+                    var stem = a.href.split('#')[0];
+                    console.log(root, stem);
+                    a.href = root + "?s=".concat(server_season, "#") + stem;
+                    console.log('new', a.href);
+                }
+            });
+        }
+        function switch_gallery(server_season) {
             // Swap page theme
             var body = document.querySelector('body');
             body.classList.remove(body.classList.toString());
-            body.classList.add(season);
+            body.classList.add(server_season);
             // Make the gallery, if it doesn't exist
-            if (!document.querySelector("div.gallery[name=\"".concat(season, "\"]"))) {
-                build_gallery(season);
+            if (!document.querySelector("div.gallery[name=\"".concat(server_season, "\"]"))) {
+                build_gallery(server_season);
             }
             // Change out stuff depending on the relevant server season
             ['div.gallery-title', 'div.gallery-maps', 'div.gallery-files', 'div.gallery'].forEach(function (selector) {
@@ -105,7 +121,8 @@ import { extract_number, json } from './utils.js';
                     div.classList.add('off');
                 });
             });
-            document.querySelectorAll("div[name=\"".concat(season, "\"]")).forEach(function (div) { div.classList.remove('off'); });
+            document.querySelectorAll("div[name=\"".concat(server_season, "\"]")).forEach(function (div) { div.classList.remove('off'); });
+            update_heading_anchors(server_season);
         }
         var LATEST_SERVER, FIGURE_TEMPLATE, PHOTO_AUTHORS, PHOTO_TITLES, params, initial_season;
         return __generator(this, function (_a) {
@@ -124,7 +141,7 @@ import { extract_number, json } from './utils.js';
                 case 1:
                     PHOTO_TITLES = _a.sent();
                     params = new URLSearchParams(window.location.search);
-                    initial_season = params.get('season') || params.get('s') || "bcr".concat(LATEST_SERVER);
+                    initial_season = params.get('s') || "bcr".concat(LATEST_SERVER);
                     add_gallery_nav_arrows();
                     switch_gallery(initial_season);
                     return [2 /*return*/];

@@ -31,17 +31,13 @@ function create_figure(image_filename: string, image_title: string, server_seaso
 }
 
 function build_gallery(server_season: string): void {
-    console.log('starting a build')
     let gallery_container: HTMLDivElement = document.querySelector('div#gallery-collection');
     let new_gallery: HTMLDivElement = document.createElement('div');
     new_gallery.classList.add('gallery', 'smaller');
     new_gallery.setAttribute('name', server_season);
 
     // Run through images
-    console.log(typeof(PHOTO_TITLES[server_season]), PHOTO_TITLES[server_season]);
     for (const [key, value] of Object.entries(PHOTO_TITLES[server_season])) {
-        console.log(key, value);
-        console.log(new_gallery.innerHTML);
         let new_figure: string = create_figure(key, value, server_season);
         new_gallery.innerHTML += new_figure;
     }
@@ -78,15 +74,35 @@ function add_gallery_nav_arrows(): void {
     });
 }
 
-function switch_gallery(season: string): void {
+function update_heading_anchors(server_season: string): void {
+    console.log(server_season);
+    let heading_anchors: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a.heading-link');
+    heading_anchors.forEach(a => {
+        console.log(a.href);
+        if (a.href.includes('?s=bcr')) {
+            console.log('replacing', a.href);
+            console.log(`?s=${server_season}`);
+            a.href = a.href.replace(/\?s=bcr\d+/, `?s=${server_season}`);
+            console.log(a.href);
+        } else {
+            let root: string = a.href.split('#')[0]
+            let stem: string = a.href.split('#')[0]
+            console.log(root, stem);
+            a.href = root + `?s=${server_season}#` + stem
+            console.log('new', a.href)
+        }
+    });
+}
+
+function switch_gallery(server_season: string): void {
     // Swap page theme
     let body: HTMLBodyElement = document.querySelector('body');
     body.classList.remove(body.classList.toString());
-    body.classList.add(season);
+    body.classList.add(server_season);
 
     // Make the gallery, if it doesn't exist
-    if (!document.querySelector(`div.gallery[name="${season}"]`)) { 
-        build_gallery(season);
+    if (!document.querySelector(`div.gallery[name="${server_season}"]`)) { 
+        build_gallery(server_season);
     }
 
     // Change out stuff depending on the relevant server season
@@ -96,12 +112,14 @@ function switch_gallery(season: string): void {
             div.classList.add('off');
         });
     });
-    document.querySelectorAll(`div[name="${season}"]`).forEach(div => { div.classList.remove('off'); });
+    document.querySelectorAll(`div[name="${server_season}"]`).forEach(div => { div.classList.remove('off'); });
+
+    update_heading_anchors(server_season);
 }
 
 // Main
 let params = new URLSearchParams(window.location.search);
-let initial_season: string = params.get('season') || params.get('s') || `bcr${LATEST_SERVER}`;
+let initial_season: string = params.get('s') || `bcr${LATEST_SERVER}`;
 
 add_gallery_nav_arrows();
 switch_gallery(initial_season);
