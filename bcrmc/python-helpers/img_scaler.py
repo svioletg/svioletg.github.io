@@ -15,4 +15,4 @@ while True:
         print('Not an integer.')
 
 image = Path(sys.argv[1])
-os.system(f'ffmpeg -i {image} -s {scale}x{scale} -sws_flags neighbor {image.parent.joinpath(image.stem)}_{scale}x{scale}{image.suffix}')
+os.system(f'ffmpeg -i {image} -s {scale}x{scale} -sws_flags neighbor {Path(os.getcwd(), image.stem)}_{scale}x{scale}{image.suffix}')

@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
+
+body {
+    margin: 0;
+    font-size: 1em;
+    font-family: 'Vollkorn', serif;
+    background-color: navy;
+}
+
+main {
+    color: black;
+    background-color: #eee;
+    padding: 5em;
+    width: 50%;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 3em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.25em;
+}
+
+h3 {
+    font-size: 1.75em;
+}
+
+button.sidenote, div.sidenote {
+    text-align: left;
+    font-size: 1em;
+    font-style: italic;
+    font-family: 'Vollkorn', serif;
+    padding: 1em;
+}
+
+button.sidenote {
+    color: white;
+    font-size: 1.5em;
+    border: none;
+    outline: none;
+    width: 100%;
+    background-color: #00aaaa;
+}
+
+div.sidenote {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #aaffff;
+    border-bottom: 5px solid #00aaaa;
+    transition: max-height 0.2s ease-out;
+}
+
+div.tooltip {
+    padding: 10px;
+    position: fixed;
+    display: block;
+    border: 1px solid black;
+    background-color: white;
+}
+
+p {
+    font-size: 1.25em;
+}
+
+span.kw {
+    color: blue;
+    font-weight: bold;
+}
+
+span.term {
+    text-decoration: underline dashed;
+}
+
+kbd {
+    font-size: 0.75em;
+    font-family: 'Consolas', monospace;
+    padding: 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: white;
+    background: linear-gradient(#555, #000);
+    border: 1px solid black;
+    box-shadow: 0px 2px 0px black;
+    border-radius: 5px;
+}
+
+code {
+    font-size: 0.75em;
+    font-family: 'Consolas', monospace;
+    padding: 5px;
+    background-color: black;
+    color: #ddd;
+    border-radius: 5px;
+}

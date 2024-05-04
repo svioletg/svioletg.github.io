@@ -1,0 +1,117 @@
+<html>
+<head>
+    <title>Python</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="prism.css">
+</head>
+<body>
+    <main>
+        <h1 style="margin-bottom: 0;">Python: An Unprofessional Introduction</h1>
+        <h3 style="text-align: center; font-style: italic; margin-top: 0;">Seth "Violet" Gibbs</h3>
+        <h2 id="preamble">Preamble Or Something</h2>
+        <p>
+            I want to preface all of this by saying up-front, I am <i>not</i> a Python expert,
+            and I don't write it in any sort of professional capacity — in other words, it's never been my job to write Python code,
+            I've only learned and used it purely as a hobby and because programming fascinates me. Over the years I've written lots of
+            miscellaneous scripts to automate or streamline certain tasks (which Python <i>excels</i> at), but as of writing the only "major"
+            project I have running is <a href="https://github.com/svioletg/viMusBot">this music bot for Discord</a>.
+            This isn't a perfect guide, and I'm certain it won't be comprehensive, but my primary goal here is to try and provide
+            a straightforward introduction to the language and some programming fundamentals along the way.
+        </p>
+        <p>
+            A lot of folks agree that
+            Python is a great starting language for those new to programming as a whole, and I completely agree — I tried to learn a
+            number of different languages as a kid, but Python is the only one that actually stuck, partially because it just ended
+            up being the most practically useful. That's for a number of reasons, and I'll try to get into them as we go along, but
+            all that is to say my aim is to both teach Python itself, and use it to introduce and explain some fundamental, core concepts
+            to programming as a whole — things present across almost all modern languages.
+            This page will serve as a general introduction to getting Python set up and ready for you to use, starting from scratch.
+        </p>
+        <p>
+            One last thing before we continue, throughout this guide will be "Sidenotes" from me, which will look like highlighted boxes
+            that can be opened or close by clicking on them. They contain <i>no</i> required information to follow this guide in general,
+            they're just extra explanations for any who may be interested in further details about the subject. You can also view them
+            as my excuse to go on tangents, which is inevitable when I start talking about this stuff. This paragraph itself could've
+            been a sidenote.
+        </p>
+
+        <h2 id="installing">Installing Python</h2>
+        <p>
+            Most programming languages can't be read and executed by your computer by default, in most cases you'll have to install some software
+            that can take the code you've written, and translate it into something your PC <i>can</i> read. Said software comes in different
+            forms depending on the language in question, but Python uses what's called an <span class="kw">interpereter</span>.
+            You can get the latest version of it from <a href="https://www.python.org/downloads">https://www.python.org/downloads</a>.
+            As a general note, as of writing this the latest major version is Python 3.12, future versions shouldn't outdate this guide too much,
+            but it could be something to keep in mind. I usually like keeping up with changes to new versions, so if I notice something that 
+            could outdate this guide, I'll try and update it when I can.
+        </p>
+        <p>
+            The yellow download button should automatically give you the installer you need for your operating system.
+            The instructions to follow will be for <b>Windows</b> users, as that's what I run 95% of the time. As far as the Windows installer is concerned, upon opening it you'll want to make sure to check the box next to
+            <b>"Add Python to PATH"</b>, or something similar. Frankly, I don't know why this isn't checked by default, but it's
+            required if you want to run Python anywhere on your system. Otherwise, almost nothing I explain beyond this is going to work.
+        </p>
+        <p>
+            Next, we'll verify that everything installed correctly. Almost every programming language, including Python, needs to be run from 
+            a <span class="kw">command-line</span> interface in order to work. On Windows, you typically have the Command Prompt and PowerShell,
+            I would suggest using the Command Prompt first. Searching for it in your start menu should bring it up, but alternatively
+            you can also press your Windows key and <kbd>R</kbd> at the same time, which will open a "Run" dialog, type "cmd" into the text box,
+            and then either click "OK" or hit <kbd>Enter</kbd>, which will also open the Command Prompt.
+        </p>
+
+        <h2 class="using-cli">Using the Command Prompt</h2>
+        <p>
+            If you're not familiar with the Command Prompt or using <abbr title="CLI: Command-line Interface">CLI</abbr>s in general,
+            I'll give a basic overview here. Here, you can use <span class="kw">commands</span> to perform a number of actions on your PC,
+            like moving in and out of folders, managing files, and running scripts and programs. Commands are entirely text-based — in their most
+            basic form, the first word you type is the command you want to run, and anything typed after it are called
+            <span class="kw">arguments</span>, which modify the behavior and output of the command. These are separated by spaces,
+            meaning most commands you'll find are either single words, or use underscores (<kbd>_</kbd>) or hyphens (<kbd>-</kbd>) 
+            to subtitute for actual spaces. An example of this <span class="kw term">syntax</span> would be <code>cd C:\Users\Violet</code>,
+            where <code>cd</code> is the command, and <code>C:\Users\Violet</code> is an argument — in this case, a file path that determines
+            what directory you want to move into. Something to note is that, navigating a modern system, you'll inevitably <i>need</i> to reference
+            paths or programs that contain spaces — in order to make sure the command prompt treats it as one single argument, just
+            put double-quotes <kbd>" "</kbd> around what you need to. For example, <code>cd "C:\Program Files"</code>.
+        </p>
+            <button class="sidenote collapsible">Sidenote: What are commands, really?</button>
+            <div class="sidenote collapsible">
+                <p>
+                    90% of the time, a "command" is actually just the name of a program somewhere on your PC. Those programs are EXE files,
+                    but when using the command prompt, EXEs can be run just by typing their name — no <code>.exe</code> required.
+                    When you type something into the command prompt and hit enter, assuming said file isn't already in the directory
+                    you're currently residing in, it will search through something called your <span class="kw">PATH</span> to locate
+                    a program with that name, a term you may remember from the Windows installer.
+                </p>
+                <p>
+                    The PATH is what's called a system enviornment variable — I won't spend a lot of time getting into what that part means,
+                    but as for the PATH itself, it's essentially a long list of <span class="kw">file paths</span> pointing to different 
+                    folders — the folders in this list are what your system will search through.
+                </p>
+                <p>
+                    That's how you're able to run certain commands or programs from the command prompt no matter what directory you're
+                    currently in, and when you start writing scripts for yourself you may even want to add your own directories to the PATH
+                    to have the same convenience. But for now, don't worry about it — the installer should have added all of the relevant
+                    Python directories to your PATH already. If it didn't, well, that's what the next section is about to determine.
+                </p>
+            </div>
+        <p>
+            Besides the Python-specific commands that will be discussed shortly (I promise), there's a few basic commands 
+            that will be useful to remember, as well as some basic terminology that I'll be using from here on out.
+
+
+
+            <h3>Common Commands (for Windows)</h3>
+            <ul>
+                <li><code>cd</code>
+            </ul>
+        </p>
+<pre><code class="language-python"># dedicated code block<br>
+def foo():
+    return 'bar'
+</code></pre>
+        <p>And now, some <code>inline_code</code>.</p>
+    </main>
+    <script src="prism.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
