@@ -40,12 +40,13 @@ import { extract_number, json } from './utils.js';
         function author_from_filename(filename) {
             return PHOTO_AUTHORS[filename.split('-')[0]];
         }
-        function create_figure(image_filename, image_title, server_season) {
+        function create_figure(image_filename, image_title, server_season, has_png) {
             var figure_string = FIGURE_TEMPLATE
                 .replace(/%IMAGE%/g, image_filename)
                 .replace(/%TITLE%/g, image_title)
                 .replace(/%SEASON%/g, server_season)
-                .replace(/%AUTHOR%/g, author_from_filename(image_filename));
+                .replace(/%AUTHOR%/g, author_from_filename(image_filename))
+                .replace(/%%HAS_PNG(.*)HAS_PNG%%/g, has_png ? '$1' : '');
             return figure_string;
         }
         function build_gallery(server_season) {
@@ -55,8 +56,8 @@ import { extract_number, json } from './utils.js';
             new_gallery.setAttribute('name', server_season);
             // Run through images
             for (var _i = 0, _a = Object.entries(PHOTO_TITLES[server_season]); _i < _a.length; _i++) {
-                var _b = _a[_i], key = _b[0], value = _b[1];
-                var new_figure = create_figure(key, value, server_season);
+                var _b = _a[_i], filename = _b[0], attrs = _b[1];
+                var new_figure = create_figure(filename, attrs.title, server_season, attrs.has_png);
                 new_gallery.innerHTML += new_figure;
             }
             // Add it
@@ -130,7 +131,7 @@ import { extract_number, json } from './utils.js';
                 case 0:
                     LATEST_SERVER = 5;
                     FIGURE_TEMPLATE = "<figure style=\"background-image: url('/bcrmc/%SEASON%/jpg/%IMAGE%.jpg');\">" +
-                        "<figcaption>%TITLE%<a href=\"/bcrmc/%SEASON%/png/%IMAGE%.png\">[PNG]</a>" +
+                        "<figcaption>%TITLE% %%HAS_PNG<a href=\"/bcrmc/%SEASON%/png/%IMAGE%.png\">[PNG]</a>HAS_PNG%%" +
                         "<br><sup>(from %AUTHOR%)</sup></figcaption></figure>";
                     PHOTO_AUTHORS = {
                         "desu": "Desu",
