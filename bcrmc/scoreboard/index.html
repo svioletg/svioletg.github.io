@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8"/>
 	<title>BCR-MC 5 — Scoreboard Viewer</title>
 	<link rel="stylesheet" type="text/css" href="/bcrmc/bcrmc.css">
 </head>
@@ -7,9 +9,9 @@
 	<main><article>
 		<nav class="flexnav" style="padding-top: 1em; padding-bottom: 1em; width: 60%;">
 			<a class="bttn" href="/bcrmc/index.html">Home</a>
-			<a class="bttn" href="./history.html">Past Servers</a>
+			<a class="bttn" href="/bcrmc/history.html">Past Servers</a>
 			<a class="bttn" href="http://play.bcr-mc.xyz:1234/">Live Server Map</a>
-			<a class="bttn" href="./help.html">Misc. Tips, Info, etc.</a>
+			<a class="bttn" href="/bcrmc/help.html">Misc. Tips, Info, etc.</a>
 		</nav>
 		<hr>
 
@@ -21,36 +23,37 @@
 		</h1>
 		<hr>
 
-		<h3>Score display type:</h3>
-		<button class="tab bttn">Player</button>
-		<button class="tab bttn">Objective</button>
+		<div class="flexnav" style="width: 60%;" id="search-type-selector">
+			<button class="bttn tab" id="search-type-stats">Statistics</button>
+			<button class="bttn tab" id="search-type-other">Other Objectives</button>
+		</div>
+		<br>
+		<div class="flexnav off" style="width: 60%;" id="stats-type-selector">
+			<hr>
+			<button class="bttn tab" id="stats-type-blocks-etc">Blocks, Items, Mobs...</button>
+			<button class="bttn tab" id="stats-type-other-stats">Other...</button>
+		</div>
+		<br>
+		<div class="flexnav off" style="width: 66%;" id="stats-search-blocks-etc">
+			<input type="text" name="player">
+			<select class="bttn" id="stats-categories">
+			</select>
+			<input type="text" name="object">
+		</div>
+		<div class="flexnav off" style="width: 50%;" id="stats-search-other">
+			<input type="text" name="player" autocomplete="Player Username">
+			<select class="bttn" id="stats-other">
+			</select>
+		</div>
+		<br>
+		<button class="bttn" id="search-button">Search</button>
 
-		<div class="tab">
-			PLAYER CONTENTS
+		<div id="search-results">
 		</div>
-		<div class="tab">
-			OBJECTIVE CONTENTS
-		</div>
-<!-- 		
-		<select>
-			<option value="!SHOWALL">All players</option>
-			<option value="Andre759">Andre759</option>
-			<option value="TheDesuComplex">TheDesuComplex</option>
-			<option value="svioletg">svioletg</option>
-			<option value="splashmob">splashmob</option>
-			<option value="leggory">leggory</option>
-			<option value="Shotoria_">Shotoria_</option>
-			<option value="The_Doctor_EV">The_Doctor_EV</option>
-			<option value="SailorJaden">SailorJaden</option>
-			<option value=".GorgonX32">.GorgonX32</option>
-			<option value="ThatLeona">ThatLeona</option>
-			<option value="ellliebutton">ellliebutton</option>
-			<option value="WaveringLibi">WaveringLibi</option>
-		</select> -->
 	</article></main>
 </body>
 <footer>
 	<script src="/bcrmc/header.js"></script>
-	<script src="/bcrmc/scoreboard/scoreboard.js"></script>
+	<script type="module" src="/bcrmc/scoreboard.js"></script>
 </footer>
 </html>

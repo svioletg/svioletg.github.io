@@ -50,6 +50,12 @@ export function json(path) {
         });
     });
 }
+export function find(query) {
+    return document.querySelector(query);
+}
+export function find_all(query) {
+    return document.querySelectorAll(query);
+}
 export function extract_number(input_string) {
     return Number(input_string.match(/\d+/)[0]);
 }

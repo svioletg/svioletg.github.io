@@ -56,6 +56,7 @@ body.bcr5 {
 main {
   background-color: rgba(0, 0, 0, 0.5);
   width: 75%;
+  min-height: 100vh;
   margin: 0 auto;
 }
 
@@ -136,6 +137,11 @@ a {
   pointer-events: none;
 }
 
+.bttn.tab.active {
+  border-color: white;
+  filter: brightness(0.5);
+}
+
 nav.flexnav .bttn {
   justify-content: center;
 }
@@ -145,13 +151,37 @@ nav.flexnav .bttn {
 }
 
 a.mega {
-  background-image: url("i/bttnbig.png");
+  background-image: url("/bcrmc/i/bttnbig.png");
   height: 72px;
 }
 
 a.mega span {
   position: relative;
   top: 3px;
+}
+
+input {
+  font-size: 1.5em;
+  font-family: "MinecraftRegular";
+  height: 1.75em;
+}
+
+select.bttn {
+  font-family: "MinecraftRegular", sans-serif;
+  background-image: none;
+  background-color: rgba(0, 0, 0, 0.25);
+  width: 10em;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+select.bttn > option {
+  font-size: 0.75em;
+  font-family: "MinecraftRegular", sans-serif;
+  color: white;
+  background-color: black;
+  text-shadow: none;
+  border: none;
 }
 
 .hl {

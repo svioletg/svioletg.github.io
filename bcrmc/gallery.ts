@@ -15,7 +15,7 @@ const PHOTO_AUTHORS: { [key: string]: string } = {
     "vi": "Violet"
 }
 
-let PHOTO_TITLES: { [key: string]: object } = await json('/bcrmc/photo_titles.json');
+const PHOTO_TITLES: { [key: string]: object } = await json('/bcrmc/photo_titles.json');
 
 function author_from_filename(filename: string): string {
     return PHOTO_AUTHORS[filename.split('-')[0]];
