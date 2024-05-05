@@ -6,7 +6,7 @@ const LATEST_SERVER: number = 5;
 
 // Concatenation for readability, mainly
 const FIGURE_TEMPLATE: string = `<figure style="background-image: url('/bcrmc/%SEASON%/jpg/%IMAGE%.jpg');">`+
-    `<figcaption>%TITLE%<a href="/bcrmc/%SEASON%/png/%IMAGE%.png">[PNG]</a>`+
+    `<figcaption>%TITLE% %%HAS_PNG<a href="/bcrmc/%SEASON%/png/%IMAGE%.png">[PNG]</a>HAS_PNG%%`+
     `<br><sup>(from %AUTHOR%)</sup></figcaption></figure>`
 
 const PHOTO_AUTHORS: { [key: string]: string } = {
@@ -15,18 +15,19 @@ const PHOTO_AUTHORS: { [key: string]: string } = {
     "vi": "Violet"
 }
 
-let PHOTO_TITLES: { [key: string]: { [key: string]: string } } = await json('/bcrmc/photo_titles.json');
+let PHOTO_TITLES: { [key: string]: object } = await json('/bcrmc/photo_titles.json');
 
 function author_from_filename(filename: string): string {
     return PHOTO_AUTHORS[filename.split('-')[0]];
 }
 
-function create_figure(image_filename: string, image_title: string, server_season: string): string {
+function create_figure(image_filename: string, image_title: string, server_season: string, has_png: boolean): string {
     let figure_string: string = FIGURE_TEMPLATE
         .replace(/%IMAGE%/g, image_filename)
         .replace(/%TITLE%/g, image_title)
         .replace(/%SEASON%/g, server_season)
-        .replace(/%AUTHOR%/g, author_from_filename(image_filename));
+        .replace(/%AUTHOR%/g, author_from_filename(image_filename))
+        .replace(/%%HAS_PNG(.*)HAS_PNG%%/g, has_png ? '$1' : '');
     return figure_string;
 }
 
@@ -37,8 +38,8 @@ function build_gallery(server_season: string): void {
     new_gallery.setAttribute('name', server_season);
 
     // Run through images
-    for (const [key, value] of Object.entries(PHOTO_TITLES[server_season])) {
-        let new_figure: string = create_figure(key, value, server_season);
+    for (const [filename, attrs] of Object.entries(PHOTO_TITLES[server_season])) {
+        let new_figure: string = create_figure(filename, attrs.title, server_season, attrs.has_png);
         new_gallery.innerHTML += new_figure;
     }
 
