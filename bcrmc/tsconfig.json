@@ -8,5 +8,5 @@
     "include": [
       "*.json",
       "*.ts"
-    ]
+, "scoreboard/scoreboard.ts"    ]
 }

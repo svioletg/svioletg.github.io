@@ -55,8 +55,11 @@ main
 }
 
 hr { width: 75%; }
+
 p { width: 75%; margin: 0 auto; font-size: 1.5em; }
+
 b { font-weight: bold; }
+
 code 
 {
     font-family: "Courier New";
@@ -135,7 +138,14 @@ a.mega span { position: relative; top: 3px; }
 input {
     font-size: 1.5em;
     font-family: 'MinecraftRegular';
-    height: 1.75em;
+    padding: 0.5em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+input.invalid {
+    border: 2px solid #ff7777;
+    color: #ff7777;
 }
 
 select.bttn {

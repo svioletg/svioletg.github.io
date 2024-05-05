@@ -50,12 +50,21 @@ export function json(path) {
         });
     });
 }
-export function find(query) {
+export function $(query) {
     return document.querySelector(query);
 }
-export function find_all(query) {
+export function $all(query) {
     return document.querySelectorAll(query);
 }
 export function extract_number(input_string) {
     return Number(input_string.match(/\d+/)[0]);
+}
+export function to_camel(input_string) {
+    var words = input_string.toLowerCase().split(' ');
+    var camel_array = [];
+    words.forEach(function (word) {
+        camel_array.push(word[0].toUpperCase() + word.slice(1));
+    });
+    var camel_string = camel_array.join('');
+    return camel_string[0].toLowerCase() + camel_string.slice(1);
 }

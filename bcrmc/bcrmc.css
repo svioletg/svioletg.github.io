@@ -163,7 +163,14 @@ a.mega span {
 input {
   font-size: 1.5em;
   font-family: "MinecraftRegular";
-  height: 1.75em;
+  padding: 0.5em;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+input.invalid {
+  border: 2px solid #ff7777;
+  color: #ff7777;
 }
 
 select.bttn {
