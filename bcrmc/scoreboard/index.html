@@ -28,24 +28,27 @@
 			<button class="bttn tab" id="search-type-other">Other Objectives</button>
 		</div>
 		<br>
+		
 		<div class="flexnav off" style="width: 60%;" id="stats-type-selector">
 			<hr>
 			<button class="bttn tab" id="stats-type-blocks-etc">Blocks, Items, Mobs...</button>
 			<button class="bttn tab" id="stats-type-other-stats">Other...</button>
 		</div>
 		<br>
-		<div class="flexnav off" style="width: 66%;" id="stats-search-blocks-etc">
-			<input type="text" name="player">
-			<select class="bttn" id="stats-categories">
-			</select>
-			<input type="text" name="object">
-		</div>
-		<div class="flexnav off" style="width: 50%;" id="stats-search-other">
-			<input type="text" name="player">
-			<select class="bttn" id="stats-other">
-			</select>
-		</div>
+		
+			<div class="flexnav off" style="width: 66%;" id="stats-search-blocks-etc">
+				<input type="text" name="player">
+				<select class="bttn" id="stats-categories"></select>
+				<div><input type="text" name="object">
+				<div id="stats-search-suggestions" class="search-suggestions"></div></div>
+			</div>
+			
+			<div class="flexnav off" style="width: 50%;" id="stats-search-other">
+				<input type="text" name="player">
+				<select class="bttn" id="stats-other"></select>
+			</div>
 		<br>
+		<!--  -->
 		<button class="bttn" id="search-button">Search</button>
 
 		<div id="search-results">

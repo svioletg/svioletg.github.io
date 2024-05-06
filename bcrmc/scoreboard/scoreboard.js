@@ -34,7 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { $, $all, json, to_camel } from '../utils.js';
+import { $, $all, json } from '../utils.js';
 (function () {
     return __awaiter(this, void 0, void 0, function () {
         function get_valid_stats_items() {
@@ -58,16 +58,38 @@ import { $, $all, json, to_camel } from '../utils.js';
         function find_close_stat_items(search) {
             return Object.keys(STATS_ITEMS).filter(function (item) {
                 if (item) {
-                    return item.startsWith(to_camel(search));
+                    return item.toLowerCase().includes(search.replace(' ', '').toLowerCase());
                 }
             });
         }
         function find_closest_stat_item(search) {
             return Object.keys(STATS_ITEMS).find(function (item) {
                 if (item) {
-                    return item.startsWith(to_camel(search));
+                    return item.toLowerCase().includes(search.replace(' ', '').toLowerCase());
                 }
             });
+        }
+        function refresh_search_suggestions(search_string) {
+            if (search_string == _last_search_value) {
+                return;
+            }
+            if (search_string.length > 2) {
+                var suggestions = find_close_stat_items(search_string);
+                $('div#stats-search-suggestions').innerHTML = suggestions.map(function (entry) { return "<button class=\"search-suggestion-entry\">".concat(STATS_ITEMS[entry], "</button>"); }).join('');
+                $('div#stats-search-suggestions').classList.remove('off');
+            }
+            else {
+                $('div#stats-search-suggestions').innerHTML = '';
+                $('div#stats-search-suggestions').classList.add('off');
+            }
+            $('div#stats-search-suggestions').style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
+            $all('button.search-suggestion-entry').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var search_input = $('input[name="object"]');
+                    search_input.value = button.textContent;
+                });
+            });
+            _last_search_value = search_string;
         }
         function build_custom_stats_selection() {
             var custom_objectives = [];
@@ -85,7 +107,7 @@ import { $, $all, json, to_camel } from '../utils.js';
                 $('select#stats-other').innerHTML += "<option value=\"".concat(objective[1], "\">").concat(objective[0], "</option>\n");
             });
         }
-        var BOARD_DATA, OBJ_PREFIXES, OBJ_TYPE_REGEX, STATS_ITEMS, _i, _a, _b, prefix, name_3;
+        var BOARD_DATA, OBJ_PREFIXES, OBJ_TYPE_REGEX, STATS_ITEMS, _last_search_value, TWO_SECOND_INTERVAL, _i, _a, _b, prefix, name_3;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0: return [4 /*yield*/, json('scoreboard-json/scoreboard-bcr5-feb01.json')];
@@ -94,7 +116,7 @@ import { $, $all, json, to_camel } from '../utils.js';
                     OBJ_PREFIXES = {
                         "b.": "Broken",
                         "c.": "Crafted",
-                        "d.": "Killed By",
+                        "d.": "Killed by",
                         "k.": "Killed",
                         "u.": "Used",
                         "m.": "Mined",
@@ -103,13 +125,40 @@ import { $, $all, json, to_camel } from '../utils.js';
                     };
                     OBJ_TYPE_REGEX = new RegExp("".concat(Object.values(OBJ_PREFIXES).join('|')));
                     STATS_ITEMS = get_valid_stats_items();
-                    console.log(STATS_ITEMS);
-                    $('button#search-button').addEventListener('click', function () {
-                        var stat_category = $('select#stats-categories').value;
-                        console.log(stat_category);
+                    _last_search_value = '';
+                    TWO_SECOND_INTERVAL = setInterval(function () {
+                        refresh_search_suggestions($('input[name="object"]').value);
+                        // Validate input
                         var search_input = $('input[name="object"]');
+                        var stat_category = $('select#stats-categories').value;
+                        var objective_name = '';
+                        for (var _i = 0, _a = Object.entries(STATS_ITEMS); _i < _a.length; _i++) {
+                            var _b = _a[_i], name_4 = _b[0], title = _b[1];
+                            if (title == search_input.value) {
+                                objective_name = name_4;
+                            }
+                        }
+                        var requested_objective = "".concat(stat_category).concat(objective_name);
+                        if (!BOARD_DATA.Objectives[requested_objective]) {
+                            search_input.classList.add('invalid');
+                        }
+                        else {
+                            search_input.classList.remove('invalid');
+                        }
+                    }, 2000);
+                    $('input[name="object"]').addEventListener('focus', function () {
+                        $('div#stats-search-suggestions').classList.remove('off');
+                    });
+                    $('input[name="object"]').addEventListener('blur', function () {
+                        setTimeout(function () {
+                            $('div#stats-search-suggestions').classList.add('off');
+                        }, 100);
+                    });
+                    $('button#search-button').addEventListener('click', function () {
+                        // TODO: will need redoing!
+                        var search_input = $('input[name="object"]');
+                        var stat_category = $('select#stats-categories').value;
                         var search_string = search_input.value;
-                        console.log(find_close_stat_items(search_string));
                         var closest_stat_item = find_closest_stat_item(search_string);
                         if (closest_stat_item) {
                             var requested_objective = "".concat(stat_category).concat(closest_stat_item);
@@ -117,7 +166,6 @@ import { $, $all, json, to_camel } from '../utils.js';
                                 search_input.classList.add('invalid');
                                 return;
                             }
-                            ;
                             search_input.classList.remove('invalid');
                             search_input.setAttribute('stored_value', requested_objective);
                             search_input.value = STATS_ITEMS[closest_stat_item];

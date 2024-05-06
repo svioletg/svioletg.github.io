@@ -97,6 +97,31 @@ div.off {
   display: none;
 }
 
+div.search-suggestions {
+  position: absolute;
+  color: white;
+  max-height: 20em;
+  overflow: scroll;
+  border: 1px solid cyan;
+}
+
+button.search-suggestion-entry {
+  color: white;
+  font-family: "MinecraftRegular";
+  font-size: 1.5em;
+  background-color: navy;
+  padding: 0.5em;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid blue;
+  transition: 0.1s background-color;
+}
+
+button.search-suggestion-entry:hover {
+  background-color: #0000aa;
+  color: cyan;
+}
+
 .flexnav.gallery-files {
   width: 60%;
 }
