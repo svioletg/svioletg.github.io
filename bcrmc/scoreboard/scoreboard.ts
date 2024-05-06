@@ -41,13 +41,13 @@ const STATS_ITEMS: { [key: string]: string } = get_valid_stats_items();
 
 function find_close_stat_items(search: string): Array<string> {
     return Object.keys(STATS_ITEMS).filter(item => {
-        if (item) { return item.toLowerCase().includes(search.replace(' ', '').toLowerCase()); }
+        if (item) { return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase()); }
     });
 }
 
 function find_closest_stat_item(search: string): string {
     return Object.keys(STATS_ITEMS).find(item => {
-        if (item) { return item.toLowerCase().includes(search.replace(' ', '').toLowerCase()); }
+        if (item) { return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase()); }
     });
 }
 
@@ -77,6 +77,7 @@ function refresh_search_suggestions(search_string: string): void {
 }
 
 const TWO_SECOND_INTERVAL = setInterval(() => {
+    console.log($('input[name="object"]').value);
     refresh_search_suggestions($('input[name="object"]').value);
     // Validate input
     let search_input: HTMLInputElement = $('input[name="object"]');

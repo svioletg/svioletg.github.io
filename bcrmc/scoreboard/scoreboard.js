@@ -58,14 +58,14 @@ import { $, $all, json } from '../utils.js';
         function find_close_stat_items(search) {
             return Object.keys(STATS_ITEMS).filter(function (item) {
                 if (item) {
-                    return item.toLowerCase().includes(search.replace(' ', '').toLowerCase());
+                    return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase());
                 }
             });
         }
         function find_closest_stat_item(search) {
             return Object.keys(STATS_ITEMS).find(function (item) {
                 if (item) {
-                    return item.toLowerCase().includes(search.replace(' ', '').toLowerCase());
+                    return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase());
                 }
             });
         }
@@ -127,6 +127,7 @@ import { $, $all, json } from '../utils.js';
                     STATS_ITEMS = get_valid_stats_items();
                     _last_search_value = '';
                     TWO_SECOND_INTERVAL = setInterval(function () {
+                        console.log($('input[name="object"]').value);
                         refresh_search_suggestions($('input[name="object"]').value);
                         // Validate input
                         var search_input = $('input[name="object"]');
