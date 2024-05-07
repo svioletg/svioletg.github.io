@@ -24,26 +24,26 @@
 		<hr>
 
 		<div class="flexnav" style="width: 60%;" id="search-type-selector">
-			<button class="bttn tab" id="search-type-stats">Statistics</button>
-			<button class="bttn tab" id="search-type-other">Other Objectives</button>
+			<button class="bttn tab" id="search-type-stats" name="tab-stats-scores">Statistics</button>
+			<button class="bttn tab" id="search-type-other" name="tab-other-scores">Other Objectives</button>
 		</div>
 		<br>
-		
-		<div class="flexnav off" style="width: 60%;" id="stats-type-selector">
+
+		<div class="flexnav off" style="width: 60%;" id="stats-type-selector" name="tab-stats-scores">
 			<hr>
-			<button class="bttn tab" id="stats-type-blocks-etc">Blocks, Items, Mobs...</button>
-			<button class="bttn tab" id="stats-type-other-stats">Other...</button>
+			<button class="bttn tab" id="stats-type-blocks-etc" name="tab-search-blocks-etc">Blocks, Items, Mobs...</button>
+			<button class="bttn tab" id="stats-type-other-stats" name="tab-search-other">Other...</button>
 		</div>
 		<br>
 		
-			<div class="flexnav off" style="width: 66%;" id="stats-search-blocks-etc">
+			<div class="flexnav off" style="width: 66%;" id="stats-search-blocks-etc" name="tab-search-blocks-etc">
 				<input type="text" name="player">
 				<select class="bttn" id="stats-categories"></select>
 				<div><input type="text" name="object">
-				<div id="stats-search-suggestions" class="search-suggestions"></div></div>
+				<div id="stats-search-suggestions" class="search-suggestions off"></div></div>
 			</div>
 			
-			<div class="flexnav off" style="width: 50%;" id="stats-search-other">
+			<div class="flexnav off" style="width: 50%;" id="stats-search-other" name="tab-search-other">
 				<input type="text" name="player">
 				<select class="bttn" id="stats-other"></select>
 			</div>
@@ -51,8 +51,7 @@
 		<!--  -->
 		<button class="bttn" id="search-button">Search</button>
 
-		<div id="search-results">
-		</div>
+		<div id="search-results"></div>
 	</article></main>
 </body>
 <footer>

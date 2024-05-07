@@ -107,7 +107,45 @@ import { $, $all, json } from '../utils.js';
                 $('select#stats-other').innerHTML += "<option value=\"".concat(objective[1], "\">").concat(objective[0], "</option>\n");
             });
         }
-        var BOARD_DATA, OBJ_PREFIXES, OBJ_TYPE_REGEX, STATS_ITEMS, _last_search_value, TWO_SECOND_INTERVAL, _i, _a, _b, prefix, name_3;
+        // Handle tabs
+        function setup_tabs() {
+            $all('button.tab').forEach(function (button) {
+                // Group tab buttons with the same parent
+                if (!tab_groups.hasOwnProperty(button.parentElement.id)) {
+                    tab_groups[button.parentElement.id] = [];
+                }
+                tab_groups[button.parentElement.id].push(button);
+                if ($("div[name=".concat(button.name, "]"))) {
+                    tab_controlled_elements.push($("div[name=".concat(button.name, "]")));
+                }
+                button.addEventListener('tab-clicked', function () {
+                    alert('tab-clicked received for button');
+                    button.classList.remove('active');
+                    if (button == last_tab_clicked) {
+                        button.classList.add('active');
+                    }
+                });
+                button.addEventListener('click', function () {
+                    alert('click received for button');
+                    last_tab_clicked = button;
+                    button.dispatchEvent(TAB_CLICKED);
+                });
+            });
+            tab_controlled_elements.forEach(function (element) {
+                console.log('adding a listener to', element);
+                element.addEventListener('tab-clicked', function () {
+                    alert('tab-clicked received for element');
+                    element.classList.add('off');
+                    // If the name attribute of a button and tab-controlled element match, show the element
+                    if (element.getAttribute('name') == last_tab_clicked.name) {
+                        element.classList.remove('off');
+                    }
+                });
+            });
+            console.log(tab_groups);
+            console.log(tab_controlled_elements);
+        }
+        var BOARD_DATA, OBJ_PREFIXES, OBJ_TYPE_REGEX, STATS_ITEMS, _last_search_value, TWO_SECOND_INTERVAL, _i, _a, _b, prefix, name_3, tab_groups, tab_controlled_elements, last_tab_clicked, TAB_CLICKED;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0: return [4 /*yield*/, json('scoreboard-json/scoreboard-bcr5-feb01.json')];
@@ -177,28 +215,10 @@ import { $, $all, json } from '../utils.js';
                         $('select#stats-categories').innerHTML += "<option value=\"".concat(prefix, "\">").concat(name_3, "</option>");
                     }
                     build_custom_stats_selection();
-                    $all('button.tab').forEach(function (button) {
-                        button.addEventListener('click', function () {
-                            button.parentElement.querySelectorAll('button.tab').forEach(function (tab) {
-                                tab.classList.remove('active');
-                            });
-                            button.classList.add('active');
-                        });
-                    });
-                    $('button#search-type-stats').addEventListener('click', function () {
-                        $('div#stats-type-selector').classList.remove('off');
-                    });
-                    $('button#search-type-other').addEventListener('click', function () {
-                        $('div#stats-type-selector').classList.add('off');
-                    });
-                    $('button#stats-type-blocks-etc').addEventListener('click', function () {
-                        $('div#stats-search-blocks-etc').classList.remove('off');
-                        $('div#stats-search-other').classList.add('off');
-                    });
-                    $('button#stats-type-other-stats').addEventListener('click', function () {
-                        $('div#stats-search-other').classList.remove('off');
-                        $('div#stats-search-blocks-etc').classList.add('off');
-                    });
+                    tab_groups = {};
+                    tab_controlled_elements = [];
+                    TAB_CLICKED = new Event('tab-clicked');
+                    setup_tabs();
                     return [2 /*return*/];
             }
         });

@@ -66,7 +66,7 @@ function refresh_search_suggestions(search_string: string): void {
 
     $('div#stats-search-suggestions').style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
 
-    $all('button.search-suggestion-entry').forEach(button => {
+    $all('button.search-suggestion-entry').forEach((button: HTMLButtonElement) => {
         button.addEventListener('click', () => {
             let search_input: HTMLInputElement = $('input[name="object"]');
             search_input.value = button.textContent;
@@ -149,31 +149,74 @@ function build_custom_stats_selection(): void {
 }
 build_custom_stats_selection();
 
-$all('button.tab').forEach(button => {
-    button.addEventListener('click', () => {
-        button.parentElement.querySelectorAll('button.tab').forEach(tab => {
-            tab.classList.remove('active');
+// TODO: Extract this tab stuff to its own module
+let tab_groups: { [key: string]: Array<HTMLElement> } = {};
+let tab_controlled_elements: Array<HTMLElement> = [];
+let last_tab_clicked: HTMLButtonElement;
+const TAB_CLICKED: Event = new Event('tab-clicked');
+
+// Handle tabs
+function setup_tabs(): void {
+    $all('button.tab').forEach((button: HTMLButtonElement) => {
+        // Group tab buttons with the same parent
+        if (!tab_groups.hasOwnProperty(button.parentElement.id)) {
+            tab_groups[button.parentElement.id] = [];
+        }
+
+        tab_groups[button.parentElement.id].push(button);
+        if ($(`div[name=${button.name}]`)) {
+            tab_controlled_elements.push($(`div[name=${button.name}]`));
+        }
+
+        button.addEventListener('tab-clicked', () => {
+            alert('tab-clicked received for button');
+            button.classList.remove('active');
+            if (button == last_tab_clicked) {
+                button.classList.add('active');
+            }
         });
-        button.classList.add('active');
+
+        button.addEventListener('click', () => {
+            alert('click received for button');
+            last_tab_clicked = button;
+            button.dispatchEvent(TAB_CLICKED);
+        });
     });
-});
 
-$('button#search-type-stats').addEventListener('click', () => {
-    $('div#stats-type-selector').classList.remove('off');
-})
+    tab_controlled_elements.forEach((element: HTMLElement) => {
+        console.log('adding a listener to', element);
+        element.addEventListener('tab-clicked', () => {
+            alert('tab-clicked received for element');
+            element.classList.add('off');
+            // If the name attribute of a button and tab-controlled element match, show the element
+            if (element.getAttribute('name') == last_tab_clicked.name) {
+                element.classList.remove('off');
+            }
+        });
+    });
 
-$('button#search-type-other').addEventListener('click', () => {
-    $('div#stats-type-selector').classList.add('off');
-})
+    console.log(tab_groups);
+    console.log(tab_controlled_elements);
+}
 
-$('button#stats-type-blocks-etc').addEventListener('click', () => {
-    $('div#stats-search-blocks-etc').classList.remove('off');
-    $('div#stats-search-other').classList.add('off');
-})
+setup_tabs();
 
-$('button#stats-type-other-stats').addEventListener('click', () => {
-    $('div#stats-search-other').classList.remove('off');
-    $('div#stats-search-blocks-etc').classList.add('off');
-})
+// $('button#search-type-stats').addEventListener('click', () => {
+//     $('div#stats-type-selector').classList.remove('off');
+// })
+
+// $('button#search-type-other').addEventListener('click', () => {
+//     $('div#stats-type-selector').classList.add('off');
+// })
+
+// $('button#stats-type-blocks-etc').addEventListener('click', () => {
+//     $('div#stats-search-blocks-etc').classList.remove('off');
+//     $('div#stats-search-other').classList.add('off');
+// })
+
+// $('button#stats-type-other-stats').addEventListener('click', () => {
+//     $('div#stats-search-other').classList.remove('off');
+//     $('div#stats-search-blocks-etc').classList.add('off');
+// })
 
 })();
