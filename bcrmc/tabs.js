@@ -1,60 +1,79 @@
 import { $, $all } from './utils.js';
-var tab_groups = {};
-var tab_controlled_elements = [];
-var last_tab_clicked;
-var TAB_CLICKED = new Event('tab-clicked');
+class Tab {
+    constructor(element, group_id) {
+        this.element = element;
+        this.group_id = group_id;
+        this.name = element.getAttribute('name');
+    }
+    ;
+}
+const TAB_CLICKED = new Event('tab-clicked');
+let tab_groups = {};
+let tab_controlled_elements = [];
+let loaded_tab_content = {};
+let active_tab;
+let previous_tab;
 export function new_tab_group_id() {
-    var new_id = Math.random().toString(36).substring(2, 7);
+    let new_id = Math.random().toString(36).substring(2, 7);
     while (tab_groups.hasOwnProperty(new_id)) {
         new_id = Math.random().toString(36).substring(2, 7);
     }
     return new_id;
 }
-export function tab_group_id(element) {
+export function get_tab_group_id(element) {
     return element.getAttribute('tab-group-id');
 }
 export function $tab_group(group_id) {
-    return $("[tab-group-id=\"".concat(group_id, "\"]"));
+    return $(`[tab-group-id="${group_id}"]`);
 }
 export function setup_tabs() {
-    $all('button.tab').forEach(function (button) {
+    $all('button.tab').forEach((button) => {
         // Group tab buttons with the same parent
         if (!button.parentElement.hasAttribute('tab-group-id')) {
             button.parentElement.setAttribute('tab-group-id', new_tab_group_id());
-            tab_groups[tab_group_id(button.parentElement)] = [];
+            tab_groups[get_tab_group_id(button.parentElement)] = [];
+            loaded_tab_content[get_tab_group_id(button.parentElement)] = null;
         }
-        tab_groups[tab_group_id(button.parentElement)].push(button);
+        let group_id = get_tab_group_id(button.parentElement);
+        let this_tab = new Tab(button, group_id);
+        tab_groups[group_id].push(this_tab);
         // And keep track of what elements are being controlled by tab buttons
-        if ($("div[name=".concat(button.name, "]"))) {
-            tab_controlled_elements.push($("div[name=".concat(button.name, "]")));
+        if ($(`div[name=${button.name}]`)) {
+            tab_controlled_elements.push($(`div[name=${button.name}]`));
         }
         else {
-            console.warn("Nothing is being controlled by tab button with name \"".concat(button.name, "\""));
+            console.warn(`Nothing is being controlled by tab button with name "${button.name}"`);
         }
-        button.addEventListener('tab-clicked', function () {
-            alert('tab-clicked received for button');
-            button.classList.remove('active');
-            if (button == last_tab_clicked) {
-                button.classList.add('active');
+        button.addEventListener('click', () => {
+            if ((active_tab == this_tab) && (button.classList.contains('active'))) {
+                return;
             }
-        });
-        button.addEventListener('click', function () {
-            alert('click received for button');
-            last_tab_clicked = button;
-            $('div').dispatchEvent(TAB_CLICKED);
+            previous_tab = active_tab;
+            active_tab = this_tab;
+            document.dispatchEvent(TAB_CLICKED);
         });
     });
-    tab_controlled_elements.forEach(function (element) {
-        console.log('adding a listener to', element);
-        element.addEventListener('tab-clicked', function () {
-            alert('tab-clicked received for element');
-            element.classList.add('off');
-            // If the name attribute of a button and tab-controlled element match, show the element
-            if (element.getAttribute('name') == last_tab_clicked.name) {
-                element.classList.remove('off');
-            }
+    document.addEventListener('tab-clicked', () => {
+        tab_groups[active_tab.group_id].forEach((tab) => {
+            tab.element.classList.remove('active');
         });
+        active_tab.element.classList.add('active');
+        // What, if anything, is currently loaded in the desired tab's group
+        let loaded_active_group = loaded_tab_content[active_tab.group_id];
+        if (loaded_active_group != null) {
+            loaded_active_group.classList.add('off');
+            loaded_tab_content[active_tab.group_id] = null;
+            let previous_loaded_content = $(`div[name="${previous_tab.name}"]`);
+            previous_loaded_content.classList.add('off');
+            if (active_tab.group_id != previous_tab.group_id) {
+                for (let tab of tab_groups[previous_tab.group_id]) {
+                    tab.element.classList.remove('active');
+                }
+            }
+            loaded_tab_content[previous_tab.group_id] = null;
+        }
+        let to_load = $(`div[name="${active_tab.name}"]`);
+        to_load.classList.remove('off');
+        loaded_tab_content[active_tab.group_id] = to_load;
     });
-    console.log(tab_groups);
-    console.log(tab_controlled_elements);
 }

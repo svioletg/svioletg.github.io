@@ -52,12 +52,17 @@ function find_closest_stat_item(search: string): string {
     });
 }
 
-let _last_search_value: string = '';
+let last_search_value: string = '';
 function refresh_search_suggestions(search_string: string): void {
-    if (search_string == _last_search_value) { return; }
+    if (search_string == last_search_value) { return; }
 
     if (search_string.length > 2) {
         let suggestions: Array<string> = find_close_stat_items(search_string);
+        if (suggestions.length == 0) {
+            $('div#stats-search-suggestions').innerHTML = '';
+            $('div#stats-search-suggestions').classList.add('off');
+            return
+        }
         $('div#stats-search-suggestions').innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${STATS_ITEMS[entry]}</button>` }).join('');
         $('div#stats-search-suggestions').classList.remove('off');
     } else {
@@ -70,15 +75,14 @@ function refresh_search_suggestions(search_string: string): void {
     $all('button.search-suggestion-entry').forEach((button: HTMLButtonElement) => {
         button.addEventListener('click', () => {
             let search_input: HTMLInputElement = $('input[name="object"]');
-            search_input.value = button.textContent;
+            last_search_value = search_input.value = button.textContent;
         });
     });
 
-    _last_search_value = search_string;
+    last_search_value = search_string;
 }
 
-const TWO_SECOND_INTERVAL = setInterval(() => {
-    console.log($('input[name="object"]').value);
+const SEARCH_SUGGESTIONS_UPDATE_INTERVAL = setInterval(() => {
     refresh_search_suggestions($('input[name="object"]').value);
     // Validate input
     let search_input: HTMLInputElement = $('input[name="object"]');
@@ -93,14 +97,18 @@ const TWO_SECOND_INTERVAL = setInterval(() => {
 
     let requested_objective: string = `${stat_category}${objective_name}`;
     if (!BOARD_DATA.Objectives[requested_objective]) {
+        // TODO: Add a tooltip explaining the invalidity
         search_input.classList.add('invalid');
     } else {
         search_input.classList.remove('invalid');
     }
-}, 2000);
+}, 1000);
 
+// Show and hide search suggestions depending on input box focus
 $('input[name="object"]').addEventListener('focus', () => {
-    $('div#stats-search-suggestions').classList.remove('off');
+    if ($('div#stats-search-suggestions').children.length > 0) {
+        $('div#stats-search-suggestions').classList.remove('off');
+    }
 });
 
 $('input[name="object"]').addEventListener('blur', () => {
@@ -151,23 +159,5 @@ function build_custom_stats_selection(): void {
 build_custom_stats_selection();
 
 setup_tabs();
-
-// $('button#search-type-stats').addEventListener('click', () => {
-//     $('div#stats-type-selector').classList.remove('off');
-// })
-
-// $('button#search-type-other').addEventListener('click', () => {
-//     $('div#stats-type-selector').classList.add('off');
-// })
-
-// $('button#stats-type-blocks-etc').addEventListener('click', () => {
-//     $('div#stats-search-blocks-etc').classList.remove('off');
-//     $('div#stats-search-other').classList.add('off');
-// })
-
-// $('button#stats-type-other-stats').addEventListener('click', () => {
-//     $('div#stats-search-other').classList.remove('off');
-//     $('div#stats-search-blocks-etc').classList.add('off');
-// })
 
 })();

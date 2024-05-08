@@ -87,8 +87,14 @@ div.search-suggestions {
     position: absolute;
     color: white;
     max-height: 20em;
-    overflow: scroll;
+    overflow-y: scroll;
+    scrollbar-width: none;
     border: 1px solid cyan;
+}
+
+div.search-suggestions::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 button.search-suggestion-entry {
@@ -112,30 +118,28 @@ button.search-suggestion-entry:hover {
     width: 60%;
 }
 
-a { color: cyan; }
-
 .bttn
 {
     font-family: 'MinecraftRegular';
-    text-shadow: 3px 3px rgba(0,0,0,0.5);
-    font-size: 1.5em;
+    font-size: 20px;
+    text-shadow: 2px 2px #414141;
     margin: 0 auto;
-    width: 396px;
-    height: 50px;
+    width: 400px;
+    height: 40px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     color: white;
     padding: 0px;
-    padding-bottom: 5px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    background-image: url('i/bttn.png');
+    padding-top: 1px;
+    border: 2px solid black;
+    background-image: url('/bcrmc/i/bttn.png');
     background-size: cover;
-    /*transition: 0.2s all;*/
 }
+
+.bttn:hover { border-color: white; }
 
 .bttn.arrow {
     width: 3em;
@@ -152,11 +156,12 @@ a { color: cyan; }
     filter: brightness(0.5);
 }
 
+
 nav.flexnav .bttn {
     justify-content: center;
 }
 
-.bttn:hover { border-color: white; }
+a { color: cyan; }
 a.mega { background-image: url('/bcrmc/i/bttnbig.png'); height: 72px; }
 a.mega span { position: relative; top: 3px; }
 
