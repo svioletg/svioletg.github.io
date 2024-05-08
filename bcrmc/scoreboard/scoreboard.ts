@@ -1,4 +1,5 @@
-import {$, $all, json, to_camel} from '../utils.js';
+import { $, $all, json } from '../utils.js';
+import { setup_tabs } from '../tabs.js';
 
 (async function () {
 
@@ -148,56 +149,6 @@ function build_custom_stats_selection(): void {
     });
 }
 build_custom_stats_selection();
-
-// TODO: Extract this tab stuff to its own module
-let tab_groups: { [key: string]: Array<HTMLElement> } = {};
-let tab_controlled_elements: Array<HTMLElement> = [];
-let last_tab_clicked: HTMLButtonElement;
-const TAB_CLICKED: Event = new Event('tab-clicked');
-
-// Handle tabs
-function setup_tabs(): void {
-    $all('button.tab').forEach((button: HTMLButtonElement) => {
-        // Group tab buttons with the same parent
-        if (!tab_groups.hasOwnProperty(button.parentElement.id)) {
-            tab_groups[button.parentElement.id] = [];
-        }
-
-        tab_groups[button.parentElement.id].push(button);
-        if ($(`div[name=${button.name}]`)) {
-            tab_controlled_elements.push($(`div[name=${button.name}]`));
-        }
-
-        button.addEventListener('tab-clicked', () => {
-            alert('tab-clicked received for button');
-            button.classList.remove('active');
-            if (button == last_tab_clicked) {
-                button.classList.add('active');
-            }
-        });
-
-        button.addEventListener('click', () => {
-            alert('click received for button');
-            last_tab_clicked = button;
-            button.dispatchEvent(TAB_CLICKED);
-        });
-    });
-
-    tab_controlled_elements.forEach((element: HTMLElement) => {
-        console.log('adding a listener to', element);
-        element.addEventListener('tab-clicked', () => {
-            alert('tab-clicked received for element');
-            element.classList.add('off');
-            // If the name attribute of a button and tab-controlled element match, show the element
-            if (element.getAttribute('name') == last_tab_clicked.name) {
-                element.classList.remove('off');
-            }
-        });
-    });
-
-    console.log(tab_groups);
-    console.log(tab_controlled_elements);
-}
 
 setup_tabs();
 

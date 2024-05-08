@@ -1,4 +1,4 @@
-import {extract_number, json} from './utils.js';
+import { extract_number, json } from './utils.js';
 
 (async function () {
 
