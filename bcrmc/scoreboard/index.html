@@ -36,13 +36,20 @@
 		</div>
 		<br>
 		
-			<div class="flexnav off" style="width: 66%;" id="stats-search-blocks-etc" name="tab-search-blocks-etc">
+		<div class="off" id="stats-search-blocks-etc" name="tab-search-blocks-etc">
+			<p>Type an asterisk <kbd>*</kbd> into the Player field (left) to get scores for every player.</p>
+			<br>
+			<div class="flexnav" style="width: 66%;">
 				<input type="text" name="player">
 				<select class="bttn" id="stats-categories"></select>
-				<div><input type="text" name="object">
-				<div id="stats-search-suggestions" class="search-suggestions off"></div></div>
+				<div>
+					<input type="text" name="object" maxlength=25>
+					<div id="stats-search-input-sub" class="text-input-sub"></div>
+					<div id="stats-search-suggestions" class="search-suggestions off"></div>
+				</div>
 			</div>
-			
+		</div>
+
 			<div class="flexnav off" style="width: 50%;" id="stats-search-other" name="tab-search-other">
 				<input type="text" name="player">
 				<select class="bttn" id="stats-other"></select>

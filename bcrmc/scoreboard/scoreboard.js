@@ -41,40 +41,64 @@ import { setup_tabs } from '../tabs.js';
             return alphabetical_info;
         }
         const STATS_ITEMS = get_valid_stats_items();
+        const STATS_ITEMS_BY_DNAME = Object.fromEntries(Object.entries(STATS_ITEMS).map(([k, v]) => [v, k]));
         function find_close_stat_items(search) {
             return Object.keys(STATS_ITEMS).filter(item => {
-                if (item) {
+                if (item)
                     return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase());
-                }
             });
         }
         function find_closest_stat_item(search) {
             return Object.keys(STATS_ITEMS).find(item => {
-                if (item) {
+                if (item)
                     return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase());
-                }
             });
         }
+        let suggestions_box = $('div#stats-search-suggestions');
+        let stats_search_sub = $('div#stats-search-input-sub');
+        function hide_suggestions() {
+            if (!suggestions_box.classList.contains('off'))
+                suggestions_box.classList.add('fade-out');
+        }
+        // Show and hide search suggestions depending on input box focus
+        let initial_search_focus = false;
+        $('input[name="object"]').addEventListener('focus', () => {
+            initial_search_focus = true;
+            if (suggestions_box.children.length > 0) {
+                suggestions_box.classList.remove('off');
+            }
+        });
+        $('input[name="object"]').addEventListener('blur', () => {
+            setTimeout(() => {
+                hide_suggestions();
+            }, 100);
+        });
         let last_search_value = '';
         function refresh_search_suggestions(search_string) {
-            if (search_string == last_search_value) {
+            stats_search_sub.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
+            suggestions_box.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
+            suggestions_box.style.setProperty('margin-top', String(stats_search_sub.offsetHeight) + 'px');
+            search_string = search_string.toLowerCase();
+            if (!initial_search_focus)
                 return;
-            }
+            if (search_string == last_search_value)
+                return;
             if (search_string.length > 2) {
                 let suggestions = find_close_stat_items(search_string);
-                if (suggestions.length == 0) {
-                    $('div#stats-search-suggestions').innerHTML = '';
-                    $('div#stats-search-suggestions').classList.add('off');
+                console.log(suggestions.length, suggestions[0], search_string, STATS_ITEMS_BY_DNAME[search_string]);
+                if (suggestions.length <= 1 && suggestions[0] == STATS_ITEMS_BY_DNAME[search_string]) {
+                    suggestions_box.innerHTML = '';
+                    hide_suggestions();
                     return;
                 }
-                $('div#stats-search-suggestions').innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${STATS_ITEMS[entry]}</button>`; }).join('');
-                $('div#stats-search-suggestions').classList.remove('off');
+                suggestions_box.innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${STATS_ITEMS[entry]}</button>`; }).join('');
+                suggestions_box.classList.remove('off');
             }
             else {
-                $('div#stats-search-suggestions').innerHTML = '';
-                $('div#stats-search-suggestions').classList.add('off');
+                suggestions_box.innerHTML = '';
+                if (!suggestions_box.classList.contains('off'))
+                    suggestions_box.classList.add('fade-out');
             }
-            $('div#stats-search-suggestions').style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
             $all('button.search-suggestion-entry').forEach((button) => {
                 button.addEventListener('click', () => {
                     let search_input = $('input[name="object"]');
@@ -88,6 +112,7 @@ import { setup_tabs } from '../tabs.js';
             // Validate input
             let search_input = $('input[name="object"]');
             let stat_category = $('select#stats-categories').value;
+            let category_name = OBJ_PREFIXES[stat_category];
             let objective_name = '';
             for (const [name, title] of Object.entries(STATS_ITEMS)) {
                 if (title == search_input.value) {
@@ -96,24 +121,25 @@ import { setup_tabs } from '../tabs.js';
             }
             let requested_objective = `${stat_category}${objective_name}`;
             if (!BOARD_DATA.Objectives[requested_objective]) {
-                // TODO: Add a tooltip explaining the invalidity
+                stats_search_sub.innerHTML = `No objective "${search_input.value}" found for category ${category_name}.`;
+                stats_search_sub.classList.add('invalid');
+                stats_search_sub.classList.remove('off');
                 search_input.classList.add('invalid');
             }
             else {
+                stats_search_sub.innerHTML = '';
+                stats_search_sub.classList.remove('invalid');
+                stats_search_sub.classList.add('off');
                 search_input.classList.remove('invalid');
             }
-        }, 1000);
-        // Show and hide search suggestions depending on input box focus
-        $('input[name="object"]').addEventListener('focus', () => {
-            if ($('div#stats-search-suggestions').children.length > 0) {
-                $('div#stats-search-suggestions').classList.remove('off');
-            }
+        }, 500);
+        $('div#stats-search-suggestions').addEventListener('animationend', () => {
+            $('div#stats-search-suggestions').classList.add('off');
+            $('div#stats-search-suggestions').classList.remove('fade-out');
         });
-        $('input[name="object"]').addEventListener('blur', () => {
-            setTimeout(() => {
-                $('div#stats-search-suggestions').classList.add('off');
-            }, 100);
-        });
+        function search_for_scores() {
+            return;
+        }
         $('button#search-button').addEventListener('click', () => {
             // TODO: will need redoing!
             let search_input = $('input[name="object"]');
@@ -131,9 +157,14 @@ import { setup_tabs } from '../tabs.js';
                 search_input.value = STATS_ITEMS[closest_stat_item];
             }
         });
-        for (const [prefix, name] of Object.entries(OBJ_PREFIXES)) {
-            $('select#stats-categories').innerHTML += `<option value="${prefix}">${name}</option>`;
+        // Build stats category selection
+        function build_stats_category_selection() {
+            $('select#stats-categories').innerHTML += `<option value="all">All Categories</option>`;
+            for (const [prefix, name] of Object.entries(OBJ_PREFIXES)) {
+                $('select#stats-categories').innerHTML += `<option value="${prefix}">${name}</option>`;
+            }
         }
+        build_stats_category_selection();
         function build_custom_stats_selection() {
             let custom_objectives = [];
             for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
