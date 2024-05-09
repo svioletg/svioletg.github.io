@@ -44,7 +44,7 @@ const STANDARD_STATS_BY_NAME: { [key: string]: string } = get_standard_stats_map
 const STANDARD_STATS_BY_TITLE: { [key: string]: string } = Object.fromEntries(Object.entries(STANDARD_STATS_BY_NAME).map(([k, v]) => [v, k]));
 
 function get_custom_stats() {
-    let custom_objectives: { [key: string]: string };
+    let custom_objectives: { [key: string]: string } = {};
     for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
         if (name.startsWith('cu.')) {
             let title: string = obj_info.DisplayName.json_dict.text;
@@ -69,20 +69,28 @@ function find_close_stat_items(search: string): Array<string> {
     });
 }
 
-let suggestions_box: HTMLDivElement = $('div#stats-search-suggestions');
-let stats_search_sub: HTMLDivElement = $('div#stats-search-input-sub');
-let player_search_sub: HTMLDivElement = $('div#stats-player-input-sub');
+const ST_STATS_PLAYER_INPUT: HTMLInputElement = $('div#standard-stats input[name="player"]');
+const ST_STATS_PLAYER_SUB: HTMLDivElement = $('div#standard-stats div[name="player"] div.text-input-sub');
+const ST_STATS_PLAYER_SUGBOX: HTMLDivElement = $('div#standard-stats div[name="player"] div.search-suggestions');
+
+const ST_STATS_OBJ_INPUT: HTMLInputElement = $('div#standard-stats input[name="object"]');
+const ST_STATS_OBJ_SUB: HTMLDivElement = $('div#standard-stats div[name="object"] div.text-input-sub');
+const ST_STATS_OBJ_SUGBOX: HTMLDivElement = $('div#standard-stats div[name="object"] div.search-suggestions');
+
+const CU_STATS_PLAYER_INPUT: HTMLInputElement = $('div#custom-stats input[name="player"]');
+const CU_STATS_PLAYER_SUB: HTMLDivElement = $('div#custom-stats div[name="player"] div.text-input-sub');
+const CU_STATS_PLAYER_SUGBOX: HTMLDivElement = $('div#custom-stats div[name="player"] div.search-suggestions');
 
 function hide_suggestions() {
-    if (!suggestions_box.classList.contains('off')) suggestions_box.classList.add('fade-out');
+    if (!ST_STATS_OBJ_SUGBOX.classList.contains('off')) ST_STATS_OBJ_SUGBOX.classList.add('fade-out');
 }
 
 // Show and hide search suggestions depending on input box focus
 let initial_search_focus: boolean = false;
 $('input[name="object"]').addEventListener('focus', () => {
     initial_search_focus = true;
-    if (suggestions_box.children.length > 0) {
-        suggestions_box.classList.remove('off');
+    if (ST_STATS_OBJ_SUGBOX.children.length > 0) {
+        ST_STATS_OBJ_SUGBOX.classList.remove('off');
     }
 });
 
@@ -94,10 +102,10 @@ $('input[name="object"]').addEventListener('blur', () => {
 // TODO: Add search suggestions for player names
 let last_search_value: string = '';
 function refresh_search_suggestions(search_string: string): void {
-    player_search_sub.style.setProperty('width', String($('input[name="player"]').offsetWidth) + 'px');
-    stats_search_sub.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
-    suggestions_box.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
-    suggestions_box.style.setProperty('margin-top', String(stats_search_sub.offsetHeight) + 'px');
+    ST_STATS_PLAYER_SUB.style.setProperty('width', String($('input[name="player"]').offsetWidth) + 'px');
+    ST_STATS_OBJ_SUB.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
+    ST_STATS_OBJ_SUGBOX.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
+    ST_STATS_OBJ_SUGBOX.style.setProperty('margin-top', String(ST_STATS_OBJ_SUB.offsetHeight) + 'px');
     search_string = search_string.toLowerCase();
     
     if (!initial_search_focus) return;
@@ -106,15 +114,15 @@ function refresh_search_suggestions(search_string: string): void {
     if (search_string.length > 2) {
         let suggestions: Array<string> = find_close_stat_items(search_string);
         if (suggestions.length <= 1 && suggestions[0] == STANDARD_STATS_BY_TITLE[search_string]) {
-            suggestions_box.innerHTML = '';
+            ST_STATS_OBJ_SUGBOX.innerHTML = '';
             hide_suggestions();
             return
         }
-        suggestions_box.innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${STANDARD_STATS_BY_NAME[entry]}</button>` }).join('');
-        suggestions_box.classList.remove('off');
+        ST_STATS_OBJ_SUGBOX.innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${STANDARD_STATS_BY_NAME[entry]}</button>` }).join('');
+        ST_STATS_OBJ_SUGBOX.classList.remove('off');
     } else {
-        suggestions_box.innerHTML = '';
-        if (!suggestions_box.classList.contains('off')) suggestions_box.classList.add('fade-out');
+        ST_STATS_OBJ_SUGBOX.innerHTML = '';
+        if (!ST_STATS_OBJ_SUGBOX.classList.contains('off')) ST_STATS_OBJ_SUGBOX.classList.add('fade-out');
     }
 
     $all('button.search-suggestion-entry').forEach((button: HTMLButtonElement) => {
@@ -127,50 +135,57 @@ function refresh_search_suggestions(search_string: string): void {
     last_search_value = search_string;
 }
 
+function validate_text_input(element: HTMLInputElement, sub_element: HTMLElement, sub_message: string, valid_options: Array<string>): void {
+    sub_message = sub_message.replace(/%value/g, element.value);
+    if (!valid_options[element.value]) {
+        sub_element.innerHTML = sub_message; sub_element.classList.add('invalid'); sub_element.classList.remove('off');
+        element.classList.add('invalid');
+    } else {
+        sub_element.innerHTML = ''; sub_element.classList.remove('invalid'); sub_element.classList.add('off');
+        element.classList.remove('invalid');
+    }
+}
+
 const SEARCH_SUGGESTIONS_UPDATE_INTERVAL = setInterval(() => {
     refresh_search_suggestions($('input[name="object"]').value);
     // Validate input
-    let player_input: HTMLInputElement = $('input[name="player"]');
-    let search_input: HTMLInputElement = $('input[name="object"]');
     let stat_category: string = $('select#stats-categories').value;
     let category_name: string = CATEGORY_PREFIXES[stat_category];
     let objective_name: string = '';
 
     for (const [name, title] of Object.entries(STANDARD_STATS_BY_NAME)) {
-        if (title == search_input.value) {
+        if (title == ST_STATS_OBJ_INPUT.value) {
             objective_name = name;
         }
     }
 
-    if (!BOARD_DATA.PlayerScores[player_input.value]) {
-        player_search_sub.innerHTML = `Can't find player "${player_input.value}".`;
-        player_search_sub.classList.add('invalid'); player_search_sub.classList.remove('off');
-        search_input.classList.add('invalid');
-    } else {
-        player_search_sub.innerHTML = '';
-        player_search_sub.classList.remove('invalid'); player_search_sub.classList.add('off');
-        search_input.classList.remove('invalid');
-    }
+    validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', Object.keys(BOARD_DATA.PlayerScores));
     
-    let requested_objective: string = `${stat_category}${objective_name}`;
-    if (!BOARD_DATA.Objectives[requested_objective]) {
-        stats_search_sub.innerHTML = `No objective "${search_input.value}" found for category ${category_name}.`;
-        stats_search_sub.classList.add('invalid'); stats_search_sub.classList.remove('off');
-        search_input.classList.add('invalid');
-    } else {
-        stats_search_sub.innerHTML = '';
-        stats_search_sub.classList.remove('invalid'); stats_search_sub.classList.add('off');
-        search_input.classList.remove('invalid');
-    }
+    // let requested_objective: string = `${stat_category}${objective_name}`;
+    // if (!BOARD_DATA.Objectives[requested_objective]) {
+    //     ST_STATS_OBJ_SUB.innerHTML = `No objective "${ST_STATS_OBJ_INPUT.value}" found for category ${category_name}.`;
+    //     ST_STATS_OBJ_SUB.classList.add('invalid'); ST_STATS_OBJ_SUB.classList.remove('off');
+    //     ST_STATS_OBJ_INPUT.classList.add('invalid');
+    // } else {
+    //     ST_STATS_OBJ_SUB.innerHTML = '';
+    //     ST_STATS_OBJ_SUB.classList.remove('invalid'); ST_STATS_OBJ_SUB.classList.add('off');
+    //     ST_STATS_OBJ_INPUT.classList.remove('invalid');
+    // }
 }, 500);
 
-$('div#stats-search-suggestions').addEventListener('animationend', () => {
-    $('div#stats-search-suggestions').classList.add('off');
-    $('div#stats-search-suggestions').classList.remove('fade-out');
-});
+for (let box of $all('div.search-suggestions')) {
+    box.addEventListener('animationend', () => {
+        $('div.search-suggestions').classList.add('off');
+        $('div.search-suggestions').classList.remove('fade-out');
+    });
+}
 
 // Request scores
-function request_scores(player: string, category_prefix: string, objective_name: string): { [key: string]: { [key: string]: number } } {
+function request_custom_scores(player: string, objective_name: string) {
+
+}
+
+function request_standard_scores(player: string, category_prefix: string, objective_name: string): { [key: string]: { [key: string]: number } } {
     let every_player: boolean = player == '*';
     let every_category: boolean = category_prefix == 'all';
     let every_objective: boolean = objective_name == '*';
@@ -194,9 +209,21 @@ function request_scores(player: string, category_prefix: string, objective_name:
     return results;
 }
 
-$('button#search-button').addEventListener('click', () => {
-    request_scores($('input[name="player"]').value, $('select#stats-categories').value, $('input[name="object"]').value);
-});
+for (let button of $all('button[name="search-button"]')) {
+    let section: HTMLElement = button.parentElement;
+    let player_input: HTMLInputElement = section.querySelector('input[name="player"]');
+    let category_selector: HTMLSelectElement = section.querySelector('select');
+    if (section.id == 'standard-stats') {
+        let object_input: HTMLInputElement = section.querySelector('input[name="object"]');
+        button.addEventListener('click', () => {
+            request_scores(player_input.value, category_selector.value, object_input.value);
+        });
+    } else if (section.id == 'custom-stats') {
+        button.addEventListener('click', () => {
+            request_scores(player_input.value, category_selector.value, object_input.value);
+        });
+    }
+}
 
 // Build stats category selection
 function build_stats_category_selection(): void {
@@ -208,8 +235,8 @@ function build_stats_category_selection(): void {
 build_stats_category_selection();
 
 function build_custom_stats_selection(): void {
-    for (let objective in CUSTOM_STATS) {
-        $('select#stats-other').innerHTML += `<option value="${objective[1]}">${objective[0]}</option>\n`;
+    for (const [name, title] of Object.entries(CUSTOM_STATS)) {
+        $('select#stats-other').innerHTML += `<option value="${name}">${title}</option>\n`;
     };
 }
 build_custom_stats_selection();

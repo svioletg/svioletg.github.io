@@ -24,42 +24,47 @@
 		<hr>
 
 		<div class="flexnav" style="width: 60%;" id="search-type-selector">
-			<button class="bttn tab" id="search-type-stats" name="tab-stats-scores">Statistics</button>
-			<button class="bttn tab" id="search-type-other" name="tab-other-scores">Other Objectives</button>
-		</div>
-		<br>
-
-		<div class="flexnav off" style="width: 60%;" id="stats-type-selector" name="tab-stats-scores">
-			<hr>
-			<button class="bttn tab" id="stats-type-blocks-etc" name="tab-search-blocks-etc">Blocks, Items, Mobs...</button>
-			<button class="bttn tab" id="stats-type-other-stats" name="tab-search-other">Other...</button>
+			<button class="bttn tab active" id="search-type-stats" name="tab-stats-scores">Statistics</button>
+			<!-- <button class="bttn tab" id="search-type-other" name="tab-other-scores">Other Objectives</button> -->
 		</div>
 		<br>
 		
-		<div class="off" id="stats-search-blocks-etc" name="tab-search-blocks-etc">
+		<div class="flexnav" style="width: 60%;" id="stats-type-selector" name="tab-stats-scores">
+			<button class="bttn tab" id="stats-type-blocks-etc" name="tab-standard-stats">Blocks, Items, Mobs...</button>
+			<button class="bttn tab" id="stats-type-other-stats" name="tab-custom-stats">Other...</button>
+		</div>
+		
+		<div class="off" id="standard-stats" name="tab-standard-stats">
 			<p>Using an <b class="hl">asterisk</b> <kbd>*</kbd> instead of a player name will get scores for all players; likewise for the items search box.</p>
 			<br>
 			<div class="flexnav" style="width: 66%;">
-				<div>
+				<div name="player">
 					<input type="text" name="player" maxlength=25 placeholder="Player">
-					<div id="stats-player-input-sub" class="text-input-sub"></div>
+					<div class="text-input-sub"></div>
+					<div class="search-suggestions off"></div>
 				</div>
 				<select class="bttn" id="stats-categories"></select>
-				<div>
+				<div name="object">
 					<input type="text" name="object" maxlength=25 placeholder="Block, item, mob, etc.">
-					<div id="stats-search-input-sub" class="text-input-sub"></div>
-					<div id="stats-search-suggestions" class="search-suggestions off"></div>
+					<div class="text-input-sub"></div>
+					<div class="search-suggestions off"></div>
 				</div>
 			</div>
+			<button class="bttn" id="search-button">Search</button>
 		</div>
 
-			<div class="flexnav off" style="width: 50%;" id="stats-search-other" name="tab-search-other">
-				<input type="text" name="player">
-				<select class="bttn" id="stats-other" style="width: 50%;"></select>
+		<div class="off" id="custom-stats" name="tab-custom-stats">
+			<div class="flexnav" style="width: 50%;">
+				<div name="player">
+					<input type="text" name="player" maxlength=25 placeholder="Player">
+					<div class="text-input-sub"></div>
+					<div class="search-suggestions off"></div>
+				</div>
+				<select class="bttn" name="custom-stats" style="width: 50%;"></select>
 			</div>
+			<button class="bttn" id="search-button">Search</button>
+		</div>
 		<br>
-		<!--  -->
-		<button class="bttn" id="search-button">Search</button>
 
 		<div id="search-results"></div>
 	</article></main>
