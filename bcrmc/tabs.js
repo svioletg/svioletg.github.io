@@ -63,6 +63,7 @@ export function setup_tabs() {
         if (loaded_active_group != null) {
             loaded_active_group.classList.add('off');
             loaded_tab_content[active_tab.group_id] = null;
+            // i wrote this in a haze last night and it works but i dont remember how
             let previous_loaded_content = $(`div[name="${previous_tab.name}"]`);
             previous_loaded_content.classList.add('off');
             if (active_tab.group_id != previous_tab.group_id) {
