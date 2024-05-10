@@ -68,7 +68,7 @@ import { setup_tabs } from '../tabs.js';
             });
         }
         const ST_STATS = $('div#standard-stats');
-        const CU_STATS = $('div#standard-stats');
+        const CU_STATS = $('div#custom-stats');
         const ST_STATS_PLAYER_INPUT = ST_STATS.querySelector('input[name="player"]');
         const ST_STATS_PLAYER_SUB = ST_STATS.querySelector('div[name="player"] div.text-input-sub');
         const ST_STATS_PLAYER_SUGBOX = ST_STATS.querySelector('div[name="player"] div.search-suggestions');
@@ -80,21 +80,28 @@ import { setup_tabs } from '../tabs.js';
         const CU_STATS_PLAYER_SUB = CU_STATS.querySelector('div[name="player"] div.text-input-sub');
         const CU_STATS_PLAYER_SUGBOX = CU_STATS.querySelector('div[name="player"] div.search-suggestions');
         const CU_STATS_OBJ_SELECTOR = CU_STATS.querySelector('select');
-        function hide_suggestions() {
-            if (!ST_STATS_OBJ_SUGBOX.classList.contains('off'))
-                ST_STATS_OBJ_SUGBOX.classList.add('fade-out');
+        function fade_out(element) {
+            if (!element.classList.contains('off'))
+                element.classList.add('fade-out');
         }
         // Show and hide search suggestions depending on input box focus
-        $('input[name="object"]').addEventListener('focus', () => {
-            if (ST_STATS_OBJ_SUGBOX.children.length > 0) {
-                ST_STATS_OBJ_SUGBOX.classList.remove('off');
-            }
-        });
-        $('input[name="object"]').addEventListener('blur', () => {
-            setTimeout(() => {
-                hide_suggestions();
-            }, 100);
-        });
+        for (let [input, sugbox] of [
+            [ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUGBOX],
+            [ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUGBOX],
+            [CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUGBOX]
+        ]) {
+            input.addEventListener('focus', () => {
+                console.log(sugbox);
+                if (sugbox.children.length > 0) {
+                    sugbox.classList.remove('off');
+                }
+            });
+            input.addEventListener('blur', () => {
+                setTimeout(() => {
+                    fade_out(sugbox);
+                }, 100);
+            });
+        }
         // TODO: Add search suggestions for player names
         let last_search_value = '';
         function refresh_search_suggestions(sugbox_parent, search_string) {
@@ -108,17 +115,17 @@ import { setup_tabs } from '../tabs.js';
             if (search_string.length > 2) {
                 let suggestions = find_close_stat_items(search_string);
                 if (suggestions.length <= 1 && suggestions[0] == STANDARD_STATS_BY_TITLE[search_string]) {
-                    ST_STATS_OBJ_SUGBOX.innerHTML = '';
-                    hide_suggestions();
+                    sugbox.innerHTML = '';
+                    fade_out(sugbox);
                     return;
                 }
-                ST_STATS_OBJ_SUGBOX.innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${STANDARD_STATS_BY_NAME[entry]}</button>`; }).join('');
-                ST_STATS_OBJ_SUGBOX.classList.remove('off');
+                sugbox.innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${STANDARD_STATS_BY_NAME[entry]}</button>`; }).join('');
+                sugbox.classList.remove('off');
             }
             else {
-                ST_STATS_OBJ_SUGBOX.innerHTML = '';
-                if (!ST_STATS_OBJ_SUGBOX.classList.contains('off'))
-                    ST_STATS_OBJ_SUGBOX.classList.add('fade-out');
+                sugbox.innerHTML = '';
+                if (!sugbox.classList.contains('off'))
+                    sugbox.classList.add('fade-out');
             }
             for (let button of $all('button.search-suggestion-entry')) {
                 button.addEventListener('click', () => {
@@ -132,8 +139,8 @@ import { setup_tabs } from '../tabs.js';
             ST_STATS_PLAYER_SUB.style.setProperty('width', String($('input[name="player"]').offsetWidth) + 'px');
             ST_STATS_OBJ_SUB.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
             sub_message = sub_message.replace(/%value%/g, element.value);
-            let is_valid = !valid_options.includes(element.value) || element.value == '*';
-            if (is_valid) {
+            let invalid = !valid_options.includes(element.value) || element.value == '*';
+            if (invalid) {
                 sub_element.innerHTML = sub_message;
                 sub_element.classList.add('invalid');
                 sub_element.classList.remove('off');
@@ -158,22 +165,14 @@ import { setup_tabs } from '../tabs.js';
                 }
             }
             validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', Object.keys(BOARD_DATA.PlayerScores));
-            validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(BOARD_DATA.PlayerScores));
-            // let requested_objective: string = `${stat_category}${objective_name}`;
-            // if (!BOARD_DATA.Objectives[requested_objective]) {
-            //     ST_STATS_OBJ_SUB.innerHTML = `No objective "${ST_STATS_OBJ_INPUT.value}" found for category ${category_name}.`;
-            //     ST_STATS_OBJ_SUB.classList.add('invalid'); ST_STATS_OBJ_SUB.classList.remove('off');
-            //     ST_STATS_OBJ_INPUT.classList.add('invalid');
-            // } else {
-            //     ST_STATS_OBJ_SUB.innerHTML = '';
-            //     ST_STATS_OBJ_SUB.classList.remove('invalid'); ST_STATS_OBJ_SUB.classList.add('off');
-            //     ST_STATS_OBJ_INPUT.classList.remove('invalid');
-            // }
+            validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE));
         }, 500);
+        console.log(BOARD_DATA.Objectives);
         for (let box of $all('div.search-suggestions')) {
+            console.log(box);
             box.addEventListener('animationend', () => {
-                $('div.search-suggestions').classList.add('off');
-                $('div.search-suggestions').classList.remove('fade-out');
+                box.classList.add('off');
+                box.classList.remove('fade-out');
             });
         }
         // Request scores
@@ -220,6 +219,7 @@ import { setup_tabs } from '../tabs.js';
         // Build stats category selection
         function build_stats_category_selection() {
             ST_STATS_CAT_SELECTOR.innerHTML += `<option value="all">All Categories</option>`;
+            console.log(CATEGORY_PREFIXES);
             for (const [prefix, name] of Object.entries(CATEGORY_PREFIXES)) {
                 ST_STATS_CAT_SELECTOR.innerHTML += `<option value="${prefix}">${name}</option>`;
             }

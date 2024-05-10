@@ -70,7 +70,7 @@ function find_close_stat_items(search: string): Array<string> {
 }
 
 const ST_STATS: HTMLDivElement = $('div#standard-stats');
-const CU_STATS: HTMLDivElement = $('div#standard-stats');
+const CU_STATS: HTMLDivElement = $('div#custom-stats');
 
 const ST_STATS_PLAYER_INPUT: HTMLInputElement = ST_STATS.querySelector('input[name="player"]');
 const ST_STATS_PLAYER_SUB: HTMLDivElement = ST_STATS.querySelector('div[name="player"] div.text-input-sub');
@@ -99,17 +99,19 @@ for (let [input, sugbox] of [
         [CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUGBOX]
     ]) {
     input.addEventListener('focus', () => {
+        console.log(sugbox);
         if (sugbox.children.length > 0) {
             sugbox.classList.remove('off');
         }
     });
+
+    input.addEventListener('blur', () => {
+        setTimeout(() => {
+            fade_out(sugbox);
+        }, 100);
+    });
 }
 
-$('input[name="object"]').addEventListener('blur', () => {
-    setTimeout(() => {
-        fade_out(ST_STATS_OBJ_SUGBOX);
-    }, 100);
-});
 // TODO: Add search suggestions for player names
 let last_search_value: string = '';
 
@@ -151,8 +153,8 @@ function validate_text_input(element: HTMLInputElement, sub_element: HTMLElement
     ST_STATS_PLAYER_SUB.style.setProperty('width', String($('input[name="player"]').offsetWidth) + 'px');
     ST_STATS_OBJ_SUB.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
     sub_message = sub_message.replace(/%value%/g, element.value);
-    let is_valid: boolean = !valid_options.includes(element.value) || element.value == '*';
-    if (is_valid) {
+    let invalid: boolean = !valid_options.includes(element.value) || element.value == '*';
+    if (invalid) {
         sub_element.innerHTML = sub_message; sub_element.classList.add('invalid'); sub_element.classList.remove('off');
         element.classList.add('invalid');
     } else {
@@ -176,13 +178,14 @@ setInterval(() => {
     }
 
     validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', Object.keys(BOARD_DATA.PlayerScores));
-    validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(BOARD_DATA.PlayerScores));
+    validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE));
 }, 500);
 
 for (let box of $all('div.search-suggestions')) {
+    console.log(box);
     box.addEventListener('animationend', () => {
-        $('div.search-suggestions').classList.add('off');
-        $('div.search-suggestions').classList.remove('fade-out');
+        box.classList.add('off');
+        box.classList.remove('fade-out');
     });
 }
 
@@ -234,6 +237,7 @@ for (let button of $all('button[name="search-button"]')) {
 // Build stats category selection
 function build_stats_category_selection(): void {
     ST_STATS_CAT_SELECTOR.innerHTML += `<option value="all">All Categories</option>`;
+    console.log(CATEGORY_PREFIXES);
     for (const [prefix, name] of Object.entries(CATEGORY_PREFIXES)) {
         ST_STATS_CAT_SELECTOR.innerHTML += `<option value="${prefix}">${name}</option>`
     }
