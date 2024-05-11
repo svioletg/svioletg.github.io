@@ -63,10 +63,8 @@ import { setup_tabs } from '../tabs.js';
         }
         const CUSTOM_STATS = get_custom_stats();
         function find_close_strings(search, options) {
-            return options.filter(item => {
-                if (item)
-                    return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase());
-            });
+            return options.filter(item => { if (item)
+                return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase()); });
         }
         const ST_STATS = $('div#standard-stats');
         const CU_STATS = $('div#custom-stats');
@@ -86,17 +84,30 @@ import { setup_tabs } from '../tabs.js';
                 element.classList.add('fade-out');
         }
         // Show and hide search suggestions depending on input box focus
-        for (let [input, sugbox] of [
+        let focus_state = {};
+        function new_focus_state_id() {
+            let new_id = Math.random().toString(36).substring(2, 7);
+            while (focus_state.hasOwnProperty(new_id)) {
+                new_id = Math.random().toString(36).substring(2, 7);
+            }
+            return new_id;
+        }
+        for (const [input, sugbox] of [
             [ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUGBOX],
             [ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUGBOX],
             [CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUGBOX]
         ]) {
+            const INPUT_FOCUS_ID = new_focus_state_id();
+            input.setAttribute('fstate-id', INPUT_FOCUS_ID);
+            focus_state[INPUT_FOCUS_ID] = false;
             input.addEventListener('focus', () => {
+                focus_state[INPUT_FOCUS_ID] = true;
                 if (sugbox.children.length > 0) {
                     sugbox.classList.remove('off');
                 }
             });
             input.addEventListener('blur', () => {
+                focus_state[INPUT_FOCUS_ID] = false;
                 setTimeout(() => {
                     fade_out(sugbox);
                 }, 100);
@@ -106,21 +117,26 @@ import { setup_tabs } from '../tabs.js';
         let last_search_value = '';
         function refresh_search_suggestions(sugbox_parent, search_string, search_options) {
             let sugbox = sugbox_parent.querySelector('div.search-suggestions');
-            sugbox.style.setProperty('width', String(sugbox_parent.querySelector('input').offsetWidth) + 'px');
+            let input = sugbox_parent.querySelector('input');
+            sugbox.style.setProperty('width', String(input.offsetWidth) + 'px');
             // typescript complains about this if i don't specify <HTMLDivElement> i guess? but just using 'input' up there is fine. ok
             sugbox.style.setProperty('margin-top', String(sugbox_parent.querySelector('div.text-input-sub').offsetHeight) + 'px');
-            search_string = search_string.toLowerCase();
             if (search_string == last_search_value)
                 return;
             if (search_string.length > 2) {
                 let suggestions = find_close_strings(search_string, search_options);
-                if (suggestions.length <= 1) {
+                if (suggestions.length <= 0) {
                     sugbox.innerHTML = '';
                     fade_out(sugbox);
                     return;
                 }
-                sugbox.innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${entry}</button>`; }).join('');
-                sugbox.classList.remove('off');
+                let new_html = suggestions.map(entry => { return `<button class="search-suggestion-entry">${entry}</button>`; }).join('');
+                // Avoid changing the contents if they're going to be the same
+                // Resets the :hover CSS property otherwise, can look weird
+                if (sugbox.innerHTML != new_html)
+                    sugbox.innerHTML = new_html;
+                if (focus_state[input.getAttribute('fstate-id')])
+                    sugbox.classList.remove('off');
             }
             else {
                 sugbox.innerHTML = '';
@@ -129,7 +145,7 @@ import { setup_tabs } from '../tabs.js';
             }
             for (let button of $all('button.search-suggestion-entry')) {
                 button.addEventListener('click', () => {
-                    let search_input = sugbox_parent.querySelector('input');
+                    let search_input = input;
                     last_search_value = search_input.value = button.textContent;
                 });
             }
@@ -153,17 +169,6 @@ import { setup_tabs } from '../tabs.js';
                 element.classList.add('invalid');
             }
         }
-        setInterval(() => {
-            refresh_search_suggestions(ST_STATS.querySelector('div[name="player"]'), ST_STATS_PLAYER_INPUT.value, PLAYERS);
-            refresh_search_suggestions(ST_STATS.querySelector('div[name="object"]'), ST_STATS_OBJ_INPUT.value, Object.keys(STANDARD_STATS_BY_NAME));
-            let st_category_value = ST_STATS_CAT_SELECTOR.value;
-            let st_category_title = CATEGORY_PREFIXES[st_category_value];
-            let st_obj_value = ST_STATS_OBJ_INPUT.value;
-            let st_obj_name = STANDARD_STATS_BY_TITLE[st_obj_value];
-            let objective_name = st_category_value + st_obj_name;
-            validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
-            validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE), [Object.keys(BOARD_DATA.Objectives).includes(objective_name)]);
-        }, 500);
         for (let box of $all('div.search-suggestions')) {
             box.addEventListener('animationend', () => {
                 box.classList.add('off');
@@ -227,5 +232,18 @@ import { setup_tabs } from '../tabs.js';
         }
         build_custom_stats_selection();
         setup_tabs();
+        setInterval(() => {
+            refresh_search_suggestions(ST_STATS.querySelector('div[name="player"]'), ST_STATS_PLAYER_INPUT.value, PLAYERS);
+            refresh_search_suggestions(ST_STATS.querySelector('div[name="object"]'), ST_STATS_OBJ_INPUT.value, Object.keys(STANDARD_STATS_BY_TITLE));
+            refresh_search_suggestions(CU_STATS.querySelector('div[name="player"]'), CU_STATS_PLAYER_INPUT.value, PLAYERS);
+            let st_category_value = ST_STATS_CAT_SELECTOR.value;
+            let st_category_title = CATEGORY_PREFIXES[st_category_value];
+            let st_obj_value = ST_STATS_OBJ_INPUT.value;
+            let st_obj_name = STANDARD_STATS_BY_TITLE[st_obj_value];
+            let objective_name = st_category_value + st_obj_name;
+            validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
+            validate_text_input(CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
+            validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE), [Object.keys(BOARD_DATA.Objectives).includes(objective_name)]);
+        }, 500);
     });
 })();
