@@ -5,6 +5,8 @@ import { setup_tabs } from '../tabs.js';
 
 const BOARD_DATA: { [key: string]: object } = await json('scoreboard-json/scoreboard-bcr5-feb01.json');
 
+const PLAYERS: Array<string> = Object.keys(BOARD_DATA.PlayerScores);
+
 const CATEGORY_PREFIXES: object = {
     "b.": "Broken",
     "c.": "Crafted",
@@ -63,8 +65,8 @@ function get_custom_stats() {
 
 const CUSTOM_STATS: { [key: string]: string } = get_custom_stats();
 
-function find_close_stat_items(search: string): Array<string> {
-    return Object.keys(STANDARD_STATS_BY_NAME).filter(item => {
+function find_close_strings(search: string, options: Array<string>): Array<string> {
+    return options.filter(item => {
         if (item) return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase());
     });
 }
@@ -99,7 +101,6 @@ for (let [input, sugbox] of [
         [CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUGBOX]
     ]) {
     input.addEventListener('focus', () => {
-        console.log(sugbox);
         if (sugbox.children.length > 0) {
             sugbox.classList.remove('off');
         }
@@ -115,7 +116,7 @@ for (let [input, sugbox] of [
 // TODO: Add search suggestions for player names
 let last_search_value: string = '';
 
-function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: string): void {
+function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: string, search_options: Array<string>): void {
     let sugbox: HTMLElement = sugbox_parent.querySelector('div.search-suggestions');
     sugbox.style.setProperty('width', String(sugbox_parent.querySelector('input').offsetWidth) + 'px');
     // typescript complains about this if i don't specify <HTMLDivElement> i guess? but just using 'input' up there is fine. ok
@@ -126,13 +127,13 @@ function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: s
     if (search_string == last_search_value) return;
 
     if (search_string.length > 2) {
-        let suggestions: Array<string> = find_close_stat_items(search_string);
-        if (suggestions.length <= 1 && suggestions[0] == STANDARD_STATS_BY_TITLE[search_string]) {
+        let suggestions: Array<string> = find_close_strings(search_string, search_options);
+        if (suggestions.length <= 1) {
             sugbox.innerHTML = '';
             fade_out(sugbox);
             return;
         }
-        sugbox.innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${STANDARD_STATS_BY_NAME[entry]}</button>` }).join('');
+        sugbox.innerHTML = suggestions.map(entry => { return `<button class="search-suggestion-entry">${entry}</button>` }).join('');
         sugbox.classList.remove('off');
     } else {
         sugbox.innerHTML = '';
@@ -149,40 +150,44 @@ function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: s
     last_search_value = search_string;
 }
 
-function validate_text_input(element: HTMLInputElement, sub_element: HTMLElement, sub_message: string, valid_options: Array<string>): void {
+function validate_text_input(element: HTMLInputElement, sub_element: HTMLElement, sub_message: string, valid_options: Array<string>,
+    other_conditions?: Array<boolean>): void {
     ST_STATS_PLAYER_SUB.style.setProperty('width', String($('input[name="player"]').offsetWidth) + 'px');
     ST_STATS_OBJ_SUB.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
     sub_message = sub_message.replace(/%value%/g, element.value);
-    let invalid: boolean = !valid_options.includes(element.value) || element.value == '*';
-    if (invalid) {
-        sub_element.innerHTML = sub_message; sub_element.classList.add('invalid'); sub_element.classList.remove('off');
-        element.classList.add('invalid');
-    } else {
+    let is_valid: boolean = (valid_options.includes(element.value) || element.value == '*') && (other_conditions ? other_conditions.every(Boolean) : true);
+    if (is_valid) {
         sub_element.innerHTML = ''; sub_element.classList.remove('invalid'); sub_element.classList.add('off');
         element.classList.remove('invalid');
+    } else {
+        sub_element.innerHTML = sub_message; sub_element.classList.add('invalid'); sub_element.classList.remove('off');
+        element.classList.add('invalid');
     }
 }
 
 setInterval(() => {
-    refresh_search_suggestions(ST_STATS.querySelector('div[name="player"]'), ST_STATS_PLAYER_INPUT.value);
-    refresh_search_suggestions(ST_STATS.querySelector('div[name="object"]'), ST_STATS_OBJ_INPUT.value);
+    refresh_search_suggestions(ST_STATS.querySelector('div[name="player"]'), ST_STATS_PLAYER_INPUT.value, PLAYERS);
+    refresh_search_suggestions(ST_STATS.querySelector('div[name="object"]'), ST_STATS_OBJ_INPUT.value, Object.keys(STANDARD_STATS_BY_NAME));
 
-    let st_category_name: string = ST_STATS_CAT_SELECTOR.value;
-    let st_category_title: string = CATEGORY_PREFIXES[st_category_name];
-    let objective_name: string = '';
+    let st_category_value: string = ST_STATS_CAT_SELECTOR.value;
+    let st_category_title: string = CATEGORY_PREFIXES[st_category_value];
 
-    for (const [name, title] of Object.entries(STANDARD_STATS_BY_NAME)) {
-        if (title == ST_STATS_OBJ_INPUT.value) {
-            objective_name = name;
-        }
-    }
+    let st_obj_value: string = ST_STATS_OBJ_INPUT.value;
+    let st_obj_name: string = STANDARD_STATS_BY_TITLE[st_obj_value];
 
-    validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', Object.keys(BOARD_DATA.PlayerScores));
-    validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE));
+    let objective_name: string = st_category_value + st_obj_name;
+
+    validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB,
+        'Can\'t find player "%value%"', PLAYERS
+    );
+
+    validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB,
+        `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE),
+        [Object.keys(BOARD_DATA.Objectives).includes(objective_name)]
+    );
 }, 500);
 
 for (let box of $all('div.search-suggestions')) {
-    console.log(box);
     box.addEventListener('animationend', () => {
         box.classList.add('off');
         box.classList.remove('fade-out');
@@ -198,7 +203,7 @@ function request_scores(player: string, category_prefix: string, objective_name:
     
     if (!every_player && !BOARD_DATA.PlayerScores[player]) return undefined;
 
-    let players: Array<string> = every_player ? Object.keys(BOARD_DATA.PlayerScores) : [player];
+    let players: Array<string> = every_player ? PLAYERS : [player];
     let categories: Array<string> = every_category ? Object.keys(CATEGORY_PREFIXES) : [category_prefix];
     let objectives: Array<string> = every_objective ? Object.keys(STANDARD_STATS_BY_NAME)
         : is_custom ? Object.keys(CUSTOM_STATS)
@@ -237,7 +242,6 @@ for (let button of $all('button[name="search-button"]')) {
 // Build stats category selection
 function build_stats_category_selection(): void {
     ST_STATS_CAT_SELECTOR.innerHTML += `<option value="all">All Categories</option>`;
-    console.log(CATEGORY_PREFIXES);
     for (const [prefix, name] of Object.entries(CATEGORY_PREFIXES)) {
         ST_STATS_CAT_SELECTOR.innerHTML += `<option value="${prefix}">${name}</option>`
     }
