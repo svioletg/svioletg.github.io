@@ -129,7 +129,7 @@ import { setup_tabs } from '../tabs.js';
             }
             for (let button of $all('button.search-suggestion-entry')) {
                 button.addEventListener('click', () => {
-                    let search_input = $('input[name="object"]');
+                    let search_input = sugbox_parent.querySelector('input');
                     last_search_value = search_input.value = button.textContent;
                 });
             }

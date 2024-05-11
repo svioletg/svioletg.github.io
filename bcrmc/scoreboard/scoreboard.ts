@@ -142,7 +142,7 @@ function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: s
 
     for (let button of $all('button.search-suggestion-entry')) {
         button.addEventListener('click', () => {
-            let search_input: HTMLInputElement = $('input[name="object"]');
+            let search_input: HTMLInputElement = sugbox_parent.querySelector('input');
             last_search_value = search_input.value = button.textContent;
         });
     }
