@@ -56,7 +56,6 @@ body.bcr5 {
 main {
   background-color: rgba(0, 0, 0, 0.5);
   width: 75%;
-  min-height: 100vh;
   margin: 0 auto;
 }
 
@@ -93,101 +92,47 @@ code {
   row-gap: 1em;
 }
 
+div.ol-mouse-position {
+  background-color: #333;
+  color: white;
+  font-family: "Consolas", monospace;
+  font-size: 1.25em;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
 div.off {
   display: none;
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-div.text-input-sub {
-  position: absolute;
-  width: -moz-max-content;
-  width: max-content;
-  background-color: white;
-  color: black;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-  font-family: "Arial", sans-serif;
-  font-size: 0.75em;
-  border: 1px solid #333;
-  box-sizing: border-box;
-}
-
-div.text-input-sub.invalid {
-  color: red;
-  border-color: red;
-}
-
-div.search-suggestions {
-  position: absolute;
-  color: white;
-  max-height: 15em;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  border: 1px solid cyan;
-}
-
-div.search-suggestions.fade-out {
-  animation-name: fade-out;
-  animation-duration: 0.25s;
-}
-
-div.search-suggestions::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-button.search-suggestion-entry {
-  color: white;
-  font-family: "MinecraftRegular";
-  font-size: 1.5em;
-  background-color: rgb(0, 0, 50);
-  padding: 0.5em;
-  display: block;
-  width: 100%;
-  border: none;
-  box-sizing: border-box;
-  border-bottom: 1px solid blue;
-  transition: 0.1s background-color;
-}
-
-button.search-suggestion-entry:hover {
-  background-color: navy;
-  color: cyan;
 }
 
 .flexnav.gallery-files {
   width: 60%;
 }
 
+a {
+  color: cyan;
+}
+
 .bttn {
   font-family: "MinecraftRegular";
-  font-size: 20px;
-  text-shadow: 2px 2px #414141;
+  text-shadow: 3px 3px rgba(0, 0, 0, 0.5);
+  font-size: 1.5em;
   margin: 0 auto;
-  width: 400px;
-  height: 40px;
-  box-sizing: border-box;
+  width: 396px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   color: white;
   padding: 0px;
-  padding-top: 1px;
-  border: 2px solid black;
-  background-image: url("/bcrmc/i/bttn.png");
+  padding-bottom: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  background-image: url("i/bttn.png");
   background-size: cover;
-}
-
-.bttn:hover {
-  border-color: white;
+  /*transition: 0.2s all;*/
 }
 
 .bttn.arrow {
@@ -200,58 +145,22 @@ button.search-suggestion-entry:hover {
   pointer-events: none;
 }
 
-.bttn.tab.active {
-  border-color: white;
-  filter: brightness(0.5);
-}
-
 nav.flexnav .bttn {
   justify-content: center;
 }
 
-a {
-  color: cyan;
+.bttn:hover {
+  border-color: white;
 }
 
 a.mega {
-  background-image: url("/bcrmc/i/bttnbig.png");
+  background-image: url("i/bttnbig.png");
   height: 72px;
 }
 
 a.mega span {
   position: relative;
   top: 3px;
-}
-
-input {
-  font-size: 1.5em;
-  font-family: "MinecraftRegular";
-  padding: 0.5em;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-input.invalid {
-  border: 2px solid #ff7777;
-  color: #ff7777;
-}
-
-select.bttn {
-  font-family: "MinecraftRegular", sans-serif;
-  background-image: none;
-  background-color: rgba(0, 0, 0, 0.25);
-  width: 10em;
-  font-size: 1.5em;
-  text-align: center;
-}
-
-select.bttn > option {
-  font-size: 0.75em;
-  font-family: "MinecraftRegular", sans-serif;
-  color: white;
-  background-color: black;
-  text-shadow: none;
-  border: none;
 }
 
 .hl {
@@ -482,19 +391,6 @@ img.bcr5-icon {
   padding-right: 1em;
   vertical-align: bottom;
   filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
-}
-
-kbd {
-  font-family: "Consolas", monospace;
-  font-size: 1em;
-  background-image: linear-gradient(#333, #222);
-  padding: 5px;
-  height: 1em;
-  width: 1em;
-  display: inline-block;
-  border: 1px solid black;
-  border-radius: 5px;
-  color: yellow;
 }
 
 @media only screen and (max-device-width: 600px) {
