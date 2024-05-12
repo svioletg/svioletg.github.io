@@ -3,12 +3,12 @@ var UnminedMapProperties = {
     minZoom: -6,
     maxZoom: 0,
     defaultZoom: 0,
-    imageFormat: "jpeg",
+    imageFormat: "webp",
     minRegionX: -11,
     minRegionZ: -11,
     maxRegionX: 11,
     maxRegionZ: 4,
     worldName: "world_nether",
-    background: "",
+    background: "#000000",
     markers: new Array()
 }

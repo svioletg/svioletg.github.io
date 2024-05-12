@@ -3,12 +3,12 @@ var UnminedMapProperties = {
     minZoom: -6,
     maxZoom: 0,
     defaultZoom: 0,
-    imageFormat: "jpeg",
+    imageFormat: "webp",
     minRegionX: -8,
     minRegionZ: -5,
     maxRegionX: 1,
     maxRegionZ: 1,
     worldName: "world_the_end",
-    background: "",
+    background: "#000000",
     markers: new Array()
 }
