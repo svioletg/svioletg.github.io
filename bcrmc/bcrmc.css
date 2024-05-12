@@ -92,6 +92,15 @@ code {
   row-gap: 1em;
 }
 
+div.ol-mouse-position {
+  background-color: #333;
+  color: white;
+  font-family: "Consolas", monospace;
+  font-size: 1.25em;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
 div.off {
   display: none;
 }
