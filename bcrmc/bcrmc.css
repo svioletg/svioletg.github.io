@@ -151,6 +151,7 @@ table {
 table.scoreboard {
   font-family: "MinecraftRegular", sans-serif;
   font-size: 30px;
+  margin-bottom: 2em;
   color: white;
   text-shadow: 4px 4px #414141;
   width: 80%;
@@ -169,6 +170,10 @@ table.scoreboard tr td {
   background-color: rgb(0, 0, 50);
   transition: 0.1s background-color;
   border: 1px solid navy;
+}
+
+table.scoreboard tr td.adjacent {
+  background-color: rgb(0, 0, 75);
 }
 
 table.scoreboard tr td:hover {

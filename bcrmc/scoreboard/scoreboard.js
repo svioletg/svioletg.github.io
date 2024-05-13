@@ -11,6 +11,7 @@ import { $, $all, json, reverse_object } from '../utils.js';
 import { setup_tabs } from '../tabs.js';
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
+        const SCOREBOARD_TABLE = $('table.scoreboard');
         const BOARD_DATA = yield json('scoreboard-json/scoreboard-bcr5-feb01.json');
         const PLAYERS = Object.keys(BOARD_DATA.PlayerScores);
         const CATEGORIES_BY_PREFIX = {
@@ -170,7 +171,8 @@ import { setup_tabs } from '../tabs.js';
             ST_STATS_PLAYER_SUB.style.setProperty('width', String($('input[name="player"]').offsetWidth) + 'px');
             ST_STATS_OBJ_SUB.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
             sub_message = sub_message.replace(/%value%/g, element.value);
-            let is_valid = (valid_options.includes(element.value) || element.value == '*') && (other_conditions ? other_conditions.every(Boolean) : true);
+            let is_valid = (valid_options.includes(element.value) || element.value == '*')
+                && (other_conditions ? other_conditions.every(Boolean) : true);
             if (is_valid) {
                 sub_element.innerHTML = '';
                 sub_element.classList.remove('invalid');
@@ -220,32 +222,49 @@ import { setup_tabs } from '../tabs.js';
             let csv = [];
             for (const [player, scores] of Object.entries(score_results)) {
                 for (const [obj, score] of Object.entries(scores)) {
-                    let category = CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
-                    csv.push(`${player},${category},${score}`);
+                    console.log(obj.split('.'));
+                    let category_title = CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
+                    let objective_title = STANDARD_STATS_BY_NAME[obj.split('.')[1]];
+                    csv.push(`${player},${category_title} ${objective_title},${score}`);
                 }
             }
             return csv;
         }
-        function build_results_table(results) {
+        function csv_blob(csv) {
+            const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            console.log(blob);
+            return blob;
+        }
+        function prompt_blob(blob) {
+            let link = window.URL.createObjectURL(blob);
+            window.location.href = link;
+        }
+        function build_and_show_results_table(results) {
             const csv = scores_as_csv(results);
-            let scoreboard_html = '';
-            for (const line of csv) {
+            let scoreboard_html = `
+    <tr>
+        <th>Player</th>
+        <th>Objective</th>
+        <th>Score</th>
+    </tr>
+    `;
+            SCOREBOARD_TABLE.innerHTML = scoreboard_html + '<p>Building...</p>';
+            $('div#search-results').classList.remove('off');
+            for (let n = 0; n < csv.length; n++) {
+                const line = csv[n];
                 let [player, category, score] = line.split(',');
                 scoreboard_html += `
-        <tr>
-            <th>Player</th>
-            <th>Objective</th>
-            <th>Score</th>
-        </tr>
-
-        <tr>
-            <td>${player}</td>
-            <td>${category}</td>
-            <td>${score}</td>
+        <tr name="${n}">
+            <td name="0">${player}</td>
+            <td name="1">${category}</td>
+            <td name="2">${score}</td>
         </tr>
         `;
             }
-            $('table.scoreboard').innerHTML = scoreboard_html;
+            SCOREBOARD_TABLE.innerHTML = scoreboard_html;
+            $('div#search-results a#csv-download').addEventListener('click', () => {
+                prompt_blob(csv_blob(csv));
+            });
         }
         for (let button of $all('button[name="search-button"]')) {
             let section = button.parentElement;
@@ -255,16 +274,14 @@ import { setup_tabs } from '../tabs.js';
                 let object_input = section.querySelector('input[name="object"]');
                 button.addEventListener('click', () => {
                     let results = request_scores(player_input.value, category_selector.value, object_input.value);
-                    build_results_table(results);
-                    $('div#search-results').classList.remove('off');
+                    build_and_show_results_table(results);
                 });
             }
             else if (section.id == 'custom-stats') {
                 let objective_selector = section.querySelector('select');
                 button.addEventListener('click', () => {
                     let results = request_scores(player_input.value, 'cu.', objective_selector.value);
-                    build_results_table(results);
-                    $('div#search-results').classList.remove('off');
+                    build_and_show_results_table(results);
                 });
             }
         }
@@ -295,7 +312,7 @@ import { setup_tabs } from '../tabs.js';
             let objective_name = st_category_value + st_obj_name;
             validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
             validate_text_input(CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
-            validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE), [st_obj_value == '*' || Object.keys(BOARD_DATA.Objectives).includes(objective_name)]);
+            validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE), [(st_obj_value == '*' || st_category_value == 'all') || Object.keys(BOARD_DATA.Objectives).includes(objective_name)]);
         }, 500);
     });
 })();
