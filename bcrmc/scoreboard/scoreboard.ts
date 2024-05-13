@@ -156,9 +156,12 @@ function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: s
         if (!sugbox.classList.contains('off')) sugbox.classList.add('fade-out');
     }
 
-    for (let button of $all('button.search-suggestion-entry')) {
+    for (let button of sugbox.querySelectorAll('button.search-suggestion-entry')) {
         button.addEventListener('click', () => {
+            console.log('CLICK!');
+            console.log(this);
             let search_input: HTMLInputElement = input;
+            console.log(input, search_input);
             last_search_value = search_input.value = button.textContent;
         });
     }
@@ -217,18 +220,26 @@ function request_scores(player: string, category_prefix: string, objective_name:
 }
 
 for (let button of $all('button[name="search-button"]')) {
+    console.log(button);
     let section: HTMLElement = button.parentElement;
+    console.log(section);
     let player_input: HTMLInputElement = section.querySelector('input[name="player"]');
     if (section.id == 'standard-stats') {
+        console.log(section.id);
         let category_selector: HTMLSelectElement = section.querySelector('select');
         let object_input: HTMLInputElement = section.querySelector('input[name="object"]');
         button.addEventListener('click', () => {
-            request_scores(player_input.value, category_selector.value, object_input.value);
+            alert();
+            let results = request_scores(player_input.value, category_selector.value, object_input.value);
+            console.log(results);
         });
     } else if (section.id == 'custom-stats') {
+        console.log(section.id);
         let objective_selector: HTMLSelectElement = section.querySelector('select');
         button.addEventListener('click', () => {
-            request_scores(player_input.value, 'cu.', objective_selector.value);
+            alert();
+            let results = request_scores(player_input.value, 'cu.', objective_selector.value);
+            console.log(results);
         });
     }
 }

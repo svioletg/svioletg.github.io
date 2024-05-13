@@ -143,9 +143,12 @@ import { setup_tabs } from '../tabs.js';
                 if (!sugbox.classList.contains('off'))
                     sugbox.classList.add('fade-out');
             }
-            for (let button of $all('button.search-suggestion-entry')) {
+            for (let button of sugbox.querySelectorAll('button.search-suggestion-entry')) {
                 button.addEventListener('click', () => {
+                    console.log('CLICK!');
+                    console.log(this);
                     let search_input = input;
+                    console.log(input, search_input);
                     last_search_value = search_input.value = button.textContent;
                 });
             }
@@ -200,19 +203,27 @@ import { setup_tabs } from '../tabs.js';
             return results;
         }
         for (let button of $all('button[name="search-button"]')) {
+            console.log(button);
             let section = button.parentElement;
+            console.log(section);
             let player_input = section.querySelector('input[name="player"]');
             if (section.id == 'standard-stats') {
+                console.log(section.id);
                 let category_selector = section.querySelector('select');
                 let object_input = section.querySelector('input[name="object"]');
                 button.addEventListener('click', () => {
-                    request_scores(player_input.value, category_selector.value, object_input.value);
+                    alert();
+                    let results = request_scores(player_input.value, category_selector.value, object_input.value);
+                    console.log(results);
                 });
             }
             else if (section.id == 'custom-stats') {
+                console.log(section.id);
                 let objective_selector = section.querySelector('select');
                 button.addEventListener('click', () => {
-                    request_scores(player_input.value, 'cu.', objective_selector.value);
+                    alert();
+                    let results = request_scores(player_input.value, 'cu.', objective_selector.value);
+                    console.log(results);
                 });
             }
         }
