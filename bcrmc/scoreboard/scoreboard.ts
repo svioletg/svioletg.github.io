@@ -1,4 +1,4 @@
-import { $, $all, json } from '../utils.js';
+import { $, $all, json, reverse_object } from '../utils.js';
 import { setup_tabs } from '../tabs.js';
 
 (async function () {
@@ -7,7 +7,7 @@ const BOARD_DATA: { [key: string]: object } = await json('scoreboard-json/scoreb
 
 const PLAYERS: Array<string> = Object.keys(BOARD_DATA.PlayerScores);
 
-const CATEGORY_PREFIXES: object = {
+const CATEGORIES_BY_PREFIX: { [key: string]: string } = {
     "b.": "Broken",
     "c.": "Crafted",
     "d.": "Killed by",
@@ -18,13 +18,15 @@ const CATEGORY_PREFIXES: object = {
     "q.": "Dropped",
 }
 
-const CATEGORY_PREFIX_REGEX: RegExp = new RegExp(`${Object.values(CATEGORY_PREFIXES).join('|')}`);
+const CATEGORIES_BY_TITLE: { [key: string]: string } = reverse_object(CATEGORIES_BY_PREFIX);
+
+const CATEGORY_PREFIX_REGEX: RegExp = new RegExp(`${Object.values(CATEGORIES_BY_PREFIX).join('|')}`);
 
 function get_standard_stats_map(): { [key: string]: string } {
     let obj_names: Array<string> = [];
     let trimmed_info: { [key: string]: string } = {};
     for (const[name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
-        if (Object.keys(CATEGORY_PREFIXES).includes(name.split('.')[0] + '.') && !obj_names.includes(name.split('.')[1])) {
+        if (Object.keys(CATEGORIES_BY_PREFIX).includes(name.split('.')[0] + '.') && !obj_names.includes(name.split('.')[1])) {
             let generic_name = name.split('.')[1];
             obj_names.push(generic_name);
             trimmed_info[generic_name] = obj_info.DisplayName.json_dict.text.replace(CATEGORY_PREFIX_REGEX, '').trim();
@@ -43,7 +45,7 @@ function get_standard_stats_map(): { [key: string]: string } {
 // An objective's NAME is what you'd use in a command, e.g. m.oakLog
 // An objective's TITLE is what Minecraft calls its "Display Name", e.g. "Oak Log Mined"
 const STANDARD_STATS_BY_NAME: { [key: string]: string } = get_standard_stats_map();
-const STANDARD_STATS_BY_TITLE: { [key: string]: string } = Object.fromEntries(Object.entries(STANDARD_STATS_BY_NAME).map(([k, v]) => [v, k]));
+const STANDARD_STATS_BY_TITLE: { [key: string]: string } = reverse_object(STANDARD_STATS_BY_NAME);
 
 function get_custom_stats() {
     let custom_objectives: { [key: string]: string } = {};
@@ -111,6 +113,11 @@ for (const [input, sugbox] of [
     const INPUT_FOCUS_ID = new_focus_state_id();
     input.setAttribute('fstate-id', INPUT_FOCUS_ID);
     focus_state[INPUT_FOCUS_ID] = false;
+
+    const SUGBOX_FOCUS_ID = new_focus_state_id();
+    sugbox.setAttribute('fstate-id', SUGBOX_FOCUS_ID);
+    focus_state[SUGBOX_FOCUS_ID] = false;
+
     
     input.addEventListener('focus', () => {
         focus_state[INPUT_FOCUS_ID] = true;
@@ -118,12 +125,22 @@ for (const [input, sugbox] of [
             sugbox.classList.remove('off');
         }
     });
+    sugbox.addEventListener('focus', () => {
+        alert('!');
+        focus_state[SUGBOX_FOCUS_ID] = true;
+    });
+    // TODO: this only works on one of them? sure. i dont care rn
 
     input.addEventListener('blur', () => {
         focus_state[INPUT_FOCUS_ID] = false;
         setTimeout(() => {
+            // If we've now focused the box itself, say by pressing tab, don't get rid of it yet
+            if (focus_state[SUGBOX_FOCUS_ID]) return;
             fade_out(sugbox);
         }, 100);
+    });
+    sugbox.addEventListener('blur', () => {
+        focus_state[SUGBOX_FOCUS_ID] = false;
     });
 }
 
@@ -189,7 +206,8 @@ for (let box of $all('div.search-suggestions')) {
 }
 
 // Request scores
-function request_scores(player: string, category_prefix: string, objective_name: string): { [key: string]: { [key: string]: number } } {
+type ScoreSearchResults = { [key: string]: { [key: string]: number } };
+function request_scores(player: string, category_prefix: string, objective_name: string): ScoreSearchResults {
     let every_player: boolean = player == '*';
     let every_category: boolean = category_prefix == 'all';
     let is_custom: boolean = category_prefix == 'cu.';
@@ -199,12 +217,12 @@ function request_scores(player: string, category_prefix: string, objective_name:
     if (!every_player && !BOARD_DATA.PlayerScores[player]) return undefined;
 
     let players: Array<string> = every_player ? PLAYERS : [player];
-    let categories: Array<string> = every_category ? Object.keys(CATEGORY_PREFIXES) : [category_prefix];
+    let categories: Array<string> = every_category ? Object.keys(CATEGORIES_BY_PREFIX) : [category_prefix];
     let objectives: Array<string> = every_objective ? Object.keys(STANDARD_STATS_BY_NAME)
         : is_custom ? Object.keys(CUSTOM_STATS)
         : [STANDARD_STATS_BY_TITLE[objective_name]];
 
-    let results: { [key: string]: { [key: string]: number } } = {};
+    let results: ScoreSearchResults = {};
     for (let p of players) {
         results[p] = {};
         for (let c of categories) {
@@ -219,19 +237,59 @@ function request_scores(player: string, category_prefix: string, objective_name:
     return results;
 }
 
+function scores_as_csv(score_results: ScoreSearchResults): Array<string> {
+    let csv: Array<string> = [];
+    for (const [player, scores] of Object.entries(score_results)) {
+        for (const [obj, score] of Object.entries(scores)) {
+            let category: string = CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
+            csv.push(`${player},${category},${score}`);
+        }
+    }
+    return csv;
+}
+
+function build_results_table(results: ScoreSearchResults): void {
+    const csv = scores_as_csv(results);
+    let scoreboard_html: string = ''; 
+    for (const line of csv) {
+        let [player, category, score] = line.split(',');
+        scoreboard_html += `
+        <tr>
+            <th>Player</th>
+            <th>Objective</th>
+            <th>Score</th>
+        </tr>
+
+        <tr>
+            <td>${player}</td>
+            <td>${category}</td>
+            <td>${score}</td>
+        </tr>
+        `;
+    }
+    $('table.scoreboard').innerHTML = scoreboard_html;
+}
+
 for (let button of $all('button[name="search-button"]')) {
     let section: HTMLElement = button.parentElement;
     let player_input: HTMLInputElement = section.querySelector('input[name="player"]');
+
     if (section.id == 'standard-stats') {
         let category_selector: HTMLSelectElement = section.querySelector('select');
         let object_input: HTMLInputElement = section.querySelector('input[name="object"]');
+
         button.addEventListener('click', () => {
             let results = request_scores(player_input.value, category_selector.value, object_input.value);
+            build_results_table(results);
+            $('div#search-results').classList.remove('off');
         });
     } else if (section.id == 'custom-stats') {
         let objective_selector: HTMLSelectElement = section.querySelector('select');
+
         button.addEventListener('click', () => {
             let results = request_scores(player_input.value, 'cu.', objective_selector.value);
+            build_results_table(results);
+            $('div#search-results').classList.remove('off');
         });
     }
 }
@@ -239,7 +297,7 @@ for (let button of $all('button[name="search-button"]')) {
 // Build stats category selection
 function build_stats_category_selection(): void {
     ST_STATS_CAT_SELECTOR.innerHTML += `<option value="all">All Categories</option>`;
-    for (const [prefix, name] of Object.entries(CATEGORY_PREFIXES)) {
+    for (const [prefix, name] of Object.entries(CATEGORIES_BY_PREFIX)) {
         ST_STATS_CAT_SELECTOR.innerHTML += `<option value="${prefix}">${name}</option>`
     }
 }
@@ -260,7 +318,7 @@ setInterval(() => {
     refresh_search_suggestions(CU_STATS.querySelector('div[name="player"]'), CU_STATS_PLAYER_INPUT.value, PLAYERS);
 
     let st_category_value: string = ST_STATS_CAT_SELECTOR.value;
-    let st_category_title: string = CATEGORY_PREFIXES[st_category_value];
+    let st_category_title: string = CATEGORIES_BY_PREFIX[st_category_value];
 
     let st_obj_value: string = ST_STATS_OBJ_INPUT.value;
     let st_obj_name: string = STANDARD_STATS_BY_TITLE[st_obj_value];

@@ -7,13 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { $, $all, json } from '../utils.js';
+import { $, $all, json, reverse_object } from '../utils.js';
 import { setup_tabs } from '../tabs.js';
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         const BOARD_DATA = yield json('scoreboard-json/scoreboard-bcr5-feb01.json');
         const PLAYERS = Object.keys(BOARD_DATA.PlayerScores);
-        const CATEGORY_PREFIXES = {
+        const CATEGORIES_BY_PREFIX = {
             "b.": "Broken",
             "c.": "Crafted",
             "d.": "Killed by",
@@ -23,12 +23,13 @@ import { setup_tabs } from '../tabs.js';
             "p.": "Picked Up",
             "q.": "Dropped",
         };
-        const CATEGORY_PREFIX_REGEX = new RegExp(`${Object.values(CATEGORY_PREFIXES).join('|')}`);
+        const CATEGORIES_BY_TITLE = reverse_object(CATEGORIES_BY_PREFIX);
+        const CATEGORY_PREFIX_REGEX = new RegExp(`${Object.values(CATEGORIES_BY_PREFIX).join('|')}`);
         function get_standard_stats_map() {
             let obj_names = [];
             let trimmed_info = {};
             for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
-                if (Object.keys(CATEGORY_PREFIXES).includes(name.split('.')[0] + '.') && !obj_names.includes(name.split('.')[1])) {
+                if (Object.keys(CATEGORIES_BY_PREFIX).includes(name.split('.')[0] + '.') && !obj_names.includes(name.split('.')[1])) {
                     let generic_name = name.split('.')[1];
                     obj_names.push(generic_name);
                     trimmed_info[generic_name] = obj_info.DisplayName.json_dict.text.replace(CATEGORY_PREFIX_REGEX, '').trim();
@@ -45,7 +46,7 @@ import { setup_tabs } from '../tabs.js';
         // An objective's NAME is what you'd use in a command, e.g. m.oakLog
         // An objective's TITLE is what Minecraft calls its "Display Name", e.g. "Oak Log Mined"
         const STANDARD_STATS_BY_NAME = get_standard_stats_map();
-        const STANDARD_STATS_BY_TITLE = Object.fromEntries(Object.entries(STANDARD_STATS_BY_NAME).map(([k, v]) => [v, k]));
+        const STANDARD_STATS_BY_TITLE = reverse_object(STANDARD_STATS_BY_NAME);
         function get_custom_stats() {
             let custom_objectives = {};
             for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
@@ -100,17 +101,31 @@ import { setup_tabs } from '../tabs.js';
             const INPUT_FOCUS_ID = new_focus_state_id();
             input.setAttribute('fstate-id', INPUT_FOCUS_ID);
             focus_state[INPUT_FOCUS_ID] = false;
+            const SUGBOX_FOCUS_ID = new_focus_state_id();
+            sugbox.setAttribute('fstate-id', SUGBOX_FOCUS_ID);
+            focus_state[SUGBOX_FOCUS_ID] = false;
             input.addEventListener('focus', () => {
                 focus_state[INPUT_FOCUS_ID] = true;
                 if (sugbox.children.length > 0) {
                     sugbox.classList.remove('off');
                 }
             });
+            sugbox.addEventListener('focus', () => {
+                alert('!');
+                focus_state[SUGBOX_FOCUS_ID] = true;
+            });
+            // TODO: this only works on one of them? sure. i dont care rn
             input.addEventListener('blur', () => {
                 focus_state[INPUT_FOCUS_ID] = false;
                 setTimeout(() => {
+                    // If we've now focused the box itself, say by pressing tab, don't get rid of it yet
+                    if (focus_state[SUGBOX_FOCUS_ID])
+                        return;
                     fade_out(sugbox);
                 }, 100);
+            });
+            sugbox.addEventListener('blur', () => {
+                focus_state[SUGBOX_FOCUS_ID] = false;
             });
         }
         // TODO: Add search suggestions for player names
@@ -175,7 +190,6 @@ import { setup_tabs } from '../tabs.js';
                 box.classList.remove('fade-out');
             });
         }
-        // Request scores
         function request_scores(player, category_prefix, objective_name) {
             let every_player = player == '*';
             let every_category = category_prefix == 'all';
@@ -184,7 +198,7 @@ import { setup_tabs } from '../tabs.js';
             if (!every_player && !BOARD_DATA.PlayerScores[player])
                 return undefined;
             let players = every_player ? PLAYERS : [player];
-            let categories = every_category ? Object.keys(CATEGORY_PREFIXES) : [category_prefix];
+            let categories = every_category ? Object.keys(CATEGORIES_BY_PREFIX) : [category_prefix];
             let objectives = every_objective ? Object.keys(STANDARD_STATS_BY_NAME)
                 : is_custom ? Object.keys(CUSTOM_STATS)
                     : [STANDARD_STATS_BY_TITLE[objective_name]];
@@ -202,6 +216,37 @@ import { setup_tabs } from '../tabs.js';
             }
             return results;
         }
+        function scores_as_csv(score_results) {
+            let csv = [];
+            for (const [player, scores] of Object.entries(score_results)) {
+                for (const [obj, score] of Object.entries(scores)) {
+                    let category = CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
+                    csv.push(`${player},${category},${score}`);
+                }
+            }
+            return csv;
+        }
+        function build_results_table(results) {
+            const csv = scores_as_csv(results);
+            let scoreboard_html = '';
+            for (const line of csv) {
+                let [player, category, score] = line.split(',');
+                scoreboard_html += `
+        <tr>
+            <th>Player</th>
+            <th>Objective</th>
+            <th>Score</th>
+        </tr>
+
+        <tr>
+            <td>${player}</td>
+            <td>${category}</td>
+            <td>${score}</td>
+        </tr>
+        `;
+            }
+            $('table.scoreboard').innerHTML = scoreboard_html;
+        }
         for (let button of $all('button[name="search-button"]')) {
             let section = button.parentElement;
             let player_input = section.querySelector('input[name="player"]');
@@ -210,19 +255,23 @@ import { setup_tabs } from '../tabs.js';
                 let object_input = section.querySelector('input[name="object"]');
                 button.addEventListener('click', () => {
                     let results = request_scores(player_input.value, category_selector.value, object_input.value);
+                    build_results_table(results);
+                    $('div#search-results').classList.remove('off');
                 });
             }
             else if (section.id == 'custom-stats') {
                 let objective_selector = section.querySelector('select');
                 button.addEventListener('click', () => {
                     let results = request_scores(player_input.value, 'cu.', objective_selector.value);
+                    build_results_table(results);
+                    $('div#search-results').classList.remove('off');
                 });
             }
         }
         // Build stats category selection
         function build_stats_category_selection() {
             ST_STATS_CAT_SELECTOR.innerHTML += `<option value="all">All Categories</option>`;
-            for (const [prefix, name] of Object.entries(CATEGORY_PREFIXES)) {
+            for (const [prefix, name] of Object.entries(CATEGORIES_BY_PREFIX)) {
                 ST_STATS_CAT_SELECTOR.innerHTML += `<option value="${prefix}">${name}</option>`;
             }
         }
@@ -240,7 +289,7 @@ import { setup_tabs } from '../tabs.js';
             refresh_search_suggestions(ST_STATS.querySelector('div[name="object"]'), ST_STATS_OBJ_INPUT.value, Object.keys(STANDARD_STATS_BY_TITLE));
             refresh_search_suggestions(CU_STATS.querySelector('div[name="player"]'), CU_STATS_PLAYER_INPUT.value, PLAYERS);
             let st_category_value = ST_STATS_CAT_SELECTOR.value;
-            let st_category_title = CATEGORY_PREFIXES[st_category_value];
+            let st_category_title = CATEGORIES_BY_PREFIX[st_category_value];
             let st_obj_value = ST_STATS_OBJ_INPUT.value;
             let st_obj_name = STANDARD_STATS_BY_TITLE[st_obj_value];
             let objective_name = st_category_value + st_obj_name;

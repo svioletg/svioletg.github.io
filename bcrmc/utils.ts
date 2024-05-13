@@ -16,6 +16,10 @@ export function extract_number(input_string: string): number {
     return Number(input_string.match(/\d+/)[0]);
 }
 
+export function reverse_object(source_object: { [key: string]: string }): { [key: string]: string } {
+    return Object.fromEntries(Object.entries(source_object).map(([k, v]) => [v, k]));
+}
+
 export function to_camel(input_string: string): string {
     let words: Array<string> = input_string.toLowerCase().split(' ');
     let camel_array: Array<string> = [];

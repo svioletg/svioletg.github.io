@@ -40,12 +40,6 @@ body
     background-image: url('i/dirt_128x128_dark.png');
 }
 
-@for $i from 1 through 5 {
-    body.bcr#{$i} {
-        background-image: var(--bcr#{$i}-bg);
-    }
-}
-
 main
 {
     background-color: rgba(0, 0, 0, 0.5);
@@ -142,6 +136,39 @@ button.search-suggestion-entry {
 button.search-suggestion-entry:hover {
     background-color: navy;
     color: cyan;
+}
+
+table {
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table.scoreboard {
+    font-family: 'MinecraftRegular', sans-serif;
+    font-size: 30px;
+    color: white;
+    text-shadow: 4px 4px #414141;
+    width: 80%;
+}
+
+table.scoreboard tr th, td {
+    padding: 0.5em;
+}
+
+table.scoreboard tr th {
+    border: 1px solid black;
+    border-bottom: 0;
+}
+
+table.scoreboard tr td {
+    background-color: rgb(0, 0, 50);
+    transition: 0.1s background-color;
+    border: 1px solid navy;
+}
+
+table.scoreboard tr td:hover {
+    background-color: rgb(0, 0, 100);
 }
 
 .flexnav.gallery-files {
@@ -274,12 +301,6 @@ h2
     text-shadow: 5px 5px black;
 }
 
-@for $i from 1 through 5 {
-    body.bcr#{$i} h2 {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), var(--bcr#{$i}-h2);
-    }
-}
-
 h2 sup { font-style: italic; font-weight: lighter; }
 h3 { font-weight: bold; font-size: 2em; text-align: left; }
 h3.subtitle
@@ -383,16 +404,6 @@ h2:hover img.linker
 
 img.alone { width: auto; height: 500px; }
 
-@for $i from 1 through 5 {
-    img.bcr#{$i}-icon {
-        content: var(--bcr#{$i}-icon);
-        height: 1.5em;
-        padding-right: 1em;
-        vertical-align: bottom;
-        filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
-    }
-}
-
 kbd {
     font-family: 'Consolas', monospace;
     font-size: 1em;
@@ -404,6 +415,30 @@ kbd {
     border: 1px solid black;
     border-radius: 5px;
     color: yellow;
+}
+
+// AUTOMATIONS
+
+@for $i from 1 through 5 {
+    body.bcr#{$i} {
+        background-image: var(--bcr#{$i}-bg);
+    }
+
+    body.bcr#{$i} h2 {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), var(--bcr#{$i}-h2);
+    }
+
+    body.bcr#{$i} table.scoreboard th {
+        background-image: var(--bcr#{$i}-h2);
+    }
+
+    img.bcr#{$i}-icon {
+        content: var(--bcr#{$i}-icon);
+        height: 1.5em;
+        padding-right: 1em;
+        vertical-align: bottom;
+        filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+    }
 }
 
 // MOBILE

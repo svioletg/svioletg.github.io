@@ -23,6 +23,9 @@ export function $all(query) {
 export function extract_number(input_string) {
     return Number(input_string.match(/\d+/)[0]);
 }
+export function reverse_object(source_object) {
+    return Object.fromEntries(Object.entries(source_object).map(([k, v]) => [v, k]));
+}
 export function to_camel(input_string) {
     let words = input_string.toLowerCase().split(' ');
     let camel_array = [];
