@@ -128,7 +128,6 @@ for (const [input, sugbox] of [
         }
     });
     sugbox.addEventListener('focus', () => {
-        alert('!');
         focus_state[SUGBOX_FOCUS_ID] = true;
     });
     // TODO: this only works on one of them? sure. i dont care rn
@@ -246,7 +245,6 @@ function scores_as_csv(score_results: ScoreSearchResults): Array<string> {
     let csv: Array<string> = [];
     for (const [player, scores] of Object.entries(score_results)) {
         for (const [obj, score] of Object.entries(scores)) {
-            console.log(obj.split('.'));
             let category_title: string = CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
             let objective_title: string = STANDARD_STATS_BY_NAME[obj.split('.')[1]];
             csv.push(`${player},${category_title} ${objective_title},${score}`);
@@ -257,7 +255,6 @@ function scores_as_csv(score_results: ScoreSearchResults): Array<string> {
 
 function csv_blob(csv: Array<string>): Blob {
     const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
-    console.log(blob);
     return blob;
 }
 
