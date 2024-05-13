@@ -158,10 +158,7 @@ function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: s
 
     for (let button of sugbox.querySelectorAll('button.search-suggestion-entry')) {
         button.addEventListener('click', () => {
-            console.log('CLICK!');
-            console.log(this);
             let search_input: HTMLInputElement = input;
-            console.log(input, search_input);
             last_search_value = search_input.value = button.textContent;
         });
     }
@@ -197,6 +194,7 @@ function request_scores(player: string, category_prefix: string, objective_name:
     let every_category: boolean = category_prefix == 'all';
     let is_custom: boolean = category_prefix == 'cu.';
     let every_objective: boolean = objective_name == '*';
+
     
     if (!every_player && !BOARD_DATA.PlayerScores[player]) return undefined;
 
@@ -206,12 +204,14 @@ function request_scores(player: string, category_prefix: string, objective_name:
         : is_custom ? Object.keys(CUSTOM_STATS)
         : [STANDARD_STATS_BY_TITLE[objective_name]];
 
-    let results: { [key: string]: { [key: string]: number } };
+    let results: { [key: string]: { [key: string]: number } } = {};
     for (let p of players) {
         results[p] = {};
         for (let c of categories) {
             for (let o of objectives) {
-                results[p][c + o] = BOARD_DATA.PlayerScores[p][c + o];
+                let score: number = BOARD_DATA.PlayerScores[p][c + o];
+                if (!score) continue;
+                results[p][c + o] = score;
             }
         }
     }
@@ -220,26 +220,18 @@ function request_scores(player: string, category_prefix: string, objective_name:
 }
 
 for (let button of $all('button[name="search-button"]')) {
-    console.log(button);
     let section: HTMLElement = button.parentElement;
-    console.log(section);
     let player_input: HTMLInputElement = section.querySelector('input[name="player"]');
     if (section.id == 'standard-stats') {
-        console.log(section.id);
         let category_selector: HTMLSelectElement = section.querySelector('select');
         let object_input: HTMLInputElement = section.querySelector('input[name="object"]');
         button.addEventListener('click', () => {
-            alert();
             let results = request_scores(player_input.value, category_selector.value, object_input.value);
-            console.log(results);
         });
     } else if (section.id == 'custom-stats') {
-        console.log(section.id);
         let objective_selector: HTMLSelectElement = section.querySelector('select');
         button.addEventListener('click', () => {
-            alert();
             let results = request_scores(player_input.value, 'cu.', objective_selector.value);
-            console.log(results);
         });
     }
 }
@@ -279,7 +271,7 @@ setInterval(() => {
     validate_text_input(CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
     validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB,
         `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE),
-        [Object.keys(BOARD_DATA.Objectives).includes(objective_name)]
+        [st_obj_value == '*' || Object.keys(BOARD_DATA.Objectives).includes(objective_name)]
     );
 }, 500);
 

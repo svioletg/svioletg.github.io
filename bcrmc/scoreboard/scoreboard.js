@@ -145,10 +145,7 @@ import { setup_tabs } from '../tabs.js';
             }
             for (let button of sugbox.querySelectorAll('button.search-suggestion-entry')) {
                 button.addEventListener('click', () => {
-                    console.log('CLICK!');
-                    console.log(this);
                     let search_input = input;
-                    console.log(input, search_input);
                     last_search_value = search_input.value = button.textContent;
                 });
             }
@@ -191,39 +188,34 @@ import { setup_tabs } from '../tabs.js';
             let objectives = every_objective ? Object.keys(STANDARD_STATS_BY_NAME)
                 : is_custom ? Object.keys(CUSTOM_STATS)
                     : [STANDARD_STATS_BY_TITLE[objective_name]];
-            let results;
+            let results = {};
             for (let p of players) {
                 results[p] = {};
                 for (let c of categories) {
                     for (let o of objectives) {
-                        results[p][c + o] = BOARD_DATA.PlayerScores[p][c + o];
+                        let score = BOARD_DATA.PlayerScores[p][c + o];
+                        if (!score)
+                            continue;
+                        results[p][c + o] = score;
                     }
                 }
             }
             return results;
         }
         for (let button of $all('button[name="search-button"]')) {
-            console.log(button);
             let section = button.parentElement;
-            console.log(section);
             let player_input = section.querySelector('input[name="player"]');
             if (section.id == 'standard-stats') {
-                console.log(section.id);
                 let category_selector = section.querySelector('select');
                 let object_input = section.querySelector('input[name="object"]');
                 button.addEventListener('click', () => {
-                    alert();
                     let results = request_scores(player_input.value, category_selector.value, object_input.value);
-                    console.log(results);
                 });
             }
             else if (section.id == 'custom-stats') {
-                console.log(section.id);
                 let objective_selector = section.querySelector('select');
                 button.addEventListener('click', () => {
-                    alert();
                     let results = request_scores(player_input.value, 'cu.', objective_selector.value);
-                    console.log(results);
                 });
             }
         }
@@ -254,7 +246,7 @@ import { setup_tabs } from '../tabs.js';
             let objective_name = st_category_value + st_obj_name;
             validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
             validate_text_input(CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
-            validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE), [Object.keys(BOARD_DATA.Objectives).includes(objective_name)]);
+            validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB, `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE), [st_obj_value == '*' || Object.keys(BOARD_DATA.Objectives).includes(objective_name)]);
         }, 500);
     });
 })();
