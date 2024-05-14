@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-        "lib": ["es6", "dom", "es2017"],
-        "target": "es5",
+        "lib": ["es6", "dom", "ES2019", "DOM.Iterable"],
+        "target": "ES6",
         "module": "es2015",
         "esModuleInterop": true
       },
     "include": [
       "*.json",
       "*.ts"
-    ]
+, "scoreboard/scoreboard.ts"    ]
 }
