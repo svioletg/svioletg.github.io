@@ -107,6 +107,7 @@ div.search-suggestions {
     overflow-y: scroll;
     scrollbar-width: none;
     border: 1px solid cyan;
+    z-index: 1;
 }
 
 div.search-suggestions.fade-out {
@@ -146,26 +147,34 @@ table {
 
 table.scoreboard {
     font-family: 'MinecraftRegular', sans-serif;
-    font-size: 30px;
-    margin-bottom: 2em;
+    font-size: 20px;
     color: white;
-    text-shadow: 4px 4px #414141;
-    width: 80%;
+    text-shadow: 2px 2px #414141;
+    min-width: 50%;
+    max-width: 75%;
 }
 
 table.scoreboard tr th, td {
+    text-align: center;
+    color: white;
     padding: 0.5em;
 }
 
 table.scoreboard tr th {
-    border: 1px solid black;
-    border-bottom: 0;
+    border: 2px solid black;
+    // border-bottom: 0;
+}
+
+table.scoreboard tr:hover td {
+    background-color: rgb(0, 0, 70);
 }
 
 table.scoreboard tr td {
     background-color: rgb(0, 0, 50);
     transition: 0.1s background-color;
-    border: 1px solid navy;
+    border: 2px solid navy;
+    padding-right: 0.1em;
+    padding-left: 0.1em;
 }
 
 table.scoreboard tr td.adjacent {
@@ -202,6 +211,11 @@ table.scoreboard tr td:hover {
 }
 
 .bttn:hover { border-color: white; }
+
+.bttn.disabled {
+    pointer-events: none;
+    filter: brightness(0.5);
+}
 
 .bttn.arrow {
     width: 3em;

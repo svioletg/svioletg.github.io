@@ -36,7 +36,13 @@
 		<br>
 		
 		<div class="off" id="standard-stats" name="tab-standard-stats">
-			<p>Using an <b class="hl">asterisk</b> <kbd>*</kbd> instead of a player name will get scores for all players; likewise for the items search box.</p>
+			<p>Using an <b class="hl">asterisk</b> <kbd>*</kbd> instead of a player name will get scores for all players; likewise for the items search box.
+			You can also use an asterisk as a <b class="hl"><abbr title="
+	A wildcard is used to specify that any text is valid in its place.
+	i.e. 'copper*' will return anything that starts with 'copper',
+	'*copper*' will return anything that has the word 'copper' in it regardless of position,
+	and '*copper' would return anything that ends with 'copper'.
+				">wildcard</abbr></b> for the item search.</p>
 			<br>
 			<div class="flexnav" style="width: 66%;">
 				<div name="player">
@@ -59,32 +65,34 @@
 
 		<div class="off" id="custom-stats" name="tab-custom-stats">
 			<div class="flexnav" style="width: 50%;">
-				<div name="player">
-					<input type="text" name="player" maxlength=25 placeholder="Player">
-					<div class="text-input-sub"></div>
-					<div class="search-suggestions off"></div>
-				</div>
-				<select class="bttn" name="custom-stats" style="width: 50%;"></select>
+				<select class="bttn" name="custom-stats" style="width: 75%;"></select>
 			</div>
 			<br>
 			<button class="bttn" name="search-button">Search</button>
 		</div>
 		<br>
 
-		<div id="search-results" class="flexnav off">
-			<p>Scoreboard search results:</p>
-			<a href="#" class="bttn" id="csv-download">Save as Spreadsheet (CSV)</a>
-			<table class="scoreboard">
-				<tr>
-					<th>Player</th>
-					<th>Objective</th>
-					<th>Score</th>
-				</tr>
+		<div id="search-results">
+			<p>Nothing searched yet.</p><br>
+			<a href="#" class="bttn disabled" id="csv-download">Save as Spreadsheet (CSV)</a>
+			<sub>Click a column header to sort the table.</sub>
+			<table class="scoreboard sortable">
+				<thead>
+					<tr>
+						<th>Player</th>
+						<th>Objective</th>
+						<th>Score</th>
+					</tr>
+				</thead>
 			</table>
 		</div>
+		<br>
+		<br>
+		<br>
 	</article></main>
 </body>
 <footer>
+	<script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/sortable.min.js"></script>
 	<script src="/bcrmc/header.js"></script>
 	<script type="module" src="/bcrmc/footer.js"></script>
 	<script type="module" src="/bcrmc/scoreboard/scoreboard.js"></script>

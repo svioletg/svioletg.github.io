@@ -1,4 +1,4 @@
-import { $, $all, json, reverse_object } from '../utils.js';
+import { $, $all, humanize_number, json, reverse_object } from '../utils.js';
 import { setup_tabs } from '../tabs.js';
 
 (async function () {
@@ -8,6 +8,10 @@ const SCOREBOARD_TABLE: HTMLTableElement = $('table.scoreboard');
 const BOARD_DATA: { [key: string]: object } = await json('scoreboard-json/scoreboard-bcr5-feb01.json');
 
 const PLAYERS: Array<string> = Object.keys(BOARD_DATA.PlayerScores);
+
+const EST_OBJECTIVE_COUNT: number = PLAYERS.map(player => Object.keys(BOARD_DATA.PlayerScores[player]).length).reduce(
+    (acc, val) => {return acc + val}, 0
+);
 
 const CATEGORIES_BY_PREFIX: { [key: string]: string } = {
     "b.": "Broken",
@@ -67,7 +71,8 @@ function get_custom_stats() {
     return sorted_custom_objectives;
 }
 
-const CUSTOM_STATS: { [key: string]: string } = get_custom_stats();
+const CUSTOM_STATS_BY_NAME: { [key: string]: string } = get_custom_stats();
+const CUSTOM_STATS_BY_TITLE: { [key: string]: string } = reverse_object(CUSTOM_STATS_BY_NAME);
 
 function find_close_strings(search: string, options: Array<string>): Array<string> {
     return options.filter(item => { if (item) return item.toLowerCase().includes(search.replace(/ /g, '').toLowerCase()); });
@@ -86,11 +91,9 @@ const ST_STATS_OBJ_INPUT: HTMLInputElement = ST_STATS.querySelector('input[name=
 const ST_STATS_OBJ_SUB: HTMLDivElement = ST_STATS.querySelector('div[name="object"] div.text-input-sub');
 const ST_STATS_OBJ_SUGBOX: HTMLDivElement = ST_STATS.querySelector('div[name="object"] div.search-suggestions');
 
-const CU_STATS_PLAYER_INPUT: HTMLInputElement = CU_STATS.querySelector('input[name="player"]');
-const CU_STATS_PLAYER_SUB: HTMLDivElement = CU_STATS.querySelector('div[name="player"] div.text-input-sub');
-const CU_STATS_PLAYER_SUGBOX: HTMLDivElement = CU_STATS.querySelector('div[name="player"] div.search-suggestions');
+const CU_STATS_OBJ_SELECTOR: HTMLSelectElement = CU_STATS.querySelector('select');
 
-const CU_STATS_OBJ_SELECTOR: HTMLSelectElement = CU_STATS.querySelector('select')
+const SEARCH_RESULTS_CONTAINER: HTMLDivElement = $('div#search-results');
 
 function fade_out(element: HTMLElement) {
     if (!element.classList.contains('off')) element.classList.add('fade-out');
@@ -110,7 +113,6 @@ function new_focus_state_id(): string {
 for (const [input, sugbox] of [
         [ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUGBOX],
         [ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUGBOX],
-        [CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUGBOX]
     ]) {
     const INPUT_FOCUS_ID = new_focus_state_id();
     input.setAttribute('fstate-id', INPUT_FOCUS_ID);
@@ -190,8 +192,12 @@ function validate_text_input(element: HTMLInputElement, sub_element: HTMLElement
     ST_STATS_OBJ_SUB.style.setProperty('width', String($('input[name="object"]').offsetWidth) + 'px');
     sub_message = sub_message.replace(/%value%/g, element.value);
 
-    let is_valid: boolean = (valid_options.includes(element.value) || element.value == '*') 
-        && (other_conditions ? other_conditions.every(Boolean) : true);
+
+    let is_valid: boolean = (
+            valid_options.includes(element.value)
+            || (filter_with_wildcard(element.value, valid_options).length > 0)
+            || element.value == '*'
+        ) && (other_conditions ? other_conditions.every(Boolean) : true);
     
     if (is_valid) {
         sub_element.innerHTML = ''; sub_element.classList.remove('invalid'); sub_element.classList.add('off');
@@ -209,31 +215,40 @@ for (let box of $all('div.search-suggestions')) {
     });
 }
 
+function filter_with_wildcard(input_string: string, source_array: Array<string>): Array<string> {
+    const reg = new RegExp('^' + input_string.replace('*', '.*'), 'i');
+    return source_array.filter(input_string => input_string.match(reg));
+}
+
 // Request scores
 type ScoreSearchResults = { [key: string]: { [key: string]: number } };
-function request_scores(player: string, category_prefix: string, objective_name: string): ScoreSearchResults {
-    let every_player: boolean = player == '*';
-    let every_category: boolean = category_prefix == 'all';
-    let is_custom: boolean = category_prefix == 'cu.';
-    let every_objective: boolean = objective_name == '*';
+function request_scores(player: string, category_prefix: string, requested_obj: string): ScoreSearchResults {
+    const every_player: boolean = player == '*';
+    const every_category: boolean = category_prefix == 'all';
+    const every_objective: boolean = requested_obj == '*';
+    const is_custom: boolean = category_prefix == 'cu.';
 
-    
     if (!every_player && !BOARD_DATA.PlayerScores[player]) return undefined;
 
     let players: Array<string> = every_player ? PLAYERS : [player];
     let categories: Array<string> = every_category ? Object.keys(CATEGORIES_BY_PREFIX) : [category_prefix];
     let objectives: Array<string> = every_objective ? Object.keys(STANDARD_STATS_BY_NAME)
-        : is_custom ? Object.keys(CUSTOM_STATS)
-        : [STANDARD_STATS_BY_TITLE[objective_name]];
-
+        : is_custom ? [requested_obj]
+        : requested_obj.includes('*') ? filter_with_wildcard(requested_obj, Object.keys(STANDARD_STATS_BY_TITLE))
+        : [STANDARD_STATS_BY_TITLE[requested_obj]];
+    
     let results: ScoreSearchResults = {};
-    for (let p of players) {
+    for (const p of players) {
+        console.log(p);
         results[p] = {};
-        for (let c of categories) {
-            for (let o of objectives) {
-                let score: number = BOARD_DATA.PlayerScores[p][c + o];
+        for (const cat of categories) {
+            console.log(cat);
+            for (let obj of objectives) {
+                console.log(obj);
+                obj = STANDARD_STATS_BY_TITLE[obj] ?? obj;
+                let score: number = BOARD_DATA.PlayerScores[p][cat + obj];
                 if (!score) continue;
-                results[p][c + o] = score;
+                results[p][cat + obj] = score;
             }
         }
     }
@@ -243,11 +258,16 @@ function request_scores(player: string, category_prefix: string, objective_name:
 
 function scores_as_csv(score_results: ScoreSearchResults): Array<string> {
     let csv: Array<string> = [];
+    console.log(score_results);
     for (const [player, scores] of Object.entries(score_results)) {
         for (const [obj, score] of Object.entries(scores)) {
-            let category_title: string = CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
-            let objective_title: string = STANDARD_STATS_BY_NAME[obj.split('.')[1]];
-            csv.push(`${player},${category_title} ${objective_title},${score}`);
+            const is_custom: boolean = obj.startsWith('cu.');
+            console.log(obj);
+            let category_title: string = is_custom ? '' : CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
+            let objective_title: string = is_custom ? CUSTOM_STATS_BY_NAME[obj.split('.')[1]] : STANDARD_STATS_BY_NAME[obj.split('.')[1]];
+            let full_objective: string = is_custom ? objective_title : `${category_title} ${objective_title}`;
+            console.log(category_title, objective_title, full_objective)
+            csv.push(`${player},${full_objective},${score}`);
         }
     }
     return csv;
@@ -264,33 +284,48 @@ function prompt_blob(blob: Blob): void {
 }
 
 function build_and_show_results_table(results: ScoreSearchResults): void {
+    const csv_dl: HTMLAnchorElement = SEARCH_RESULTS_CONTAINER.querySelector('a#csv-download');
+    SEARCH_RESULTS_CONTAINER.classList.remove('off');
+
     const csv = scores_as_csv(results);
+    if (csv.length == 0) {
+        SEARCH_RESULTS_CONTAINER.querySelector('p').innerHTML = `Nothing found.<br>
+            <sup>Nothing could be found for that player, category, and object combination.</sup>`;
+        csv_dl.classList.add('disabled');
+        return;
+    }
+
+    SEARCH_RESULTS_CONTAINER.querySelector('p').innerHTML = `Found ${csv.length} results!`;
     let scoreboard_html: string = `
-    <tr>
-        <th>Player</th>
-        <th>Objective</th>
-        <th>Score</th>
-    </tr>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Objective</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
     `;
 
     SCOREBOARD_TABLE.innerHTML = scoreboard_html + '<p>Building...</p>';
-    $('div#search-results').classList.remove('off');
     for (let n = 0; n < csv.length; n++) {
         const line = csv[n];
         let [player, category, score] = line.split(',');
         scoreboard_html += `
-        <tr name="${n}">
-            <td name="0">${player}</td>
-            <td name="1">${category}</td>
-            <td name="2">${score}</td>
-        </tr>
+            <tr name="${n}">
+                <td name="0">${player}</td>
+                <td name="1">${category}</td>
+                <td name="2">${score}</td>
+            </tr>
         `;
     }
+    scoreboard_html += '</tbody>';
     SCOREBOARD_TABLE.innerHTML = scoreboard_html;
 
-    $('div#search-results a#csv-download').addEventListener('click', () => {
+    csv_dl.addEventListener('click', () => {
         prompt_blob(csv_blob(csv));
     });
+    csv_dl.classList.remove('disabled');
 }
 
 for (let button of $all('button[name="search-button"]')) {
@@ -309,7 +344,7 @@ for (let button of $all('button[name="search-button"]')) {
         let objective_selector: HTMLSelectElement = section.querySelector('select');
 
         button.addEventListener('click', () => {
-            let results = request_scores(player_input.value, 'cu.', objective_selector.value);
+            let results = request_scores('*', 'cu.', objective_selector.value);
             build_and_show_results_table(results);
         });
     }
@@ -325,19 +360,19 @@ function build_stats_category_selection(): void {
 build_stats_category_selection();
 
 function build_custom_stats_selection(): void {
-    for (const [name, title] of Object.entries(CUSTOM_STATS)) {
+    for (const [name, title] of Object.entries(CUSTOM_STATS_BY_NAME)) {
         CU_STATS_OBJ_SELECTOR.innerHTML += `<option value="${name}">${title}</option>\n`;
     };
 }
 build_custom_stats_selection();
 
 setup_tabs();
-
+console.log(BOARD_DATA);
 setInterval(() => {
     refresh_search_suggestions(ST_STATS.querySelector('div[name="player"]'), ST_STATS_PLAYER_INPUT.value, PLAYERS);
     refresh_search_suggestions(ST_STATS.querySelector('div[name="object"]'), ST_STATS_OBJ_INPUT.value, Object.keys(STANDARD_STATS_BY_TITLE));
-    refresh_search_suggestions(CU_STATS.querySelector('div[name="player"]'), CU_STATS_PLAYER_INPUT.value, PLAYERS);
 
+    let player_input_value: string = ST_STATS_PLAYER_INPUT.value;
     let st_category_value: string = ST_STATS_CAT_SELECTOR.value;
     let st_category_title: string = CATEGORIES_BY_PREFIX[st_category_value];
 
@@ -345,13 +380,23 @@ setInterval(() => {
     let st_obj_name: string = STANDARD_STATS_BY_TITLE[st_obj_value];
 
     let objective_name: string = st_category_value + st_obj_name;
+    
+    if (player_input_value == '*' && st_category_value == 'all' && st_obj_value == '*') {
+        SEARCH_RESULTS_CONTAINER.querySelector('p').innerHTML = `<sub>
+            <span style="color: rgb(255, 127, 127);">
+                This search will return all statistic entries in the scoreboard, which is 
+                <em>roughly ${humanize_number(EST_OBJECTIVE_COUNT)}</em>.
+                <br>This may take a long time to search, and the page may freeze while doing so.
+            </span>
+        </sub>`;
+    }
 
     validate_text_input(ST_STATS_PLAYER_INPUT, ST_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
-    validate_text_input(CU_STATS_PLAYER_INPUT, CU_STATS_PLAYER_SUB, 'Can\'t find player "%value%"', PLAYERS);
     validate_text_input(ST_STATS_OBJ_INPUT, ST_STATS_OBJ_SUB,
         `No entry for "%value%" in category "${st_category_title}"`, Object.keys(STANDARD_STATS_BY_TITLE),
-        [(st_obj_value == '*' || st_category_value == 'all') || Object.keys(BOARD_DATA.Objectives).includes(objective_name)]
+        [(st_obj_value.includes('*') || st_category_value == 'all') || Object.keys(BOARD_DATA.Objectives).includes(objective_name)]
     );
 }, 500);
+
 
 })();

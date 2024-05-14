@@ -23,6 +23,12 @@ export function $all(query) {
 export function extract_number(input_string) {
     return Number(input_string.match(/\d+/)[0]);
 }
+export function humanize_number(num) {
+    const abbrevs = ['', '', '', 'k', 'm', ' billion', 'trillion'];
+    const digits = num.toString().length - 1;
+    console.log(digits);
+    return (num / Math.pow(10, digits)).toPrecision(2).toString() + abbrevs[digits];
+}
 export function reverse_object(source_object) {
     return Object.fromEntries(Object.entries(source_object).map(([k, v]) => [v, k]));
 }
