@@ -73,6 +73,14 @@ code
     row-gap: 1em;
 }
 
+.flexnav.col2 {
+    width: 60%;
+}
+
+.flexnav.col1 {
+    width: 50%;
+}
+
 div.ol-mouse-position {
     background-color: #333;
     color: white;
@@ -311,6 +319,7 @@ h1.mc-head img:not(.no-shadow) {
 
 h2, h3 
 {
+    box-sizing: border-box;
     width: 75%;
     margin: auto;
     padding: 0.5em;
@@ -379,12 +388,14 @@ figcaption sup { font-style: italic; }
 
 ul { font-size: 1.5em; width: 75%; text-align: left; margin: 0 auto; }
 ul img { width: 40%; }
-ul ol
+
+ol.withbg
 {
+    width: 75%;
+    font-size: 1.5em;
     padding-top: 1em;
     padding-bottom: 1em;
-    margin-left: 0;
-    font-size: 0.9em;
+    margin: 0 auto;
     text-align: left;
     background-color: rgba(255,0,255,0.1);
     backdrop-filter: blur(5px);
@@ -473,14 +484,17 @@ kbd {
 
 @media only screen and (max-device-width:600px)
 {
-/*	body {font-size:2em;}*/
-    main {width: 100%}
-    h2, h2 {width: 100%; border-left: none;}
-    .bttn {padding: 1em; width: 75%;}
+    body {font-size: 0.75em;}
+    main {width: 100%; margin: 0;}
+    h1 {font-size: 2em;}
+    h2 {width: 100%; border-left: none;}
+    .bttn {padding: 1em; width: 75%; height: 3em;}
     ul {width: 100%; padding-left: 0;}
+    ol {width: 100%;}
     ul li {padding-left: 1em;}
-    ul ol {border-left: none;}
     ul img {width: 100%;}
     img.alone {width: 100%; height: auto;}
     figure img {height: 200px;}
+    .flexnav.col1 {width: 90%;}
+    .flexnav.col2 {width: 90%;}
 }

@@ -2,10 +2,9 @@
 <html>
 	<head>
 		<title>Info - BCR-MC</title>
-		<link rel="icon" type="image/x-icon" href="favicon.ico">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<link rel="icon" type="image/x-icon" href="/bcrmc/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="bcrmc.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="/bcrmc/header.js"></script>
 	</head>
 	<body class="bcr5">
 	<main>
@@ -22,12 +21,13 @@
 			The server is now closed, thanks to all who joined! Until next year!
 		</h1>
 		<br>
-		<div class="flexnav" style="width: 60%;">
+		<div class="flexnav col2">
 			<a href="gallery/?s=bcr5" class="bttn">Photo Gallery, Maps, World Download</a>
 			<a href="scoreboard/?s=bcr5" class="bttn">Search & Browse the Scoreboard</a>
 		</div>
 		<br>
 		<hr>
+
 		<h1 class="mc-head">
 			<img src="i/bcr.png" style="height: 1.5em; vertical-align: bottom;">
 			<span>BCR-MC 5 — 1.20: </span><span class="title-gradient-120">Trails & Tales</span>
@@ -36,7 +36,7 @@
 
 		<h2 id="contents">Table Of Contents</h2>
 		<br>
-		<nav class="flexnav" style="width: 60%;">
+		<nav class="flexnav col2">
 			<a class="bttn" href="#joining-the-server">Joining The Server</a>
 			<a class="bttn" href="#active-datapacks">Active Datapacks</a>
 			<a class="bttn" href="#active-plugins">Active Plugins</a>
@@ -49,29 +49,37 @@
 			<li>Make sure you are on <b class="hl">1.20.2</b>. You can play with both vanilla & modded clients, but <b class="hl">only client-side mods will load</b>. Server-side mods will simply be ignored.</li>
 			<li>The server is running on Minecraft Java Edition, however Bedrock players can also join thanks to the GeyserMC plugin.</li>
 			<li>If you are on Java, you'll connect via <b class="hl">Multiplayer</b> → <b class="hl">Direct Connect</b> or <b class="hl">Add Server</b>, using the address <code>play.bcr-mc.xyz</code>. <b>If you are on Bedrock,</b> see below - <i>you will only have to do this once!</i></li><br>
-			<h3 style="font-size: 1.5em; margin: 0;">Switch users:</h3>
-			<span>(Summarized from <a href="https://apexminecrafthosting.com/how-to-join-a-bedrock-edition-server-on-xbox-switch/">this article</a>.)</span>
-			<ol>
-				<li>Open the <b class="hl">System Settings</b> by selecting the <b>gear icon</b> on the home screen, and scroll down to the <b>Internet</b> section.</li>
-				<li>Select <b class="hl">Internet Settings</b>, select the network you are connected to (there should be a checkmark to the right of it), and select <b class="hl">Change Settings</b>.</li>
-				<li>Change <b class="hl">DNS Settings</b> to <b>Manual</b>, 
-					then set your <b class="hl">Primary DNS</b> to <code>104.238.130.180</code>, 
-					and set your <b class="hl">Secondary DNS</b> to <code>1.1.1.1</code>.</li>
-				<li>Select <b class="hl">Save</b>, and open Minecraft.</li>
-				<li>At the title screen, choose <b class="hl">Play</b>, followed by the <b class="hl">Servers</b> tab.</li>
-				<li>Select anything from the <b class="hl">Featured Servers</b> list, and then <b class="hl">Join Server</b>.</li>
-				<li>A new menu will appear - select <b class="hl">Connect to a Server</b>. From here, you'll continue from <b>Step 3</b> of the "Other Bedrock users" section below — make sure that the <b class="hl">Add to server list</b> toggle is flipped ON (it should look green) so that you don't have to do this each time.</li>
-			</ol>
-			<h3 style="font-size: 1.5em; margin: 0;">Other Bedrock users:</h3>
-			<ol>
-				<li>Hit <b class="hl">Play</b>, then select the <b class="hl">Servers</b> tab.</li>
-				<li>Scroll to the bottom of the list, and select <b class="hl">Add Server</b>.</li>
-				<li>In the <b class="hl">Server Name</b> box, enter whatever you'd like. This will only affect the title of the server for yourself.</li>
-				<li>In the <b class="hl">Server Address</b> box, enter <code>play.bcr-mc.xyz</code>.</li>
-				<li>In the <b class="hl">Port</b> box, enter the number <code>19132</code> if it is not there already.</li>
-				<li>The server will now be available at the bottom of your Servers list, in the future.</li>
-			</ol>
 		</ul>
+		<div class="flexnav col2">
+			<a href="#connecting-on-bedrock-switch" class="bttn">Connecting on Bedrock (Switch)</a>
+			<a href="#connecting-on-bedrock-other" class="bttn">Connecting on Bedrock (Other)</a>
+		</div>
+		<h2 id="connecting-on-bedrock-switch">
+			Connecting on Bedrock (Switch)<br>
+			<sup>(Summarized from <a href="https://apexminecrafthosting.com/how-to-join-a-bedrock-edition-server-on-xbox-switch/">this article</a>.)</sup>
+		</h2>
+		
+		<ol class="withbg">
+			<li>Open the <b class="hl">System Settings</b> by selecting the <b>gear icon</b> on the home screen, and scroll down to the <b>Internet</b> section.</li>
+			<li>Select <b class="hl">Internet Settings</b>, select the network you are connected to (there should be a checkmark to the right of it), and select <b class="hl">Change Settings</b>.</li>
+			<li>Change <b class="hl">DNS Settings</b> to <b>Manual</b>, 
+				then set your <b class="hl">Primary DNS</b> to <code>104.238.130.180</code>, 
+				and set your <b class="hl">Secondary DNS</b> to <code>1.1.1.1</code>.</li>
+			<li>Select <b class="hl">Save</b>, and open Minecraft.</li>
+			<li>At the title screen, choose <b class="hl">Play</b>, followed by the <b class="hl">Servers</b> tab.</li>
+			<li>Select anything from the <b class="hl">Featured Servers</b> list, and then <b class="hl">Join Server</b>.</li>
+			<li>A new menu will appear - select <b class="hl">Connect to a Server</b>. From here, you'll continue from <b>Step 3</b> of the "Other Bedrock users" section below — make sure that the <b class="hl">Add to server list</b> toggle is flipped ON (it should look green) so that you don't have to do this each time.</li>
+		</ol>
+
+		<h2 id="connecting-on-bedrock-other">Connecting on Bedrock (Other)</h2>
+		<ol class="withbg">
+			<li>Hit <b class="hl">Play</b>, then select the <b class="hl">Servers</b> tab.</li>
+			<li>Scroll to the bottom of the list, and select <b class="hl">Add Server</b>.</li>
+			<li>In the <b class="hl">Server Name</b> box, enter whatever you'd like. This will only affect the title of the server for yourself.</li>
+			<li>In the <b class="hl">Server Address</b> box, enter <code>play.bcr-mc.xyz</code>.</li>
+			<li>In the <b class="hl">Port</b> box, enter the number <code>19132</code> if it is not there already.</li>
+			<li>The server will now be available at the bottom of your Servers list, in the future.</li>
+		</ol>
 
 		<h2 id="active-datapacks">Active Datapacks</h2>
 		<ul>
