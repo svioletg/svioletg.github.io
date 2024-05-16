@@ -20,6 +20,7 @@
 
     --bcr5-icon: url('i/cherry_sapling_128x128.png');
     --bcr5-bg:   url('i/cherry_planks_128x128.png');
+    --bcr5-grad: linear-gradient(fuchsia, orange);
     --bcr5-h2:   url('i/bamboo_planks_128x128_dark.png');
 }
 
@@ -30,7 +31,7 @@
 
 body
 {
-    margin: 0;
+    margin-top: 0;
     color: white;
     font-family: 'Aoboshi One', serif;
     font-weight: lighter;
@@ -56,10 +57,13 @@ b { font-weight: bold; }
 
 code 
 {
-    font-family: "Courier New";
+    font-family: 'Consolas', 'Courier New', monospace;
     font-weight: bold; 
-    background-color: #333; 
-    padding: 5px; color: yellow;
+    background-color: black; 
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px;
+    color: yellow;
 }
 
 .flexnav
@@ -299,13 +303,11 @@ select.bttn > option {
     color: turquoise;
 }
 
-span.title-gradient-120
+.text-grad-bcr5
 {
-    background: linear-gradient(fuchsia, orange);
-    /* background: radial-gradient(gold, fuchsia); */
+    background: var(--bcr5-grad);
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(3px 3px rgba(0, 0, 0, 0.5));
 }
 
 h1 { font-size: 3em; }
@@ -329,6 +331,7 @@ h2, h3
 
 h2 
 {
+    width: 75%;
     font-size: 2em;
     background-color: rgba(0,255,255,0.25);
     background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('i/slate_128x128.png');
@@ -386,8 +389,13 @@ figcaption
 
 figcaption sup { font-style: italic; }
 
-ul { font-size: 1.5em; width: 75%; text-align: left; margin: 0 auto; }
+ul { font-size: 1.5em; width: 75%; text-align: left; margin: 0 auto; list-style: disc inside; }
 ul img { width: 40%; }
+
+ul.buttonlist {
+    list-style: none;
+    text-align: center;
+}
 
 ol.withbg
 {
@@ -482,16 +490,15 @@ kbd {
 
 // MOBILE
 
-@media only screen and (max-device-width:600px)
-{
+@media only screen and (max-device-width:600px) {
     body {font-size: 0.75em;}
-    main {width: 100%; margin: 0;}
+    main {width: 100%;}
     h1 {font-size: 2em;}
-    h2 {width: 100%; border-left: none;}
-    .bttn {padding: 1em; width: 75%; height: 3em;}
+    h2 {width: 90%;}
+    .bttn {padding: 1em; width: 100%; height: 3em;}
     ul {width: 100%; padding-left: 0;}
     ol {width: 100%;}
-    ul li {padding-left: 1em;}
+    ul li {margin: 0 auto; width: 80%;}
     ul img {width: 100%;}
     img.alone {width: 100%; height: auto;}
     figure img {height: 200px;}
