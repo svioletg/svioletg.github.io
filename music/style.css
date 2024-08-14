@@ -4,6 +4,7 @@ body {
 }
 
 article.main {
+    margin-left: 2em;
     width: 75%;
 }
 
@@ -11,7 +12,7 @@ table {
     table-layout: fixed;
     border-collapse: collapse;
     border: 1px solid black;
-    width: 75%;
+    width: 100%;
 }
 
 tr, td {
