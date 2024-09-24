@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&display=swap");
 :root {
   --bcr1-icon: url("i/bell_128x128.png");
   --bcr1-bg: url("i/dirt_128x128_dark.png");
@@ -17,6 +18,10 @@
   --bcr5-bg: url("i/cherry_planks_128x128.png");
   --bcr5-grad: linear-gradient(fuchsia, orange);
   --bcr5-h2: url("i/bamboo_planks_128x128_dark.png");
+  --bcr6-icon: url("i/trial_key_128x128.png");
+  --bcr6-bg: url("i/tuff_bricks_64x64_dark.png");
+  --bcr6-grad: linear-gradient(#d67b5b, #59b292);
+  --bcr6-h2: url("i/oxidized_cut_copper_64x64_dark.png");
 }
 
 @font-face {
@@ -26,8 +31,8 @@
 body {
   margin-top: 0;
   color: white;
-  font-family: "Aoboshi One", serif;
-  font-weight: lighter;
+  font-family: "Grenze Gotisch", serif;
+  font-weight: normal;
   text-align: center;
   font-size: 1em;
   background-color: black;
@@ -43,7 +48,7 @@ main {
 
 hr {
   width: 75%;
-  color: white;
+  color: grey;
 }
 
 p {
@@ -316,6 +321,13 @@ select.bttn > option {
 
 .text-grad-bcr5 {
   background: var(--bcr5-grad);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-grad-bcr6 {
+  background: var(--bcr6-grad);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -631,6 +643,29 @@ img.bcr5-icon {
 }
 
 a img.bcr5-icon {
+  margin-bottom: 0.25em;
+}
+
+body.bcr6 {
+  background-image: var(--bcr6-bg);
+}
+
+body.bcr6 h2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), var(--bcr6-h2);
+}
+
+body.bcr6 table.scoreboard th {
+  background-image: var(--bcr6-h2);
+}
+
+img.bcr6-icon {
+  content: var(--bcr6-icon);
+  height: 1.5em;
+  vertical-align: bottom;
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+}
+
+a img.bcr6-icon {
   margin-bottom: 0.25em;
 }
 

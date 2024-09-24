@@ -15,7 +15,7 @@ def main():
         if not source_path.is_file():
             input(f'Path specified: "{source_path}" doesn\'t exist or is not a file.')
 
-        img = Image.open(source_path)
+        img = Image.open(source_path).convert('RGB')
         dest_path = source_path.parent.joinpath(source_path.stem + '_dark' + source_path.suffix)
         brightness = ImageEnhance.Brightness(img)
         img = brightness.enhance(0.5)

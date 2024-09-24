@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { extract_number, json } from './utils.js';
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
-        const LATEST_SERVER = 5;
+        const LATEST_SERVER = 6;
         // Concatenation for readability, mainly
         const FIGURE_TEMPLATE = `<figure style="background-image: url('/bcrmc/%SEASON%/jpg/%IMAGE%.jpg');">` +
             `<figcaption>%TITLE% %%HAS_PNG<a href="/bcrmc/%SEASON%/png/%IMAGE%.png">[PNG]</a>HAS_PNG%%` +

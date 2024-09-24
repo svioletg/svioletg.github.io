@@ -2,7 +2,7 @@ import { extract_number, json } from './utils.js';
 
 (async function () {
 
-const LATEST_SERVER: number = 5;
+const LATEST_SERVER: number = 6;
 
 // Concatenation for readability, mainly
 const FIGURE_TEMPLATE: string = `<figure style="background-image: url('/bcrmc/%SEASON%/jpg/%IMAGE%.jpg');">`+

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&display=swap');
 
 :root {
     --bcr1-icon: url('i/bell_128x128.png');
@@ -22,6 +23,11 @@
     --bcr5-bg:   url('i/cherry_planks_128x128.png');
     --bcr5-grad: linear-gradient(fuchsia, orange);
     --bcr5-h2:   url('i/bamboo_planks_128x128_dark.png');
+
+    --bcr6-icon: url('i/trial_key_128x128.png');
+    --bcr6-bg:   url('i/tuff_bricks_64x64_dark.png');
+    --bcr6-grad: linear-gradient(#d67b5b, #59b292);
+    --bcr6-h2:   url('i/oxidized_cut_copper_64x64_dark.png');
 }
 
 @font-face {
@@ -32,8 +38,8 @@
 body {
     margin-top: 0;
     color: white;
-    font-family: 'Aoboshi One', serif;
-    font-weight: lighter;
+    font-family: 'Grenze Gotisch', serif;
+    font-weight: normal;
     text-align: center;
     font-size: 1em;
     background-color: black;
@@ -47,7 +53,7 @@ main {
     margin: 0 auto;
 }
 
-hr { width: 75%; color: white; }
+hr { width: 75%; color: grey; }
 
 p { width: 75%; margin: 0 auto; font-size: 1.5em; }
 
@@ -306,6 +312,13 @@ select.bttn > option {
     -webkit-text-fill-color: transparent;
 }
 
+.text-grad-bcr6
+{
+    background: var(--bcr6-grad);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 h1 { font-size: 3em; }
 
 h1.mc-head span,
@@ -485,7 +498,7 @@ footer p {
 
 // AUTOMATIONS
 
-@for $i from 1 through 5 {
+@for $i from 1 through 6 {
     body.bcr#{$i} {
         background-image: var(--bcr#{$i}-bg);
     }
