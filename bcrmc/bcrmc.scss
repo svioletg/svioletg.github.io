@@ -47,7 +47,7 @@ main {
     margin: 0 auto;
 }
 
-hr { width: 75%; }
+hr { width: 75%; color: white; }
 
 p { width: 75%; margin: 0 auto; font-size: 1.5em; }
 
@@ -484,7 +484,7 @@ sup {
     img.bcr#{$i}-icon {
         content: var(--bcr#{$i}-icon);
         height: 1.5em;
-        padding-right: 1em;
+        // padding-right: 1em;
         vertical-align: bottom;
         filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
     }
@@ -499,6 +499,7 @@ sup {
     h2 {width: 90%;}
     h3.subtitle {width: 100%;}
     .bttn {padding: 1em; width: 100%; height: 60px;}
+    .buttonlist .bttn {height: 30px;}
     ul {width: 100%; padding-left: 0;}
     ol {width: 100%;}
     ul li {margin: 0 auto; width: 80%;}
