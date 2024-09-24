@@ -488,6 +488,10 @@ sup {
         vertical-align: bottom;
         filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
     }
+
+    a img.bcr#{$i}-icon {
+        margin-bottom: 0.25em;
+    }
 }
 
 // MOBILE
@@ -505,7 +509,9 @@ sup {
     ul li {margin: 0 auto; width: 80%;}
     ul img {width: 100%;}
     img.alone {width: 100%; height: auto;}
+    figure { min-width: 50%; max-width: 50%; }
     figure img {height: 200px;}
     .flexnav.col1 {width: 90%;}
     .flexnav.col2 {width: 90%;}
+    .flexnav.gallery-files {width: 100%;}
 }
