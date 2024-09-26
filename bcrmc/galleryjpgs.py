@@ -1,5 +1,5 @@
-# convert all pngs to jpg and sort them
-
+"""Scans a directory for PNG files and creates JPG duplicates if they don't exist,
+sorting them into the JPG subdirectory of the given directory."""
 import os
 import sys
 from pathlib import Path
@@ -25,7 +25,7 @@ def main():
             tqdm.write(f'"{item}" -> "{Path(item).with_suffix('.jpg')}"')
             os.system(f'ffmpeg -i "{Path(item)}" "{Path(item).with_suffix('.jpg')}" -q:v 0 -hide_banner')
             processed += 1
-    
+
     if processed == 0:
         print('No files to convert.')
 
