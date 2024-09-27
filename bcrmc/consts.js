@@ -1,1 +1,1 @@
-export const LATEST_SERVER = 5;
+export const LATEST_SERVER = 6;
