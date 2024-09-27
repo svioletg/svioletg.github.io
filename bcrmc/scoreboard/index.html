@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8"/>
-	<title>BCR-MC 5 — Scoreboard Viewer</title>
+	<title>BCR-MC — Scoreboard Viewer</title>
 	<link rel="stylesheet" type="text/css" href="/bcrmc/bcrmc.css">
 	<link rel="icon" type="image/x-icon" href="/bcrmc/favicon.ico">
+	<script>
+		let FF_FOUC_FIX; // doesn't work...
+	</script>
 </head>
 <body class="bcr5">
 	<main><article>
@@ -14,15 +17,17 @@
 			<a class="bttn" href="http://play.bcr-mc.xyz:1234/">Live Server Map</a>
 		</nav>
 		<hr>
-
-		<h1 class="mc-head">
-			<img class="no-shadow" src="/bcrmc/i/bcr.png" style="height: 1.5em; vertical-align: bottom;">
-			<span>BCR-MC 5 — 1.20:</span> <span class="text-grad-bcr5">Trails & Tales</span>
-			<img src="/bcrmc/i/cherry_sapling_128x128.png" style="height: 1.5em; vertical-align: bottom;">
-			<br><span style="color: white;">Post-Server Scoreboard Viewer</span>
-		</h1>
+		<!-- Server titles -->
+		<div class="flexnav board-title off" name="bcr1"><h2 id="114">BCR-MC 1 - 1.14/1.15: Village & Pillage Update / Buzzy Bees Update<br><sup>(Dec. 2019)</sup></h2></div>
+		<div class="flexnav board-title off" name="bcr2"><h2 id="115">BCR-MC 2 - 1.15: Buzzy Bees Update<br><sup>(Apr. 2020)</sup></h2></div>
+		<div class="flexnav board-title off" name="bcr3"><h2 id="118">BCR-MC 3 - 1.18: Caves & Cliffs Update<br><sup>(Dec. 1st, 2021 — Jan. 29th, 2022)</sup></h2></div>
+		<div class="flexnav board-title off" name="bcr4"><h2 id="119">BCR-MC 4 - 1.19: The Wild Update<br><sup>(Dec. 1st, 2022 — Jan. 31st 2023)</sup></h2></div>
+		<div class="flexnav board-title off" name="bcr5"><h2 id="120">BCR-MC 5 - 1.20: Trails & Tales<br><sup>(Dec. 1st, 2023 — Jan. 31st 2024)</sup></h2></div>
 		<hr>
-
+	<div id="no-scores-container" class="off">
+		<p>No scores found for this server.</p>
+	</div>
+	<div id="scoreboard-container">
 		<div class="flexnav" style="width: 60%;" id="search-type-selector">
 			<button class="bttn tab active" id="search-type-stats" name="tab-stats-scores">Statistics</button>
 			<!-- <button class="bttn tab" id="search-type-other" name="tab-other-scores">Other Objectives</button> -->
@@ -86,6 +91,7 @@
 				</thead>
 			</table>
 		</div>
+	</div>
 		<br>
 		<br>
 		<br>

@@ -1,11 +1,30 @@
-import { $, $all, humanize_number, json, reverse_object } from '../utils.js';
+import { LATEST_SERVER } from '../consts.js';
+import { $, $all, extract_number, humanize_number, json, reverse_object } from '../utils.js';
 import { setup_tabs } from '../tabs.js';
 
 (async function () {
 
+const URL_PARAMS: URLSearchParams = new URLSearchParams(window.location.search);
+
+const SERVER: string = URL_PARAMS.get('s') ?? 'bcr5';
+const SCOREBOARD_FILES: { [key: string]: string } = {
+    'bcr1': 'scoreboard-json/scoreboard-empty.json',
+    'bcr2': 'scoreboard-json/scoreboard-empty.json',
+    'bcr3': 'scoreboard-json/scoreboard-empty.json',
+    'bcr4': 'scoreboard-json/scoreboard-empty.json',
+    'bcr5': 'scoreboard-json/scoreboard-bcr5-feb01.json',
+    'bcr6': 'scoreboard-json/scoreboard-bcr5-feb01.json',
+}
+
+const NO_SCORES_CONTAINER: HTMLDivElement = $('div#no-scores-container');
+const SCOREBOARD_CONTAINER: HTMLDivElement = $('div#scoreboard-container');
 const SCOREBOARD_TABLE: HTMLTableElement = $('table.scoreboard');
 
-const BOARD_DATA: { [key: string]: object } = await json('scoreboard-json/scoreboard-bcr5-feb01.json');
+const BOARD_DATA: { [key: string]: object } = await json(SCOREBOARD_FILES[SERVER]);
+
+if (Object.keys(BOARD_DATA.PlayerScores).length == 0) {
+    SCOREBOARD_CONTAINER.classList.add('off'); NO_SCORES_CONTAINER.classList.remove('off');
+}
 
 const PLAYERS: Array<string> = Object.keys(BOARD_DATA.PlayerScores);
 
@@ -99,6 +118,41 @@ function fade_out(element: HTMLElement) {
     if (!element.classList.contains('off')) element.classList.add('fade-out');
 }
 
+function add_scoreboard_nav_arrows(): void {
+    let board_titles: NodeListOf<HTMLDivElement> = document.querySelectorAll('div.board-title');
+    board_titles.forEach(title => {
+        let current_page_name: string = title.getAttribute('name');
+        let current_page_number: number = extract_number(current_page_name);
+
+        let left_arrow: HTMLButtonElement = document.createElement('button');
+        left_arrow.classList.add('bttn', 'arrow');
+        left_arrow.addEventListener('click', () => { window.location.href = `?s=bcr${current_page_number - 1}`; })
+        left_arrow.innerHTML = '&lt;';
+
+        let right_arrow: HTMLButtonElement = document.createElement('button');
+        right_arrow.classList.add('bttn', 'arrow');
+        right_arrow.addEventListener('click', () => { window.location.href = `?s=bcr${current_page_number + 1}`; })
+        right_arrow.innerHTML = '&gt;';
+
+        title.insertBefore(left_arrow, title.querySelector('h2'));
+        if (current_page_number == 1) {
+            left_arrow.classList.add('hide');
+        }
+
+        title.appendChild(right_arrow);
+        if (current_page_number == LATEST_SERVER) {
+            right_arrow.classList.add('hide');
+        }
+    });
+    let body: HTMLBodyElement = document.querySelector('body');
+    body.classList.remove(body.classList.toString());
+    body.classList.add(SERVER);
+
+    $(`div.board-title[name="${SERVER}"]`).classList.remove('off');
+}
+
+add_scoreboard_nav_arrows();
+
 // Show and hide search suggestions depending on input box focus
 let focus_state: { [key: string]: boolean } = {};
 
@@ -122,7 +176,7 @@ for (const [input, sugbox] of [
     sugbox.setAttribute('fstate-id', SUGBOX_FOCUS_ID);
     focus_state[SUGBOX_FOCUS_ID] = false;
 
-    
+
     input.addEventListener('focus', () => {
         focus_state[INPUT_FOCUS_ID] = true;
         if (sugbox.children.length > 0) {
@@ -133,6 +187,7 @@ for (const [input, sugbox] of [
         focus_state[SUGBOX_FOCUS_ID] = true;
     });
     // TODO: this only works on one of them? sure. i dont care rn
+    // TODO: i dont remember what i meant by this ^
 
     input.addEventListener('blur', () => {
         focus_state[INPUT_FOCUS_ID] = false;
@@ -147,7 +202,6 @@ for (const [input, sugbox] of [
     });
 }
 
-// TODO: Add search suggestions for player names
 let last_search_value: string = '';
 
 function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: string, search_options: Array<string>): void {
@@ -156,7 +210,7 @@ function refresh_search_suggestions(sugbox_parent: HTMLElement, search_string: s
     sugbox.style.setProperty('width', String(input.offsetWidth) + 'px');
     // typescript complains about this if i don't specify <HTMLDivElement> i guess? but just using 'input' up there is fine. ok
     sugbox.style.setProperty('margin-top', String(sugbox_parent.querySelector<HTMLDivElement>('div.text-input-sub').offsetHeight) + 'px');
-        
+
     if (search_string == last_search_value) return;
 
     if (search_string.length > 2) {
@@ -198,7 +252,7 @@ function validate_text_input(element: HTMLInputElement, sub_element: HTMLElement
             || (filter_with_wildcard(element.value, valid_options).length > 0)
             || element.value == '*'
         ) && (other_conditions ? other_conditions.every(Boolean) : true);
-    
+
     if (is_valid) {
         sub_element.innerHTML = ''; sub_element.classList.remove('invalid'); sub_element.classList.add('off');
         element.classList.remove('invalid');
@@ -236,15 +290,12 @@ function request_scores(player: string, category_prefix: string, requested_obj: 
         : is_custom ? [requested_obj]
         : requested_obj.includes('*') ? filter_with_wildcard(requested_obj, Object.keys(STANDARD_STATS_BY_TITLE))
         : [STANDARD_STATS_BY_TITLE[requested_obj]];
-    
+
     let results: ScoreSearchResults = {};
     for (const p of players) {
-        console.log(p);
         results[p] = {};
         for (const cat of categories) {
-            console.log(cat);
             for (let obj of objectives) {
-                console.log(obj);
                 obj = STANDARD_STATS_BY_TITLE[obj] ?? obj;
                 let score: number = BOARD_DATA.PlayerScores[p][cat + obj];
                 if (!score) continue;
@@ -258,15 +309,12 @@ function request_scores(player: string, category_prefix: string, requested_obj: 
 
 function scores_as_csv(score_results: ScoreSearchResults): Array<string> {
     let csv: Array<string> = [];
-    console.log(score_results);
     for (const [player, scores] of Object.entries(score_results)) {
         for (const [obj, score] of Object.entries(scores)) {
             const is_custom: boolean = obj.startsWith('cu.');
-            console.log(obj);
             let category_title: string = is_custom ? '' : CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
             let objective_title: string = is_custom ? CUSTOM_STATS_BY_NAME[obj.split('.')[1]] : STANDARD_STATS_BY_NAME[obj.split('.')[1]];
             let full_objective: string = is_custom ? objective_title : `${category_title} ${objective_title}`;
-            console.log(category_title, objective_title, full_objective)
             csv.push(`${player},${full_objective},${score}`);
         }
     }
@@ -367,7 +415,6 @@ function build_custom_stats_selection(): void {
 build_custom_stats_selection();
 
 setup_tabs();
-console.log(BOARD_DATA);
 setInterval(() => {
     refresh_search_suggestions(ST_STATS.querySelector('div[name="player"]'), ST_STATS_PLAYER_INPUT.value, PLAYERS);
     refresh_search_suggestions(ST_STATS.querySelector('div[name="object"]'), ST_STATS_OBJ_INPUT.value, Object.keys(STANDARD_STATS_BY_TITLE));
@@ -380,11 +427,11 @@ setInterval(() => {
     let st_obj_name: string = STANDARD_STATS_BY_TITLE[st_obj_value];
 
     let objective_name: string = st_category_value + st_obj_name;
-    
+
     if (player_input_value == '*' && st_category_value == 'all' && st_obj_value == '*') {
         SEARCH_RESULTS_CONTAINER.querySelector('p').innerHTML = `<sub>
             <span style="color: rgb(255, 127, 127);">
-                This search will return all statistic entries in the scoreboard, which is 
+                This search will return all statistic entries in the scoreboard, which is
                 <em>roughly ${humanize_number(EST_OBJECTIVE_COUNT)}</em>.
                 <br>This may take a long time to search, and the page may freeze while doing so.
             </span>

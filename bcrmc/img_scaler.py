@@ -3,17 +3,15 @@ from pathlib import Path
 
 from PIL import Image
 
-from keepopen import keep_open
+from explorer_script import explorer_script
 
 
-@keep_open
+@explorer_script
 def main():
-    if len(sys.argv) == 1:
-        input('No image path given.')
     for arg in sys.argv[1:]:
         source_path = Path(arg)
         if not source_path.is_file():
-            input(f'Path specified: "{source_path}" doesn\'t exist or is not a file.')
+            print(f'Path specified: "{source_path}" doesn\'t exist or is not a file.')
 
         while True:
             try:
