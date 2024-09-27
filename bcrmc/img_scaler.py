@@ -3,10 +3,10 @@ from pathlib import Path
 
 from PIL import Image
 
-from keepopen import keep_open
+from explorer_script import explorer_script
 
 
-@keep_open
+@explorer_script
 def main():
     for arg in sys.argv[1:]:
         source_path = Path(arg)

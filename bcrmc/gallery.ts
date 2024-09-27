@@ -62,12 +62,12 @@ function add_gallery_nav_arrows(): void {
         right_arrow.classList.add('bttn', 'arrow');
         right_arrow.addEventListener('click', () => { switch_gallery(`bcr${current_page_number + 1}`); })
         right_arrow.innerHTML = '&gt;';
-        
+
         title.insertBefore(left_arrow, title.querySelector('h2'));
         if (current_page_number == 1) {
             left_arrow.classList.add('hide');
         }
-        
+
         title.appendChild(right_arrow);
         if (current_page_number == LATEST_SERVER) {
             right_arrow.classList.add('hide');
@@ -102,7 +102,7 @@ function switch_gallery(server_season: string): void {
     body.classList.add(server_season);
 
     // Make the gallery, if it doesn't exist
-    if (!document.querySelector(`div.gallery[name="${server_season}"]`)) { 
+    if (!document.querySelector(`div.gallery[name="${server_season}"]`)) {
         build_gallery(server_season);
     }
 

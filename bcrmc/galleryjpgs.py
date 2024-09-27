@@ -6,12 +6,12 @@ from pathlib import Path
 
 import colorama
 from colorama import Fore
-from keepopen import keep_open
+from explorer_script import explorer_script
 from tqdm import tqdm
 
 colorama.init(autoreset=True)
 
-@keep_open
+@explorer_script
 def main():
     root = Path(sys.argv[1])
     png = [*(root / 'png').glob('*.png')]

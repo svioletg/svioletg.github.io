@@ -1,4 +1,5 @@
-bcrmc/__pycache__/
+__pycache__/
+*/__pycache__/
 coding/posts/makenew.py
 coding/posts/makenew.bat
 bcrmc/newfigs.txt
