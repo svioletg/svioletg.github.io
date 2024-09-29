@@ -13,7 +13,7 @@ const SCOREBOARD_FILES: { [key: string]: string } = {
     'bcr3': 'scoreboard-json/scoreboard-empty.json',
     'bcr4': 'scoreboard-json/scoreboard-empty.json',
     'bcr5': 'scoreboard-json/scoreboard-bcr5-feb01.json',
-    'bcr6': 'scoreboard-json/scoreboard-bcr5-feb01.json',
+    'bcr6': 'scoreboard-json/scoreboard-empty.json',
 }
 const SCOREBOARD_JSON_URL: string = `/bcrmc/scoreboard/${SCOREBOARD_FILES[SERVER]}`;
 
