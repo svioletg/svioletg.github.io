@@ -23,6 +23,8 @@ import { setup_tabs } from '../tabs.js';
             'bcr5': 'scoreboard-json/scoreboard-bcr5-feb01.json',
             'bcr6': 'scoreboard-json/scoreboard-bcr5-feb01.json',
         };
+        const SCOREBOARD_JSON_URL = `/bcrmc/scoreboard/${SCOREBOARD_FILES[SERVER]}`;
+        $('a#board-json-dl').href = SCOREBOARD_JSON_URL;
         const NO_SCORES_CONTAINER = $('div#no-scores-container');
         const SCOREBOARD_CONTAINER = $('div#scoreboard-container');
         const SCOREBOARD_TABLE = $('table.scoreboard');
@@ -271,7 +273,7 @@ import { setup_tabs } from '../tabs.js';
             return results;
         }
         function scores_as_csv(score_results) {
-            let csv = [];
+            let csv = ['Player,Objective,Score'];
             for (const [player, scores] of Object.entries(score_results)) {
                 for (const [obj, score] of Object.entries(scores)) {
                     const is_custom = obj.startsWith('cu.');

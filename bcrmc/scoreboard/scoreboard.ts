@@ -15,6 +15,9 @@ const SCOREBOARD_FILES: { [key: string]: string } = {
     'bcr5': 'scoreboard-json/scoreboard-bcr5-feb01.json',
     'bcr6': 'scoreboard-json/scoreboard-bcr5-feb01.json',
 }
+const SCOREBOARD_JSON_URL: string = `/bcrmc/scoreboard/${SCOREBOARD_FILES[SERVER]}`;
+
+$('a#board-json-dl').href = SCOREBOARD_JSON_URL;
 
 const NO_SCORES_CONTAINER: HTMLDivElement = $('div#no-scores-container');
 const SCOREBOARD_CONTAINER: HTMLDivElement = $('div#scoreboard-container');
@@ -308,7 +311,7 @@ function request_scores(player: string, category_prefix: string, requested_obj: 
 }
 
 function scores_as_csv(score_results: ScoreSearchResults): Array<string> {
-    let csv: Array<string> = [];
+    let csv: Array<string> = ['Player,Objective,Score'];
     for (const [player, scores] of Object.entries(score_results)) {
         for (const [obj, score] of Object.entries(scores)) {
             const is_custom: boolean = obj.startsWith('cu.');
