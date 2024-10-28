@@ -29,17 +29,13 @@
 		<hr>
 
 		<h1 class="mc-head">
-			<img src="i/bcr.png" style="height: 1.5em; vertical-align: bottom;">
-			<span>BCR-MC 6: </span>
-			<span class="text-grad-bcr6">Tricky Trials</span>
-			<img class="bcr6-icon" style="height: 1.5em; vertical-align: bottom;">
-			<br><span style="font-size: 0.75em; vertical-align: top;">[ <span class="text-grad-bcr6"><a href="https://minecraft.wiki/w/Java_Edition_1.21">1.21</a></span> ]</span>
 		</h1>
 
 		<h2 id="contents">Table Of Contents</h2>
 		<br>
 		<nav class="flexnav col2">
 			<a class="bttn" href="#joining-the-server">Joining The Server</a>
+			<a class="bttn" href="#whats-new">What's New</a>
 			<a class="bttn" href="#active-datapacks">Active Datapacks</a>
 			<a class="bttn" href="#active-plugins">Active Plugins</a>
 			<a class="bttn" href="#recommended-mods">Recommended Mods</a>
@@ -84,11 +80,21 @@
 			<li>The server will now be available at the bottom of your Servers list, in the future.</li>
 		</ol>
 
+		<h2 id="whats-new">What's New</h2>
+		<p>You can read up on the overall changes and additions in Minecraft 1.21 on the <a href="https://minecraft.fandom.com/wiki/Java_Edition_1.21">Minecraft Wiki</a>.</p>
+		<p>
+			This year's server datapack comes with a handful of smelting recipes that will make it easier to <a href="https://minecraft.wiki/w/Oxidation">oxidize copper</a>.
+			<ul>
+				<li>Placing any copper block into a furnace will <b class="hl">advance its oxidzation by one stage</b>, and the recipe takes <b class="hl">20 seconds</b> to complete. It grants no experience.</li>
+				<li>Excluding the base unoxidized state, there are three stages of oxidzation, so fully oxidizing a copper block would take a full minute.</li>
+			</ul>
+		</p>
+
 		<h2 id="active-datapacks">Active Datapacks</h2>
 		<ul class="buttonlist datapack-list">
-			<li><a class="bttn" href="https://github.com/svioletg/RecordEveryStatistic/tree/1.21.1">Record Every Statistic</a>
-				Records Minecraft statistics to scoreboard objectives that can be used for commands.
-				<br><sup>Originally created by <a href="https://github.com/tylastrog/RecordEveryStatistic">trylastrog</a>, we're using <a href="https://github.com/svioletg/RecordEveryStatistic/tree/1.21.1">my fork</a> this time around since it hasn't been updated for 1.21.</sup>
+			<li><a href="https://github.com/svioletg/bcrmc-datapacks/tree/main/bcrmc6" class="bttn">bcrmc6</a>
+				A custom datapack written for this server, mainly containing miscellaneous utility functions.
+				This datapack replaces the previously used "Record Every Statistic" datapack's purpose, and criteria-based scoreboard objectives now follow a new format.
 			</li><hr>
 			<li><a class="bttn" href="https://www.planetminecraft.com/data-pack/treecapitator-datapack-1-13/">TreeCapitator</a>
 				Allows chopping down a whole tree by breaking one block. Can be configured per player by typing <code>/trigger TreeCapitator</code> into chat. Will use the equivalent amount of tool durability as if you'd used it on every block. You can chop single blocks by sneaking.
@@ -182,6 +188,8 @@
 	</main>
 	</body>
 	<footer>
+		<script src="/bcrmc/header.js" defer></script>
+		<script src="/bcrmc/templates.js" defer></script>
 		<script src="/bcrmc/script.js" defer></script>
 		<script src="/bcrmc/footer.js" defer></script>
 	</footer>

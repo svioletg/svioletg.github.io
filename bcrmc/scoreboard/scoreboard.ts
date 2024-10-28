@@ -122,7 +122,7 @@ function fade_out(element: HTMLElement) {
 }
 
 function add_scoreboard_nav_arrows(): void {
-    let board_titles: NodeListOf<HTMLDivElement> = document.querySelectorAll('div.board-title');
+    let board_titles: NodeListOf<HTMLDivElement> = document.querySelectorAll('div.historic-title');
     board_titles.forEach(title => {
         let current_page_name: string = title.getAttribute('name');
         let current_page_number: number = extract_number(current_page_name);
@@ -151,7 +151,7 @@ function add_scoreboard_nav_arrows(): void {
     body.classList.remove(body.classList.toString());
     body.classList.add(SERVER);
 
-    $(`div.board-title[name="${SERVER}"]`).classList.remove('off');
+    $(`div.historic-title[name="${SERVER}"]`).classList.remove('off');
 }
 
 add_scoreboard_nav_arrows();

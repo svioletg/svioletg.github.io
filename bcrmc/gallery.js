@@ -47,7 +47,7 @@ import { extract_number, json } from './utils.js';
             gallery_container.appendChild(new_gallery);
         }
         function add_gallery_nav_arrows() {
-            let gallery_titles = document.querySelectorAll('div.gallery-title');
+            let gallery_titles = document.querySelectorAll('div.historic-title');
             gallery_titles.forEach(title => {
                 let current_page_name = title.getAttribute('name');
                 let current_page_number = extract_number(current_page_name);
@@ -99,7 +99,7 @@ import { extract_number, json } from './utils.js';
                 build_gallery(server_season);
             }
             // Change out stuff depending on the relevant server season
-            ['div.gallery-title', 'div.gallery-maps', 'div.gallery-files', 'div.gallery'].forEach(selector => {
+            ['div.historic-title', 'div.gallery-maps', 'div.gallery-files', 'div.gallery'].forEach(selector => {
                 let divs = document.querySelectorAll(selector);
                 divs.forEach(div => {
                     div.classList.add('off');

@@ -106,7 +106,7 @@ import { setup_tabs } from '../tabs.js';
                 element.classList.add('fade-out');
         }
         function add_scoreboard_nav_arrows() {
-            let board_titles = document.querySelectorAll('div.board-title');
+            let board_titles = document.querySelectorAll('div.historic-title');
             board_titles.forEach(title => {
                 let current_page_name = title.getAttribute('name');
                 let current_page_number = extract_number(current_page_name);
@@ -130,7 +130,7 @@ import { setup_tabs } from '../tabs.js';
             let body = document.querySelector('body');
             body.classList.remove(body.classList.toString());
             body.classList.add(SERVER);
-            $(`div.board-title[name="${SERVER}"]`).classList.remove('off');
+            $(`div.historic-title[name="${SERVER}"]`).classList.remove('off');
         }
         add_scoreboard_nav_arrows();
         // Show and hide search suggestions depending on input box focus
