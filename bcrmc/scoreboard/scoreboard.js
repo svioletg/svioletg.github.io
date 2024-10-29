@@ -21,7 +21,7 @@ import { setup_tabs } from '../tabs.js';
             'bcr3': 'scoreboard-json/scoreboard-empty.json',
             'bcr4': 'scoreboard-json/scoreboard-empty.json',
             'bcr5': 'scoreboard-json/scoreboard-bcr5-feb01.json',
-            'bcr6': 'scoreboard-json/scoreboard-empty.json',
+            'bcr6': 'scoreboard-json/6test.json',
         };
         const SCOREBOARD_JSON_URL = `/bcrmc/scoreboard/${SCOREBOARD_FILES[SERVER]}`;
         $('a#board-json-dl').href = SCOREBOARD_JSON_URL;
@@ -36,7 +36,7 @@ import { setup_tabs } from '../tabs.js';
         const PLAYERS = Object.keys(BOARD_DATA.PlayerScores);
         const EST_OBJECTIVE_COUNT = PLAYERS.map(player => Object.keys(BOARD_DATA.PlayerScores[player]).length).reduce((acc, val) => { return acc + val; }, 0);
         const CATEGORIES_BY_PREFIX = {
-            "b.": "Broken",
+            "broken.": "Broken",
             "c.": "Crafted",
             "d.": "Killed by",
             "k.": "Killed",
@@ -54,7 +54,14 @@ import { setup_tabs } from '../tabs.js';
                 if (Object.keys(CATEGORIES_BY_PREFIX).includes(name.split('.')[0] + '.') && !obj_names.includes(name.split('.')[1])) {
                     let generic_name = name.split('.')[1];
                     obj_names.push(generic_name);
-                    trimmed_info[generic_name] = obj_info.DisplayName.json_dict.text.replace(CATEGORY_PREFIX_REGEX, '').trim();
+                    var nameroot = "";
+                    if (typeof obj_info.DisplayName == "string") {
+                        nameroot = obj_info.DisplayName;
+                    }
+                    else {
+                        nameroot = obj_info.DisplayName.json_dict.text;
+                    }
+                    trimmed_info[generic_name] = nameroot.replace(CATEGORY_PREFIX_REGEX, '').replace('"', '').trim();
                 }
             }
             obj_names = obj_names.sort();
@@ -73,7 +80,13 @@ import { setup_tabs } from '../tabs.js';
             let custom_objectives = {};
             for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
                 if (name.startsWith('cu.')) {
-                    let title = obj_info.DisplayName.json_dict.text;
+                    let title;
+                    if (typeof obj_info.DisplayName == "string") {
+                        title = obj_info.DisplayName.replace('"', '');
+                    }
+                    else {
+                        title = obj_info.DisplayName.json_dict.text;
+                    }
                     custom_objectives[name.split('cu.')[1]] = title;
                 }
             }

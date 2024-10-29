@@ -13,7 +13,7 @@ const SCOREBOARD_FILES: { [key: string]: string } = {
     'bcr3': 'scoreboard-json/scoreboard-empty.json',
     'bcr4': 'scoreboard-json/scoreboard-empty.json',
     'bcr5': 'scoreboard-json/scoreboard-bcr5-feb01.json',
-    'bcr6': 'scoreboard-json/scoreboard-empty.json',
+    'bcr6': 'scoreboard-json/6test.json',
 }
 const SCOREBOARD_JSON_URL: string = `/bcrmc/scoreboard/${SCOREBOARD_FILES[SERVER]}`;
 
@@ -35,8 +35,10 @@ const EST_OBJECTIVE_COUNT: number = PLAYERS.map(player => Object.keys(BOARD_DATA
     (acc, val) => {return acc + val}, 0
 );
 
+
+
 const CATEGORIES_BY_PREFIX: { [key: string]: string } = {
-    "b.": "Broken",
+    "broken.": "Broken",
     "c.": "Crafted",
     "d.": "Killed by",
     "k.": "Killed",
@@ -57,7 +59,15 @@ function get_standard_stats_map(): { [key: string]: string } {
         if (Object.keys(CATEGORIES_BY_PREFIX).includes(name.split('.')[0] + '.') && !obj_names.includes(name.split('.')[1])) {
             let generic_name = name.split('.')[1];
             obj_names.push(generic_name);
-            trimmed_info[generic_name] = obj_info.DisplayName.json_dict.text.replace(CATEGORY_PREFIX_REGEX, '').trim();
+
+            var nameroot = "";
+            if (typeof obj_info.DisplayName == "string") {
+                nameroot = obj_info.DisplayName;
+            } else {
+                nameroot = obj_info.DisplayName.json_dict.text;
+            }
+
+            trimmed_info[generic_name] = nameroot.replace(CATEGORY_PREFIX_REGEX, '').replace('"', '').trim();
         }
     }
 
@@ -79,7 +89,12 @@ function get_custom_stats() {
     let custom_objectives: { [key: string]: string } = {};
     for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
         if (name.startsWith('cu.')) {
-            let title: string = obj_info.DisplayName.json_dict.text;
+            let title: string;
+            if (typeof obj_info.DisplayName == "string") {
+                title = obj_info.DisplayName.replace('"', '');
+            } else {
+                title = obj_info.DisplayName.json_dict.text;
+            }
             custom_objectives[name.split('cu.')[1]] = title;
         }
     }
