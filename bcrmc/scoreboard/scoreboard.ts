@@ -6,7 +6,9 @@ import { setup_tabs } from '../tabs.js';
 
 const URL_PARAMS: URLSearchParams = new URLSearchParams(window.location.search);
 
-const SERVER: string = URL_PARAMS.get('s') ?? 'bcr5';
+const SERVER: string = URL_PARAMS.get('s') ?? 'bcr' + LATEST_SERVER.toString();
+const SCOREBOARD_JSON_FORMAT: string = SERVER >= 'bcr6' ? 'new-svg' : 'old-res';
+
 const SCOREBOARD_FILES: { [key: string]: string } = {
     'bcr1': 'scoreboard-json/scoreboard-empty.json',
     'bcr2': 'scoreboard-json/scoreboard-empty.json',
@@ -35,18 +37,32 @@ const EST_OBJECTIVE_COUNT: number = PLAYERS.map(player => Object.keys(BOARD_DATA
     (acc, val) => {return acc + val}, 0
 );
 
+const CUSTOM_STAT_PREFIX: string = SCOREBOARD_JSON_FORMAT == 'new-svg' ? 'custom.' : 'cu.';
 
-
-const CATEGORIES_BY_PREFIX: { [key: string]: string } = {
-    "broken.": "Broken",
-    "c.": "Crafted",
-    "d.": "Killed by",
-    "k.": "Killed",
-    "u.": "Used",
-    "m.": "Mined",
-    "p.": "Picked Up",
-    "q.": "Dropped",
+const CATEGORY_PREFIX_FORMATS: { [key: string]: { [key: string]: string } } = {
+    "old-res": {
+        "b.": "Broken",
+        "c.": "Crafted",
+        "d.": "Killed by",
+        "k.": "Killed",
+        "u.": "Used",
+        "m.": "Mined",
+        "p.": "Picked Up",
+        "q.": "Dropped",
+    },
+    "new-svg": {
+        "broken.": "Broken",
+        "crafted.": "Crafted",
+        "killed_by.": "Killed by",
+        "killed.": "Killed",
+        "used.": "Used",
+        "mined.": "Mined",
+        "picked_up.": "Picked Up",
+        "dropped.": "Dropped",
+    }
 }
+
+const CATEGORIES_BY_PREFIX: { [key: string]: string } = CATEGORY_PREFIX_FORMATS[SCOREBOARD_JSON_FORMAT];
 
 const CATEGORIES_BY_TITLE: { [key: string]: string } = reverse_object(CATEGORIES_BY_PREFIX);
 
@@ -61,8 +77,8 @@ function get_standard_stats_map(): { [key: string]: string } {
             obj_names.push(generic_name);
 
             var nameroot = "";
-            if (typeof obj_info.DisplayName == "string") {
-                nameroot = obj_info.DisplayName;
+            if (!("json_dict" in obj_info.DisplayName)) {
+                nameroot = obj_info.DisplayName.text;
             } else {
                 nameroot = obj_info.DisplayName.json_dict.text;
             }
@@ -88,14 +104,14 @@ const STANDARD_STATS_BY_TITLE: { [key: string]: string } = reverse_object(STANDA
 function get_custom_stats() {
     let custom_objectives: { [key: string]: string } = {};
     for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
-        if (name.startsWith('cu.')) {
+        if (name.startsWith(CUSTOM_STAT_PREFIX)) {
             let title: string;
-            if (typeof obj_info.DisplayName == "string") {
-                title = obj_info.DisplayName.replace('"', '');
+            if (!("json_dict" in obj_info.DisplayName)) {
+                title = obj_info.DisplayName.text;
             } else {
                 title = obj_info.DisplayName.json_dict.text;
             }
-            custom_objectives[name.split('cu.')[1]] = title;
+            custom_objectives[name.split(CUSTOM_STAT_PREFIX)[1]] = title;
         }
     }
 
@@ -201,9 +217,11 @@ for (const [input, sugbox] of [
             sugbox.classList.remove('off');
         }
     });
+
     sugbox.addEventListener('focus', () => {
         focus_state[SUGBOX_FOCUS_ID] = true;
     });
+
     // TODO: this only works on one of them? sure. i dont care rn
     // TODO: i dont remember what i meant by this ^
 
@@ -298,7 +316,7 @@ function request_scores(player: string, category_prefix: string, requested_obj: 
     const every_player: boolean = player == '*';
     const every_category: boolean = category_prefix == 'all';
     const every_objective: boolean = requested_obj == '*';
-    const is_custom: boolean = category_prefix == 'cu.';
+    const is_custom: boolean = category_prefix == CUSTOM_STAT_PREFIX;
 
     if (!every_player && !BOARD_DATA.PlayerScores[player]) return undefined;
 
@@ -326,10 +344,11 @@ function request_scores(player: string, category_prefix: string, requested_obj: 
 }
 
 function scores_as_csv(score_results: ScoreSearchResults): Array<string> {
-    let csv: Array<string> = ['Player,Objective,Score'];
+    let csv: Array<string> = [];
+    // let csv: Array<string> = ['Player,Objective,Score'];
     for (const [player, scores] of Object.entries(score_results)) {
         for (const [obj, score] of Object.entries(scores)) {
-            const is_custom: boolean = obj.startsWith('cu.');
+            const is_custom: boolean = obj.startsWith(CUSTOM_STAT_PREFIX);
             let category_title: string = is_custom ? '' : CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
             let objective_title: string = is_custom ? CUSTOM_STATS_BY_NAME[obj.split('.')[1]] : STANDARD_STATS_BY_NAME[obj.split('.')[1]];
             let full_objective: string = is_custom ? objective_title : `${category_title} ${objective_title}`;
@@ -410,7 +429,7 @@ for (let button of $all('button[name="search-button"]')) {
         let objective_selector: HTMLSelectElement = section.querySelector('select');
 
         button.addEventListener('click', () => {
-            let results = request_scores('*', 'cu.', objective_selector.value);
+            let results = request_scores('*', CUSTOM_STAT_PREFIX, objective_selector.value);
             build_and_show_results_table(results);
         });
     }

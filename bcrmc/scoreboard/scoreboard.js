@@ -14,7 +14,8 @@ import { setup_tabs } from '../tabs.js';
     return __awaiter(this, void 0, void 0, function* () {
         var _a;
         const URL_PARAMS = new URLSearchParams(window.location.search);
-        const SERVER = (_a = URL_PARAMS.get('s')) !== null && _a !== void 0 ? _a : 'bcr5';
+        const SERVER = (_a = URL_PARAMS.get('s')) !== null && _a !== void 0 ? _a : 'bcr' + LATEST_SERVER.toString();
+        const SCOREBOARD_JSON_FORMAT = SERVER >= 'bcr6' ? 'new-svg' : 'old-res';
         const SCOREBOARD_FILES = {
             'bcr1': 'scoreboard-json/scoreboard-empty.json',
             'bcr2': 'scoreboard-json/scoreboard-empty.json',
@@ -35,16 +36,30 @@ import { setup_tabs } from '../tabs.js';
         }
         const PLAYERS = Object.keys(BOARD_DATA.PlayerScores);
         const EST_OBJECTIVE_COUNT = PLAYERS.map(player => Object.keys(BOARD_DATA.PlayerScores[player]).length).reduce((acc, val) => { return acc + val; }, 0);
-        const CATEGORIES_BY_PREFIX = {
-            "broken.": "Broken",
-            "c.": "Crafted",
-            "d.": "Killed by",
-            "k.": "Killed",
-            "u.": "Used",
-            "m.": "Mined",
-            "p.": "Picked Up",
-            "q.": "Dropped",
+        const CUSTOM_STAT_PREFIX = SCOREBOARD_JSON_FORMAT == 'new-svg' ? 'custom.' : 'cu.';
+        const CATEGORY_PREFIX_FORMATS = {
+            "old-res": {
+                "b.": "Broken",
+                "c.": "Crafted",
+                "d.": "Killed by",
+                "k.": "Killed",
+                "u.": "Used",
+                "m.": "Mined",
+                "p.": "Picked Up",
+                "q.": "Dropped",
+            },
+            "new-svg": {
+                "broken.": "Broken",
+                "crafted.": "Crafted",
+                "killed_by.": "Killed by",
+                "killed.": "Killed",
+                "used.": "Used",
+                "mined.": "Mined",
+                "picked_up.": "Picked Up",
+                "dropped.": "Dropped",
+            }
         };
+        const CATEGORIES_BY_PREFIX = CATEGORY_PREFIX_FORMATS[SCOREBOARD_JSON_FORMAT];
         const CATEGORIES_BY_TITLE = reverse_object(CATEGORIES_BY_PREFIX);
         const CATEGORY_PREFIX_REGEX = new RegExp(`${Object.values(CATEGORIES_BY_PREFIX).join('|')}`);
         function get_standard_stats_map() {
@@ -55,8 +70,8 @@ import { setup_tabs } from '../tabs.js';
                     let generic_name = name.split('.')[1];
                     obj_names.push(generic_name);
                     var nameroot = "";
-                    if (typeof obj_info.DisplayName == "string") {
-                        nameroot = obj_info.DisplayName;
+                    if (!("json_dict" in obj_info.DisplayName)) {
+                        nameroot = obj_info.DisplayName.text;
                     }
                     else {
                         nameroot = obj_info.DisplayName.json_dict.text;
@@ -79,15 +94,15 @@ import { setup_tabs } from '../tabs.js';
         function get_custom_stats() {
             let custom_objectives = {};
             for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
-                if (name.startsWith('cu.')) {
+                if (name.startsWith(CUSTOM_STAT_PREFIX)) {
                     let title;
-                    if (typeof obj_info.DisplayName == "string") {
-                        title = obj_info.DisplayName.replace('"', '');
+                    if (!("json_dict" in obj_info.DisplayName)) {
+                        title = obj_info.DisplayName.text;
                     }
                     else {
                         title = obj_info.DisplayName.json_dict.text;
                     }
-                    custom_objectives[name.split('cu.')[1]] = title;
+                    custom_objectives[name.split(CUSTOM_STAT_PREFIX)[1]] = title;
                 }
             }
             let sorted_names = Object.keys(custom_objectives).sort();
@@ -261,7 +276,7 @@ import { setup_tabs } from '../tabs.js';
             const every_player = player == '*';
             const every_category = category_prefix == 'all';
             const every_objective = requested_obj == '*';
-            const is_custom = category_prefix == 'cu.';
+            const is_custom = category_prefix == CUSTOM_STAT_PREFIX;
             if (!every_player && !BOARD_DATA.PlayerScores[player])
                 return undefined;
             let players = every_player ? PLAYERS : [player];
@@ -286,10 +301,11 @@ import { setup_tabs } from '../tabs.js';
             return results;
         }
         function scores_as_csv(score_results) {
-            let csv = ['Player,Objective,Score'];
+            let csv = [];
+            // let csv: Array<string> = ['Player,Objective,Score'];
             for (const [player, scores] of Object.entries(score_results)) {
                 for (const [obj, score] of Object.entries(scores)) {
-                    const is_custom = obj.startsWith('cu.');
+                    const is_custom = obj.startsWith(CUSTOM_STAT_PREFIX);
                     let category_title = is_custom ? '' : CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
                     let objective_title = is_custom ? CUSTOM_STATS_BY_NAME[obj.split('.')[1]] : STANDARD_STATS_BY_NAME[obj.split('.')[1]];
                     let full_objective = is_custom ? objective_title : `${category_title} ${objective_title}`;
@@ -360,7 +376,7 @@ import { setup_tabs } from '../tabs.js';
             else if (section.id == 'custom-stats') {
                 let objective_selector = section.querySelector('select');
                 button.addEventListener('click', () => {
-                    let results = request_scores('*', 'cu.', objective_selector.value);
+                    let results = request_scores('*', CUSTOM_STAT_PREFIX, objective_selector.value);
                     build_and_show_results_table(results);
                 });
             }

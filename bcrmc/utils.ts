@@ -19,7 +19,6 @@ export function extract_number(input_string: string): number {
 export function humanize_number(num: number): string {
     const abbrevs: Array<string> = ['', '', '', 'k', 'm', ' billion', 'trillion'];
     const digits: number = num.toString().length - 1;
-    console.log(digits);
     return (num / Math.pow(10, digits)).toPrecision(2).toString() + abbrevs[digits];
 }
 
