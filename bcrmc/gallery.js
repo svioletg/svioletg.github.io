@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { extract_number, json } from './utils.js';
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
-        const LATEST_SERVER = 5;
+        const LATEST_SERVER = 6;
         // Concatenation for readability, mainly
         const FIGURE_TEMPLATE = `<figure style="background-image: url('/bcrmc/%SEASON%/jpg/%IMAGE%.jpg');">` +
             `<figcaption>%TITLE% %%HAS_PNG<a href="/bcrmc/%SEASON%/png/%IMAGE%.png">[PNG]</a>HAS_PNG%%` +
@@ -47,7 +47,7 @@ import { extract_number, json } from './utils.js';
             gallery_container.appendChild(new_gallery);
         }
         function add_gallery_nav_arrows() {
-            let gallery_titles = document.querySelectorAll('div.gallery-title');
+            let gallery_titles = document.querySelectorAll('div.historic-title');
             gallery_titles.forEach(title => {
                 let current_page_name = title.getAttribute('name');
                 let current_page_number = extract_number(current_page_name);
@@ -99,7 +99,7 @@ import { extract_number, json } from './utils.js';
                 build_gallery(server_season);
             }
             // Change out stuff depending on the relevant server season
-            ['div.gallery-title', 'div.gallery-maps', 'div.gallery-files', 'div.gallery'].forEach(selector => {
+            ['div.historic-title', 'div.gallery-maps', 'div.gallery-files', 'div.gallery'].forEach(selector => {
                 let divs = document.querySelectorAll(selector);
                 divs.forEach(div => {
                     div.classList.add('off');

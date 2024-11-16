@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&display=swap");
 :root {
   --bcr1-icon: url("i/bell_128x128.png");
   --bcr1-bg: url("i/dirt_128x128_dark.png");
-  --bcr1-h2: url("i/cobblestone_128x128.png");
+  --bcr1-h2: url("i/cobblestone_128x128_dark.png");
   --bcr2-icon: url("i/honey_bottle_128x128.png");
   --bcr2-bg: url("i/grass_block_top_128x128.png");
   --bcr2-h2: url("i/honeycomb_block_128x128_dark.png");
@@ -13,29 +14,40 @@
   --bcr4-icon: url("i/sculk_shrieker_side_128x128.png");
   --bcr4-bg: url("i/sculk_catalyst_top_128x128.png");
   --bcr4-h2: url("i/mangrove_planks_128x128.png");
+  --bcr4-font: "Roboto Slab", serif;
   --bcr5-icon: url("i/cherry_sapling_128x128.png");
   --bcr5-bg: url("i/cherry_planks_128x128.png");
   --bcr5-grad: linear-gradient(fuchsia, orange);
   --bcr5-h2: url("i/bamboo_planks_128x128_dark.png");
+  --bcr5-font: "Aoboshi One", serif;
+  --bcr6-icon: url("i/trial_key_128x128.png");
+  --bcr6-bg: url("i/tuff_bricks_128x128_dark.png");
+  --bcr6-grad: linear-gradient(#d67b5b, #59b292);
+  --bcr6-h2: url("i/oxidized_cut_copper_64x64_dark.png");
+  --bcr6-font: "Grenze Gotisch", serif;
 }
 
 @font-face {
   font-family: "MinecraftRegular";
   src: url("./font/MinecraftRegular-Bmg3.otf");
 }
+html {
+  background-color: black;
+}
+
 body {
   margin-top: 0;
   color: white;
-  font-family: "Aoboshi One", serif;
-  font-weight: lighter;
+  font-family: "Times New Roman", serif;
+  font-weight: normal;
   text-align: center;
   font-size: 1em;
-  background-color: black;
+  background-color: #333;
   background-image: url("i/dirt_128x128_dark.png");
 }
 
 main {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
   width: 75%;
   min-height: 100vh;
   margin: 0 auto;
@@ -43,7 +55,7 @@ main {
 
 hr {
   width: 75%;
-  color: white;
+  color: grey;
 }
 
 p {
@@ -321,6 +333,13 @@ select.bttn > option {
   -webkit-text-fill-color: transparent;
 }
 
+.text-grad-bcr6 {
+  background: var(--bcr6-grad);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 h1 {
   font-size: 3em;
 }
@@ -520,6 +539,7 @@ footer p {
 }
 
 body.bcr1 {
+  font-family: var(--bcr1-font);
   background-image: var(--bcr1-bg);
 }
 
@@ -543,6 +563,7 @@ a img.bcr1-icon {
 }
 
 body.bcr2 {
+  font-family: var(--bcr2-font);
   background-image: var(--bcr2-bg);
 }
 
@@ -566,6 +587,7 @@ a img.bcr2-icon {
 }
 
 body.bcr3 {
+  font-family: var(--bcr3-font);
   background-image: var(--bcr3-bg);
 }
 
@@ -589,6 +611,7 @@ a img.bcr3-icon {
 }
 
 body.bcr4 {
+  font-family: var(--bcr4-font);
   background-image: var(--bcr4-bg);
 }
 
@@ -612,6 +635,7 @@ a img.bcr4-icon {
 }
 
 body.bcr5 {
+  font-family: var(--bcr5-font);
   background-image: var(--bcr5-bg);
 }
 
@@ -631,6 +655,30 @@ img.bcr5-icon {
 }
 
 a img.bcr5-icon {
+  margin-bottom: 0.25em;
+}
+
+body.bcr6 {
+  font-family: var(--bcr6-font);
+  background-image: var(--bcr6-bg);
+}
+
+body.bcr6 h2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), var(--bcr6-h2);
+}
+
+body.bcr6 table.scoreboard th {
+  background-image: var(--bcr6-h2);
+}
+
+img.bcr6-icon {
+  content: var(--bcr6-icon);
+  height: 1.5em;
+  vertical-align: bottom;
+  filter: drop-shadow(2px 2px rgba(0, 0, 0, 0.5));
+}
+
+a img.bcr6-icon {
   margin-bottom: 0.25em;
 }
 
@@ -690,6 +738,9 @@ a img.bcr5-icon {
     width: 90%;
   }
   .flexnav.gallery-files {
+    width: 100%;
+  }
+  div#simple-css-toggle {
     width: 100%;
   }
 }/*# sourceMappingURL=bcrmc.css.map */

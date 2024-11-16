@@ -2,7 +2,7 @@ import { extract_number, json } from './utils.js';
 
 (async function () {
 
-const LATEST_SERVER: number = 5;
+const LATEST_SERVER: number = 6;
 
 // Concatenation for readability, mainly
 const FIGURE_TEMPLATE: string = `<figure style="background-image: url('/bcrmc/%SEASON%/jpg/%IMAGE%.jpg');">`+
@@ -48,7 +48,7 @@ function build_gallery(server_season: string): void {
 }
 
 function add_gallery_nav_arrows(): void {
-    let gallery_titles: NodeListOf<HTMLDivElement> = document.querySelectorAll('div.gallery-title');
+    let gallery_titles: NodeListOf<HTMLDivElement> = document.querySelectorAll('div.historic-title');
     gallery_titles.forEach(title => {
         let current_page_name: string = title.getAttribute('name');
         let current_page_number: number = extract_number(current_page_name);
@@ -107,7 +107,7 @@ function switch_gallery(server_season: string): void {
     }
 
     // Change out stuff depending on the relevant server season
-    ['div.gallery-title', 'div.gallery-maps', 'div.gallery-files', 'div.gallery'].forEach(selector => {
+    ['div.historic-title', 'div.gallery-maps', 'div.gallery-files', 'div.gallery'].forEach(selector => {
         let divs: NodeListOf<HTMLDivElement> = document.querySelectorAll(selector);
         divs.forEach(div => {
             div.classList.add('off');

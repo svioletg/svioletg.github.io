@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Screenshot Gallery - BCR-MC 5</title>
+		<title>Screenshot Gallery - BCR-MC 6</title>
 		<link rel="icon" type="image/x-icon" href="/bcrmc/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="/bcrmc/bcrmc.css">
 		<script src="/bcrmc/header.js"></script>
 	</head>
-	<body class="bcr5">
+	<body class="bcr6">
 	<main>
 	<article>
+		<!-- 
+		---- Adding new content ----
+		Add PNGs to the "png" folder, and drop the parent bcr# folder onto `galleryjpgs.py`.
+		Run `update_photo_json.py` to add images to the JSON, edit it directly for captions.
+		The JS should handle everything from there.
+		-->
 		<nav class="flexnav" style="padding-top: 1em; padding-bottom: 1em;">
 			<a class="bttn" href="/bcrmc/info.html">Home</a>
 			<a class="bttn" href="http://play.bcr-mc.xyz:1234/">Live Server Map</a>
@@ -16,11 +22,12 @@
 		</nav>
 		<hr>
 		<!-- Server titles -->
-		<div class="flexnav gallery-title off" name="bcr1"><h2 id="114">BCR-MC 1 - 1.14/1.15: Village & Pillage Update / Buzzy Bees Update<br><sup>(Dec. 2019)</sup></h2></div>
-		<div class="flexnav gallery-title off" name="bcr2"><h2 id="115">BCR-MC 2 - 1.15: Buzzy Bees Update<br><sup>(Apr. 2020)</sup></h2></div>
-		<div class="flexnav gallery-title off" name="bcr3"><h2 id="118">BCR-MC 3 - 1.18: Caves & Cliffs Update<br><sup>(Dec. 1st, 2021 — Jan. 29th, 2022)</sup></h2></div>
-		<div class="flexnav gallery-title off" name="bcr4"><h2 id="119">BCR-MC 4 - 1.19: The Wild Update<br><sup>(Dec. 1st, 2022 — Jan. 31st 2023)</sup></h2></div>
-		<div class="flexnav gallery-title off" name="bcr5"><h2 id="120">BCR-MC 5 - 1.20: Trails & Tales<br><sup>(Dec. 1st, 2023 — Jan. 31st 2024)</sup></h2></div>
+		<div class="flexnav historic-title off" name="bcr1"><h2 id="114">BCR-MC 1 - 1.14/1.15: Village & Pillage Update / Buzzy Bees Update<br><sup>Dec. 2019</sup></h2></div>
+		<div class="flexnav historic-title off" name="bcr2"><h2 id="115">BCR-MC 2 - 1.15: Buzzy Bees Update<br><sup>Apr. 2020</sup></h2></div>
+		<div class="flexnav historic-title off" name="bcr3"><h2 id="118">BCR-MC 3 - 1.18: Caves & Cliffs Update<br><sup>Dec. 1st, 2021 — Jan. 29th, 2022</sup></h2></div>
+		<div class="flexnav historic-title off" name="bcr4"><h2 id="119">BCR-MC 4 - 1.19: The Wild Update<br><sup>Dec. 1st, 2022 — Jan. 31st 2023</sup></h2></div>
+		<div class="flexnav historic-title off" name="bcr5"><h2 id="120">BCR-MC 5 - 1.20: Trails & Tales<br><sup>Dec. 1st, 2023 — Jan. 31st 2024</sup></h2></div>
+		<div class="flexnav historic-title off" name="bcr6"><h2 id="121">BCR-MC 6 - 1.21: Tricky Trials<br><sup>Dec. 1st, 2024 — Jan. 31st 2025</sup></h2></div>
 		<br>
 		<!-- World maps -->
 		<div class="gallery-maps off" name="bcr1">
@@ -55,6 +62,17 @@
 				<br>The overworld map is roughly 10,000 x 10,000 pixels.
 			</p>
 		</div>
+		<div class="gallery-maps off" name="bcr6">
+			<!-- <figure><img src="/bcrmc/bcr6/jpg/bcr6-world.jpg"><figcaption>Final Explored Map <a href="/bcrmc/bcr6/png/bcr6-world.png">[PNG]</a></figcaption></figure> -->
+			<!-- <figure><img src="/bcrmc/bcr6/jpg/bcr6-town.jpg"><figcaption>Town (Map View) <a href="/bcrmc/bcr6/png/bcr6-town.png">[PNG]</a></figcaption></figure> -->
+			<!-- <hr> -->
+			<!-- <a href="https://bcr-mc.xyz/bcrmc/maps/bcr6/overworld/" class="bttn">View Interactive Map</a>
+			<sup>Interactive map created with <a href="https://unmined.net/">uNmINeD</a>.</sup>
+			<p>If you want a maximum-detail map or maps of the Nether and End, you can go to the MEGA folder linked below! Note that the images
+				denoted with <code>level3</code> are the maximum detail our map plugin recorded, and as such are potentially <i>huge</i> files.
+				<br>The overworld map is roughly 10,000 x 10,000 pixels.
+			</p> -->
+		</div>
 		<br>
 		<!-- Downloads -->
 		<h2>Files</h2>
@@ -74,6 +92,10 @@
 			<a target="_blank" class="bttn mega" href="https://mega.nz/file/GEIjRBjT#P_uXuxE3X6xr0lkr_UHwzbKY2O2SJfxujVVQTUNczic"><span>World Download<br>[ MEGAsync, ~3.7gb ZIP ]</span></a>
 			<a target="_blank" class="bttn mega" href="https://mega.nz/folder/WFgUXbrR#x4DrZTiB2MtWEONt5Vgccw"><span>BCR-MC 5 Map Renders<br>[ MEGAsync, Folder ]</span></a>
 		</div>
+		<div class="flexnav gallery-files off" name="bcr6">
+			<a target="_blank" class="bttn mega" href=""><span>World Download<br>[ T.B.A ]</span></a>
+			<a target="_blank" class="bttn mega" href=""><span>BCR-MC 6 Map Renders<br>[ T.B.A ]</span></a>
+		</div>
 		<!-- Screenshot gallery -->
 		<h2>Gallery</h2>
 		<div id="gallery-collection">
@@ -85,5 +107,6 @@
 		<script type="module" src="/bcrmc/gallery.js" defer></script>
 		<script src="/bcrmc/script.js" defer></script>
 		<script src="/bcrmc/footer.js" defer></script>
+		<script src="/bcrmc/altstyles.js" defer></script>
 	</footer>
 </html>

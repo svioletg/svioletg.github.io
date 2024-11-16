@@ -8,20 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { LATEST_SERVER } from '../consts.js';
-import { $, $all, extract_number, humanize_number, json, reverse_object } from '../utils.js';
 import { setup_tabs } from '../tabs.js';
+import { $, $all, extract_number, humanize_number, json, reverse_object } from '../utils.js';
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         var _a;
         const URL_PARAMS = new URLSearchParams(window.location.search);
-        const SERVER = (_a = URL_PARAMS.get('s')) !== null && _a !== void 0 ? _a : 'bcr5';
+        const SERVER = (_a = URL_PARAMS.get('s')) !== null && _a !== void 0 ? _a : 'bcr' + LATEST_SERVER.toString();
+        const SCOREBOARD_JSON_FORMAT = SERVER >= 'bcr6' ? 'new-svg' : 'old-res';
         const SCOREBOARD_FILES = {
             'bcr1': 'scoreboard-json/scoreboard-empty.json',
             'bcr2': 'scoreboard-json/scoreboard-empty.json',
             'bcr3': 'scoreboard-json/scoreboard-empty.json',
             'bcr4': 'scoreboard-json/scoreboard-empty.json',
             'bcr5': 'scoreboard-json/scoreboard-bcr5-feb01.json',
-            'bcr6': 'scoreboard-json/scoreboard-bcr5-feb01.json',
+            'bcr6': 'scoreboard-json/6test.json',
         };
         const SCOREBOARD_JSON_URL = `/bcrmc/scoreboard/${SCOREBOARD_FILES[SERVER]}`;
         $('a#board-json-dl').href = SCOREBOARD_JSON_URL;
@@ -35,16 +36,30 @@ import { setup_tabs } from '../tabs.js';
         }
         const PLAYERS = Object.keys(BOARD_DATA.PlayerScores);
         const EST_OBJECTIVE_COUNT = PLAYERS.map(player => Object.keys(BOARD_DATA.PlayerScores[player]).length).reduce((acc, val) => { return acc + val; }, 0);
-        const CATEGORIES_BY_PREFIX = {
-            "b.": "Broken",
-            "c.": "Crafted",
-            "d.": "Killed by",
-            "k.": "Killed",
-            "u.": "Used",
-            "m.": "Mined",
-            "p.": "Picked Up",
-            "q.": "Dropped",
+        const CUSTOM_STAT_PREFIX = SCOREBOARD_JSON_FORMAT == 'new-svg' ? 'custom.' : 'cu.';
+        const CATEGORY_PREFIX_FORMATS = {
+            "old-res": {
+                "b.": "Broken",
+                "c.": "Crafted",
+                "d.": "Killed by",
+                "k.": "Killed",
+                "u.": "Used",
+                "m.": "Mined",
+                "p.": "Picked Up",
+                "q.": "Dropped",
+            },
+            "new-svg": {
+                "broken.": "Broken",
+                "crafted.": "Crafted",
+                "killed_by.": "Killed by",
+                "killed.": "Killed",
+                "used.": "Used",
+                "mined.": "Mined",
+                "picked_up.": "Picked Up",
+                "dropped.": "Dropped",
+            }
         };
+        const CATEGORIES_BY_PREFIX = CATEGORY_PREFIX_FORMATS[SCOREBOARD_JSON_FORMAT];
         const CATEGORIES_BY_TITLE = reverse_object(CATEGORIES_BY_PREFIX);
         const CATEGORY_PREFIX_REGEX = new RegExp(`${Object.values(CATEGORIES_BY_PREFIX).join('|')}`);
         function get_standard_stats_map() {
@@ -54,7 +69,14 @@ import { setup_tabs } from '../tabs.js';
                 if (Object.keys(CATEGORIES_BY_PREFIX).includes(name.split('.')[0] + '.') && !obj_names.includes(name.split('.')[1])) {
                     let generic_name = name.split('.')[1];
                     obj_names.push(generic_name);
-                    trimmed_info[generic_name] = obj_info.DisplayName.json_dict.text.replace(CATEGORY_PREFIX_REGEX, '').trim();
+                    var nameroot = "";
+                    if (!("json_dict" in obj_info.DisplayName)) {
+                        nameroot = obj_info.DisplayName.text;
+                    }
+                    else {
+                        nameroot = obj_info.DisplayName.json_dict.text;
+                    }
+                    trimmed_info[generic_name] = nameroot.replace(CATEGORY_PREFIX_REGEX, '').replace('"', '').trim();
                 }
             }
             obj_names = obj_names.sort();
@@ -72,9 +94,15 @@ import { setup_tabs } from '../tabs.js';
         function get_custom_stats() {
             let custom_objectives = {};
             for (const [name, obj_info] of Object.entries(BOARD_DATA.Objectives)) {
-                if (name.startsWith('cu.')) {
-                    let title = obj_info.DisplayName.json_dict.text;
-                    custom_objectives[name.split('cu.')[1]] = title;
+                if (name.startsWith(CUSTOM_STAT_PREFIX)) {
+                    let title;
+                    if (!("json_dict" in obj_info.DisplayName)) {
+                        title = obj_info.DisplayName.text;
+                    }
+                    else {
+                        title = obj_info.DisplayName.json_dict.text;
+                    }
+                    custom_objectives[name.split(CUSTOM_STAT_PREFIX)[1]] = title;
                 }
             }
             let sorted_names = Object.keys(custom_objectives).sort();
@@ -106,7 +134,7 @@ import { setup_tabs } from '../tabs.js';
                 element.classList.add('fade-out');
         }
         function add_scoreboard_nav_arrows() {
-            let board_titles = document.querySelectorAll('div.board-title');
+            let board_titles = document.querySelectorAll('div.historic-title');
             board_titles.forEach(title => {
                 let current_page_name = title.getAttribute('name');
                 let current_page_number = extract_number(current_page_name);
@@ -130,7 +158,7 @@ import { setup_tabs } from '../tabs.js';
             let body = document.querySelector('body');
             body.classList.remove(body.classList.toString());
             body.classList.add(SERVER);
-            $(`div.board-title[name="${SERVER}"]`).classList.remove('off');
+            $(`div.historic-title[name="${SERVER}"]`).classList.remove('off');
         }
         add_scoreboard_nav_arrows();
         // Show and hide search suggestions depending on input box focus
@@ -248,7 +276,7 @@ import { setup_tabs } from '../tabs.js';
             const every_player = player == '*';
             const every_category = category_prefix == 'all';
             const every_objective = requested_obj == '*';
-            const is_custom = category_prefix == 'cu.';
+            const is_custom = category_prefix == CUSTOM_STAT_PREFIX;
             if (!every_player && !BOARD_DATA.PlayerScores[player])
                 return undefined;
             let players = every_player ? PLAYERS : [player];
@@ -273,10 +301,11 @@ import { setup_tabs } from '../tabs.js';
             return results;
         }
         function scores_as_csv(score_results) {
-            let csv = ['Player,Objective,Score'];
+            let csv = [];
+            // let csv: Array<string> = ['Player,Objective,Score'];
             for (const [player, scores] of Object.entries(score_results)) {
                 for (const [obj, score] of Object.entries(scores)) {
-                    const is_custom = obj.startsWith('cu.');
+                    const is_custom = obj.startsWith(CUSTOM_STAT_PREFIX);
                     let category_title = is_custom ? '' : CATEGORIES_BY_PREFIX[obj.split('.')[0] + '.'];
                     let objective_title = is_custom ? CUSTOM_STATS_BY_NAME[obj.split('.')[1]] : STANDARD_STATS_BY_NAME[obj.split('.')[1]];
                     let full_objective = is_custom ? objective_title : `${category_title} ${objective_title}`;
@@ -347,7 +376,7 @@ import { setup_tabs } from '../tabs.js';
             else if (section.id == 'custom-stats') {
                 let objective_selector = section.querySelector('select');
                 button.addEventListener('click', () => {
-                    let results = request_scores('*', 'cu.', objective_selector.value);
+                    let results = request_scores('*', CUSTOM_STAT_PREFIX, objective_selector.value);
                     build_and_show_results_table(results);
                 });
             }

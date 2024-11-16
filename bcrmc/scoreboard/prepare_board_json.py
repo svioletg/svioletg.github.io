@@ -8,8 +8,8 @@ from tqdm import tqdm
 
 sys.path.append('..')
 
-import scoreboard_utils as sc
-from explorer_script import explorer_script  # pylint: disable=import-error; its fine
+from explorer_script import explorer_script  # pylint: disable=import-error, wrong-import-position
+from mc_score_utils.mc_score_utils import Scoreboard  # pylint: disable=wrong-import-position
 
 
 @explorer_script
@@ -21,7 +21,7 @@ def main(dat_file: str | Path):
 
     print(f'Using file "{dat_file}"...')
     whitelist: Path = Path(input('Provide the path to whitelist.json: ').strip('"'))
-    board = sc.Scoreboard(dat_file, player_whitelist=whitelist, show_progress=True)
+    board = Scoreboard(dat_file, player_whitelist=whitelist, show_progress=True)
     dotted_names = [p for p in board.player_scores if p.startswith('.')]
     if dotted_names:
         print(f'Found {len(dotted_names)} players with a dot preceding their name.')
