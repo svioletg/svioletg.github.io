@@ -550,5 +550,105 @@
         }
     },
     "bcr6": {
+        "mar-greenhouse3": {
+            "title": "mar-greenhouse3",
+            "has_png": true
+        },
+        "vi-easttownviewzoom": {
+            "title": "vi-easttownviewzoom",
+            "has_png": true
+        },
+        "mar-mardesubase": {
+            "title": "mar-mardesubase",
+            "has_png": true
+        },
+        "vi-docship": {
+            "title": "vi-docship",
+            "has_png": true
+        },
+        "mar-netherfortress": {
+            "title": "mar-netherfortress",
+            "has_png": true
+        },
+        "vi-townportalatnight": {
+            "title": "vi-townportalatnight",
+            "has_png": true
+        },
+        "mar-sunsetoversnow": {
+            "title": "mar-sunsetoversnow",
+            "has_png": true
+        },
+        "desu-blazefarm": {
+            "title": "desu-blazefarm",
+            "has_png": true
+        },
+        "mar-sculkcavelava": {
+            "title": "mar-sculkcavelava",
+            "has_png": true
+        },
+        "vi-easttownview": {
+            "title": "vi-easttownview",
+            "has_png": true
+        },
+        "vi-violetportalhall": {
+            "title": "vi-violetportalhall",
+            "has_png": true
+        },
+        "mar-snowypostoffice": {
+            "title": "mar-snowypostoffice",
+            "has_png": true
+        },
+        "vi-townportalfromwest": {
+            "title": "vi-townportalfromwest",
+            "has_png": true
+        },
+        "vi-townsnowing": {
+            "title": "vi-townsnowing",
+            "has_png": true
+        },
+        "desu-townportal": {
+            "title": "desu-townportal",
+            "has_png": true
+        },
+        "desu-mardesuhosue": {
+            "title": "desu-mardesuhosue",
+            "has_png": true
+        },
+        "vi-kaitlyntower": {
+            "title": "vi-kaitlyntower",
+            "has_png": true
+        },
+        "mar-cliffwithlavaflow": {
+            "title": "mar-cliffwithlavaflow",
+            "has_png": true
+        },
+        "vi-towndesubase": {
+            "title": "vi-towndesubase",
+            "has_png": true
+        },
+        "mar-meadowwithcherries": {
+            "title": "mar-meadowwithcherries",
+            "has_png": true
+        },
+        "vi-underwatericeberg": {
+            "title": "vi-underwatericeberg",
+            "has_png": true
+        },
+        "mar-aurorataigasnow": {
+            "title": "mar-aurorataigasnow",
+            "has_png": true
+        },
+        "mar-greenhouse2": {
+            "title": "mar-greenhouse2",
+            "has_png": true
+        },
+        "desu-postoffice": {
+            "title": "desu-postoffice",
+            "has_png": true
+        },
+        "mar-ruinedportalonsea": {
+            "title": "mar-ruinedportalonsea",
+            "has_png": true
+        }
     }
 }

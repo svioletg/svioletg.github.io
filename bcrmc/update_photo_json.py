@@ -3,11 +3,11 @@ import os
 import sys
 from pathlib import Path
 
-from keepopen import keep_open
+from explorer_script import explorer_script
 from tqdm import tqdm
 
 
-@keep_open
+@explorer_script
 def main():
     root = Path(sys.argv[1])
     if not root.is_dir():

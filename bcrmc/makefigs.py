@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 import colorama
-import regex as re
+import re
 from bs4 import BeautifulSoup
 from colorama import Back, Fore, Style
 
@@ -20,7 +20,7 @@ def main():
         folder = sys.argv[1]
     else:
         import inquirer
-        q = [inquirer.List('folder', message='Choose image root folder', choices=['bcr1', 'bcr2', 'bcr3', 'bcr4', 'bcr5'], carousel=True)]
+        q = [inquirer.List('folder', message='Choose image root folder', choices=['bcr1', 'bcr2', 'bcr3', 'bcr4', 'bcr5', 'bcr6'], carousel=True)]
         folder = inquirer.prompt(q)['folder']
 
     try:
