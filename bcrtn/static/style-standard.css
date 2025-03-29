@@ -1,0 +1,267 @@
+@font-face {
+    font-family: synkopy;
+    src: url('../static/font-synkopy/Synkopy-Regular.otf');
+}
+
+@font-face {
+    font-family: 'Overused Grotesk';
+    src: url('https://raw.githubusercontent.com/RandomMaerks/Overused-Grotesk/master/fonts/variable/OverusedGroteskRoman-VF.ttf');
+    font-weight: 500 900;
+}
+
+:root {
+    --chart-pie-size: 300px;
+    --base-font-size: 1.75em;
+    --font-header: 'synkopy';
+    --font-body: 'Overused Grotesk';
+    --dialog-height: 50vh;
+}
+
+@keyframes modal-open {
+    from { height: 0; opacity: 0; }
+    to { height: var(--dialog-height); opacity: 1; }
+}
+
+body {
+    background-color: black;
+    background: linear-gradient(0deg, rgb(66, 0, 66), rgb(36, 1, 102));
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: white;
+    top: 0;
+    overflow: scroll;
+    font-family: var(--font-body), sans-serif;
+    font-size: var(--base-font-size);
+}
+
+h1, h2 {
+    font-family: var(--font-header), sans-serif;
+    filter: drop-shadow(8px 8px rgba(0, 0, 0, 1));
+}
+
+h1 {
+    background: linear-gradient(cyan, blue);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: calc(var(--base-font-size) + calc(var(--base-font-size) * 0.5));
+    text-transform: uppercase;
+}
+
+h2 {
+    background: linear-gradient(purple, magenta);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: calc(var(--base-font-size) + calc(var(--base-font-size) * 0.25));
+    text-transform: lowercase;
+}
+
+h1#title {
+    margin: 0 auto;
+    padding: 0.5em;
+    text-align: center;
+}
+
+h1#title .title-segment {
+    display: block;
+}
+
+h1#title .title-segment:nth-child(1) {
+    text-align: left;
+    font-size: 0.5em;
+}
+
+h1#title .title-segment:nth-child(2) {
+    text-align: left;
+}
+
+h1#title .title-segment:nth-child(3) {
+    text-align: right;
+}
+
+h1#title .report-date {
+    font-size: 0.5em;
+}
+
+hr {
+    background-color: grey;
+    border: none;
+    height: 1px;
+}
+
+div.chart-pie {
+    position: relative;
+    width: var(--chart-pie-size);
+    height: var(--chart-pie-size);
+    border-radius: 50%;
+}
+
+div.chart-pie-slice {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+div.chart-pie-slice:hover {
+    transform: translateX(20px);
+}
+
+ol {
+    margin-left: 2em;
+    padding: 1em;
+    padding-left: 3em;
+    border-left: 5px solid rgba(255, 0, 255, 0.5);
+    background-color: rgba(255, 0, 255, 0.25);
+    width: 50%;
+}
+
+.half-top {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.half-bottom {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+span.hl-colored {
+    font-weight: 900;
+    background: linear-gradient(yellow, white);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+span.hl-underline {
+    font-weight: 900;
+    font-style: italic;
+    background: linear-gradient(cyan, darkcyan);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    box-shadow: inset 0 -0.25em 0 rgba(255, 0, 255, 0.25);
+}
+
+sup.note {
+    padding-left: 2em;
+}
+
+a {
+    color: cyan;
+}
+
+a:visited {
+    color: darkcyan;
+}
+
+a:hover {
+    color: yellow;
+    text-decoration: none;
+    box-shadow: inset 0 -0.25em 0 cyan;
+}
+
+button {
+    pointer-events: all;
+}
+
+button.toggle-on {
+    pointer-events: none;
+}
+
+button.text-button {
+    font-family: var(--font-body), sans-serif;
+    font-size: 1em;
+    background: none;
+    border: none;
+    color: cyan;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+button.text-button:hover {
+    color: yellow;
+}
+
+button.text-button.toggle-on {
+    color: grey;
+}
+
+button.close-modal-button {
+    display: block;
+    margin: 0 0 0 auto;
+    padding: 1em;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+button.close-modal-button:hover {
+    filter: invert(1);
+}
+
+dialog {
+    position: fixed;
+    top: 25vh;
+    min-width: 25vh;
+    max-height: var(--dialog-height);
+    padding-left: 4em;
+    padding-right: 4em;
+    overflow-y: scroll;
+    animation: none;
+    animation-duration: 0.5s;
+}
+
+dialog.open {
+    animation: modal-open;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+}
+
+div#dialog-content ol, div#dialog-content ul {
+    margin: auto;
+    padding: 0;
+    background: none;
+    border: none;
+    width: 100%;
+}
+
+.text-smaller {
+    font-size: calc(var(--base-font-size) - calc(var(--base-font-size) * 0.5));
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        font-size: 1.5em;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    h1#title .title-segment:nth-child(-n + 3) {
+        text-align: center;
+    }
+
+    ol, ul {
+        width: 80%;
+        margin: 0 auto;
+        padding: 1em;
+        list-style-position: inside;
+    }
+
+    dialog {
+        min-width: 80vw;
+        max-width: 80vw;
+        padding: 1em;
+    }
+}
