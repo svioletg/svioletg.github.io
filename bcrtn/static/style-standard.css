@@ -29,7 +29,6 @@ body {
     min-height: 100vh;
     color: white;
     top: 0;
-    overflow: scroll;
     font-family: var(--font-body), sans-serif;
     font-size: var(--base-font-size);
 }

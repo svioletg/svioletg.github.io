@@ -1,6 +1,8 @@
 body {
     margin: 0 auto;
     width: 66%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 body.frozen {
