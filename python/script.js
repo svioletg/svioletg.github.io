@@ -1,19 +1,19 @@
-var COLLAPSE_BUTTONS = document.querySelectorAll('button.collapsible');
-var TERM_TAGS = document.querySelectorAll('span.term');
-var TERMINOLOGY = {
+const COLLAPSE_BUTTONS = document.querySelectorAll('button.collapsible');
+const TERM_TAGS = document.querySelectorAll('span.term');
+const TERMINOLOGY = {
     'test': 'Test tooltip description.'
 };
-var tooltipTimeout = null;
-var currentTooltip = null;
+let tooltipTimeout = null;
+let currentTooltip = null;
 function term_tip_template(description) {
-    var template = document.createElement('div');
+    let template = document.createElement('div');
     template.classList.add('tooltip');
-    template.innerHTML = "".concat(description);
+    template.innerHTML = `${description}`;
     return template;
 }
 function destroyAllTooltips() {
-    var tooltips = document.querySelectorAll('.tooltip');
-    tooltips.forEach(function (tooltip) {
+    const tooltips = document.querySelectorAll('.tooltip');
+    tooltips.forEach((tooltip) => {
         // TODO: Fade-out here
         tooltip.remove();
     });
@@ -28,27 +28,27 @@ function createTooltip(tag) {
     }
     currentTooltip = term_tip_template(TERMINOLOGY[tag.id]);
     // Position the tooltip relative to the link
-    var linkRect = tag.getBoundingClientRect();
-    currentTooltip.style.top = "".concat(linkRect.top + linkRect.height, "px");
-    currentTooltip.style.left = "".concat(linkRect.left, "px");
+    let linkRect = tag.getBoundingClientRect();
+    currentTooltip.style.top = `${linkRect.top + linkRect.height}px`;
+    currentTooltip.style.left = `${linkRect.left}px`;
     // Append the tooltip to the body
     document.body.appendChild(currentTooltip);
 }
 function main() {
     // Add collapsing functionality
-    COLLAPSE_BUTTONS.forEach(function (button) {
+    COLLAPSE_BUTTONS.forEach((button) => {
         console.log(button);
-        button.addEventListener('click', function () {
+        button.addEventListener('click', () => {
             button.classList.toggle('active');
-            var nextElement = button.nextElementSibling;
+            let nextElement = button.nextElementSibling;
             if (!nextElement) {
-                console.log("Couldn't find next element sibling for collapsible button ".concat(button, "."));
+                console.log(`Couldn't find next element sibling for collapsible button ${button}.`);
             }
             else if (!(nextElement instanceof HTMLDivElement)) {
-                console.log("Next element sibling for collapsible button ".concat(button, " is not a div. Instead: ").concat(nextElement));
+                console.log(`Next element sibling for collapsible button ${button} is not a div. Instead: ${nextElement}`);
             }
             else {
-                var content = nextElement;
+                let content = nextElement;
                 console.log(content);
                 if (content.style.maxHeight) {
                     content.style.maxHeight = '0';
@@ -60,11 +60,11 @@ function main() {
         });
     });
     // Add description boxes to term elements
-    TERM_TAGS.forEach(function (tag) {
-        tag.addEventListener('mouseover', function () {
+    TERM_TAGS.forEach((tag) => {
+        tag.addEventListener('mouseover', () => {
             createTooltip(tag);
         });
-        tag.addEventListener('mouseout', function () {
+        tag.addEventListener('mouseout', () => {
             tooltipTimeout = setTimeout(destroyAllTooltips, 1000);
         });
     });

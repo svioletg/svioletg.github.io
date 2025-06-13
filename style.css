@@ -1,30 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Bagel+Fat+One&display=swap');
 
-html
-{
-	background-color: #440044;
+@font-face {
+    font-family: 'Overused Grotesk';
+    src: url('https://raw.githubusercontent.com/RandomMaerks/Overused-Grotesk/master/fonts/variable/OverusedGroteskRoman-VF.ttf');
+    font-weight: 300 900;
+}
+
+html {
+	background-color: #440088;
 	background-repeat: no-repeat;
 	height: 100%;
 }
 
-body
-{
+body {
 	font-size: 0.75em;
-	font-family: 'Akshar', serif;
+	font-family: 'Overused Grotesk', sans-serif;
 	color: white;
 	text-shadow:
-       3px 3px 0 #000,
-     -1px -1px 0 #000,  
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-       1px 1px 0 #000;
+	   3px  3px 0 #000,
+	  -1px -1px 0 #000,  
+	   1px -1px 0 #000,
+	  -1px  1px 0 #000,
+	   1px  1px 0 #000;
 }
 
 hr { color: white; width: 50%; }
 
-h1, h2
-{
+h1, h2 {
 	letter-spacing: 2px;
 	font-family: 'Aoboshi One', serif;
 	font-size: 3em;
@@ -32,19 +35,12 @@ h1, h2
 	text-align: center;
 }
 
-h2
-{
-	font-size: 2em;
-}
+h2 { font-size: 2em; }
 
-div#links
-{
-	font-family: 'Aoboshi One', serif;
-}
+div#links { font-family: 'Aoboshi One', serif; }
 
-div.notebox
-{
-	font-family: 'Akshar', sans-serif;
+div.notebox {
+	font-family: 'Overused Grotesk', sans-serif;
 	margin: 0 auto;
 	text-align: center;
 	font-size: 2em;
@@ -53,39 +49,121 @@ div.notebox
 	background-color: rgba(0,0,0,0.5);
 }
 
-a.btn
-{
-	/* background-image: url('wedgebtn.svg');
-	background-position: center;
-	background-size: cover; */
+a.btn {
 	display: block;
 	margin: 0 auto;
 	padding: 0.5em;
-	/* width: 25%; */
-	/* border-radius: 2em; */
 	color: white;
-	/* background-color: white; */
 	font-size: 2.5em;
 	text-align: center;
 	text-decoration: none;
 	text-shadow:
-       3px 3px 0 #000,
-     -1px -1px 0 #000,  
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-       1px 1px 0 #000;
+	   3px  3px 0 #000,
+	  -1px -1px 0 #000,  
+	   1px -1px 0 #000,
+	  -1px  1px 0 #000,
+	   1px  1px 0 #000;
 
 	transition: all 0.1s;
 }
 
-a.btn:hover
-{
+a.btn:hover {
 	color: yellow;
+	text-shadow:
+	   6px  6px 0 #000,
+	  -1px -1px 0 #000,  
+	   1px -1px 0 #000,
+	  -1px  1px 0 #000,
+	   1px  1px 0 #000;
 }
 
-div#links sup
-{
+a.btn.off {
+	color: grey;
+	pointer-events: none;
+}
+
+div#links sup {
 	font-style: italic;
 	font-size: 0.5em;
 	padding:0;
+}
+
+div#project-cards {
+	width: 50%;
+	margin: 0 auto;
+}
+
+div#project-cards div.card {
+	background-color: black;
+	color: white;
+	font-size: 1.5em;
+	padding: 1em;
+	margin-bottom: 0.5em;
+	border-radius: 20px;
+	transition: all 0.1s;
+}
+
+div#project-cards div.card a {
+	color: blue;
+	text-decoration: none;
+}
+
+div#project-cards div.card a:hover {
+	text-decoration: underline;
+	color: goldenrod;
+}
+
+div#project-cards div.card a.title {
+	font-size: 2em;
+	color: cornflowerblue;
+	transition: all 0.1s;
+}
+
+div#project-cards div.card a.title:hover {
+	color: yellow;
+}
+
+div#project-cards div.card span.subtitle {
+	display: block;
+	font-style: italic;
+	font-size: 1em;
+	text-shadow: none;
+}
+
+div#project-cards div.card hr {
+	width: 100%;
+}
+
+div#project-cards div.card span.lang {
+	text-shadow: none;
+	padding: 0.25em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
+	border-radius: 20px;
+	background-color: #555;
+	border: 2px solid #333;
+}
+
+div#project-cards div.card span.lang.py {
+	background-color: hsl(220 100% 75%);
+	border: 2px solid hsl(220 100% 25%);
+	color: hsl(220 100% 25%);
+}
+
+div#project-cards div.card span.lang.html {
+	background-color: hsl(30 100% 75%);
+	border: 2px solid hsl(30 100% 25%);
+	color: hsl(30 100% 25%);
+}
+
+div#project-cards div.card span.lang.css {
+	background-color: hsl(220 100% 75%);
+	border: 2px solid hsl(220 100% 25%);
+	color: hsl(220 100% 25%);
+}
+
+div#project-cards div.card span.lang.js {
+	background-color: hsl(60 100% 75%);
+	border: 2px solid hsl(60 100% 25%);
+	color: hsl(60 100% 25%);
 }

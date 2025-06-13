@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pytut.css">
+    <title>Python Introduction by Violet</title>
+</head>
+<body>
+<main>
+    <article>
+        <h1>A brief non-comprehensive introduction to programming with Python</h1>
+        <h3>Table of Contents</h3>
+        <ol id="toc"></ol>
+
+        <h2>Introduction</h2>
+        <p>
+            I'm Violet, a hobbyist programmer who's been learning and using Python since I was a kid.
+            I'm not a professional programmer in any sense and have no intention to be, and I'm probably not
+            qualified to be writing a whole tutorial on this subject. I will be doing this regardless.
+            Python is often listed among good programming languages for beginners, and as I started learning it
+            as a beginner myself all those years ago, I would pretty strongly agree. I think it's a great way to
+            get introduced to the concept of programming in general, and the language makes it fairly easy to jump
+            right into making useful things, so I wanted to write a bit of a tutorial or essay or whatever you want to call it
+            on mainly how to use Python, but also to try and give a better understanding of programming as a whole in the process.
+        </p>
+        <p>
+            I want to write this so that it requires as little prerequisite programming or computer knowledge as possible,
+            and I'll be explaining many things as I go, but there are some very common things that are going to come up
+            as we continue that will be useful to get out of the way right now.
+            Firstly, throughout these pages I'll be using the term "CLI" a lot, and the CLI is a very important and
+            basic part to doing almost any coding at all. CLI stands for <b>command-line interface</b>, you're almost guaranteed
+            to have one available to you on any major desktop operating system, like Windows, MacOS, or Linux (any distro of it).
+            If you're on MacOS or a Linux distro, your CLI is likely a program named "Terminal". On Windows 11 you may also have
+            a "Terminal" (or "Windows Terminal") app, which you should use; otherwise, you'll have a program named "Command Prompt"
+             — this exists on basically every version of Windows. Technically Windows also has "PowerShell" as a CLI option,
+            but using it won't provide any advantages as far as this tutorial is concerned—if you already use PowerShell then
+            by all means keep doing so, but if that's the case probably arleady just skipped this section anyways.
+        </p>
+
+        <h2>Getting familiar with the CLI</h2>
+        <p>
+            <p class="aside">
+                I'll be using the terms "CLI", "console", and "shell" interchangably, but will mostly stick to "CLI".
+            </p>
+            A command-line interface is called as such because it serves solely as an interface to receive and process written
+            "commands" to carry out certain actions. What commands are available to you depends mostly on your operating system,
+            but I'll be covering some basic ones that you'll need for our purposes. Regardless of operating system, you should
+            the <code>cd</code> command available to you. This is used to change your <b>current working directory</b>
+            (directories are the same as folders, the term "directory" is just more common in programming), letting you navigate
+            around your filesystem.
+        </p>
+        <p>
+            I'll start by using Windows as an example — when you start your CLI, you should be able to
+            start typing into it. The text to the left of where you're typing is the <b>path</b> to your current working directory,
+            which is likely your user folder (e.g. <code>C:\Users\Violet</code>). The <code>&gt;</code> character at the end
+            is not part of the path, rather it's simply a <b>prompt</b> to show where you can start typing.
+        </p>
+        <p>
+            The <code>cd</code> command is very basic and takes only one <b>argument</b>: a path to the directory you want to
+            change into. This can be either <b>relative</b> or <b>absolute</b>. A path is <b>absolute</b> if it starts with
+            the filesystem's <b>root</b> — on Windows, this a drive letter (like <code>C:</code>), and on MacOS or Linux, this is a forward slash
+            (<code>/</code>). <b>Relative</b> paths are any that do <em>not</em> start with that root.
+            <br>
+            <ul>
+                <li><code>C:\Users\Violet\Documents</code> is an absolute path in Windows</li>
+                <li><code>/home/violet/Documents</code> is an absolute path in MacOS / Linux</li>
+                <li><code>Documents/Important</code> is a relative path in any OS</li>
+            </ul>
+            <p class="aside">
+                Note that directories are typically separated by <b>backslashes</b> (<code>\</code>) on Windows,
+                but <b>forward slashes</b> (<code>/</code>) on MacOS / Linux.
+                In most cases on modern versions of Windows, the forward slash should be accepted as well, but it's
+                worth keeping in mind in case you're using Windows and run into any trouble regarding paths.
+            </p>
+            <i>An example of its usage in Windows...</i>
+            <blockquote class="code">
+C:\Users\Violet>cd Documents
+
+C:\Users\Violet\Documents>
+            </blockquote>
+            <i>...and in MacOS / Linux.</i>
+            <blockquote class="code">
+violet@my-desktop:~$ cd Documents
+violet@my-desktop:~/Documents$
+            </blockquote>
+        </p>
+        <p>
+            The other command I'll mention is used to list the contents of your current directory.
+            For Windows, this is the <code>dir</code> command, while on MacOS and Linux, it's <code>ls</code>.
+            <i>Windows...</i>
+            <blockquote class="code">
+C:\Users\Seth>cd Documents
+
+C:\Users\Seth\Documents>dir
+Volume in drive C is Windows
+Volume Serial Number is XXXX-XXXX
+
+Directory of C:\Users\Seth\Documents
+
+2025-09-06  00:00    &lt;DIR&gt;          .
+2025-09-06  00:00    &lt;DIR&gt;          ..
+2025-09-06  00:00                48 my_document.txt
+                1 File(s) 48 bytes
+                2 Dir(s)  XX bytes free
+
+C:\Users\Seth\Documents\temptest>
+            </blockquote>
+            <i>
+                ...and Linux. Note that the <code>-l</code> argument can be used to give more details such as dates,
+                and the <code>-a</code> argument is used to show hidden files. Both can be done at the same time by using
+                <code>-la</code>.
+            </i>
+            <blockquote class="code">
+violet@my-desktop:~$ cd Documents
+violet@my-desktop:~/Documents$ ls
+ my_document.txt
+violet@my-desktop:~/Documents$ ls -l
+total 4
+-rw-rw-r-- 1 violet violet 48 Sep  6 00:00 my_document.txt
+violet@my-desktop:~/Documents$ ls -a
+ .  ..  my_document.txt
+            </blockquote>
+        </p>
+        <p>With these explained, we can move on. Next up is installing Python itself.</p>
+        <h2>Setting up Python</h2>
+        <p>
+            Python code can't be read natively by your computer — in order to run any Python code, you need to install
+            Python's software like the interpreter and standard libraries.
+            If you're on Linux, while Python may be available in your distro's package manager, I would heavily recommend using
+            <a href="https://github.com/pyenv/pyenv">pyenv</a> to manage your Python installations. For Windows or MacOS users,
+            you can download the latest installer from <a href="https://www.python.org/downloads/">Python's official site</a>.
+            If you <em>are</em> doing the latter, during the installation you may see a checkbox labelled something like
+            "Add Python to PATH" — it's important to make sure this is checked.
+        </p>
+        <p class="aside">
+            While there shouldn't be too many differences as long as you're using a version beginning with "3",
+            the latest version as of writing is Python 3.13, so this tutorial is written with that in mind.
+        </p>
+        <p>
+            We'll verify that Python was installed correctly. Open up your CLI, type <code>python</code> or <code>py</code>,
+            and you should see something like this:
+        </p>
+        <blockquote class="code">
+Python 3.12.8 (main, Jan 20 2025, 12:56:51) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+        </blockquote>
+        <p>
+            When run like this with no arguments, the Python
+            <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> will be opened.
+            The REPL is an interactive console where you can write lines of Python and have them evaluated immediately,
+            letting you experiment and test things out quickly. I won't focus too much on it right now since we haven't even
+            discussed how to write Python yet, but keep it in mind as we continue. In order to actually run Python code, which
+            is saved into files ending in a <code>.py</code> extension, just use the Python command followed by a path to a
+            Python script file.
+        </p>
+        <blockquote class="code">
+            python my_code.py
+        </blockquote>
+        <i>or</i>
+        <blockquote class="code">
+            py my_code.py
+        </blockquote>
+        <p>
+            With Python ready to go, we'll start exploring some fundamentals of programming, and how to use them in Python.
+        </p>
+        <h2>Data types</h2>
+    </article>
+</main>
+</body>
+<footer>
+    — Credits, copyright notices, etc. —
+    <br>
+    Info icon <icon name="info"></icon> by <b>element-plus</b>, retrieved from <a href="https://www.svgrepo.com/svg/500599/info-filled">svgrepo</a>,
+        used under the MIT License
+    <script type="text/javascript" src="pytut.js"></script>
+</footer>
+</html>
