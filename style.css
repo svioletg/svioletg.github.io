@@ -49,6 +49,14 @@ div.notebox {
 	background-color: rgba(0,0,0,0.5);
 }
 
+a {
+	color: cyan;
+}
+
+a:visited {
+	color: teal;
+}
+
 a.btn {
 	display: block;
 	margin: 0 auto;
@@ -166,4 +174,11 @@ div#project-cards div.card span.lang.js {
 	background-color: hsl(60 100% 75%);
 	border: 2px solid hsl(60 100% 25%);
 	color: hsl(60 100% 25%);
+}
+
+footer {
+	margin: 0 auto;
+	width: 50%;
+	text-align: center;
+	font-size: 1.5em;
 }
