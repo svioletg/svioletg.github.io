@@ -1,115 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8"/>
-	<title>Scoreboard Viewer - BCR-MC</title>
-	<link rel="stylesheet" type="text/css" href="/bcrmc/bcrmc.css">
-	<link rel="icon" type="image/x-icon" href="/bcrmc/favicon.ico">
-	<script>
-		let FF_FOUC_FIX; // doesn't work...
-	</script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="refresh" content="0; url=https://bcr-mc.xyz/stats"/>
+	<title>Redirecting...</title>
 </head>
-<body class="bcr6">
-	<main><article>
-		<nav class="flexnav" style="padding-top: 1em; padding-bottom: 1em;">
-			<a class="bttn" href="/bcrmc/index.html">Home</a>
-			<a class="bttn" href="/bcrmc/history.html">Past Servers</a>
-			<a class="bttn" href="http://play.bcr-mc.xyz:1234/">Live Server Map</a>
-		</nav>
-		<hr>
-		<!-- Server titles -->
-		<div class="flexnav historic-title off" name="bcr1"></div>
-		<div class="flexnav historic-title off" name="bcr2"></div>
-		<div class="flexnav historic-title off" name="bcr3"></div>
-		<div class="flexnav historic-title off" name="bcr4"></div>
-		<div class="flexnav historic-title off" name="bcr5"></div>
-		<div class="flexnav historic-title off" name="bcr6"></div>
-		<hr>
-	<div id="no-scores-container" class="off">
-		<p>No scores found for this server.</p>
-	</div>
+<body>
+	The BCR-MC sections of this site have been moved to a new server!
 
-	<div id="scoreboard-container">
-		<a href="/bcrmc/scoreboard/scoreboard-json/scoreboard-empty.json" id="board-json-dl" class="bttn" download="scoreboard.json">
-			Download Full Scoreboard JSON
-		</a>
-		<p><em class="hl">NOTE:</em> The full scoreboard JSON data is <span class="hl">quite long</span> and <span class="hl">not formatted for readability</span>.</p>
-		<br>
-		<div class="flexnav" style="width: 60%;" id="search-type-selector">
-			<button class="bttn tab active" id="search-type-stats" name="tab-stats-scores">Statistics</button>
-			<!-- <button class="bttn tab" id="search-type-other" name="tab-other-scores">Other Objectives</button> -->
-		</div>
-		<br>
-
-		<div class="flexnav" style="width: 60%;" id="stats-type-selector" name="tab-stats-scores">
-			<button class="bttn tab" id="stats-type-blocks-etc" name="tab-standard-stats">Blocks, Items, Mobs...</button>
-			<button class="bttn tab" id="stats-type-other-stats" name="tab-custom-stats">Other...</button>
-		</div>
-		<br>
-		
-		<div class="off" id="standard-stats" name="tab-standard-stats">
-			<p>Using an <b class="hl">asterisk</b> <kbd>*</kbd> instead of a player name will get scores for all players; likewise for the items search box.
-			You can also use an asterisk as a <b class="hl"><abbr title="
-	A wildcard is used to specify that any text is valid in its place.
-	i.e. 'copper*' will return anything that starts with 'copper',
-	'*copper*' will return anything that has the word 'copper' in it regardless of position,
-	and '*copper' would return anything that ends with 'copper'.
-				">wildcard</abbr></b> for the item search.</p>
-			<br>
-			<div class="flexnav" style="width: 80%;">
-				<div name="player">
-					<input type="text" name="player" maxlength=25 placeholder="Player">
-					<div class="text-input-sub"></div>
-					<div class="search-suggestions off"></div>
-				</div>
-
-				<select class="bttn" id="stats-categories"></select>
-
-				<div name="object">
-					<input type="text" name="object" maxlength=25 placeholder="Block, item, mob, etc.">
-					<div class="text-input-sub"></div>
-					<div class="search-suggestions off"></div>
-				</div>
-			</div>
-			<br>
-			<button class="bttn" name="search-button">Search</button>
-		</div>
-
-		<div class="off" id="custom-stats" name="tab-custom-stats">
-			<div class="flexnav" style="width: 50%;">
-				<select class="bttn" name="custom-stats" style="width: 75%;"></select>
-			</div>
-			<br>
-			<button class="bttn" name="search-button">Search</button>
-		</div>
-		<br>
-
-		<div id="search-results">
-			<p>Nothing searched yet.</p><br>
-			<a href="#" class="bttn disabled" id="csv-download">Save as Spreadsheet (CSV)</a>
-			<sub>Click a column header to sort the table.</sub>
-			<table class="scoreboard sortable">
-				<thead>
-					<tr>
-						<th>Player</th>
-						<th>Objective</th>
-						<th>Score</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-	</div>
-		<br>
-		<br>
-		<br>
-	</article></main>
-	<script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/sortable.min.js"></script>
-	<script src="/bcrmc/header.js" defer></script>
-	<script src="/bcrmc/templates.js" defer></script>
-	<script src="/bcrmc/footer.js" defer></script>
-	<script src="/bcrmc/altstyles.js" defer></script>
-	<script type="module" src="/bcrmc/scoreboard/scoreboard.js"></script>
+	<a href="https://bcr-mc.xyz/stats">If this page does not automatically redirect, click here.</a>
 </body>
-<footer>
-</footer>
 </html>
