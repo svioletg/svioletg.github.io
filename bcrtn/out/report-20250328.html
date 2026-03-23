@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style-common.css">
+    <link rel="stylesheet" id="standard" href="../static/style-standard.css">
+    <link rel="stylesheet" id="simple" href="../static/style-simple.css" disabled="disabled">
+    <title>TOONAMI NIGHTS REPORT</title>
+</head>
+<body>
+<div id="dim-screen-overlay" class="overlay-disabled"></div>
+<main>
+    <article>
+        <h1 id="title">
+            <span class="title-segment">THE</span>
+            <span class="title-segment">TOONAMI NIGHTS</span>
+            <span class="title-segment">STATUS REPORT</span>
+            <span class="report-date">March 28, 2025</span>
+        </h1>
+        <div>
+            <p class="text-smaller">
+                Choose layout:
+                <button class="text-button btn-style-selector toggle-on" name="standard">Standard</button>
+                | <button class="text-button btn-style-selector" name="simple">Simple</button>
+                <br>
+                View the full Toonami Nights spreadsheet
+                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFojYfK_hVNx3Lm4TM4p0vidr2w0Yfxa5fJ296-C_L_7V9_dRQFBV4ZwfdsS6_np52krzyZuonWbdR/pubhtml">here</a>,
+                or download it as in <select id="select-sheet-dl-type" name="sheet-dl-type" onchange="on_sheet_dl_select_change(this);">
+                    <option value="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFojYfK_hVNx3Lm4TM4p0vidr2w0Yfxa5fJ296-C_L_7V9_dRQFBV4ZwfdsS6_np52krzyZuonWbdR/pub?output=csv">
+                        .csv
+                    </option>
+                    <option value="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFojYfK_hVNx3Lm4TM4p0vidr2w0Yfxa5fJ296-C_L_7V9_dRQFBV4ZwfdsS6_np52krzyZuonWbdR/pub?output=tsv">
+                        .tsv
+                    </option>
+                    <option value="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFojYfK_hVNx3Lm4TM4p0vidr2w0Yfxa5fJ296-C_L_7V9_dRQFBV4ZwfdsS6_np52krzyZuonWbdR/pub?output=pdf">
+                        .pdf
+                    </option>
+                    <option value="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFojYfK_hVNx3Lm4TM4p0vidr2w0Yfxa5fJ296-C_L_7V9_dRQFBV4ZwfdsS6_np52krzyZuonWbdR/pub?output=xlsx">
+                        .xlsx
+                    </option>
+                    <option value="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFojYfK_hVNx3Lm4TM4p0vidr2w0Yfxa5fJ296-C_L_7V9_dRQFBV4ZwfdsS6_np52krzyZuonWbdR/pub?output=ods">
+                        .ods
+                    </option>
+                </select>
+                format <a id="sheet-dl-link" href="#">here</a>.
+            </p>
+            <hr>
+            <h3>
+                Toonami Nights has run for <hl2>3 years, 1 month and 8 days</hl2>. In that time...
+            </h3>
+            <h3>
+                A total of <hl2>82 shows</hl2> have been part of Toonami Nights,
+                and we've watched <hl2>1,198 individual episodes</hl2>.
+            </h3>
+
+            <h2>General</h2>
+            <p>We've finished <hl2>65</hl2> shows (79.3%), leaving <hl2>17</hl2> incomplete.</p>
+            <p>
+                The <hl1>newest</hl1> show we've watched is <hl2>Dandadan</hl2>, from <hl2>October 4, 2024</hl2>,
+                while the <hl1>oldest</hl1> we've watched is <hl2>The Rose of Versailles</hl2>, from <hl2>October 10, 1979</hl2>.
+                <br><br>
+                Most shows — <hl1>7.3% of them</hl1> — have been from <hl2>2021</hl2>.
+                <br>
+                <ol class="half-top text-smaller" name="autolist-jCzxDdq3" start="1" style="display: none;"><li> 2021 (6 shows)</li><li> 2022 (5 shows)</li><li> 2018 (5 shows)</li><li> 2017 (5 shows)</li><li> 2024 (4 shows)</li><li> 2019 (4 shows)</li><li> 2004 (4 shows)</li><li> 2002 (4 shows)</li><li> 1995 (4 shows)</li><li> 2020 (3 shows)</li><li> 2016 (3 shows)</li><li> 1999 (3 shows)</li><li> 1998 (3 shows)</li><li> 2011 (2 shows)</li><li> 2010 (2 shows)</li><li> 2003 (2 shows)</li><li> 1992 (2 shows)</li><li> 1990 (2 shows)</li><li> 1988 (2 shows)</li><li> 2015 (1 shows)</li><li> 2014 (1 shows)</li><li> 2013 (1 shows)</li><li> 2012 (1 shows)</li><li> 2007 (1 shows)</li><li> 2006 (1 shows)</li><li> 2000 (1 shows)</li><li> 1997 (1 shows)</li><li> 1996 (1 shows)</li><li> 1994 (1 shows)</li><li> 1993 (1 shows)</li><li> 1989 (1 shows)</li><li> 1979 (1 shows)</li></ol><ol class="half-top text-smaller" start="1"><li> 2021 (6 shows)</li><li> 2022 (5 shows)</li><li> 2018 (5 shows)</li><li> 2017 (5 shows)</li><li> 2024 (4 shows)</li><span><button class="text-button expand-autolist" name=autolist-jCzxDdq3>[click to show all...]</button></span></ol><ol class="half-bottom text-smaller" start="28"><li> 1996 (1 shows)</li><li> 1994 (1 shows)</li><li> 1993 (1 shows)</li><li> 1989 (1 shows)</li><li> 1979 (1 shows)</li></ol>
+            </p>
+            <p>
+                <hl2>51.2%</hl2> (42) of shows have been shown
+                dubbed, while <hl2>45.1%</hl2> (37) of shows
+                have been shown subbed.
+            </p>
+            <p>
+                Going by the average user ratings on MyAnimeList, the <hl1>highest rated show</hl1> we've watched is <hl2>Bocchi the Rock</hl2>, with a rating of
+                <hl2>8.76 out of 10</hl2>. The <hl1>lowest rated</hl1> is
+                <hl2>Cipher The Video</hl2>, with a rating of <hl2>4.54</hl2>.
+            </p>
+
+            <h2>Episode Counts</h2>
+            <p>
+                The <hl1>most common show length</hl1> is <hl2>12 episodes</hl2>,
+                with 24 shows (29.3%).
+                <br>
+                <sup class="note">
+                    <hl2>26</hl2> is the second most common length with 11 shows,
+                    and <hl2>13</hl2> is up third with 11.
+                </sup>
+                <br><br>
+                The <hl1>longest show overall</hl1> is <hl2>Turn A Gundam</hl2> at <hl2>50 episodes</hl2>;
+                while the <hl1>longest show <em>finished</em></hl1> is <hl2>The Rose of Versailles</hl2> with <hl2>40</hl2>.
+            </p>
+
+            <h2>Genres</h2>
+            <sub>*Only shows that have pages on MyAnimeList can be counted for these stats.</sub>
+            <p>
+                The <hl1>most common genre</hl1> is <hl2>Action</hl2> with 37 shows.
+                <br>
+                <ol class="half-top text-smaller" name="autolist-gd34d1XG" start="1" style="display: none;"><li> Action (37 shows)</li><li> Comedy (29 shows)</li><li> Drama (27 shows)</li><li> Sci-Fi (26 shows)</li><li> Adventure (19 shows)</li><li> Fantasy (17 shows)</li><li> Mecha (16 shows)</li><li> Mystery (15 shows)</li><li> Award Winning (14 shows)</li><li> Adult Cast (13 shows)</li><li> Romance (11 shows)</li><li> School (11 shows)</li><li> Psychological (11 shows)</li><li> Seinen (11 shows)</li><li> Shounen (11 shows)</li><li> Supernatural (11 shows)</li><li> Suspense (10 shows)</li><li> Space (10 shows)</li><li> Military (9 shows)</li><li> Avant Garde (6 shows)</li><li> Music (6 shows)</li><li> Anthropomorphic (5 shows)</li><li> Detective (5 shows)</li><li> Parody (4 shows)</li><li> Workplace (4 shows)</li><li> Mahou Shoujo (4 shows)</li><li> Otaku Culture (3 shows)</li><li> Performing Arts (3 shows)</li><li> Sports (3 shows)</li><li> Super Power (3 shows)</li><li> Gag Humor (3 shows)</li><li> Historical (3 shows)</li><li> Shoujo (3 shows)</li><li> Horror (3 shows)</li><li> Vampire (2 shows)</li><li> Idols (Female) (2 shows)</li><li> Childcare (2 shows)</li><li> Showbiz (2 shows)</li><li> Crossdressing (2 shows)</li><li> Racing (2 shows)</li><li> CGDCT (2 shows)</li><li> Isekai (2 shows)</li><li> Love Polygon (2 shows)</li><li> Josei (2 shows)</li><li> Urban Fantasy (2 shows)</li><li> Mythology (2 shows)</li><li> Ecchi (1 shows)</li><li> Boys Love (1 shows)</li><li> Iyashikei (1 shows)</li><li> Slice of Life (1 shows)</li><li> Gore (1 shows)</li><li> Martial Arts (1 shows)</li><li> Survival (1 shows)</li><li> Gourmet (1 shows)</li><li> Visual Arts (1 shows)</li><li> Love Status Quo (1 shows)</li><li> Harem (1 shows)</li><li> Organized Crime (1 shows)</li></ol><ol class="half-top text-smaller" start="1"><li> Action (37 shows)</li><li> Comedy (29 shows)</li><li> Drama (27 shows)</li><li> Sci-Fi (26 shows)</li><li> Adventure (19 shows)</li><span><button class="text-button expand-autolist" name=autolist-gd34d1XG>[click to show all...]</button></span></ol><ol class="half-bottom text-smaller" start="54"><li> Gourmet (1 shows)</li><li> Visual Arts (1 shows)</li><li> Love Status Quo (1 shows)</li><li> Harem (1 shows)</li><li> Organized Crime (1 shows)</li></ol>
+            </p>
+        </div>
+        <hr>
+        <div class="text-smaller">
+            Fonts used:
+            <ul>
+                <li style="font-family: 'synkopy', sans-serif;"><a href="https://fontesk.com/synkopy-font/">synkopy</a></li>
+                <li style="font-family: 'Overused Grotesk', sans-serif;"><a href="https://github.com/RandomMaerks/Overused-Grotesk">Overused Grotesk</a></li>
+            </ul>
+        </div>
+    </article>
+    <dialog>
+        <button class="close-modal-button"><img src="../static/close.svg"></button>
+        <div id="dialog-content">
+        </div>
+    </dialog>
+</main>
+</body>
+<footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../static/script.js"></script>
+</footer>
+</html>
